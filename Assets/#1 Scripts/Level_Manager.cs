@@ -4,7 +4,7 @@ using UnityEngine;
 public class Level_Manager : MonoBehaviour
 {
     //현재 레벨 , 0 = 튜토리얼 , n ~~~ = n레벨
-    private int currentLevel = 0;
+    private int _currentLevel = 0;
 
     public void Awake()
     {
@@ -13,8 +13,9 @@ public class Level_Manager : MonoBehaviour
 
     public void ChangeLevel(int l)
     {
-        string level = "Level_" + l.ToString();
+        string level = "Level_" + l;
         SceneManager.LoadScene(level);
-        currentLevel = l;
+        _currentLevel = l;
     }
+    
 }
