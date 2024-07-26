@@ -1,3 +1,4 @@
+using System;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.Events;
@@ -5,8 +6,8 @@ using UnityEngine.Events;
 public class GameManager : MonoBehaviour
 {
     public static GameManager inst;
-    
     private SceneLoader SL;
+    
     public void Awake()
     {
         inst = this;
@@ -14,13 +15,33 @@ public class GameManager : MonoBehaviour
         SL = GetComponent<SceneLoader>();
     }
 
-    public void ChangeLevel(int l, LoadSceneMode mode)
+    public void Update()
     {
-        SL.ChangeLevel(l,mode);
+        if (Input.GetKeyDown(KeyCode.Escape) && !SL.CheckLoadScene(Scenes.Setting))
+        {
+            if (SL.CheckLoadScene(Scenes.EscMenu))
+            {
+                UnLoadScene(Scenes.EscMenu);
+            }
+            else
+            {
+                ChangeScene(Scenes.EscMenu,LoadSceneMode.Additive);
+            }
+        }
+    }
+
+    public void ChangeLevel(int l)
+    {
+        SL.ChangeLevel(l);
     }
 
     public void ChangeScene(Scenes scene, LoadSceneMode mode)
     {
         SL.ChangeScene(scene,mode);
+    }
+
+    public void UnLoadScene(Scenes scene)
+    {
+        SL.UnLoadScene(scene);
     }
 }

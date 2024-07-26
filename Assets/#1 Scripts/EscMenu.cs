@@ -4,16 +4,16 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-public class MainMenu : MonoBehaviour
+public class EscMenu : MonoBehaviour
 {
-    public Button StartButton;
-    public Button TutorialButton;
+    public Button ExitButton;
     public Button SettingButton;
+    public Button ExitgameButton;
 
     private void Start()
     {
-        StartButton.onClick.AddListener(() => { GameManager.inst.ChangeLevel(1);});
-        TutorialButton.onClick.AddListener(() => { GameManager.inst.ChangeLevel(0);});
+        ExitButton.onClick.AddListener(() => { GameManager.inst.UnLoadScene(Scenes.EscMenu);});
         SettingButton.onClick.AddListener(() => { GameManager.inst.ChangeScene(Scenes.Setting, LoadSceneMode.Additive);});
+        ExitgameButton.onClick.AddListener(() => { Application.Quit();});
     }
 }

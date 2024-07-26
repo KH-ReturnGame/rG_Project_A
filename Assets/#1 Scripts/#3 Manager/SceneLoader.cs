@@ -5,6 +5,7 @@ public enum Scenes
 {
     MainMenu,
     Setting,
+    EscMenu,
 }
 
 public class SceneLoader : MonoBehaviour
@@ -19,10 +20,10 @@ public class SceneLoader : MonoBehaviour
     }
 
     //씬 중에서도 레벨씬 전환
-    public void ChangeLevel(int l, LoadSceneMode mode)
+    public void ChangeLevel(int l)
     {
         string level = "Level_" + l;
-        SceneManager.LoadScene(level,mode);
+        SceneManager.LoadScene(level);
         _currentLevel = l;
     }
 
@@ -30,6 +31,24 @@ public class SceneLoader : MonoBehaviour
     public void ChangeScene(Scenes scene, LoadSceneMode mode)
     {
         SceneManager.LoadScene(scene.ToString(), mode);
+        if (mode == 0)
+        {
+            Debug.Log(SceneManager.GetActiveScene());
+        }
+    }
+
+    public void UnLoadScene(Scenes scene)
+    {
+        SceneManager.UnloadSceneAsync(scene.ToString());
+    }
+
+    public bool CheckLoadScene(string scene)
+    {
+        return SceneManager.GetSceneByName(scene).isLoaded;
+    }
+    public bool CheckLoadScene(Scenes scene)
+    {
+        return SceneManager.GetSceneByName(scene.ToString()).isLoaded;
     }
     
 }
