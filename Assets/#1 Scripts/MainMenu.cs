@@ -14,6 +14,6 @@ public class MainMenu : MonoBehaviour
     {
         StartButton.onClick.AddListener(() => { GameManager.inst.ChangeLevel(1);});
         TutorialButton.onClick.AddListener(() => { GameManager.inst.ChangeLevel(0);});
-        SettingButton.onClick.AddListener(() => { GameManager.inst.ChangeScene(Scenes.Setting, LoadSceneMode.Additive);});
+        SettingButton.onClick.AddListener(() => { GameManager.inst.ToggleSettingMenu(); });
     }
 }

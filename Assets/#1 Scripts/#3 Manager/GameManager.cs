@@ -7,26 +7,57 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager inst;
     private SceneLoader SL;
+
+    public GameObject EscMenuObj;
+    public bool isEscMenuView;
+    private GameObject CreatedEscMenu;
+
+    public GameObject SettingMenuObj;
+    public bool isSettingMenuView;
+    private GameObject CreatedSettingMenu;
     
     public void Awake()
     {
-        inst = this;
+        if (inst == null)
+        {
+            inst = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
         DontDestroyOnLoad(this);
         SL = GetComponent<SceneLoader>();
     }
 
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && !SL.CheckLoadScene(Scenes.Setting))
+        if (Input.GetKeyDown(KeyCode.Escape) && !isSettingMenuView)
         {
-            if (SL.CheckLoadScene(Scenes.EscMenu))
+            isEscMenuView = !isEscMenuView;
+            if (isEscMenuView)
             {
-                UnLoadScene(Scenes.EscMenu);
+                GameObject canvas = GameObject.FindGameObjectWithTag("canvas");
+                CreatedEscMenu = Instantiate(EscMenuObj, canvas.transform, false);
             }
             else
             {
-                ChangeScene(Scenes.EscMenu,LoadSceneMode.Additive);
+                Destroy(CreatedEscMenu);
             }
+        }
+    }
+
+    public void ToggleSettingMenu()
+    {
+        isSettingMenuView = !isSettingMenuView;
+        if (isSettingMenuView)
+        {
+            GameObject canvas = GameObject.FindGameObjectWithTag("canvas");
+            CreatedSettingMenu = Instantiate(SettingMenuObj, canvas.transform, false);
+        }
+        else
+        {
+            Destroy(CreatedSettingMenu);
         }
     }
 

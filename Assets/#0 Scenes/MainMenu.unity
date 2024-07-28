@@ -912,7 +912,7 @@ GameObject:
   - component: {fileID: 1690389459}
   m_Layer: 5
   m_Name: Canvas
-  m_TagString: Untagged
+  m_TagString: canvas
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1314,6 +1314,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f26e03daeecf40379ad3cdc89c07fdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  EscMenuObj: {fileID: 2870154902967371074, guid: f489ed59df7f18c48b69f92d5638acb5, type: 3}
+  isEscMenuView: 0
+  SettingMenuObj: {fileID: 1835440232105209379, guid: 93646d0d679ca624c8d425bc01ad84d5, type: 3}
+  isSettingMenuView: 0
 --- !u!114 &2106650886
 MonoBehaviour:
   m_ObjectHideFlags: 0
