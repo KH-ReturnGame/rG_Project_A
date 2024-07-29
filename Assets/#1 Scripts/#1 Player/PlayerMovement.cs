@@ -6,17 +6,22 @@ public class PlayerMovement : MonoBehaviour
 {
     private float _movementInputDirection;
     private float _movementSpeed = 8.00f;
-    private Rigidbody2D playerRigidbody;
+
+    public GameObject Body;
+    private Rigidbody2D BodyRigidbody;
+    
+    public GameObject Head;
+    private Rigidbody2D HeadRigidbody;
 
     private void Start()
     {
-        playerRigidbody = GetComponent<Rigidbody2D>();
+        BodyRigidbody = Body.GetComponent<Rigidbody2D>();
     }
 
     private void FixedUpdate()
     {
         
-        playerRigidbody.velocity = new Vector2(_movementInputDirection * _movementSpeed, playerRigidbody.velocity.y);
+        BodyRigidbody.velocity = new Vector2(_movementInputDirection * _movementSpeed, BodyRigidbody.velocity.y);
     }
 
 
