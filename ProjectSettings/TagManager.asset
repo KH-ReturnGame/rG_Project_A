@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - canvas
+  - ground
+  - GroundCheck
+  - Head
+  - Body
   layers:
   - Default
   - TransparentFX
@@ -12,8 +16,8 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
+  - Head
+  - Body
   - 
   - 
   - 

@@ -6,24 +6,64 @@ public class PlayerMovement : MonoBehaviour
 {
     private float _movementInputDirection;
     private float _movementSpeed = 8.00f;
-    private Rigidbody2D playerRigidbody;
+    private float _jumpForce = 10f;
+
+    public GameObject Body;
+    private Rigidbody2D BodyRigidbody;
+    
+    public GameObject Head;
+    private Rigidbody2D HeadRigidbody;
+
+    private Rigidbody2D NowRigidbody;
+    
+    
 
     private void Start()
     {
-        playerRigidbody = GetComponent<Rigidbody2D>();
+        BodyRigidbody = Body.GetComponent<Rigidbody2D>();
+        HeadRigidbody = Head.GetComponent<Rigidbody2D>();
+        NowRigidbody = BodyRigidbody;
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
-        
-        playerRigidbody.velocity = new Vector2(_movementInputDirection * _movementSpeed, playerRigidbody.velocity.y);
+        //기본 좌우 움직임
+        NowRigidbody.velocity = new Vector2(_movementInputDirection * _movementSpeed, NowRigidbody.velocity.y);
     }
 
 
-    //입력받기
+    //좌우 입력받기
     public void OnMove(InputValue value)
     {
         _movementInputDirection = value.Get<float>();
     }
+    
+    //점프 입력받기
+    public void OnJump(InputValue value)
+    {
+        if ((NowRigidbody==BodyRigidbody && Body.GetComponent<Body>().IsContainState(BodyStates.IsGround))||
+            (NowRigidbody==HeadRigidbody && Head.GetComponent<Head>().IsContainState(HeadStates.IsGround)))
+        {
+            NowRigidbody.velocity = new Vector2(NowRigidbody.velocity.x, 0);
+            NowRigidbody.velocity = new Vector2(NowRigidbody.velocity.x, _jumpForce);
+        }
+    }
+    //머리, 몸 전환 입력받기
+    public void OnChange(InputValue value)
+    {
+        
+        if (NowRigidbody == BodyRigidbody)
+        {
+            NowRigidbody = HeadRigidbody;
+            GameManager.inst.ChangeCameraTarget(Head);
+        }
+        else
+        {
+            NowRigidbody = BodyRigidbody;
+            GameManager.inst.ChangeCameraTarget(Body);
+        }
+    }
+    
+    
     
 }

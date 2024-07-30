@@ -3,7 +3,7 @@ using UnityEngine;
 
 public enum BodyStates
 {
-    IsGround,
+    IsGround=0,
 }
 
 public class Body : MonoBehaviour
@@ -15,7 +15,7 @@ public class Body : MonoBehaviour
     public StateManager<Body> _stateManager;
     
     //기본 설정
-    public void Setup()
+    public void Start()
     {
         //_states 초기화
         _states = new State<Body>[state_count];
@@ -26,7 +26,7 @@ public class Body : MonoBehaviour
     }
     
     //부모의 추상 메소드를 구현, Entity_Manager의 Update에서 반복함
-    public void Updated()
+    public void Update()
     {
         //상태 매니저의 Execute실행
         _stateManager.Execute();
