@@ -6,6 +6,9 @@ TagManager:
   tags:
   - canvas
   - ground
+  - GroundCheck
+  - Head
+  - Body
   layers:
   - Default
   - TransparentFX
@@ -13,8 +16,8 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
+  - Head
+  - Body
   - 
   - 
   - 

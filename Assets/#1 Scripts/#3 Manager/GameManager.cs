@@ -87,4 +87,9 @@ public class GameManager : MonoBehaviour
     {
         SL.UnLoadScene(scene);
     }
+
+    public void ChangeCameraTarget(GameObject obj)
+    {
+        GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>().ChangeTarget(obj);
+    }
 }

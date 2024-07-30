@@ -20,6 +20,15 @@
                     "id": "d06ec2c8-1d9d-46ff-8c86-d2d21349322b",
                     "expectedControlType": "Button",
                     "processors": "",
+                    "interactions": "Press",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Change",
+                    "type": "Button",
+                    "id": "e8d561cc-bd78-47eb-84cf-5c11640fed44",
+                    "expectedControlType": "Button",
+                    "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
                 }
@@ -110,6 +119,17 @@
                     "processors": "",
                     "groups": "PC",
                     "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7b8b3265-7b86-42c7-b4b6-8e2ebb047a6c",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "Change",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -26,7 +26,7 @@ public class Body : MonoBehaviour
     }
     
     //부모의 추상 메소드를 구현, Entity_Manager의 Update에서 반복함
-    public void Updated()
+    public void Update()
     {
         //상태 매니저의 Execute실행
         _stateManager.Execute();
