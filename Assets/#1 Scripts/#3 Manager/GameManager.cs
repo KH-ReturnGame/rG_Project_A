@@ -37,14 +37,26 @@ public class GameManager : MonoBehaviour
             isEscMenuView = !isEscMenuView;
             if (isEscMenuView)
             {
-                GameObject canvas = GameObject.FindGameObjectWithTag("canvas");
-                CreatedEscMenu = Instantiate(EscMenuObj, canvas.transform, false);
+                PauseGame();
             }
             else
             {
-                Destroy(CreatedEscMenu);
+                ResumeGame();
             }
         }
+    }
+    
+    public void PauseGame()
+    {
+        Time.timeScale = 0;
+        GameObject canvas = GameObject.FindGameObjectWithTag("canvas");
+        CreatedEscMenu = Instantiate(EscMenuObj, canvas.transform, false);
+    }
+
+    public void ResumeGame()
+    {
+        Time.timeScale = 1;
+        Destroy(CreatedEscMenu);
     }
 
     public void ToggleSettingMenu()

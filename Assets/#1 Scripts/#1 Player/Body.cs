@@ -3,7 +3,7 @@ using UnityEngine;
 
 public enum BodyStates
 {
-    IsGround,
+    IsGround=0,
 }
 
 public class Body : MonoBehaviour
@@ -15,7 +15,7 @@ public class Body : MonoBehaviour
     public StateManager<Body> _stateManager;
     
     //기본 설정
-    public void Setup()
+    public void Start()
     {
         //_states 초기화
         _states = new State<Body>[state_count];

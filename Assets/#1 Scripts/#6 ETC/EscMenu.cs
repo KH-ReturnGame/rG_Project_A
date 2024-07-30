@@ -16,6 +16,7 @@ public class EscMenu : MonoBehaviour
         MainmenuButton.onClick.AddListener(() => { 
             GameManager.inst.ChangeScene(Scenes.MainMenu, LoadSceneMode.Single);
             GameManager.inst.isEscMenuView = false;
+            Time.timeScale = 1;
         });
         ExitgameButton.onClick.AddListener(() => { Application.Quit();});
     }
