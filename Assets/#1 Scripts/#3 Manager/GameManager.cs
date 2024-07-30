@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
     public GameObject SettingMenuObj;
     public bool isSettingMenuView;
     private GameObject CreatedSettingMenu;
+
+    public bool isPaused = false;
     
     public void Awake()
     {
@@ -48,6 +50,7 @@ public class GameManager : MonoBehaviour
     
     public void PauseGame()
     {
+        isPaused = true;
         Time.timeScale = 0;
         GameObject canvas = GameObject.FindGameObjectWithTag("canvas");
         CreatedEscMenu = Instantiate(EscMenuObj, canvas.transform, false);
@@ -55,6 +58,7 @@ public class GameManager : MonoBehaviour
 
     public void ResumeGame()
     {
+        isPaused = false;
         Time.timeScale = 1;
         Destroy(CreatedEscMenu);
     }
