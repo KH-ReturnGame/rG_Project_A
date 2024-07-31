@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class ObjectManager : MonoBehaviour
 {
     public GameObject Arrow;
-    public float followSpeed = 5.0f;
-    public float rotationSpeed = 100.0f;
+    public float followSpeed;
+    public float rotationSpeed;
 
     public void Start()
     {

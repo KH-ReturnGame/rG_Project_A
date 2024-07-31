@@ -1847,7 +1847,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Arrow: {fileID: 1669094250}
   followSpeed: 5
-  rotationSpeed: 100
+  rotationSpeed: 300
 --- !u!212 &1669094253
 SpriteRenderer:
   m_ObjectHideFlags: 0
