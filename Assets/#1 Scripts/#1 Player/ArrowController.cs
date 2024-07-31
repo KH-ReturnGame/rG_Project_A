@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ObjectManager : MonoBehaviour
+public class ArrowController : MonoBehaviour
 {
     public GameObject Arrow;
     public float followSpeed;
