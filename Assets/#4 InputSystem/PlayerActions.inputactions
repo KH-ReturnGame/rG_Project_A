@@ -132,6 +132,17 @@
                     "action": "Change",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a23c6023-798c-4516-a7fa-54d2a3905da4",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "Change",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }
