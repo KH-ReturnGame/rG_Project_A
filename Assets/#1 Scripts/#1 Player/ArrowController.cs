@@ -157,6 +157,9 @@ public class ArrowController : MonoBehaviour
     
     public void OnCollisionEnter2D()
     {
-        ChangeArrow("1");
+        if (!isOnClick)
+        {
+            ChangeArrow("1");
+        }
     }
 }
