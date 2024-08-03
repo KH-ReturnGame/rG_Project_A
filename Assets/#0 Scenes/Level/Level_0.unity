@@ -1487,19 +1487,7 @@ MonoBehaviour:
     m_ActionId: e75640f0-31b1-4bc4-855f-cf53610a15ee
     m_ActionName: PlayerActions/Arrow[/Keyboard/r]
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1669094252}
-        m_TargetAssemblyTypeName: ArrowController, Assembly-CSharp
-        m_MethodName: OnChangeArrow
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: 5e6d3a7a-1b63-45b5-ba06-44c395152448
     m_ActionName: PlayerActions/ChangeArrow[/Keyboard/1,/Keyboard/2]
   - m_PersistentCalls:

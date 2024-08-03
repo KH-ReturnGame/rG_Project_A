@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -19,7 +20,6 @@ public class ArrowController : MonoBehaviour
     private Vector2 currentMousePosition;
 
     private Vector2 startMousePosition;
-    private Vector2 endMousePosition;
     public GameObject ArrowControlPrefab;
     private GameObject ArrowControlObj;
     private float angle;
@@ -52,7 +52,7 @@ public class ArrowController : MonoBehaviour
         }
         else
         {
-            Debug.Log("ddd");
+            //Debug.Log("ddd");
             rigidbody.gravityScale = 1f;
         }
     }
@@ -64,19 +64,19 @@ public class ArrowController : MonoBehaviour
         {
             rigidbody.gravityScale = 0;
             rigidbody.velocity = Vector3.zero;
+            ChangeArrow("1");
         }
     }
 
-    public void OnChangeArrow(InputAction.CallbackContext context)
+    public void ChangeArrow(String mode)
     {
-        //Debug.Log(context.control.name);
-        ControlMethod = context.control.name;
-        if (context.started && ControlMethod == "2")
+        ControlMethod = mode;
+        if (ControlMethod == "2")
         {
             rigidbody.gravityScale = 0;
             rigidbody.velocity = Vector3.zero;
         }
-        else if (context.started && ControlMethod == "1")
+        else if (ControlMethod == "1")
         {
             rigidbody.gravityScale = 0;
             rigidbody.velocity = Vector3.zero;
@@ -92,13 +92,15 @@ public class ArrowController : MonoBehaviour
     }
     public void OnDragArrowMouse(InputAction.CallbackContext context)
     {
-        if (!CanControllArrow || ControlMethod != "2")
+        if (!CanControllArrow)
         {
             return;
         }
         //눌렀을때
-        if (context.started)
+        if (context.started && !GameManager.inst.isPaused)
         {
+            ChangeArrow("2");
+            
             startMousePosition = currentMousePosition;
             GameObject canvas = GameObject.FindGameObjectWithTag("canvas");
             ArrowControlObj =Instantiate(ArrowControlPrefab,canvas.transform);
@@ -108,11 +110,10 @@ public class ArrowController : MonoBehaviour
         else if (context.canceled)
         {
             isOnClick = false;
-            endMousePosition = currentMousePosition;
             Destroy(ArrowControlObj);
             
             transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
-            GetComponent<Rigidbody2D>().velocity = new Vector2((direction_mouse.normalized.x)*(l/100),(direction_mouse.normalized.y)*(l/80));
+            GetComponent<Rigidbody2D>().velocity = new Vector2((direction_mouse.normalized.x)*(l/10),(direction_mouse.normalized.y)*(l/8));
         }
         //중간
         else
@@ -127,10 +128,12 @@ public class ArrowController : MonoBehaviour
         Vector3 worldPosition = UnityEngine.Camera.main.ScreenToWorldPoint(mousePosition);
 
         // 화살표 마우스위치로 이동
-        Arrow.transform.position = Vector3.Lerp(Arrow.transform.position, new Vector3(worldPosition.x, worldPosition.y, 0), followSpeed * Time.deltaTime);
+        Vector3 position = Arrow.transform.position;
+        position = Vector3.Lerp(position, new Vector3(worldPosition.x, worldPosition.y, 0), followSpeed * Time.deltaTime);
+        Arrow.transform.position = position;
 
         // 방향 계산
-        Vector3 direction = worldPosition - Arrow.transform.position;
+        Vector3 direction = worldPosition - position;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f; // 필요하면 각도 추가
         Quaternion targetRotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
@@ -150,5 +153,10 @@ public class ArrowController : MonoBehaviour
                                  Mathf.Pow(currentMousePosition.y - startMousePosition.y,2));
             ArrowControlObj.GetComponent<RectTransform>().sizeDelta = new Vector2(50, l+100);
         }
+    }
+    
+    public void OnCollisionEnter2D()
+    {
+        ChangeArrow("1");
     }
 }

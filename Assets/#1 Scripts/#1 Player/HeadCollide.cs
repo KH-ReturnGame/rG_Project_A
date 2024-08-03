@@ -17,7 +17,7 @@ public class HeadCollide : MonoBehaviour
             (other.CompareTag("Body") && name == "head_ground_check"))
         {
             Head.GetComponent<Head>().AddState(HeadStates.IsGround);
-            Debug.Log("머리 바닥 닿음");
+            //Debug.Log("머리 바닥 닿음");
         }
     }
 
@@ -28,7 +28,7 @@ public class HeadCollide : MonoBehaviour
             (other.CompareTag("Body") && name == "head_ground_check"))
         {   
             Head.GetComponent<Head>().RemoveState(HeadStates.IsGround);  
-            Debug.Log("머리 바닥 떨어짐");
+            //Debug.Log("머리 바닥 떨어짐");
         }
     }
 }
