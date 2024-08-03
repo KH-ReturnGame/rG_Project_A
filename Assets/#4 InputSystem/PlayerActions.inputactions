@@ -42,15 +42,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "ChangeArrow",
-                    "type": "Button",
-                    "id": "5e6d3a7a-1b63-45b5-ba06-44c395152448",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "Press",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "DragArrowPos",
                     "type": "Value",
                     "id": "0b3dba16-5845-48b3-a200-aa577fc4b3a4",
@@ -188,28 +179,6 @@
                     "processors": "",
                     "groups": "PC",
                     "action": "ActivateArrow",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "2bcc629c-5c52-4575-b2b3-31a1eaa18a3c",
-                    "path": "<Keyboard>/1",
-                    "interactions": "Press",
-                    "processors": "",
-                    "groups": "",
-                    "action": "ChangeArrow",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "911b237e-300e-441b-b901-f2ec2e657ff9",
-                    "path": "<Keyboard>/2",
-                    "interactions": "Press",
-                    "processors": "",
-                    "groups": "",
-                    "action": "ChangeArrow",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

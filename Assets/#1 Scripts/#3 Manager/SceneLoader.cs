@@ -14,10 +14,10 @@ public class SceneLoader : MonoBehaviour
     private int _currentLevel = 1;
 
     //씬 중에서도 레벨씬 전환
-    public void ChangeLevel(int l)
+    public void ChangeLevel(int l,LoadSceneMode mode)
     {
         string level = "Level_" + l;
-        SceneManager.LoadScene(level);
+        SceneManager.LoadScene(level,mode);
         _currentLevel = l;
     }
 

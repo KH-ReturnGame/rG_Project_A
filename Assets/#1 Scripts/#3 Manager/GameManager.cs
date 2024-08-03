@@ -77,9 +77,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void ChangeLevel(int l)
+    public void ChangeLevel(int l,LoadSceneMode mode)
     {
-        SL.ChangeLevel(l);
+        SL.ChangeLevel(l,mode);
     }
 
     public void ChangeScene(Scenes scene, LoadSceneMode mode)
