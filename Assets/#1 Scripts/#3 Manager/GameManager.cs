@@ -92,6 +92,16 @@ public class GameManager : MonoBehaviour
         SL.UnLoadScene(scene);
     }
 
+    public bool CheckLoadScene(string scene)
+    {
+        return SL.CheckLoadScene(scene);
+    }
+
+    public bool CheckLoadScene(Scenes scene)
+    {
+        return SL.CheckLoadScene(scene);
+    }
+
     public void ChangeCameraTarget(GameObject obj)
     {
         GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>().ChangeTarget(obj);
