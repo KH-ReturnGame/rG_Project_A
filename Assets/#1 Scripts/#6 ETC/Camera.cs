@@ -35,13 +35,8 @@ public class Camera : MonoBehaviour
         
             //자신의 좌표를 연산된 좌표로 변경하기
             transform.position = new Vector3(
-<<<<<<< Updated upstream
-                _paX.Change_Coordinate_Euler(T,pos[0]), 
-                _paY.Change_Coordinate_Euler(T,pos[1]),-30);
-=======
                 _paX.Change_Coordinate_Euler(Time.deltaTime*5,pos[0]), 
                 _paY.Change_Coordinate_Euler(Time.deltaTime*5,pos[1]),-30);
->>>>>>> Stashed changes
         }
     }
 }
