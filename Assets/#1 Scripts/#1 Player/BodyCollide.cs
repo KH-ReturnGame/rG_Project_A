@@ -16,7 +16,7 @@ public class BodyCollide : MonoBehaviour
         {
             Body.GetComponent<Body>().AddState(BodyStates.IsGround);
             collideCount++;
-            Debug.Log("몸 바닥 닿음");
+            //Debug.Log("몸 바닥 닿음");
         }
     }
 
@@ -31,7 +31,7 @@ public class BodyCollide : MonoBehaviour
             {
                 Body.GetComponent<Body>().RemoveState(BodyStates.IsGround);  
             }
-            Debug.Log("몸  바닥 떨어짐");
+            //Debug.Log("몸  바닥 떨어짐");
         }
     }
 }
