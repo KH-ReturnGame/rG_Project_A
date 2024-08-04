@@ -24,12 +24,39 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Change",
+                    "name": "ChangePlayer",
                     "type": "Button",
                     "id": "e8d561cc-bd78-47eb-84cf-5c11640fed44",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ActivateArrow",
+                    "type": "Button",
+                    "id": "e75640f0-31b1-4bc4-855f-cf53610a15ee",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "DragArrowPos",
+                    "type": "Value",
+                    "id": "0b3dba16-5845-48b3-a200-aa577fc4b3a4",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "DragArrowMouse",
+                    "type": "Button",
+                    "id": "58c021e8-2e09-45e4-9f14-bebdf00b418a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press",
                     "initialStateCheck": false
                 }
             ],
@@ -129,7 +156,51 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "PC",
-                    "action": "Change",
+                    "action": "ChangePlayer",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a23c6023-798c-4516-a7fa-54d2a3905da4",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "ChangePlayer",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c6535bbf-6598-4cbc-8ffc-20a39a5b227d",
+                    "path": "<Keyboard>/r",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "ActivateArrow",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "da45ec19-48e9-436e-b4e6-19c53f97c165",
+                    "path": "<Mouse>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "DragArrowPos",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e738ed99-c659-4ef6-aa4f-fc4f2bd55f76",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "DragArrowMouse",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

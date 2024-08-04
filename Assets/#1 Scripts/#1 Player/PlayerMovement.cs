@@ -5,8 +5,8 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     private float _movementInputDirection;
-    private float _movementSpeed = 8.00f;
-    private float _jumpForce = 10f;
+    public float _movementSpeed;
+    public float _jumpForce;
 
     public GameObject Body;
     private Rigidbody2D BodyRigidbody;
@@ -33,13 +33,13 @@ public class PlayerMovement : MonoBehaviour
 
 
     //좌우 입력받기
-    public void OnMove(InputValue value)
+    public void OnMove(InputAction.CallbackContext context)
     {
-        _movementInputDirection = value.Get<float>();
+        _movementInputDirection = context.ReadValue<float>();
     }
     
     //점프 입력받기
-    public void OnJump(InputValue value)
+    public void OnJump(InputAction.CallbackContext context)
     {
         if ((NowRigidbody==BodyRigidbody && Body.GetComponent<Body>().IsContainState(BodyStates.IsGround))||
             (NowRigidbody==HeadRigidbody && Head.GetComponent<Head>().IsContainState(HeadStates.IsGround)))
@@ -49,7 +49,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
     //머리, 몸 전환 입력받기
-    public void OnChange(InputValue value)
+    public void OnChangePlayer(InputAction.CallbackContext context)
     {
         
         if (NowRigidbody == BodyRigidbody)

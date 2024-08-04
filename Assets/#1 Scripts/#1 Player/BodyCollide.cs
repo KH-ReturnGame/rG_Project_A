@@ -5,6 +5,8 @@ using UnityEngine;
 public class BodyCollide : MonoBehaviour
 {
     public GameObject Body;
+    private int collideCount;
+    
     public void OnTriggerEnter2D(Collider2D other)
     {
         
@@ -13,6 +15,7 @@ public class BodyCollide : MonoBehaviour
             (other.CompareTag("Head") && name == "body_ground_check"))
         {
             Body.GetComponent<Body>().AddState(BodyStates.IsGround);
+            collideCount++;
             //Debug.Log("몸 바닥 닿음");
         }
     }
@@ -22,8 +25,12 @@ public class BodyCollide : MonoBehaviour
         //땅에서 떨어졌다고 땅감지 콜라이더가 체크하면 땅감지 해제
         if ((other.CompareTag("ground")&&name == "body_ground_check")||
             (other.CompareTag("Head") && name == "body_ground_check"))
-        {   
-            Body.GetComponent<Body>().RemoveState(BodyStates.IsGround);  
+        {
+            collideCount--;
+            if (collideCount == 0)
+            {
+                Body.GetComponent<Body>().RemoveState(BodyStates.IsGround);  
+            }
             //Debug.Log("몸  바닥 떨어짐");
         }
     }
