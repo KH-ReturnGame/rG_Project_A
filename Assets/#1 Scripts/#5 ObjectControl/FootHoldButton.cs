@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.Serialization;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -15,7 +16,7 @@ public class FootHoldButton : MonoBehaviour
     public int flip = 1;
 
     public int SignalType = 0;
-    private bool signal = false;
+    public bool signal = false;
 
     public List<Collider2D> downObj;
 
@@ -25,27 +26,28 @@ public class FootHoldButton : MonoBehaviour
         {
             downObj.Add(other);
         }
-
-        if (downObj.Count == 1 && !signal)
+        else
         {
-            if (isToggle)
+            return;
+        }
+        
+        if (downObj.Count == 1 && !signal && !isToggle)
+        {
+            //신호 보내기 넣어야함
+            signal = true;
+            moveButton("enter");
+        }
+
+        if (downObj.Count == 1 && isToggle)
+        {
+            signal = !signal;
+            if (signal)
             {
-                signal = !signal;
+                moveButton("enter");
             }
             else
             {
-                //신호 보내기 넣어야함
-                signal = true;
-                if (downDirection == "Y")
-                {
-                    transform.position = new Vector3(transform.position.x, transform.position.y - 0.2f*flip,
-                        transform.position.z);
-                }
-                else
-                {
-                    transform.position = new Vector3(transform.position.x - 0.2f*flip, transform.position.y,
-                        transform.position.z);
-                }
+                moveButton("exit");
             }
         }
     }
@@ -56,27 +58,30 @@ public class FootHoldButton : MonoBehaviour
         {
             downObj.Remove(other);
         }
-        if (downObj.Count == 0 && signal)
+        else
         {
-            if (isToggle)
-            {
-                
-            }
-            else
-            {
-                //신호 보내기 넣어야함
-                signal = false;
-                if (downDirection == "Y")
-                {
-                    transform.position = new Vector3(transform.position.x, transform.position.y + 0.2f*flip,
-                        transform.position.z);
-                }
-                else
-                {
-                    transform.position = new Vector3(transform.position.x + 0.2f*flip, transform.position.y,
-                        transform.position.z);
-                }
-            }
+            return;
+        }
+        
+        if (downObj.Count == 0 && signal && !isToggle)
+        {
+            signal = false;
+            moveButton("exit");
+        }
+    }
+
+    private void moveButton(string str)
+    {
+        int f = str == "enter" ? 1 : -1;
+        if (downDirection == "Y")
+        {
+            transform.position = new Vector3(transform.position.x, transform.position.y - 0.2f*flip*f,
+                transform.position.z);
+        }
+        else
+        {
+            transform.position = new Vector3(transform.position.x - 0.2f*flip*f, transform.position.y,
+                transform.position.z);
         }
     }
 
