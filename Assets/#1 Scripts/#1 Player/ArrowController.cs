@@ -113,7 +113,7 @@ public class ArrowController : MonoBehaviour
             Destroy(ArrowControlObj);
             
             transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
-            GetComponent<Rigidbody2D>().velocity = new Vector2((direction_mouse.normalized.x)*(l/10),(direction_mouse.normalized.y)*(l/8));
+            GetComponent<Rigidbody2D>().velocity = new Vector2((direction_mouse.normalized.x)*(l/5),(direction_mouse.normalized.y)*(l/5));
         }
         //중간
         else
