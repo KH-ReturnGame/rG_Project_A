@@ -1768,7 +1768,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Arrow: {fileID: 1669094250}
-  followSpeed: 5
+  followSpeed: 10
   rotationSpeed: 500
   CanControllArrow: 0
   ControlMethod: 1
