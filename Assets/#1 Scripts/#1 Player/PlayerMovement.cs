@@ -5,8 +5,8 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     private float _movementInputDirection;
-    private float _movementSpeed = 8.00f;
-    private float _jumpForce = 10f;
+    public float _movementSpeed;
+    public float _jumpForce;
 
     public GameObject Body;
     private Rigidbody2D BodyRigidbody;
