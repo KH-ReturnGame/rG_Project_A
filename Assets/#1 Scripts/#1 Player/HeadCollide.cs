@@ -5,7 +5,8 @@ using UnityEngine;
 public class HeadCollide : MonoBehaviour
 {
     public GameObject Head;
-
+    private int collideCount;
+    
     public void Update()
     {
         transform.position = Head.transform.position;
@@ -17,6 +18,7 @@ public class HeadCollide : MonoBehaviour
             (other.CompareTag("Body") && name == "head_ground_check"))
         {
             Head.GetComponent<Head>().AddState(HeadStates.IsGround);
+            collideCount++;
             //Debug.Log("머리 바닥 닿음");
         }
     }
@@ -27,7 +29,11 @@ public class HeadCollide : MonoBehaviour
         if ((other.CompareTag("ground")&&name == "head_ground_check")||
             (other.CompareTag("Body") && name == "head_ground_check"))
         {   
-            Head.GetComponent<Head>().RemoveState(HeadStates.IsGround);  
+            collideCount--;
+            if (collideCount == 0)
+            {
+                Head.GetComponent<Head>().RemoveState(HeadStates.IsGround);  
+            }
             //Debug.Log("머리 바닥 떨어짐");
         }
     }
