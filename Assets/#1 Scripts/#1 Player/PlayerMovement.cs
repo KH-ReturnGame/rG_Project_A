@@ -41,6 +41,8 @@ public class PlayerMovement : MonoBehaviour
     //점프 입력받기
     public void OnJump(InputAction.CallbackContext context)
     {
+        if (!context.started)
+            return;
         if ((NowRigidbody==BodyRigidbody && Body.GetComponent<Body>().IsContainState(BodyStates.IsGround))||
             (NowRigidbody==HeadRigidbody && Head.GetComponent<Head>().IsContainState(HeadStates.IsGround)))
         {
