@@ -8,6 +8,7 @@ public class Door : MonoBehaviour, ISignalReceive
     [HideInInspector] public int RotateType;
     public float angle;
     private float originAngle;
+    private Vector2 startpos;
 
     private Transform rotateTransform;
     
@@ -22,17 +23,20 @@ public class Door : MonoBehaviour, ISignalReceive
         
         if (RotateType == 0)
         {
-            rotateTransform = transform.parent.transform;
+            rotateTransform = transform.GetChild(0).transform;
         }
         else
         {
-            rotateTransform = transform.parent.transform.parent.transform;
+            rotateTransform = transform;
         }
+
+        startpos = new Vector2(transform.position.x, transform.position.y);
+        //Debug.Log(startpos);
     }
 
     public void SignalChanged(bool signal)
     {
-        Debug.Log((signal)?"문열림":"문닫힘");
+        //Debug.Log((signal)?"문열림":"문닫힘");
         Signal = signal;
     }
 
@@ -43,12 +47,12 @@ public class Door : MonoBehaviour, ISignalReceive
             if (Signal)
             {
                 transform.position =
-                    Vector3.Slerp(transform.position, new Vector3(0, 4, 0), 10f*Time.deltaTime);
+                    Vector3.Lerp(transform.position, new Vector3(startpos.x,startpos.y+4f, 0), 10f*Time.deltaTime);
             }
             else
             {
                 transform.position =
-                    Vector3.Slerp(transform.position, new Vector3(0, 0, 0), 10f*Time.deltaTime);
+                    Vector3.Lerp(transform.position, new Vector3(startpos.x, startpos.y, 0), 10f*Time.deltaTime);
             }
         }
         else
