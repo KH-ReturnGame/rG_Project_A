@@ -15,7 +15,8 @@ public class HeadCollide : MonoBehaviour
     public void OnTriggerEnter2D(Collider2D other)
     {
         if ((other.CompareTag("ground") && name == "head_ground_check")||
-            (other.CompareTag("Body") && name == "head_ground_check"))
+            (other.CompareTag("Body") && name == "head_ground_check")||
+            (other.CompareTag("Door") && name == "head_ground_check"))
         {
             Head.GetComponent<Head>().AddState(HeadStates.IsGround);
             collideCount++;
@@ -27,7 +28,8 @@ public class HeadCollide : MonoBehaviour
     {
         //땅에서 떨어졌다고 땅감지 콜라이더가 체크하면 땅감지 해제
         if ((other.CompareTag("ground")&&name == "head_ground_check")||
-            (other.CompareTag("Body") && name == "head_ground_check"))
+            (other.CompareTag("Body") && name == "head_ground_check")||
+            (other.CompareTag("Door") && name == "head_ground_check"))
         {   
             collideCount--;
             if (collideCount == 0)
