@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager inst;
     private SceneLoader SL;
+    private SignalManager SM;
 
     public GameObject EscMenuObj;
     public bool isEscMenuView;
@@ -30,6 +31,7 @@ public class GameManager : MonoBehaviour
         }
         DontDestroyOnLoad(this);
         SL = GetComponent<SceneLoader>();
+        SM = GetComponent<SignalManager>();
     }
 
     public void Update()
@@ -77,6 +79,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    //Scene 관리
     public void ChangeLevel(int l,LoadSceneMode mode)
     {
         SL.ChangeLevel(l,mode);
@@ -102,8 +105,29 @@ public class GameManager : MonoBehaviour
         return SL.CheckLoadScene(scene);
     }
 
+    //카메라 관리
     public void ChangeCameraTarget(GameObject obj)
     {
         GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>().ChangeTarget(obj);
     }
+    
+    //신호 관리
+    public bool CheckSignal(int index)
+    {
+        return SM.CheckSignal(index);
+    }
+    public void ChangeSignal(int index, bool signal)
+    {
+        SM.ChangeSignal(index, signal);
+    }
+    public void AddSendObj(GameObject obj, int index)
+    {
+        Debug.Log(obj.name);
+        SM.AddSendObj(obj,index);
+    }
+    public void RemSendObj(GameObject obj)
+    {
+        SM.RemSendObj(obj);
+    }
+    
 }
