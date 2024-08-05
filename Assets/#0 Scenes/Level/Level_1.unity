@@ -491,6 +491,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SignalType: 1
+  DoorType: UpDown
 --- !u!1 &185735033
 GameObject:
   m_ObjectHideFlags: 0
