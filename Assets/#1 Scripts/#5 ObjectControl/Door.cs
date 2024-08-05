@@ -18,7 +18,7 @@ public class Door : MonoBehaviour, ISignalReceive
     
     public void Start()
     {
-        Debug.Log(gameObject.name);
+        //Debug.Log(gameObject.name);
         GameManager.inst.AddSendObj(gameObject,SignalType);
         
         if (RotateType == 0)

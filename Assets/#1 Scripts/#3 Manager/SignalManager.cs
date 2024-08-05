@@ -36,7 +36,7 @@ public class SignalManager : MonoBehaviour
     }
     public void AddSendObj(GameObject obj, int index)
     {
-        Debug.Log(obj.name);
+        //Debug.Log(obj.name);
         SendObj.Add(obj,index);
     }
     public void RemSendObj(GameObject obj)
