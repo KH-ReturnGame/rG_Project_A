@@ -24,16 +24,56 @@ public class GameManager : MonoBehaviour
         if (inst == null)
         {
             inst = this;
+            DontDestroyOnLoad(gameObject);
         }
-        else
+        else if (inst != this)
         {
             Destroy(gameObject);
         }
-        DontDestroyOnLoad(this);
         SL = GetComponent<SceneLoader>();
         SM = GetComponent<SignalManager>();
     }
+    public static GameManager Instance
+    {
+        get
+        {
+            if (inst == null)
+            {
+                inst = FindObjectOfType<GameManager>();
+                if (inst == null)
+                {
+                    GameObject go = new GameObject("GameManager");
+                    inst = go.AddComponent<GameManager>();
+                    DontDestroyOnLoad(go);
+                }
+            }
+            return inst;
+        }
+    }
+    
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
 
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // GameManager 초기화 또는 참조 업데이트
+        if (GameManager.Instance != null)
+        {
+            Debug.Log("GameManager instance is available after scene load");
+        }
+        else
+        {
+            Debug.LogWarning("GameManager instance is null after scene load");
+        }
+    }
+    
     public void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape) && !isSettingMenuView)

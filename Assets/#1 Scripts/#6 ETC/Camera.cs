@@ -43,7 +43,7 @@ public class Camera : MonoBehaviour
 
     public void Update()
     {
-        if (!GameManager.inst.isPaused)
+        if (!GameManager.Instance.isPaused)
         {
             //현재 타겟의 좌표 가져오기
             Vector2 pos = TargetObj.transform.position;

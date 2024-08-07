@@ -16,7 +16,7 @@ public class SignalManager : MonoBehaviour
         {
             Signal[i] = false;
         }
-        Debug.Log("list size" + Signal.Length);
+        //Debug.Log("list size" + Signal.Length);
     }
 
     public bool CheckSignal(int index)

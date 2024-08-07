@@ -57,12 +57,12 @@ public class PlayerMovement : MonoBehaviour
         if (NowRigidbody == BodyRigidbody)
         {
             NowRigidbody = HeadRigidbody;
-            GameManager.inst.ChangeCameraTarget(Head);
+            GameManager.Instance.ChangeCameraTarget(Head);
         }
         else
         {
             NowRigidbody = BodyRigidbody;
-            GameManager.inst.ChangeCameraTarget(Body);
+            GameManager.Instance.ChangeCameraTarget(Body);
         }
     }
     

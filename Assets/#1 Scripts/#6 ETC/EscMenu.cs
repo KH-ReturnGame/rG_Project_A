@@ -12,11 +12,11 @@ public class EscMenu : MonoBehaviour
 
     private void Start()
     {
-        SettingButton.onClick.AddListener(() => { GameManager.inst.ToggleSettingMenu(); });
+        SettingButton.onClick.AddListener(() => { GameManager.Instance.ToggleSettingMenu(); });
         MainmenuButton.onClick.AddListener(() => { 
-            GameManager.inst.ChangeScene(Scenes.MainMenu, LoadSceneMode.Single);
-            GameManager.inst.isEscMenuView = false;
-            GameManager.inst.isPaused = false;
+            GameManager.Instance.ChangeScene(Scenes.MainMenu, LoadSceneMode.Single);
+            GameManager.Instance.isEscMenuView = false;
+            GameManager.Instance.isPaused = false;
             Time.timeScale = 1;
         });
         ExitgameButton.onClick.AddListener(() => { Application.Quit();});

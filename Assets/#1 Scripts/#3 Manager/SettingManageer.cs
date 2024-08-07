@@ -7,6 +7,6 @@ public class SettingManageer : MonoBehaviour
 {
     public void ExitSetting()
     {
-        GameManager.inst.ToggleSettingMenu();
+        GameManager.Instance.ToggleSettingMenu();
     }
 }
