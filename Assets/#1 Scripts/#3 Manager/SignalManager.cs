@@ -26,13 +26,33 @@ public class SignalManager : MonoBehaviour
 
     public void ChangeSignal(int index, bool signal)
     {
-        Debug.Log("이거는 ??????");
         Signal[index] = signal;
         
+        var itemsToRemove = new List<GameObject>();
         var items = SendObj.Where(pair => pair.Value == index);
         foreach (var item in items)
         {
-            item.Key.GetComponent<ISignalReceive>().SignalChanged(signal);
+            if (item.Key == null || !item.Key.activeInHierarchy)
+            {
+                itemsToRemove.Add(item.Key);
+                continue;
+            }
+            
+            var signalReceiver = item.Key.GetComponent<ISignalReceive>();
+            if (signalReceiver != null)
+            {
+                signalReceiver.SignalChanged(signal);
+            }
+            else
+            {
+                itemsToRemove.Add(item.Key);
+            }
+        }
+
+        // 파괴되었거나 유효하지 않은 오브젝트 제거
+        foreach (var obj in itemsToRemove)
+        {
+            SendObj.Remove(obj);
         }
     }
     public void AddSendObj(GameObject obj, int index)
