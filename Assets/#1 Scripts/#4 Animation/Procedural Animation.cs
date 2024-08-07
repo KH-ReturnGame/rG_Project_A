@@ -51,6 +51,9 @@ public class ProceduralAnimations
     //이번 프레임에서의 좌표 변화량 계산 메서드
     public float Change_Coordinate_Euler(float T, float X, float Xd = 0)
     {
+        //const float MIN_DELTA_TIME = 0.0001f;
+        //T = Mathf.Max(T, MIN_DELTA_TIME);
+        
         //타겟 좌표 변화량은 현재 타겟 좌표 - 이전 타겟 좌표를 시간으로 나눈 것이고
         Xd = (X - _Xp) / T;
 
@@ -60,6 +63,11 @@ public class ProceduralAnimations
         //기타 공식들
         _Y = _Y + T * _Yd;
         _Yd = _Yd + T * (X + _k3 * Xd - _Y - _k1 * _Yd) / _k2;
+
+        if (float.IsNaN(_Y))
+        {
+            Debug.Log(","+Xd+","+_Xp+","+_Yd);
+        }
 
         //최종적으로 이번 프레임에서 바꿔야할 자신의 좌표를 반환
         return _Y;

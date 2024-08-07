@@ -129,7 +129,7 @@ public class ArrowController : MonoBehaviour
 
         // 화살표 마우스위치로 이동
         Vector3 position = Arrow.transform.position;
-        position = Vector3.Lerp(position, new Vector3(worldPosition.x, worldPosition.y, 0), followSpeed * Time.deltaTime);
+        position = Vector3.Lerp(position, new Vector3(worldPosition.x, worldPosition.y, 0), followSpeed * Time.unscaledDeltaTime);
         Arrow.transform.position = position;
 
         // 방향 계산
@@ -138,7 +138,7 @@ public class ArrowController : MonoBehaviour
         Quaternion targetRotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
         // 화살표 회전 -> 마우스 방향으로
-        Arrow.transform.rotation = Quaternion.RotateTowards(Arrow.transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        Arrow.transform.rotation = Quaternion.RotateTowards(Arrow.transform.rotation, targetRotation, rotationSpeed * Time.unscaledDeltaTime);
     }
 
     public void ControlMethod_2()

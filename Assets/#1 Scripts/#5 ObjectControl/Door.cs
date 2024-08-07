@@ -47,12 +47,12 @@ public class Door : MonoBehaviour, ISignalReceive
             if (Signal)
             {
                 transform.position =
-                    Vector3.Lerp(transform.position, new Vector3(startpos.x,startpos.y+4f, 0), 10f*Time.deltaTime);
+                    Vector3.Lerp(transform.position, new Vector3(startpos.x,startpos.y+4f, 0), 10f*Time.unscaledDeltaTime);
             }
             else
             {
                 transform.position =
-                    Vector3.Lerp(transform.position, new Vector3(startpos.x, startpos.y, 0), 10f*Time.deltaTime);
+                    Vector3.Lerp(transform.position, new Vector3(startpos.x, startpos.y, 0), 10f*Time.unscaledDeltaTime);
             }
         }
         else
@@ -61,12 +61,12 @@ public class Door : MonoBehaviour, ISignalReceive
             {
                 originAngle = rotateTransform.rotation.z;
                 Quaternion targetRotation = Quaternion.AngleAxis(angle, Vector3.forward);
-                rotateTransform.rotation = Quaternion.RotateTowards(rotateTransform.rotation, targetRotation, 500 * Time.deltaTime);
+                rotateTransform.rotation = Quaternion.RotateTowards(rotateTransform.rotation, targetRotation, 500 * Time.unscaledDeltaTime);
             }
             else
             {
                 Quaternion targetRotation = Quaternion.AngleAxis(originAngle, Vector3.forward);
-                rotateTransform.rotation = Quaternion.RotateTowards(rotateTransform.rotation, targetRotation, 500 * Time.deltaTime);
+                rotateTransform.rotation = Quaternion.RotateTowards(rotateTransform.rotation, targetRotation, 500 * Time.unscaledDeltaTime);
             }
         }
     }

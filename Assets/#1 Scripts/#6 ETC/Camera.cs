@@ -46,20 +46,52 @@ public class Camera : MonoBehaviour
         if (!GameManager.Instance.isPaused)
         {
             //현재 타겟의 좌표 가져오기
-            Vector2 pos = TargetObj.transform.position;
-        
-            //자신의 좌표를 연산된 좌표로 변경하기
-            transform.position = new Vector3(
-                _paX.Change_Coordinate_Euler(Time.deltaTime*5,pos[0]), 
-                _paY.Change_Coordinate_Euler(Time.deltaTime*5,pos[1]),-30);
+            if (TargetObj is not null)
+            {
+                Vector2 pos = TargetObj.transform.position;
+                
+                //자신의 좌표를 연산된 좌표로 변경하기
+                float newX = _paX.Change_Coordinate_Euler(Time.unscaledDeltaTime*5, pos[0]);
+                float newY = _paY.Change_Coordinate_Euler(Time.unscaledDeltaTime*5, pos[1]);
+
+                if (!float.IsNaN(newX) && !float.IsNaN(newY))
+                {
+                    transform.position = new Vector3(newX, newY, -30);
+                }
+                else
+                {
+                    //Debug.Log(pos);
+                    Debug.LogWarning("Calculated position contains NaN! / dT : "+Time.deltaTime+"  / tS : "+Time.timeScale +" / x,y : " +newX+","+newY);
+                }
+            }
+            else
+            {
+                Debug.LogWarning("TargetObj is null!");
+            }
             
-            //현재 타겟의 좌표 가져오기
-            Vector2 pos_ = miniCamTarget.transform.position;
-        
-            //미니캠 좌표를 연산된 좌표로 변경하기
-            miniCam.transform.position = new Vector3(
-                _pax.Change_Coordinate_Euler(Time.deltaTime*5,pos_[0]), 
-                _pay.Change_Coordinate_Euler(Time.deltaTime*5,pos_[1]),-30);
+            
+            if (miniCamTarget is not null)
+            {
+                //현재 타겟의 좌표 가져오기
+                Vector2 pos_ = miniCamTarget.transform.position;
+                
+                //자신의 좌표를 연산된 좌표로 변경하기
+                float newx = _pax.Change_Coordinate_Euler(Time.unscaledDeltaTime*5, pos_[0]);
+                float newy = _pay.Change_Coordinate_Euler(Time.unscaledDeltaTime*5, pos_[1]);
+
+                if (!float.IsNaN(newx) && !float.IsNaN(newy))
+                {
+                    miniCam.transform.position = new Vector3(newx, newy, -30);
+                }
+                else
+                {
+                    Debug.LogWarning("Calculated position contains NaN! / dT : "+Time.deltaTime+"  / tS : "+Time.timeScale);
+                }
+            }
+            else
+            {
+                Debug.LogWarning("miniCamTarget is null!");
+            }
         }
     }
 }
