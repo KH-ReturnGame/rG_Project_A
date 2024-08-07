@@ -158,6 +158,7 @@ public class GameManager : MonoBehaviour
     }
     public void ChangeSignal(int index, bool signal)
     {
+        Debug.Log("이거 실행됨?");
         SM.ChangeSignal(index, signal);
     }
     public void AddSendObj(GameObject obj, int index)

@@ -26,6 +26,7 @@ public class SignalManager : MonoBehaviour
 
     public void ChangeSignal(int index, bool signal)
     {
+        Debug.Log("이거는 ??????");
         Signal[index] = signal;
         
         var items = SendObj.Where(pair => pair.Value == index);
