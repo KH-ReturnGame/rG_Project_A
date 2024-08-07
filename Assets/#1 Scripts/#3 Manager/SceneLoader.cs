@@ -1,5 +1,7 @@
 using UnityEngine.SceneManagement;
 using UnityEngine;
+using System;
+using System.Collections;
 
 public enum Scenes
 {
@@ -13,23 +15,29 @@ public class SceneLoader : MonoBehaviour
     //현재 레벨 , n ~~~ = n레벨
     private int _currentLevel = 1;
 
-    //씬 중에서도 레벨씬 전환
-    public void ChangeLevel(int l,LoadSceneMode mode)
+    public void ChangeLevel(int l, LoadSceneMode mode)
     {
         string level = "Level_" + l;
-        SceneManager.LoadScene(level,mode);
+        StartCoroutine(LoadSceneAsync(level, mode));
         _currentLevel = l;
     }
 
-    //레벨 이외의 씬을 변경할때 사용
     public void ChangeScene(Scenes scene, LoadSceneMode mode)
     {
-        SceneManager.LoadScene(scene.ToString(), mode);
-        if (mode == 0)
-        {
-            Debug.Log(SceneManager.GetActiveScene());
-        }
+        StartCoroutine(LoadSceneAsync(scene.ToString(), mode));
     }
+
+    private IEnumerator LoadSceneAsync(string sceneName, LoadSceneMode mode)
+    {
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName, mode);
+        while (!asyncLoad.isDone)
+        {
+            yield return null;
+        }
+        Debug.Log("Scene loaded: " + sceneName);
+    }
+    
+    
 
     public void UnLoadScene(Scenes scene)
     {

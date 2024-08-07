@@ -24,7 +24,7 @@ public class MainMenu : MonoBehaviour
         StartButton.GetComponent<Button>().onClick.AddListener(ClickStartButton);
         EasyButton.GetComponent<Button>().onClick.AddListener(() =>
         {
-            GameManager.inst.ChangeLevel(1,LoadSceneMode.Single);
+            GameManager.Instance.ChangeLevel(1,LoadSceneMode.Single);
         });
         HardButton.GetComponent<Button>().onClick.AddListener(() =>
         {
@@ -70,25 +70,25 @@ public class MainMenu : MonoBehaviour
         if (StartButtonToggle)
         {
             startRectT.anchoredPosition3D =
-                Vector3.Slerp(startRectT.anchoredPosition3D, new Vector3(700, 100, 0), 10f*Time.deltaTime);
+                Vector3.Slerp(startRectT.anchoredPosition3D, new Vector3(700, 100, 0), 10f*Time.unscaledDeltaTime);
 
             easyRectT.anchoredPosition3D =
-                Vector3.Slerp(easyRectT.anchoredPosition3D, new Vector3(700, -10, 0), 10f*Time.deltaTime);
+                Vector3.Slerp(easyRectT.anchoredPosition3D, new Vector3(700, -10, 0), 10f*Time.unscaledDeltaTime);
             
             hardRectT.anchoredPosition3D =
-                Vector3.Slerp(hardRectT.anchoredPosition3D, new Vector3(700, -110, 0), 10f*Time.deltaTime);
+                Vector3.Slerp(hardRectT.anchoredPosition3D, new Vector3(700, -110, 0), 10f*Time.unscaledDeltaTime);
 
         }
         else
         {
             startRectT.anchoredPosition3D =
-                Vector3.Slerp(startRectT.anchoredPosition3D, new Vector3(700, 0, 0), 10f*Time.deltaTime);
+                Vector3.Slerp(startRectT.anchoredPosition3D, new Vector3(700, 0, 0), 10f*Time.unscaledDeltaTime);
             
             easyRectT.anchoredPosition3D =
-                Vector3.Slerp(easyRectT.anchoredPosition3D, new Vector3(700, 90, 0), 10f*Time.deltaTime);
+                Vector3.Slerp(easyRectT.anchoredPosition3D, new Vector3(700, 90, 0), 10f*Time.unscaledDeltaTime);
             
             hardRectT.anchoredPosition3D =
-                Vector3.Slerp(hardRectT.anchoredPosition3D, new Vector3(700, -10, 0), 10f*Time.deltaTime);
+                Vector3.Slerp(hardRectT.anchoredPosition3D, new Vector3(700, -10, 0), 10f*Time.unscaledDeltaTime);
         }
     }
 }

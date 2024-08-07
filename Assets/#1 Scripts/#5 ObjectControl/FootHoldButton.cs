@@ -34,14 +34,15 @@ public class FootHoldButton : MonoBehaviour
         if (downObj.Count == 1 && !signal && !isToggle)
         {
             signal = true;
-            GameManager.inst.ChangeSignal(SignalType,signal);
+            GameManager.Instance.ChangeSignal(SignalType, signal);
             moveButton("enter");
         }
 
         if (downObj.Count == 1 && isToggle)
         {
             signal = !signal;
-            GameManager.inst.ChangeSignal(SignalType,signal);
+            //Debug.Log(GameManager.Instance.name);
+            GameManager.Instance.ChangeSignal(SignalType,signal);
             if (signal)
             {
                 moveButton("enter");
@@ -67,7 +68,7 @@ public class FootHoldButton : MonoBehaviour
         if (downObj.Count == 0 && signal && !isToggle)
         {
             signal = false;
-            GameManager.inst.ChangeSignal(SignalType,signal);
+            GameManager.Instance.ChangeSignal(SignalType,signal);
             moveButton("exit");
         }
     }
