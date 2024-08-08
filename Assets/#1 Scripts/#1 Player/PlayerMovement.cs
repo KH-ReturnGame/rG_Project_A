@@ -4,20 +4,23 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
+    //플레이어 기본 움직임
     private float _movementInputDirection;
     public float _movementSpeed;
     public float _jumpForce;
 
+    //몸 관련
     public GameObject Body;
     private Rigidbody2D BodyRigidbody;
     
+    //머리 관련
     public GameObject Head;
     private Rigidbody2D HeadRigidbody;
 
+    //현재 조작할 오브젝트
     private Rigidbody2D NowRigidbody;
     
-    
-
+    //기본 초기화
     private void Start()
     {
         BodyRigidbody = Body.GetComponent<Rigidbody2D>();
@@ -25,13 +28,13 @@ public class PlayerMovement : MonoBehaviour
         NowRigidbody = BodyRigidbody;
     }
 
+    //움직임 무한 적용~~
     private void Update()
     {
         //기본 좌우 움직임
         NowRigidbody.velocity = new Vector2(_movementInputDirection * _movementSpeed, NowRigidbody.velocity.y);
     }
-
-
+    
     //좌우 입력받기
     public void OnMove(InputAction.CallbackContext context)
     {
@@ -50,10 +53,10 @@ public class PlayerMovement : MonoBehaviour
             NowRigidbody.velocity = new Vector2(NowRigidbody.velocity.x, _jumpForce);
         }
     }
+    
     //머리, 몸 전환 입력받기
     public void OnChangePlayer(InputAction.CallbackContext context)
     {
-        
         if (NowRigidbody == BodyRigidbody)
         {
             NowRigidbody = HeadRigidbody;

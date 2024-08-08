@@ -1,31 +1,30 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class ArrowController : MonoBehaviour
 {
+    //화살 자기자신 관련 변수
     public GameObject Arrow;
     private new Rigidbody2D rigidbody;
     
+    //화살 조작
+    public bool CanControllArrow = false;
+    public string ControlMethod = "1";
+    
+    //화살 움직임 Method_1
     public float followSpeed;
     public float rotationSpeed;
-    public bool CanControllArrow = false;
-
-    public string ControlMethod = "1";
-    [SerializeField]
-    private Vector2 currentMousePosition;
-
-    private Vector2 startMousePosition;
-    public GameObject ArrowControlPrefab;
-    private GameObject ArrowControlObj;
-    private float angle;
-    private float l;
-    private Vector2 direction_mouse;
     
+    //화살 움직임 Method_2
+    private Vector2 startMousePosition; //초기 마우스 위치
+    [SerializeField]
+    private Vector2 currentMousePosition; //실시간 마우스 위치
+    public GameObject ArrowControlPrefab; //조작하는거 보여주기 위한 오브젝트
+    private GameObject ArrowControlObj; //실제 생성된 인스턴스
+    private float angle; //각도
+    private float l; //길이
+    private Vector2 direction_mouse; //자신과 마우스와의 방향
     public bool isOnClick;
     
     public void Start()
@@ -36,30 +35,36 @@ public class ArrowController : MonoBehaviour
     
     public void Update()
     {
+        //조작 가능할때
         if (CanControllArrow)
         {
             switch (ControlMethod)
             {
+                //조작 방법 1일때
                 case "1":
                     rigidbody.gravityScale = 0;
                     ControlMethod_1();
                     break;
+                //조작 방법 2일때
                 case "2":
                     rigidbody.gravityScale = 1f;
                     ControlMethod_2();
                     break;
             }
         }
+        //조작 가능하지 않을때 중력 만들어주기
         else
         {
-            //Debug.Log("ddd");
             rigidbody.gravityScale = 1f;
         }
     }
 
+    //화살 조작 여부를 결정하는 입력 이벤트 함수
     public void OnActivateArrow(InputAction.CallbackContext context)
     {
         CanControllArrow = !CanControllArrow;
+        
+        //화살 조작이 가능해졌으면 물리법칙 초기화 + Method_1로
         if (context.started && CanControllArrow)
         {
             rigidbody.gravityScale = 0;
@@ -68,6 +73,7 @@ public class ArrowController : MonoBehaviour
         }
     }
 
+    //Method 변경 함수
     public void ChangeArrow(String mode)
     {
         ControlMethod = mode;
@@ -83,30 +89,31 @@ public class ArrowController : MonoBehaviour
         }
     }
 
+    //마우스 포인터 조작 이벤트 함수
     public void OnDragArrowPos(InputAction.CallbackContext context)
     {
         // 스크린 좌표를 월드 좌표로 변환 (2D 게임 기준)
         Vector2 screenPosition = context.ReadValue<Vector2>();
-        //currentMousePosition= UnityEngine.Camera.main.ScreenToWorldPoint(screenPosition);
         currentMousePosition = screenPosition;
     }
+    
+    //마우스 클릭 이벤트 함수
     public void OnDragArrowMouse(InputAction.CallbackContext context)
     {
         if (!CanControllArrow)
         {
             return;
         }
-        //눌렀을때
+        //눌렀을때 Method2로 변경
         if (context.started && !GameManager.inst.isPaused)
         {
             ChangeArrow("2");
-            
             startMousePosition = currentMousePosition;
             GameObject canvas = GameObject.FindGameObjectWithTag("canvas");
             ArrowControlObj =Instantiate(ArrowControlPrefab,canvas.transform);
             ArrowControlObj.transform.position = startMousePosition;
         }
-        //뗄때
+        //뗄때 화살 날리기
         else if (context.canceled)
         {
             isOnClick = false;
@@ -121,6 +128,8 @@ public class ArrowController : MonoBehaviour
             isOnClick = true;
         }
     }
+    
+    //Method_1 핵심 함수
     public void ControlMethod_1()
     {
         Vector3 mousePosition = Input.mousePosition;
@@ -141,20 +150,24 @@ public class ArrowController : MonoBehaviour
         Arrow.transform.rotation = Quaternion.RotateTowards(Arrow.transform.rotation, targetRotation, rotationSpeed * Time.unscaledDeltaTime);
     }
 
+    //Method_2 핵심 함수
     public void ControlMethod_2()
     {
         if (isOnClick)
         {
+            //회전 관련
             direction_mouse = currentMousePosition - startMousePosition;
             angle = Mathf.Atan2(direction_mouse.y, direction_mouse.x) * Mathf.Rad2Deg - 90f;
             ArrowControlObj.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
 
+            //길이 관련
             l = Mathf.Sqrt(Mathf.Pow((currentMousePosition.x - startMousePosition.x), 2) +
                                  Mathf.Pow(currentMousePosition.y - startMousePosition.y,2));
             ArrowControlObj.GetComponent<RectTransform>().sizeDelta = new Vector2(50, l+100);
         }
     }
     
+    //화살이 아무 곳에나 충돌하면 Method 1로 변경
     public void OnCollisionEnter2D()
     {
         if (!isOnClick)
