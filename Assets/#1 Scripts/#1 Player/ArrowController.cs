@@ -26,6 +26,10 @@ public class ArrowController : MonoBehaviour
     private float l; //길이
     private Vector2 direction_mouse; //자신과 마우스와의 방향
     public bool isOnClick;
+    private bool isFly=false;
+    
+    //화살 머리 합체
+    public PlayerMovement PM;
     
     public void Start()
     {
@@ -121,6 +125,7 @@ public class ArrowController : MonoBehaviour
             
             transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
             GetComponent<Rigidbody2D>().velocity = new Vector2((direction_mouse.normalized.x)*(l/5),(direction_mouse.normalized.y)*(l/5));
+            isFly = true;
         }
         //중간
         else
@@ -168,11 +173,27 @@ public class ArrowController : MonoBehaviour
     }
     
     //화살이 아무 곳에나 충돌하면 Method 1로 변경
-    public void OnCollisionEnter2D()
+    public void OnCollisionEnter2D(Collision2D other)
     {
         if (!isOnClick)
-        {
-            ChangeArrow("1");
+        {            
+            //화살 머리 합체!
+            if (other.transform.CompareTag("Head") && isFly)
+            {
+                PM.isConnectHead = true;
+                if (PM.WhatControlPlayer() == "Head")
+                {
+                    PM.ChangeControl();
+                }
+                
+                Debug.Log("화살 머리 합체");
+                
+            }
+            else if(!other.transform.CompareTag("Head"))
+            {
+                isFly = false;
+                ChangeArrow("1");
+            }
         }
     }
 }

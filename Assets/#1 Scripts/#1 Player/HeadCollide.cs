@@ -6,6 +6,7 @@ public class HeadCollide : MonoBehaviour
 {
     public GameObject Head;
     private int collideCount;
+    public PlayerMovement PM;
     
     public void Update()
     {
@@ -21,6 +22,10 @@ public class HeadCollide : MonoBehaviour
             Head.GetComponent<Head>().AddState(HeadStates.IsGround);
             collideCount++;
             //Debug.Log("머리 바닥 닿음");
+        }
+        if(!other.CompareTag("Arrow"))
+        {
+            PM.isConnectHead = false;
         }
     }
 

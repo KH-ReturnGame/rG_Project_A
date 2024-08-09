@@ -20,6 +20,9 @@ public class PlayerMovement : MonoBehaviour
     //현재 조작할 오브젝트
     private Rigidbody2D NowRigidbody;
     
+    //화살 머리 합체 관련
+    public bool isConnectHead = false;
+    
     //기본 초기화
     private void Start()
     {
@@ -57,6 +60,16 @@ public class PlayerMovement : MonoBehaviour
     //머리, 몸 전환 입력받기
     public void OnChangePlayer(InputAction.CallbackContext context)
     {
+        if (isConnectHead)
+        {
+            return;
+        }
+        ChangeControl();
+    }
+    
+    //머리 몸 전환 함수
+    public void ChangeControl()
+    {
         if (NowRigidbody == BodyRigidbody)
         {
             NowRigidbody = HeadRigidbody;
@@ -67,6 +80,17 @@ public class PlayerMovement : MonoBehaviour
             NowRigidbody = BodyRigidbody;
             GameManager.Instance.ChangeCameraTarget(Body);
         }
+    }
+    
+    //현재 머리인지 몸인지 반환
+    public string WhatControlPlayer()
+    {
+        if (NowRigidbody == BodyRigidbody)
+        {
+            return "Body";
+        }
+
+        return "Head";
     }
     
     

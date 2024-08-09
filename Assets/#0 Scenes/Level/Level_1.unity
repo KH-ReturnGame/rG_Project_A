@@ -4765,6 +4765,7 @@ MonoBehaviour:
   _jumpForce: 30
   Body: {fileID: 846713358}
   Head: {fileID: 1360159658}
+  isConnectHead: 0
 --- !u!1 &1292390683
 GameObject:
   m_ObjectHideFlags: 0
@@ -5218,13 +5219,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Arrow: {fileID: 1669094250}
-  followSpeed: 10
-  rotationSpeed: 500
   CanControllArrow: 0
   ControlMethod: 1
+  followSpeed: 10
+  rotationSpeed: 500
   currentMousePosition: {x: 0, y: 0}
   ArrowControlPrefab: {fileID: 1442945881843960250, guid: 92457d26a0d934fc99f1b1d372fe7e2a, type: 3}
   isOnClick: 0
+  PM: {fileID: 1185104178}
 --- !u!212 &1669094253
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5420,7 +5422,6 @@ GameObject:
   - component: {fileID: 1863343495}
   - component: {fileID: 1863343498}
   - component: {fileID: 1863343499}
-  - component: {fileID: 1863343500}
   - component: {fileID: 1863343501}
   m_Layer: 6
   m_Name: head_ground_check
@@ -5457,6 +5458,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Head: {fileID: 1360159658}
+  PM: {fileID: 1185104178}
 --- !u!50 &1863343499
 Rigidbody2D:
   serializedVersion: 4
@@ -5478,22 +5480,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 7
---- !u!58 &1863343500
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1863343494}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 6200000, guid: d3b066e15d4db4bc99cbd30f3cc0dcbd, type: 2}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.09974559}
-  serializedVersion: 2
-  m_Radius: 0.38031805
 --- !u!61 &1863343501
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5645,7 +5631,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 15
+  orthographic size: 20
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -5688,12 +5674,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a09580bcfb16d48c18dce36284424ff7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TargetObj: {fileID: 846713358}
   F: 0.34
   Z: 0.79
   R: 0
   T: 0.01
   Q: 4
+  TargetObj: {fileID: 846713358}
   miniCam: {fileID: 903207022}
   miniCamTarget: {fileID: 1360159658}
 --- !u!4 &1953689213357093008 stripped

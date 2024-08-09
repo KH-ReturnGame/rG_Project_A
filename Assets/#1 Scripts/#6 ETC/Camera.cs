@@ -62,7 +62,7 @@ public class Camera : MonoBehaviour
 
                 float dx = Mathf.Abs(transform.position.x - newX);
                 float dy = Mathf.Abs(transform.position.y - newY);
-                if (!float.IsNaN(newX) && !float.IsNaN(newY) && (dx+dy) > 0.001f)
+                if (!float.IsNaN(newX) && !float.IsNaN(newY))      
                 {
                     transform.position = new Vector3(newX, newY, -30);
                 }
