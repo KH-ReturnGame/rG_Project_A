@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -30,6 +32,7 @@ public class ArrowController : MonoBehaviour
     
     //화살 머리 합체
     public PlayerMovement PM;
+    public GameObject Head;
     
     public void Start()
     {
@@ -181,19 +184,29 @@ public class ArrowController : MonoBehaviour
             if (other.transform.CompareTag("Head") && isFly)
             {
                 PM.isConnectHead = true;
+                Head.GetComponent<CircleCollider2D>().isTrigger = true;
                 if (PM.WhatControlPlayer() == "Head")
                 {
                     PM.ChangeControl();
                 }
                 
                 Debug.Log("화살 머리 합체");
-                
+                StartCoroutine("CombineHead");
             }
             else if(!other.transform.CompareTag("Head"))
             {
                 isFly = false;
                 ChangeArrow("1");
             }
+        }
+    }
+
+    IEnumerator CombineHead()
+    {
+        while (PM.isConnectHead)
+        {
+            Head.transform.position = Arrow.transform.position;
+            yield return new WaitForFixedUpdate();
         }
     }
 }

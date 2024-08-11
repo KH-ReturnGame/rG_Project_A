@@ -23,9 +23,11 @@ public class HeadCollide : MonoBehaviour
             collideCount++;
             //Debug.Log("머리 바닥 닿음");
         }
-        if(!other.CompareTag("Arrow"))
+        if(!other.CompareTag("Arrow") && name == "Head")
         {
+            Debug.Log(other.name);
             PM.isConnectHead = false;
+            Head.GetComponent<CircleCollider2D>().isTrigger = false;
         }
     }
 

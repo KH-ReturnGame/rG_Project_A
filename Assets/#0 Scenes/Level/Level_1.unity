@@ -4852,6 +4852,7 @@ GameObject:
   - component: {fileID: 1360159662}
   - component: {fileID: 1360159663}
   - component: {fileID: 1360159664}
+  - component: {fileID: 1360159665}
   m_Layer: 6
   m_Name: Head
   m_TagString: Head
@@ -4986,7 +4987,7 @@ PlatformEffector2D:
   m_UseColliderMask: 1
   m_ColliderMask:
     serializedVersion: 2
-    m_Bits: 2147483647
+    m_Bits: 1975
   m_RotationalOffset: 0
   m_UseOneWay: 0
   m_UseOneWayGrouping: 0
@@ -4994,6 +4995,20 @@ PlatformEffector2D:
   m_UseSideFriction: 0
   m_UseSideBounce: 0
   m_SideArc: 1
+--- !u!114 &1360159665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1360159658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d51cb2770f3404bb50491a8a4fc12e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Head: {fileID: 1360159658}
+  PM: {fileID: 1185104178}
 --- !u!1 &1532238398
 GameObject:
   m_ObjectHideFlags: 0
@@ -5227,6 +5242,7 @@ MonoBehaviour:
   ArrowControlPrefab: {fileID: 1442945881843960250, guid: 92457d26a0d934fc99f1b1d372fe7e2a, type: 3}
   isOnClick: 0
   PM: {fileID: 1185104178}
+  Head: {fileID: 1360159658}
 --- !u!212 &1669094253
 SpriteRenderer:
   m_ObjectHideFlags: 0
