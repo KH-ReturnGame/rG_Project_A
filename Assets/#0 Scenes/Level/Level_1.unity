@@ -4852,7 +4852,6 @@ GameObject:
   - component: {fileID: 1360159662}
   - component: {fileID: 1360159663}
   - component: {fileID: 1360159664}
-  - component: {fileID: 1360159665}
   m_Layer: 6
   m_Name: Head
   m_TagString: Head
@@ -4971,31 +4970,12 @@ CircleCollider2D:
   m_Density: 1
   m_Material: {fileID: 6200000, guid: d3b066e15d4db4bc99cbd30f3cc0dcbd, type: 2}
   m_IsTrigger: 0
-  m_UsedByEffector: 1
+  m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!251 &1360159664
-PlatformEffector2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1360159658}
-  m_Enabled: 1
-  m_UseColliderMask: 1
-  m_ColliderMask:
-    serializedVersion: 2
-    m_Bits: 1975
-  m_RotationalOffset: 0
-  m_UseOneWay: 0
-  m_UseOneWayGrouping: 0
-  m_SurfaceArc: 180
-  m_UseSideFriction: 0
-  m_UseSideBounce: 0
-  m_SideArc: 1
---- !u!114 &1360159665
+--- !u!114 &1360159664
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5009,6 +4989,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Head: {fileID: 1360159658}
   PM: {fileID: 1185104178}
+  AC: {fileID: 1669094252}
 --- !u!1 &1532238398
 GameObject:
   m_ObjectHideFlags: 0
@@ -5241,6 +5222,7 @@ MonoBehaviour:
   currentMousePosition: {x: 0, y: 0}
   ArrowControlPrefab: {fileID: 1442945881843960250, guid: 92457d26a0d934fc99f1b1d372fe7e2a, type: 3}
   isOnClick: 0
+  isFly: 0
   PM: {fileID: 1185104178}
   Head: {fileID: 1360159658}
 --- !u!212 &1669094253
@@ -5284,7 +5266,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 939031a50028fae4080af8a87df833d6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -5331,9 +5313,9 @@ PolygonCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.28866667}
-    oldSize: {x: 1, y: 1}
+    border: {x: 1, y: 0.53125, z: 0.15625, w: 0.4375}
+    pivot: {x: 0.6350141, y: 0.5393908}
+    oldSize: {x: 3.125, y: 1.25}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -5341,9 +5323,11 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0, y: 0.5773587}
-      - {x: -0.5, y: -0.28866667}
-      - {x: 0.5, y: -0.28866667}
+    - - {x: 0.99377525, y: -0.006603956}
+      - {x: 0.737517, y: 0.12183368}
+      - {x: -0.9908538, y: 0.13795531}
+      - {x: -0.99436045, y: -0.15024257}
+      - {x: 0.74943924, y: -0.12850857}
 --- !u!4 &1767495687 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6433807957502365374, guid: 2e965aaa61b824c40837c6f7aef70d5a, type: 3}
@@ -5475,6 +5459,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Head: {fileID: 1360159658}
   PM: {fileID: 1185104178}
+  AC: {fileID: 1669094252}
 --- !u!50 &1863343499
 Rigidbody2D:
   serializedVersion: 4

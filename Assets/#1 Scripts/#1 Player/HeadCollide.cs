@@ -7,6 +7,7 @@ public class HeadCollide : MonoBehaviour
     public GameObject Head;
     private int collideCount;
     public PlayerMovement PM;
+    public ArrowController AC;
     
     public void Update()
     {
@@ -23,11 +24,14 @@ public class HeadCollide : MonoBehaviour
             collideCount++;
             //Debug.Log("머리 바닥 닿음");
         }
-        if(!other.CompareTag("Arrow") && name == "Head")
+        if(!other.CompareTag("Arrow")&&!other.CompareTag("Button") && name == "Head")
         {
-            Debug.Log(other.name);
+            Debug.Log(other.name+"/"+name);
             PM.isConnectHead = false;
             Head.GetComponent<CircleCollider2D>().isTrigger = false;
+            AC.gameObject.GetComponent<PolygonCollider2D>().isTrigger = false;
+            AC.isFly = false;
+            AC.ChangeArrow("1");
         }
     }
 

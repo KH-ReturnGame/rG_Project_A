@@ -11,6 +11,7 @@ TagManager:
   - Body
   - Arrow
   - Door
+  - Button
   layers:
   - Default
   - TransparentFX

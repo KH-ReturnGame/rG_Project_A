@@ -34,6 +34,8 @@ public class PlayerMovement : MonoBehaviour
     //움직임 무한 적용~~
     private void Update()
     {
+        if(NowRigidbody==HeadRigidbody && isConnectHead){return;}
+        
         //기본 좌우 움직임
         NowRigidbody.velocity = new Vector2(_movementInputDirection * _movementSpeed, NowRigidbody.velocity.y);
     }
