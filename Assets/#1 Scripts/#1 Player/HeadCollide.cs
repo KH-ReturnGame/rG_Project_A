@@ -29,6 +29,7 @@ public class HeadCollide : MonoBehaviour
             Debug.Log(other.name+"/"+name);
             PM.isConnectHead = false;
             Head.GetComponent<CircleCollider2D>().isTrigger = false;
+            Head.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
             AC.gameObject.GetComponent<PolygonCollider2D>().isTrigger = false;
             AC.isFly = false;
             AC.ChangeArrow("1");
