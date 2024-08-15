@@ -133,7 +133,11 @@ public class ArrowController : MonoBehaviour
             isOnClick = false;
             Destroy(ArrowControlObj);
 
+            
+            
             transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+
+            GetComponent<Rigidbody2D>().velocity = Vector3.zero;
             GetComponent<Rigidbody2D>().velocity = new Vector2((direction_mouse.normalized.x) * (l / 5),
                 (direction_mouse.normalized.y) * (l / 5));
             isFly = true;
@@ -197,6 +201,7 @@ public class ArrowController : MonoBehaviour
                 PM.isConnectHead = true;
                 Head.GetComponent<CircleCollider2D>().isTrigger = true;
                 GetComponent<PolygonCollider2D>().isTrigger = true;
+                Head.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
 
                 Debug.Log("화살 머리 합체");
             }
