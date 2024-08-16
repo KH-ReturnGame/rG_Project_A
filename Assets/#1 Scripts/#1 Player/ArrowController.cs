@@ -198,10 +198,10 @@ public class ArrowController : MonoBehaviour
             //화살 머리 합체!
             if (other.transform.CompareTag("Head") && isFly)
             {
-                PM.isConnectHead = true;
+                /*PM.isConnectHead = true;
                 Head.GetComponent<CircleCollider2D>().isTrigger = true;
                 GetComponent<PolygonCollider2D>().isTrigger = true;
-                Head.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+                Head.GetComponent<Rigidbody2D>().velocity = Vector3.zero;*/
 
                 Debug.Log("화살 머리 합체");
             }

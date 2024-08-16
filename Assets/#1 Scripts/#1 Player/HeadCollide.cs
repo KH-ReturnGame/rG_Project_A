@@ -24,7 +24,7 @@ public class HeadCollide : MonoBehaviour
             collideCount++;
             //Debug.Log("머리 바닥 닿음");
         }
-        if(!other.CompareTag("Arrow")&&!other.CompareTag("Button") && name == "Head")
+        /*if(!other.CompareTag("Arrow")&&!other.CompareTag("Button") && name == "Head")
         {
             Debug.Log(other.name+"/"+name);
             PM.isConnectHead = false;
@@ -33,7 +33,7 @@ public class HeadCollide : MonoBehaviour
             AC.gameObject.GetComponent<PolygonCollider2D>().isTrigger = false;
             AC.isFly = false;
             AC.ChangeArrow("1");
-        }
+        }*/
     }
 
     public void OnTriggerExit2D(Collider2D other)
