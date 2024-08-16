@@ -34,6 +34,7 @@ public class ArrowController : MonoBehaviour
     //화살 머리 합체
     public PlayerMovement PM;
     public GameObject Head;
+    public GameObject Body;
 
     public void Start()
     {
@@ -72,11 +73,11 @@ public class ArrowController : MonoBehaviour
         }
     }
 
-    //화살 조작 여부를 결정하는 입력 이벤트 함수
+    /*//화살 조작 여부를 결정하는 입력 이벤트 함수
     public void OnActivateArrow(InputAction.CallbackContext context)
     {
         ActivateArrow();
-    }
+    }*/
 
     public void ActivateArrow()
     {
@@ -152,6 +153,21 @@ public class ArrowController : MonoBehaviour
         else
         {
             isOnClick = true;
+        }
+    }
+
+    public void OnChangeCameraHead(InputAction.CallbackContext context)
+    {
+        if (context.started && CanControllArrow)
+        {
+            GameManager.Instance.ChangeCameraTarget(Head);
+        }
+    }
+    public void OnChangeCameraBody(InputAction.CallbackContext context)
+    {
+        if (context.started && CanControllArrow)
+        {
+            GameManager.Instance.ChangeCameraTarget(Body);
         }
     }
 

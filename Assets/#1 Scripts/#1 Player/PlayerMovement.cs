@@ -43,7 +43,7 @@ public class PlayerMovement : MonoBehaviour
         if (ControlMode == "Arrow") return;
         //기본 좌우 움직임
         NowRigidbody.velocity = new Vector2(_movementInputDirection * _movementSpeed, NowRigidbody.velocity.y);
-    }
+    }g
     
     //좌우 입력받기
     public void OnMove(InputAction.CallbackContext context)
@@ -54,7 +54,7 @@ public class PlayerMovement : MonoBehaviour
     //점프 입력받기
     public void OnJump(InputAction.CallbackContext context)
     {
-        if (!context.started)
+        if (!context.started || ControlMode == "Arrow")
             return;
         if ((NowRigidbody==BodyRigidbody && Body.GetComponent<Body>().IsContainState(BodyStates.IsGround))||
             (NowRigidbody==HeadRigidbody && Head.GetComponent<Head>().IsContainState(HeadStates.IsGround)))

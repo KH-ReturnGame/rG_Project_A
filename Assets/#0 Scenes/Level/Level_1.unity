@@ -4698,10 +4698,10 @@ MonoBehaviour:
     m_ActionName: PlayerActions/ChangePlayer[/Keyboard/enter,/Keyboard/leftShift]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1669094252}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ArrowController, Assembly-CSharp
-        m_MethodName: OnActivateArrow
-        m_Mode: 0
+        m_MethodName: 
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -4744,6 +4744,38 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 58c021e8-2e09-45e4-9f14-bebdf00b418a
     m_ActionName: PlayerActions/DragArrowMouse[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1669094252}
+        m_TargetAssemblyTypeName: ArrowController, Assembly-CSharp
+        m_MethodName: OnChangeCameraHead
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: c298f56c-e9ba-43e5-9495-93f093d4bae5
+    m_ActionName: PlayerActions/ChangeCameraHead[/Keyboard/q]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1669094252}
+        m_TargetAssemblyTypeName: ArrowController, Assembly-CSharp
+        m_MethodName: OnChangeCameraBody
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: ac8a6d08-b07f-42e9-8e82-98625f168a18
+    m_ActionName: PlayerActions/ChangeCameraBody[/Keyboard/e]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: PlayerActions
@@ -5226,6 +5258,7 @@ MonoBehaviour:
   isFly: 0
   PM: {fileID: 1185104178}
   Head: {fileID: 1360159658}
+  Body: {fileID: 846713358}
 --- !u!212 &1669094253
 SpriteRenderer:
   m_ObjectHideFlags: 0

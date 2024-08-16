@@ -58,6 +58,24 @@
                     "processors": "",
                     "interactions": "Press",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "ChangeCameraHead",
+                    "type": "Button",
+                    "id": "c298f56c-e9ba-43e5-9495-93f093d4bae5",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ChangeCameraBody",
+                    "type": "Button",
+                    "id": "ac8a6d08-b07f-42e9-8e82-98625f168a18",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -201,6 +219,28 @@
                     "processors": "",
                     "groups": "PC",
                     "action": "DragArrowMouse",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "01a55b22-63e8-48bf-b64b-ebec34635561",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "ChangeCameraHead",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d75de209-20f2-4d0f-9c68-e5a3768de6ad",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "ChangeCameraBody",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
