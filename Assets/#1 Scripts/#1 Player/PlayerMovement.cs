@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -16,9 +17,13 @@ public class PlayerMovement : MonoBehaviour
     //머리 관련
     public GameObject Head;
     private Rigidbody2D HeadRigidbody;
+    
+    //화살 관련
+    public GameObject Arrow;
 
     //현재 조작할 오브젝트
     private Rigidbody2D NowRigidbody;
+    private string ControlMode;
     
     //화살 머리 합체 관련
     public bool isConnectHead = false;
@@ -29,13 +34,13 @@ public class PlayerMovement : MonoBehaviour
         BodyRigidbody = Body.GetComponent<Rigidbody2D>();
         HeadRigidbody = Head.GetComponent<Rigidbody2D>();
         NowRigidbody = BodyRigidbody;
+        ControlMode = "Body";
     }
 
     //움직임 무한 적용~~
     private void Update()
     {
-        if(NowRigidbody==HeadRigidbody && isConnectHead){return;}
-        
+        if (ControlMode == "Arrow") return;
         //기본 좌우 움직임
         NowRigidbody.velocity = new Vector2(_movementInputDirection * _movementSpeed, NowRigidbody.velocity.y);
     }
@@ -66,21 +71,39 @@ public class PlayerMovement : MonoBehaviour
         {
             return;
         }
-        ChangeControl();
+
+        if (context.started)
+        {
+            ChangeControl();
+        }
     }
     
-    //머리 몸 전환 함수
+    //머리 몸 화살 전환 함수
     public void ChangeControl()
     {
-        if (NowRigidbody == BodyRigidbody)
+        switch (ControlMode)
         {
-            NowRigidbody = HeadRigidbody;
-            GameManager.Instance.ChangeCameraTarget(Head);
-        }
-        else
-        {
-            NowRigidbody = BodyRigidbody;
-            GameManager.Instance.ChangeCameraTarget(Body);
+            case "Body":
+            {
+                ControlMode = "Head";
+                NowRigidbody = HeadRigidbody;
+                GameManager.Instance.ChangeCameraTarget(Head);
+                return;
+            }
+            case "Head":
+            {
+                ControlMode = "Arrow";
+                Arrow.GetComponent<ArrowController>().ActivateArrow();
+                return;
+            }
+            case "Arrow":
+            {
+                ControlMode = "Body";
+                NowRigidbody = BodyRigidbody;
+                GameManager.Instance.ChangeCameraTarget(Body);
+                Arrow.GetComponent<ArrowController>().ActivateArrow();
+                return;
+            }
         }
     }
     

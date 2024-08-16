@@ -4765,6 +4765,7 @@ MonoBehaviour:
   _jumpForce: 30
   Body: {fileID: 846713358}
   Head: {fileID: 1360159658}
+  Arrow: {fileID: 1669094250}
   isConnectHead: 0
 --- !u!1 &1292390683
 GameObject:

@@ -75,10 +75,15 @@ public class ArrowController : MonoBehaviour
     //화살 조작 여부를 결정하는 입력 이벤트 함수
     public void OnActivateArrow(InputAction.CallbackContext context)
     {
+        ActivateArrow();
+    }
+
+    public void ActivateArrow()
+    {
         CanControllArrow = !CanControllArrow;
 
         //화살 조작이 가능해졌으면 물리법칙 초기화 + Method_1로
-        if (context.started && CanControllArrow)
+        if (CanControllArrow)
         {
             rigidbody.gravityScale = 0;
             rigidbody.velocity = Vector3.zero;
