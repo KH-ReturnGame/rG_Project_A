@@ -23,7 +23,7 @@ public class PlayerMovement : MonoBehaviour
 
     //현재 조작할 오브젝트
     private Rigidbody2D NowRigidbody;
-    private string ControlMode;
+    public string ControlMode;
     
     //화살 머리 합체 관련
     public bool isConnectHead = false;
@@ -43,7 +43,7 @@ public class PlayerMovement : MonoBehaviour
         if (ControlMode == "Arrow") return;
         //기본 좌우 움직임
         NowRigidbody.velocity = new Vector2(_movementInputDirection * _movementSpeed, NowRigidbody.velocity.y);
-    }g
+    }
     
     //좌우 입력받기
     public void OnMove(InputAction.CallbackContext context)
