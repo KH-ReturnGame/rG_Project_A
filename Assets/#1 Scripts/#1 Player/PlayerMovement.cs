@@ -74,29 +74,29 @@ public class PlayerMovement : MonoBehaviour
 
         if (context.started)
         {
-            ChangeControl();
+            ChangeControl(context.control.name);
         }
     }
     
     //머리 몸 화살 전환 함수
-    public void ChangeControl()
+    public void ChangeControl(string controlmode)
     {
-        switch (ControlMode)
+        switch (controlmode)
         {
-            case "Body":
+            case "q":
             {
                 ControlMode = "Head";
                 NowRigidbody = HeadRigidbody;
                 GameManager.Instance.ChangeCameraTarget(Head);
                 return;
             }
-            case "Head":
+            case "leftShift":
             {
                 ControlMode = "Arrow";
                 Arrow.GetComponent<ArrowController>().ActivateArrow();
                 return;
             }
-            case "Arrow":
+            case "e":
             {
                 ControlMode = "Body";
                 NowRigidbody = BodyRigidbody;

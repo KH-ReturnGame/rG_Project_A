@@ -45,7 +45,7 @@ public class ArrowController : MonoBehaviour
     public void Update()
     {
         //조작 가능할때
-        if (CanControllArrow)
+        if (CanControllArrow && PM.ControlMode=="Arrow")
         {
             switch (ControlMethod)
             {
@@ -155,22 +155,6 @@ public class ArrowController : MonoBehaviour
             isOnClick = true;
         }
     }
-
-    public void OnChangeCameraHead(InputAction.CallbackContext context)
-    {
-        if (context.started && CanControllArrow)
-        {
-            GameManager.Instance.ChangeCameraTarget(Head);
-        }
-    }
-    public void OnChangeCameraBody(InputAction.CallbackContext context)
-    {
-        if (context.started && CanControllArrow)
-        {
-            GameManager.Instance.ChangeCameraTarget(Body);
-        }
-    }
-
     //Method_1 핵심 함수
     public void ControlMethod_1()
     {
