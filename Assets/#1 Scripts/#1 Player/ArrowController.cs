@@ -19,6 +19,8 @@ public class ArrowController : MonoBehaviour
     //화살 움직임 Method_1
     public float followSpeed;
     public float rotationSpeed;
+    public List<GameObject> hitObjects = new List<GameObject>();
+    public LayerMask layermask;
 
     //화살 움직임 Method_2
     private Vector2 startMousePosition; //초기 마우스 위치
@@ -161,12 +163,11 @@ public class ArrowController : MonoBehaviour
         Vector3 mousePosition = Input.mousePosition;
         mousePosition.z = UnityEngine.Camera.main.nearClipPlane; // 카메라와의 거리 설정
         Vector3 worldPosition = UnityEngine.Camera.main.ScreenToWorldPoint(mousePosition);
-
+        
         // 화살표 마우스위치로 이동
         Vector3 position = Arrow.transform.position;
         position = Vector3.Lerp(position, new Vector3(worldPosition.x, worldPosition.y, 0),
             followSpeed * Time.unscaledDeltaTime);
-        Arrow.transform.position = position;
 
         // 방향 계산
         Vector3 direction = worldPosition - position;
@@ -176,6 +177,41 @@ public class ArrowController : MonoBehaviour
         // 화살표 회전 -> 마우스 방향으로
         Arrow.transform.rotation = Quaternion.RotateTowards(Arrow.transform.rotation, targetRotation,
             rotationSpeed * Time.unscaledDeltaTime);
+        
+        //벽에 닿았는지 확인
+        RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, direction, 50f);
+        Debug.DrawRay(transform.position, direction, Color.red);
+        Debug.Log(targetRotation.eulerAngles);
+        
+        hitObjects.Clear();
+
+        Vector2 hitpoint = new Vector2(0,0);
+        foreach (var hit in hits)
+        {
+            hitObjects.Add(hit.collider.gameObject);
+            if (hit.transform.CompareTag("ground"))
+            {
+                hitpoint = hit.point;
+                break;
+            }
+        }
+        bool groundHit = hitObjects.Exists(obj => obj.CompareTag("ground"));
+        Debug.Log(Vector2.Distance(hitpoint, transform.position));
+        if (groundHit && Vector2.Distance(hitpoint, transform.position) <= 2)
+        {
+            RaycastHit2D groundRaycast = Array.Find(hits, hit => hit.collider && hit.collider.CompareTag("ground"));
+
+            // ground 오브젝트와 충돌한 경우, transform의 위치를 조정하여 땅을 넘지 않도록 한다.
+            Vector3 hitPoint = groundRaycast.point; // 충돌한 지점
+            Vector3 normal = groundRaycast.normal; // 충돌한 표면의 법선 벡터
+
+            // 땅을 넘지 않도록 충돌 지점 바로 앞에 위치를 설정
+            transform.position = hitPoint + normal * 1f; // 땅을 넘지 않게 약간 떨어진 위치로 설정
+        }
+        else
+        {
+            Arrow.transform.position = position;
+        }
     }
 
     //Method_2 핵심 함수
