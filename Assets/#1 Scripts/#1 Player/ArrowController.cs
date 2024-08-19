@@ -184,8 +184,6 @@ public class ArrowController : MonoBehaviour
         
         //벽에 닿았는지 확인
         RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, direction, 50f);
-        Debug.DrawRay(transform.position, direction, Color.red);
-        Debug.Log(targetRotation.eulerAngles);
         
         hitObjects.Clear();
 
