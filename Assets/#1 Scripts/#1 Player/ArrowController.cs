@@ -46,6 +46,8 @@ public class ArrowController : MonoBehaviour
 
     public void Update()
     {
+        if(GameManager.Instance.isPaused) return;
+        
         //조작 가능할때
         if (CanControllArrow)
         {
@@ -54,10 +56,12 @@ public class ArrowController : MonoBehaviour
                 //조작 방법 1일때
                 case "1":
                     rigidbody.gravityScale = 0;
+                    GetComponent<PolygonCollider2D>().isTrigger = true;
                     ControlMethod_1();
                     break;
                 //조작 방법 2일때
                 case "2":
+                    GetComponent<PolygonCollider2D>().isTrigger = false;
                     ControlMethod_2();
                     break;
             }
@@ -196,7 +200,6 @@ public class ArrowController : MonoBehaviour
             }
         }
         bool groundHit = hitObjects.Exists(obj => obj.CompareTag("ground"));
-        Debug.Log(Vector2.Distance(hitpoint, transform.position));
         if (groundHit && Vector2.Distance(hitpoint, transform.position) <= 2)
         {
             RaycastHit2D groundRaycast = Array.Find(hits, hit => hit.collider && hit.collider.CompareTag("ground"));
@@ -239,11 +242,8 @@ public class ArrowController : MonoBehaviour
             //화살 머리 합체!
             if (other.transform.CompareTag("Head") && isFly)
             {
-                /*PM.isConnectHead = true;
-                Head.GetComponent<CircleCollider2D>().isTrigger = true;
-                GetComponent<PolygonCollider2D>().isTrigger = true;
-                Head.GetComponent<Rigidbody2D>().velocity = Vector3.zero;*/
-
+                //애니메이션 추가
+                
                 Debug.Log("화살 머리 합체");
             }
             else if (!other.transform.CompareTag("Head") && !PM.isConnectHead)
