@@ -85,23 +85,27 @@ public class PlayerMovement : MonoBehaviour
         {
             case "q":
             {
+                if(ControlMode == "Head") return;
                 ControlMode = "Head";
                 NowRigidbody = HeadRigidbody;
                 GameManager.Instance.ChangeCameraTarget(Head);
+                Arrow.GetComponent<ArrowController>().ActivateArrow(false);
                 return;
             }
             case "leftShift":
             {
+                if(ControlMode == "Arrow") return;
                 ControlMode = "Arrow";
-                Arrow.GetComponent<ArrowController>().ActivateArrow();
+                Arrow.GetComponent<ArrowController>().ActivateArrow(true);
                 return;
             }
             case "e":
             {
+                if(ControlMode == "Body") return;
                 ControlMode = "Body";
                 NowRigidbody = BodyRigidbody;
                 GameManager.Instance.ChangeCameraTarget(Body);
-                Arrow.GetComponent<ArrowController>().ActivateArrow();
+                Arrow.GetComponent<ArrowController>().ActivateArrow(false);
                 return;
             }
         }

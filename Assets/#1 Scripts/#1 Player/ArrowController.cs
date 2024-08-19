@@ -45,7 +45,7 @@ public class ArrowController : MonoBehaviour
     public void Update()
     {
         //조작 가능할때
-        if (CanControllArrow && PM.ControlMode=="Arrow")
+        if (CanControllArrow)
         {
             switch (ControlMethod)
             {
@@ -79,9 +79,9 @@ public class ArrowController : MonoBehaviour
         ActivateArrow();
     }*/
 
-    public void ActivateArrow()
+    public void ActivateArrow(bool control)
     {
-        CanControllArrow = !CanControllArrow;
+        CanControllArrow = control;
 
         //화살 조작이 가능해졌으면 물리법칙 초기화 + Method_1로
         if (CanControllArrow)
