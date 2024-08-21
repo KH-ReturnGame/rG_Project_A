@@ -264,16 +264,16 @@ public class ArrowController : MonoBehaviour
                 foreach (var hit in hits)
                 {
                     hitObjects.Add(hit.collider.gameObject);
-                    if (hit.transform.CompareTag("ground"))
+                    if (hit.transform.CompareTag("ground") || hit.transform.CompareTag("Door"))
                     {
                         hitpoint = hit.point;
                         break;
                     }
                 }
-                bool groundHit = hitObjects.Exists(obj => obj.CompareTag("ground"));
+                bool groundHit = hitObjects.Exists(obj => obj.CompareTag("ground")) || hitObjects.Exists(obj => obj.CompareTag("Door"));
                 if (groundHit && Vector2.Distance(hitpoint, transform.position) <= 5 && !Head.activeSelf)
                 {
-                    RaycastHit2D groundRaycast = Array.Find(hits, hit => hit.collider && hit.collider.CompareTag("ground"));
+                    RaycastHit2D groundRaycast = Array.Find(hits, hit => hit.collider && (hit.collider.CompareTag("ground")||hit.collider.CompareTag("Door")));
 
                     // ground 오브젝트와 충돌한 경우, transform의 위치를 조정하여 땅을 넘지 않도록 한다.
                     Vector3 hitPoint = groundRaycast.point; // 충돌한 지점
