@@ -85,10 +85,11 @@ public class PlayerMovement : MonoBehaviour
             {
                 if(controlMode == "Head") return;
                 controlMode = "Head";
-                _nowRigidbody = _headRigidbody;
-                GameManager.Instance.ChangeCameraTarget(_head);
                 _arrow.GetComponent<ArrowController>().ActivateArrow(false);
                 _arrow.GetComponent<PolygonCollider2D>().isTrigger = false;
+                
+                _nowRigidbody = _headRigidbody;
+                GameManager.Instance.ChangeCameraTarget(_head);
                 return;
             }
             case "leftShift":
@@ -96,32 +97,20 @@ public class PlayerMovement : MonoBehaviour
                 if(controlMode == "Arrow") return;
                 controlMode = "Arrow";
                 _arrow.GetComponent<ArrowController>().ActivateArrow(true);
+                _arrow.GetComponent<PolygonCollider2D>().isTrigger = true;
                 return;
             }
             case "e":
             {
                 if(controlMode == "Body") return;
                 controlMode = "Body";
-                _nowRigidbody = _bodyRigidbody;
-                GameManager.Instance.ChangeCameraTarget(_body);
                 _arrow.GetComponent<ArrowController>().ActivateArrow(false);
                 _arrow.GetComponent<PolygonCollider2D>().isTrigger = false;
+                
+                _nowRigidbody = _bodyRigidbody;
+                GameManager.Instance.ChangeCameraTarget(_body);
                 return;
             }
         }
     }
-    
-    //현재 머리인지 몸인지 반환
-    public string WhatControlPlayer()
-    {
-        if (_nowRigidbody == _bodyRigidbody)
-        {
-            return "Body";
-        }
-
-        return "Head";
-    }
-    
-    
-    
 }

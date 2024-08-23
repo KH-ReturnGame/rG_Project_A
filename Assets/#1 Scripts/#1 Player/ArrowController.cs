@@ -40,6 +40,7 @@ public class ArrowController : MonoBehaviour
     private SpriteRenderer _spriteRenderer;
     public Sprite[] sprites;
 
+    //기본 초기화
     public void Start()
     {
         _arrow = player.GetPlayerObj(PlayerObj.Arrow);
@@ -50,6 +51,7 @@ public class ArrowController : MonoBehaviour
         _spriteRenderer = _arrow.GetComponent<SpriteRenderer>();
     }
 
+    //업데이트
     public void Update()
     {
         if(GameManager.Instance.isPaused) return;
@@ -79,6 +81,7 @@ public class ArrowController : MonoBehaviour
         }
     }
     
+    //화살 활성화 비활성화 조절
     public void ActivateArrow(bool control)
     {
         if (control)
@@ -146,14 +149,12 @@ public class ArrowController : MonoBehaviour
             player.RemoveState(PlayerStats.IsOnClick);
             player.AddState(PlayerStats.IsFly);
             Destroy(_arrowControlObj);
-
-            
             
             transform.rotation = Quaternion.Euler(new Vector3(0, 0, _angle));
-
             GetComponent<Rigidbody2D>().velocity = Vector3.zero;
             GetComponent<Rigidbody2D>().velocity = new Vector2((_directionMouse.normalized.x) * (_l / 5),
                 (_directionMouse.normalized.y) * (_l / 5));
+            
             _arrowRigidbody.gravityScale = 1f;
         }
         //중간
@@ -162,6 +163,7 @@ public class ArrowController : MonoBehaviour
             player.AddState(PlayerStats.IsOnClick);
         }
     }
+    
     //Method_1 핵심 함수
     public void ControlMethod_1()
     {
@@ -183,25 +185,23 @@ public class ArrowController : MonoBehaviour
         _arrow.transform.rotation = Quaternion.RotateTowards(_arrow.transform.rotation, targetRotation,
             rotationSpeed * Time.unscaledDeltaTime);
         
-        //벽에 닿았는지 확인
+        //레이캐스트 쏴서 바닥 통과 막기
         RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, direction, 50f);
-        
         hitObjects.Clear();
-
         Vector2 hitpoint = new Vector2(0,0);
         foreach (var hit in hits)
         {
             hitObjects.Add(hit.collider.gameObject);
-            if (hit.transform.CompareTag("ground"))
+            if (hit.transform.CompareTag("ground") || hit.transform.CompareTag("Door"))
             {
                 hitpoint = hit.point;
                 break;
             }
         }
-        bool groundHit = hitObjects.Exists(obj => obj.CompareTag("ground"));
+        bool groundHit = hitObjects.Exists(obj => (obj.CompareTag("ground")||obj.CompareTag("Door")));
         if (groundHit && Vector2.Distance(hitpoint, transform.position) <= 2)
         {
-            RaycastHit2D groundRaycast = Array.Find(hits, hit => hit.collider && hit.collider.CompareTag("ground"));
+            RaycastHit2D groundRaycast = Array.Find(hits, hit => hit.collider && (hit.collider.CompareTag("ground")||hit.collider.CompareTag("Door")));
 
             // ground 오브젝트와 충돌한 경우, transform의 위치를 조정하여 땅을 넘지 않도록 한다.
             Vector3 hitPoint = groundRaycast.point; // 충돌한 지점
