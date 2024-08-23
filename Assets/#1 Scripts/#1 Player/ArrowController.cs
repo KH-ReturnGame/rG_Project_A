@@ -128,7 +128,7 @@ public class ArrowController : MonoBehaviour
     //마우스 클릭 이벤트 함수
     public void OnDragArrowMouse(InputAction.CallbackContext context)
     {
-        if (!CanControllArrow)
+        if (!CanControllArrow || isFly)
         {
             return;
         }
