@@ -30,4 +30,49 @@ namespace PlayerOwnedStates
             
         }
     }
+    public class CanControlArrow : State<Player>
+    {
+        public override void Enter(Player player)
+        {
+            
+        }
+        public override void Execute(Player player)
+        {
+            
+        }
+        public override void Exit(Player player)
+        {
+            
+        }
+    }
+    public class IsOnClick : State<Player>
+    {
+        public override void Enter(Player player)
+        {
+            
+        }
+        public override void Execute(Player player)
+        {
+            
+        }
+        public override void Exit(Player player)
+        {
+            
+        }
+    }
+    public class IsFly : State<Player>
+    {
+        public override void Enter(Player player)
+        {
+            
+        }
+        public override void Execute(Player player)
+        {
+            
+        }
+        public override void Exit(Player player)
+        {
+            
+        }
+    }
 }

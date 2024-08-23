@@ -5,6 +5,9 @@ public enum PlayerStats
 {
     BodyIsGround=0,
     HeadIsGround,
+    CanControlArrow,
+    IsOnClick,
+    IsFly,
 }
 
 public enum PlayerObj
@@ -34,6 +37,9 @@ public class Player : MonoBehaviour
         _states = new State<Player>[StateCount];
         _states[(int)PlayerStats.BodyIsGround] = new PlayerOwnedStates.BodyIsGround();
         _states[(int)PlayerStats.HeadIsGround] = new PlayerOwnedStates.HeadIsGround();
+        _states[(int)PlayerStats.CanControlArrow] = new PlayerOwnedStates.CanControlArrow();
+        _states[(int)PlayerStats.IsOnClick] = new PlayerOwnedStates.IsOnClick();
+        _states[(int)PlayerStats.IsFly] = new PlayerOwnedStates.IsFly();
         
 
         _stateManager = new StateManager<Player>();

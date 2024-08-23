@@ -28,9 +28,6 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D _nowRigidbody;
     public string controlMode;
     
-    //화살 머리 합체 관련
-    public bool isConnectHead = false;
-    
     //기본 초기화
     private void Start()
     {
@@ -73,11 +70,6 @@ public class PlayerMovement : MonoBehaviour
     //머리, 몸 전환 입력받기
     public void OnChangePlayer(InputAction.CallbackContext context)
     {
-        if (isConnectHead)
-        {
-            return;
-        }
-
         if (context.started)
         {
             ChangeControl(context.control.name);

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using PlayerOwnedStates;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -16,7 +17,6 @@ public class ArrowController : MonoBehaviour
     private Rigidbody2D _arrowRigidbody;
 
     //화살 조작
-    public bool canControllArrow = false;
     public string controlMethod = "1";
 
     //화살 움직임 Method_1
@@ -32,8 +32,6 @@ public class ArrowController : MonoBehaviour
     private float _angle; //각도
     private float _l; //길이
     private Vector2 _directionMouse; //자신과 마우스와의 방향
-    public bool isOnClick;
-    public bool isFly = false;
 
     //화살 머리 합체
     private PlayerMovement _pm;
@@ -57,7 +55,7 @@ public class ArrowController : MonoBehaviour
         if(GameManager.Instance.isPaused) return;
         
         //조작 가능할때
-        if (canControllArrow)
+        if (player.IsContainState(PlayerStats.CanControlArrow))
         {
             switch (controlMethod)
             {
@@ -79,26 +77,21 @@ public class ArrowController : MonoBehaviour
         {
             _arrowRigidbody.gravityScale = 1f;
         }
-
-
-        if (_pm.isConnectHead)
-        {
-            _head.transform.position = _arrow.transform.position;
-        }
     }
-
-    /*//화살 조작 여부를 결정하는 입력 이벤트 함수
-    public void OnActivateArrow(InputAction.CallbackContext context)
-    {
-        ActivateArrow();
-    }*/
-
+    
     public void ActivateArrow(bool control)
     {
-        canControllArrow = control;
+        if (control)
+        {
+            player.AddState(PlayerStats.CanControlArrow);
+        }
+        else
+        {
+            player.RemoveState(PlayerStats.CanControlArrow);
+        }
 
         //화살 조작이 가능해졌으면 물리법칙 초기화 + Method_1로
-        if (canControllArrow)
+        if (player.IsContainState(PlayerStats.CanControlArrow))
         {
             _arrowRigidbody.gravityScale = 0;
             _arrowRigidbody.velocity = Vector3.zero;
@@ -133,7 +126,7 @@ public class ArrowController : MonoBehaviour
     //마우스 클릭 이벤트 함수
     public void OnDragArrowMouse(InputAction.CallbackContext context)
     {
-        if (!canControllArrow || isFly)
+        if (!player.IsContainState(PlayerStats.CanControlArrow) || player.IsContainState(PlayerStats.IsFly))
         {
             return;
         }
@@ -150,7 +143,8 @@ public class ArrowController : MonoBehaviour
         //뗄때 화살 날리기
         else if (context.canceled)
         {
-            isOnClick = false;
+            player.RemoveState(PlayerStats.IsOnClick);
+            player.AddState(PlayerStats.IsFly);
             Destroy(_arrowControlObj);
 
             
@@ -160,13 +154,12 @@ public class ArrowController : MonoBehaviour
             GetComponent<Rigidbody2D>().velocity = Vector3.zero;
             GetComponent<Rigidbody2D>().velocity = new Vector2((_directionMouse.normalized.x) * (_l / 5),
                 (_directionMouse.normalized.y) * (_l / 5));
-            isFly = true;
             _arrowRigidbody.gravityScale = 1f;
         }
         //중간
         else
         {
-            isOnClick = true;
+            player.AddState(PlayerStats.IsOnClick);
         }
     }
     //Method_1 핵심 함수
@@ -226,7 +219,7 @@ public class ArrowController : MonoBehaviour
     //Method_2 핵심 함수
     public void ControlMethod_2()
     {
-        if (isOnClick)
+        if (player.IsContainState(PlayerStats.IsOnClick))
         {
             //회전 관련
             _directionMouse = currentMousePosition - _startMousePosition;
@@ -243,10 +236,10 @@ public class ArrowController : MonoBehaviour
     //화살이 아무 곳에나 충돌하면 Method 1로 변경
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (!isOnClick)
+        if (!player.IsContainState(PlayerStats.IsOnClick))
         {
             //화살 머리 합체!
-            if (other.transform.CompareTag("Head") && isFly)
+            if (other.transform.CompareTag("Head") && player.IsContainState(PlayerStats.IsFly))
             {
                 //스프라이트 전환
                 _spriteRenderer.sprite = sprites[1];
@@ -255,9 +248,9 @@ public class ArrowController : MonoBehaviour
                     (_directionMouse.normalized.y) * (_l / 5));
                 Debug.Log("화살 머리 합체");
             }
-            else if (!other.transform.CompareTag("Head") && !_pm.isConnectHead)
+            else if (!other.transform.CompareTag("Head"))
             {
-                isFly = false;
+                player.RemoveState(PlayerStats.IsFly);
                 ChangeArrow("1");
                 _spriteRenderer.sprite = sprites[0];
 
