@@ -57,8 +57,8 @@ public class Camera : MonoBehaviour
                 Vector2 pos = TargetObj.transform.position;
                 
                 //자신의 좌표를 연산된 좌표로 변경하기
-                float newX = _paX.Change_Coordinate_Euler(Time.unscaledDeltaTime*5, pos[0]);
-                float newY = _paY.Change_Coordinate_Euler(Time.unscaledDeltaTime*5, pos[1]);
+                float newX = _paX.Change_Coordinate_Euler(Time.deltaTime*5, pos[0]);
+                float newY = _paY.Change_Coordinate_Euler(Time.deltaTime*5, pos[1]);
 
                 float dx = Mathf.Abs(transform.position.x - newX);
                 float dy = Mathf.Abs(transform.position.y - newY);
@@ -85,8 +85,8 @@ public class Camera : MonoBehaviour
                 Vector2 pos_ = miniCamTarget.transform.position;
                 
                 //자신의 좌표를 연산된 좌표로 변경하기
-                float newx = _pax.Change_Coordinate_Euler(Time.unscaledDeltaTime*5, pos_[0]);
-                float newy = _pay.Change_Coordinate_Euler(Time.unscaledDeltaTime*5, pos_[1]);
+                float newx = _pax.Change_Coordinate_Euler(Time.deltaTime*5, pos_[0]);
+                float newy = _pay.Change_Coordinate_Euler(Time.deltaTime*5, pos_[1]);
 
                 float dx = Mathf.Abs(transform.position.x - newx);
                 float dy = Mathf.Abs(transform.position.y - newy);
