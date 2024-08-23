@@ -1,0 +1,89 @@
+using System;
+using UnityEngine;
+
+public enum PlayerStats
+{
+    BodyIsGround=0,
+    HeadIsGround,
+    CanControlArrow,
+    IsOnClick,
+    IsFly,
+}
+
+public enum PlayerObj
+{
+    Body=0,
+    Head,
+    Arrow,
+}
+
+public class Player : MonoBehaviour
+{
+    //플레이어가 가질 수 있는 모든 상태 개수
+    private static readonly int StateCount = Enum.GetValues(typeof(PlayerStats)).Length;
+    //플레이어가 가질 수 있는 모든 상태들 배열
+    private State<Player>[] _states;
+    private StateManager<Player> _stateManager;
+    
+    //머리,몸,화살 오브젝트
+    public GameObject Body;
+    public GameObject Head;
+    public GameObject Arrow;
+    
+    //기본 설정
+    public void Start()
+    {
+        //_states 초기화
+        _states = new State<Player>[StateCount];
+        _states[(int)PlayerStats.BodyIsGround] = new PlayerOwnedStates.BodyIsGround();
+        _states[(int)PlayerStats.HeadIsGround] = new PlayerOwnedStates.HeadIsGround();
+        _states[(int)PlayerStats.CanControlArrow] = new PlayerOwnedStates.CanControlArrow();
+        _states[(int)PlayerStats.IsOnClick] = new PlayerOwnedStates.IsOnClick();
+        _states[(int)PlayerStats.IsFly] = new PlayerOwnedStates.IsFly();
+        
+
+        _stateManager = new StateManager<Player>();
+        _stateManager.Setup(this,StateCount,_states);
+    }
+    
+    //업데이트 메소드
+    public void Update()
+    {
+        //상태 매니저의 Execute실행
+        _stateManager.Execute();
+    }
+
+    //상태 추가 메소드
+    public void AddState(PlayerStats ps)
+    {
+        State<Player> newState = _states[(int)ps];
+        _stateManager.AddState(newState);
+    }
+    
+    //상태 제거 메소드
+    public void RemoveState(PlayerStats ps)
+    {
+        State<Player> remState = _states[(int)ps];
+        _stateManager.RemoveState(remState);
+    }
+    //상태 있는지 체크
+    public bool IsContainState(PlayerStats ps)
+    {
+        return _stateManager._currentState.Contains(_states[(int)ps]);
+    }
+    
+    //머리, 몸, 화살에 접근하기
+    public GameObject GetPlayerObj(PlayerObj obj)
+    {
+        switch (obj)
+        {
+            case PlayerObj.Body:
+                return Body;
+            case PlayerObj.Head:
+                return Head;
+            case PlayerObj.Arrow:
+                return Arrow;
+        }
+        return null;
+    }
+}

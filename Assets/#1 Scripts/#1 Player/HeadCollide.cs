@@ -1,17 +1,23 @@
 using System;
 using UnityEngine.Tilemaps;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class HeadCollide : MonoBehaviour
 {
-    public GameObject Head;
-    private int collideCount;
-    public PlayerMovement PM;
-    public ArrowController AC;
+    public Player player;
     
+    private GameObject _head;
+    private int _collideCount;
+
+    public void Start()
+    {
+        _head = player.GetPlayerObj(PlayerObj.Head);
+    }
+
     public void Update()
     {
-        transform.position = Head.transform.position;
+        transform.position = _head.transform.position;
     }
 
     public void OnTriggerEnter2D(Collider2D other)
@@ -20,8 +26,8 @@ public class HeadCollide : MonoBehaviour
             (other.CompareTag("Body") && name == "head_ground_check")||
             (other.CompareTag("Door") && name == "head_ground_check"))
         {
-            Head.GetComponent<Head>().AddState(HeadStates.IsGround);
-            collideCount++;
+            player.AddState(PlayerStats.HeadIsGround);
+            _collideCount++;
             //Debug.Log("머리 바닥 닿음");
         }
         
@@ -34,10 +40,10 @@ public class HeadCollide : MonoBehaviour
             (other.CompareTag("Body") && name == "head_ground_check")||
             (other.CompareTag("Door") && name == "head_ground_check"))
         {   
-            collideCount--;
-            if (collideCount == 0)
+            _collideCount--;
+            if (_collideCount == 0)
             {
-                Head.GetComponent<Head>().RemoveState(HeadStates.IsGround);  
+                player.RemoveState(PlayerStats.HeadIsGround);  
             }
             //Debug.Log("머리 바닥 떨어짐");
         }

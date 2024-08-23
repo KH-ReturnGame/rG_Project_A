@@ -5057,6 +5057,7 @@ GameObject:
   - component: {fileID: 1185104176}
   - component: {fileID: 1185104177}
   - component: {fileID: 1185104178}
+  - component: {fileID: 1185104179}
   m_Layer: 10
   m_Name: Player
   m_TagString: Untagged
@@ -5204,38 +5205,6 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 58c021e8-2e09-45e4-9f14-bebdf00b418a
     m_ActionName: PlayerActions/DragArrowMouse[/Mouse/leftButton]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1669094252}
-        m_TargetAssemblyTypeName: ArrowController, Assembly-CSharp
-        m_MethodName: OnChangeCameraHead
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: c298f56c-e9ba-43e5-9495-93f093d4bae5
-    m_ActionName: PlayerActions/ChangeCameraHead[/Keyboard/q]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1669094252}
-        m_TargetAssemblyTypeName: ArrowController, Assembly-CSharp
-        m_MethodName: OnChangeCameraBody
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: ac8a6d08-b07f-42e9-8e82-98625f168a18
-    m_ActionName: PlayerActions/ChangeCameraBody[/Keyboard/e]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: PlayerActions
@@ -5253,13 +5222,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a357f43a4534d50b9553b4f3076dd9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _movementSpeed: 20
-  _jumpForce: 30
+  player: {fileID: 1185104179}
+  movementSpeed: 20
+  jumpForce: 30
+  controlMode: 
+  isConnectHead: 0
+--- !u!114 &1185104179
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1185104175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed5042a509b1410f8a1e7e1a9e6e86f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   Body: {fileID: 846713358}
   Head: {fileID: 1360159658}
   Arrow: {fileID: 1669094250}
-  ControlMode: 
-  isConnectHead: 0
 --- !u!1 &1217043229
 GameObject:
   m_ObjectHideFlags: 0
@@ -5369,7 +5351,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecf916ff4663486ea47dc5591a6b32c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Body: {fileID: 846713358}
+  player: {fileID: 1185104179}
 --- !u!1 &1332528711
 GameObject:
   m_ObjectHideFlags: 0
@@ -5654,9 +5636,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d51cb2770f3404bb50491a8a4fc12e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Head: {fileID: 1360159658}
-  PM: {fileID: 1185104178}
-  AC: {fileID: 1669094252}
+  player: {fileID: 1185104179}
 --- !u!1 &1531612111
 GameObject:
   m_ObjectHideFlags: 0
@@ -5958,23 +5938,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a59012354cebd17458162396f0d843aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Arrow: {fileID: 1669094250}
-  CanControllArrow: 0
-  ControlMethod: 1
+  player: {fileID: 1185104179}
+  canControllArrow: 0
+  controlMethod: 1
   followSpeed: 10
   rotationSpeed: 500
   hitObjects: []
-  layermask:
-    serializedVersion: 2
-    m_Bits: 0
   currentMousePosition: {x: 0, y: 0}
-  ArrowControlPrefab: {fileID: 1442945881843960250, guid: 92457d26a0d934fc99f1b1d372fe7e2a, type: 3}
+  arrowControlPrefab: {fileID: 1442945881843960250, guid: 92457d26a0d934fc99f1b1d372fe7e2a, type: 3}
   isOnClick: 0
   isFly: 0
-  PM: {fileID: 1185104178}
-  Head: {fileID: 1360159658}
-  Body: {fileID: 846713358}
-  Sprites:
+  sprites:
   - {fileID: 21300000, guid: b0e2f1fefe4384719bdc64a89b2d3b6d, type: 3}
   - {fileID: 21300000, guid: becbc8f8687b44a69a111a6c3158fc9c, type: 3}
 --- !u!212 &1669094253
@@ -6247,9 +6221,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d51cb2770f3404bb50491a8a4fc12e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Head: {fileID: 1360159658}
-  PM: {fileID: 1185104178}
-  AC: {fileID: 1669094252}
+  player: {fileID: 1185104179}
 --- !u!50 &1863343499
 Rigidbody2D:
   serializedVersion: 4

@@ -17,7 +17,7 @@ public class ChangeMovementUI : MonoBehaviour
 
     public void Update()
     {
-        switch (pm.ControlMode)
+        switch (pm.controlMode)
         {
             case "Head":
                 HeadUI.localScale = Vector3.Slerp(HeadUI.localScale, new Vector3(1, 1, 1), 10 * Time.unscaledDeltaTime);
