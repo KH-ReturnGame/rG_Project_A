@@ -151,8 +151,8 @@
                 },
                 {
                     "name": "",
-                    "id": "7b8b3265-7b86-42c7-b4b6-8e2ebb047a6c",
-                    "path": "<Keyboard>/enter",
+                    "id": "a23c6023-798c-4516-a7fa-54d2a3905da4",
+                    "path": "<Keyboard>/leftShift",
                     "interactions": "",
                     "processors": "",
                     "groups": "PC",
@@ -162,8 +162,19 @@
                 },
                 {
                     "name": "",
-                    "id": "a23c6023-798c-4516-a7fa-54d2a3905da4",
-                    "path": "<Keyboard>/leftShift",
+                    "id": "a182a0c6-8702-4560-a0ed-8f6146b85dfb",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "ChangePlayer",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3c86e454-15e5-4b93-a50b-8618463a9392",
+                    "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
                     "groups": "PC",

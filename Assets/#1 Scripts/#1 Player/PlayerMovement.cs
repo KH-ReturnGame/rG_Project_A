@@ -1,37 +1,50 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
+    //플레이어 기본 움직임
     private float _movementInputDirection;
     public float _movementSpeed;
     public float _jumpForce;
 
+    //몸 관련
     public GameObject Body;
     private Rigidbody2D BodyRigidbody;
     
+    //머리 관련
     public GameObject Head;
     private Rigidbody2D HeadRigidbody;
+    
+    //화살 관련
+    public GameObject Arrow;
 
+    //현재 조작할 오브젝트
     private Rigidbody2D NowRigidbody;
+    public string ControlMode;
     
+    //화살 머리 합체 관련
+    public bool isConnectHead = false;
     
-
+    //기본 초기화
     private void Start()
     {
         BodyRigidbody = Body.GetComponent<Rigidbody2D>();
         HeadRigidbody = Head.GetComponent<Rigidbody2D>();
         NowRigidbody = BodyRigidbody;
+        ControlMode = "Body";
     }
 
+    //움직임 무한 적용~~
     private void Update()
     {
+        if (ControlMode == "Arrow") return;
         //기본 좌우 움직임
         NowRigidbody.velocity = new Vector2(_movementInputDirection * _movementSpeed, NowRigidbody.velocity.y);
     }
-
-
+    
     //좌우 입력받기
     public void OnMove(InputAction.CallbackContext context)
     {
@@ -41,7 +54,7 @@ public class PlayerMovement : MonoBehaviour
     //점프 입력받기
     public void OnJump(InputAction.CallbackContext context)
     {
-        if (!context.started)
+        if (!context.started || ControlMode == "Arrow")
             return;
         if ((NowRigidbody==BodyRigidbody && Body.GetComponent<Body>().IsContainState(BodyStates.IsGround))||
             (NowRigidbody==HeadRigidbody && Head.GetComponent<Head>().IsContainState(HeadStates.IsGround)))
@@ -50,20 +63,65 @@ public class PlayerMovement : MonoBehaviour
             NowRigidbody.velocity = new Vector2(NowRigidbody.velocity.x, _jumpForce);
         }
     }
+    
     //머리, 몸 전환 입력받기
     public void OnChangePlayer(InputAction.CallbackContext context)
     {
-        
+        if (isConnectHead)
+        {
+            return;
+        }
+
+        if (context.started)
+        {
+            ChangeControl(context.control.name);
+        }
+    }
+    
+    //머리 몸 화살 전환 함수
+    public void ChangeControl(string controlmode)
+    {
+        switch (controlmode)
+        {
+            case "q":
+            {
+                if(ControlMode == "Head") return;
+                ControlMode = "Head";
+                NowRigidbody = HeadRigidbody;
+                GameManager.Instance.ChangeCameraTarget(Head);
+                Arrow.GetComponent<ArrowController>().ActivateArrow(false);
+                Arrow.GetComponent<PolygonCollider2D>().isTrigger = false;
+                return;
+            }
+            case "leftShift":
+            {
+                if(ControlMode == "Arrow") return;
+                ControlMode = "Arrow";
+                Arrow.GetComponent<ArrowController>().ActivateArrow(true);
+                return;
+            }
+            case "e":
+            {
+                if(ControlMode == "Body") return;
+                ControlMode = "Body";
+                NowRigidbody = BodyRigidbody;
+                GameManager.Instance.ChangeCameraTarget(Body);
+                Arrow.GetComponent<ArrowController>().ActivateArrow(false);
+                Arrow.GetComponent<PolygonCollider2D>().isTrigger = false;
+                return;
+            }
+        }
+    }
+    
+    //현재 머리인지 몸인지 반환
+    public string WhatControlPlayer()
+    {
         if (NowRigidbody == BodyRigidbody)
         {
-            NowRigidbody = HeadRigidbody;
-            GameManager.Instance.ChangeCameraTarget(Head);
+            return "Body";
         }
-        else
-        {
-            NowRigidbody = BodyRigidbody;
-            GameManager.Instance.ChangeCameraTarget(Body);
-        }
+
+        return "Head";
     }
     
     

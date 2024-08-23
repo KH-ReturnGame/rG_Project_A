@@ -6,6 +6,8 @@ public class HeadCollide : MonoBehaviour
 {
     public GameObject Head;
     private int collideCount;
+    public PlayerMovement PM;
+    public ArrowController AC;
     
     public void Update()
     {
@@ -22,6 +24,7 @@ public class HeadCollide : MonoBehaviour
             collideCount++;
             //Debug.Log("머리 바닥 닿음");
         }
+        
     }
 
     public void OnTriggerExit2D(Collider2D other)
