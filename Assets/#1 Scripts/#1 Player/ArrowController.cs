@@ -246,7 +246,8 @@ public class ArrowController : MonoBehaviour
                 //스프라이트 전환
                 _spriteRenderer.sprite = Sprites[1];
                 Head.SetActive(false);
-                
+                GetComponent<Rigidbody2D>().velocity = new Vector2((direction_mouse.normalized.x) * (l / 5),
+                    (direction_mouse.normalized.y) * (l / 5));
                 Debug.Log("화살 머리 합체");
             }
             else if (!other.transform.CompareTag("Head") && !PM.isConnectHead)
@@ -260,38 +261,6 @@ public class ArrowController : MonoBehaviour
                     Head.transform.position = other.contacts[0].point + other.contacts[0].normal * 1f; // 땅을 넘지 않게 약간 떨어진 위치로 설정
                     Head.SetActive(true);
                 }
-                
-                /*
-                //벽에 닿았는지 확인
-                RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, transform.right, 50f);
-                
-                hitObjects.Clear();
-
-                Vector2 hitpoint = new Vector2(0,0);
-                foreach (var hit in hits)
-                {
-                    hitObjects.Add(hit.collider.gameObject);
-                    if (hit.transform.CompareTag("ground") || hit.transform.CompareTag("Door"))
-                    {
-                        hitpoint = hit.point;
-                        break;
-                    }
-                }
-                bool groundHit = hitObjects.Exists(obj => obj.CompareTag("ground")) || hitObjects.Exists(obj => obj.CompareTag("Door"));
-                if (groundHit && Vector2.Distance(hitpoint, transform.position) <= 5 && !Head.activeSelf)
-                {
-                    RaycastHit2D groundRaycast = Array.Find(hits, hit => hit.collider && (hit.collider.CompareTag("ground")||hit.collider.CompareTag("Door")));
-
-                    // ground 오브젝트와 충돌한 경우, transform의 위치를 조정하여 땅을 넘지 않도록 한다.
-                    Vector3 hitPoint = groundRaycast.point; // 충돌한 지점
-                    Vector3 normal = groundRaycast.normal; // 충돌한 표면의 법선 벡터
-
-                    // 땅을 넘지 않도록 충돌 지점 바로 앞에 위치를 설정
-                    Head.transform.position = hitPoint + normal * 1f; // 땅을 넘지 않게 약간 떨어진 위치로 설정
-                    Head.SetActive(true);
-                }
-                Debug.Log(Vector2.Distance(hitpoint, transform.position));*/
-                
                 
             }
         }
