@@ -6,13 +6,7 @@ public class BodyCollide : MonoBehaviour
 {
     public Player player;
     
-    private GameObject _body;
     private int _collideCount;
-
-    private void Start()
-    {
-        _body = player.GetPlayerObj(PlayerObj.Body);
-    }
 
     public void OnTriggerEnter2D(Collider2D other)
     {
@@ -20,7 +14,7 @@ public class BodyCollide : MonoBehaviour
             (other.CompareTag("Head") && name == "body_ground_check")||
             (other.CompareTag("Door") && name == "body_ground_check"))
         {
-            _body.GetComponent<Body>().AddState(BodyStates.IsGround);
+            player.AddState(PlayerStats.BodyIsGround);
             _collideCount++;
             //Debug.Log("몸 바닥 닿음");
         }
@@ -36,7 +30,7 @@ public class BodyCollide : MonoBehaviour
             _collideCount--;
             if (_collideCount == 0)
             {
-                _body.GetComponent<Body>().RemoveState(BodyStates.IsGround);  
+                player.RemoveState(PlayerStats.BodyIsGround);  
             }
             //Debug.Log("몸  바닥 떨어짐");
         }

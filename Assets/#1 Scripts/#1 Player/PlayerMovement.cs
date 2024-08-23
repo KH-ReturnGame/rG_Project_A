@@ -62,8 +62,8 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!context.started || controlMode == "Arrow")
             return;
-        if ((_nowRigidbody==_bodyRigidbody && _body.GetComponent<Body>().IsContainState(BodyStates.IsGround))||
-            (_nowRigidbody==_headRigidbody && _head.GetComponent<Head>().IsContainState(HeadStates.IsGround)))
+        if ((_nowRigidbody==_bodyRigidbody && player.IsContainState(PlayerStats.BodyIsGround))||
+            (_nowRigidbody==_headRigidbody && player.IsContainState(PlayerStats.HeadIsGround)))
         {
             _nowRigidbody.velocity = new Vector2(_nowRigidbody.velocity.x, 0);
             _nowRigidbody.velocity = new Vector2(_nowRigidbody.velocity.x, jumpForce);

@@ -8,15 +8,11 @@ public class HeadCollide : MonoBehaviour
     public Player player;
     
     private GameObject _head;
-    private PlayerMovement _pm;
-    private ArrowController _ac;
     private int _collideCount;
 
     public void Start()
     {
         _head = player.GetPlayerObj(PlayerObj.Head);
-        _pm = player.gameObject.GetComponent<PlayerMovement>();
-        _ac = player.GetComponent<ArrowController>();
     }
 
     public void Update()
@@ -30,7 +26,7 @@ public class HeadCollide : MonoBehaviour
             (other.CompareTag("Body") && name == "head_ground_check")||
             (other.CompareTag("Door") && name == "head_ground_check"))
         {
-            _head.GetComponent<Head>().AddState(HeadStates.IsGround);
+            player.AddState(PlayerStats.HeadIsGround);
             _collideCount++;
             //Debug.Log("머리 바닥 닿음");
         }
@@ -47,7 +43,7 @@ public class HeadCollide : MonoBehaviour
             _collideCount--;
             if (_collideCount == 0)
             {
-                _head.GetComponent<Head>().RemoveState(HeadStates.IsGround);  
+                player.RemoveState(PlayerStats.HeadIsGround);  
             }
             //Debug.Log("머리 바닥 떨어짐");
         }
