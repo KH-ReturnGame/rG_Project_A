@@ -101,6 +101,19 @@ public class GameManager : MonoBehaviour
         }
     }
     
+    //유니티 일시정지 이벤트
+    private void OnApplicationPause(bool pauseStatus)
+    {
+        if (pauseStatus)
+        {
+            PauseGame();
+        }
+        else
+        {
+            ResumeGame();
+        }
+    }
+
     //Esc 메뉴 무한 체크
     public void Update()
     {
@@ -110,10 +123,13 @@ public class GameManager : MonoBehaviour
             if (isEscMenuView)
             {
                 PauseGame();
+                GameObject canvas = GameObject.FindGameObjectWithTag("canvas");
+                CreatedEscMenu = Instantiate(EscMenuObj, canvas.transform, false);
             }
             else
             {
                 ResumeGame();
+                Destroy(CreatedEscMenu);
             }
         }
     }
@@ -123,8 +139,6 @@ public class GameManager : MonoBehaviour
     {
         isPaused = true;
         Time.timeScale = 0;
-        GameObject canvas = GameObject.FindGameObjectWithTag("canvas");
-        CreatedEscMenu = Instantiate(EscMenuObj, canvas.transform, false);
     }
 
     //게임 재개
@@ -132,7 +146,6 @@ public class GameManager : MonoBehaviour
     {
         isPaused = false;
         Time.timeScale = 1;
-        Destroy(CreatedEscMenu);
     }
 
     //설정 메뉴 열고 끄기

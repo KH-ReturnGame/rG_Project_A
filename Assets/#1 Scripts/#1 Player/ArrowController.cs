@@ -34,9 +34,7 @@ public class ArrowController : MonoBehaviour
     private Vector2 _directionMouse; //자신과 마우스와의 방향
 
     //화살 머리 합체
-    private PlayerMovement _pm;
     private GameObject _head;
-    private GameObject _body;
     private SpriteRenderer _spriteRenderer;
     public Sprite[] sprites;
 
@@ -45,9 +43,7 @@ public class ArrowController : MonoBehaviour
     {
         _arrow = player.GetPlayerObj(PlayerObj.Arrow);
         _arrowRigidbody = _arrow.GetComponent<Rigidbody2D>();
-        _pm = player.GetComponent<PlayerMovement>();
         _head = player.GetPlayerObj(PlayerObj.Head);
-        _body = player.GetPlayerObj(PlayerObj.Body);
         _spriteRenderer = _arrow.GetComponent<SpriteRenderer>();
     }
 
@@ -174,7 +170,7 @@ public class ArrowController : MonoBehaviour
         // 화살표 마우스위치로 이동
         Vector3 position = _arrow.transform.position;
         position = Vector3.Lerp(position, new Vector3(worldPosition.x, worldPosition.y, 0),
-            followSpeed * Time.unscaledDeltaTime);
+            followSpeed * Time.deltaTime);
 
         // 방향 계산
         Vector3 direction = worldPosition - position;
