@@ -254,7 +254,14 @@ public class ArrowController : MonoBehaviour
                 isFly = false;
                 ChangeArrow("1");
                 _spriteRenderer.sprite = Sprites[0];
+
+                if ((other.transform.CompareTag("ground") || other.transform.CompareTag("Door")) && !Head.activeSelf)
+                {
+                    Head.transform.position = other.contacts[0].point + other.contacts[0].normal * 1f; // 땅을 넘지 않게 약간 떨어진 위치로 설정
+                    Head.SetActive(true);
+                }
                 
+                /*
                 //벽에 닿았는지 확인
                 RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, transform.right, 50f);
                 
@@ -283,7 +290,7 @@ public class ArrowController : MonoBehaviour
                     Head.transform.position = hitPoint + normal * 1f; // 땅을 넘지 않게 약간 떨어진 위치로 설정
                     Head.SetActive(true);
                 }
-                Debug.Log(Vector2.Distance(hitpoint, transform.position));
+                Debug.Log(Vector2.Distance(hitpoint, transform.position));*/
                 
                 
             }
