@@ -158,11 +158,11 @@ RectTransform:
   m_Father: {fileID: 253754192}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 700, y: 0}
+  m_AnchorMin: {x: 1, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchoredPosition: {x: 840, y: 0}
   m_SizeDelta: {x: 400, y: 130}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &104346611
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -724,11 +724,11 @@ RectTransform:
   m_Father: {fileID: 253754192}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 700, y: 90}
+  m_AnchorMin: {x: 1, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchoredPosition: {x: 840, y: 90}
   m_SizeDelta: {x: 400, y: 130}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &736167653
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -978,11 +978,11 @@ RectTransform:
   m_Father: {fileID: 253754192}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 700, y: -10}
+  m_AnchorMin: {x: 1, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchoredPosition: {x: 840, y: 10}
   m_SizeDelta: {x: 400, y: 130}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &1331195446
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1113,10 +1113,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -1347,9 +1347,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f26e03daeecf40379ad3cdc89c07fdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EscMenuObj: {fileID: 2870154902967371074, guid: f489ed59df7f18c48b69f92d5638acb5, type: 3}
+  EscMenuObj: {fileID: 4142151439556449101, guid: a85e164a2e46ffb4fba8a8b6a7454fb6, type: 3}
   isEscMenuView: 0
-  SettingMenuObj: {fileID: 1835440232105209379, guid: 93646d0d679ca624c8d425bc01ad84d5, type: 3}
+  SettingMenuObj: {fileID: 7452956515628437014, guid: 93646d0d679ca624c8d425bc01ad84d5, type: 3}
   isSettingMenuView: 0
   isPaused: 0
 --- !u!114 &2106650886

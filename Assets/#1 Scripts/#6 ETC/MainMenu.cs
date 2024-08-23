@@ -54,14 +54,20 @@ public class MainMenu : MonoBehaviour
         if (StartButtonToggle)
         {
             yield return new WaitForSeconds(0.15f);
-            EasyButton.SetActive(true);
-            HardButton.SetActive(true);
+            if (!EasyButton.activeSelf && !HardButton.activeSelf)
+            {
+                EasyButton.SetActive(true);
+                HardButton.SetActive(true);
+            }
         }
         else
         {
             yield return new WaitForSeconds(0.025f);
-            EasyButton.SetActive(false);
-            HardButton.SetActive(false);
+            if (EasyButton.activeSelf && HardButton.activeSelf)
+            {
+                EasyButton.SetActive(false);
+                HardButton.SetActive(false);
+            }
         }
     }
 
