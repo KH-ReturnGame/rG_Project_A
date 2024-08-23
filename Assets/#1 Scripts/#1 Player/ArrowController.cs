@@ -42,7 +42,7 @@ public class ArrowController : MonoBehaviour
 
     public void Start()
     {
-        Arrow.transform.gameObject.SetActive(true);
+        //Arrow.transform.gameObject.SetActive(true);
         rigidbody = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
     }
