@@ -23,6 +23,7 @@ public class ArrowController : MonoBehaviour
     public float followSpeed;
     public float rotationSpeed;
     public List<GameObject> hitObjects = new List<GameObject>();
+    private float maxMoveDistance = 0.5f;
 
     //화살 움직임 Method_2
     private Vector2 _startMousePosition; //초기 마우스 위치
@@ -169,8 +170,20 @@ public class ArrowController : MonoBehaviour
         
         // 화살표 마우스위치로 이동
         Vector3 position = _arrow.transform.position;
-        position = Vector3.Lerp(position, new Vector3(worldPosition.x, worldPosition.y, 0),
+        Vector3 new_position = Vector3.Lerp(position, new Vector3(worldPosition.x, worldPosition.y, 0),
             followSpeed * Time.deltaTime);
+
+        if (Vector3.Distance(position, new_position) >= maxMoveDistance)
+        {
+            Debug.Log("ddd");
+            position += (-position+new_position).normalized * maxMoveDistance;
+        }
+        else
+        {
+            position = new_position;
+        }
+        
+        
 
         // 방향 계산
         Vector3 direction = worldPosition - position;
@@ -182,7 +195,7 @@ public class ArrowController : MonoBehaviour
             rotationSpeed * Time.unscaledDeltaTime);
         
         //레이캐스트 쏴서 바닥 통과 막기
-        RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, direction, 50f);
+        RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, direction, 20);
         hitObjects.Clear();
         Vector2 hitpoint = new Vector2(0,0);
         foreach (var hit in hits)
