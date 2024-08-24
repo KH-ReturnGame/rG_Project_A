@@ -1036,7 +1036,6 @@ GameObject:
   - component: {fileID: 846713359}
   - component: {fileID: 846713362}
   - component: {fileID: 846713363}
-  - component: {fileID: 846713361}
   - component: {fileID: 846713364}
   m_Layer: 7
   m_Name: Body
@@ -1113,18 +1112,6 @@ Transform:
   m_Father: {fileID: 1185104176}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &846713361
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 846713358}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e94504af3dc594fd6b80ab79a4eed671, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!50 &846713362
 Rigidbody2D:
   serializedVersion: 4
@@ -5496,7 +5483,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1360159660}
   - component: {fileID: 1360159659}
-  - component: {fileID: 1360159661}
   - component: {fileID: 1360159662}
   - component: {fileID: 1360159663}
   - component: {fileID: 1360159664}
@@ -5574,18 +5560,6 @@ Transform:
   m_Father: {fileID: 1185104176}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1360159661
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1360159658}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ff22001f8a2347708788436784bd1d6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!50 &1360159662
 Rigidbody2D:
   serializedVersion: 4
@@ -5840,7 +5814,7 @@ MonoBehaviour:
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
-  m_ScreenMatchMode: 0
+  m_ScreenMatchMode: 1
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
