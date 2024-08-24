@@ -169,22 +169,20 @@ public class ArrowController : MonoBehaviour
         Vector3 worldPosition = UnityEngine.Camera.main.ScreenToWorldPoint(mousePosition);
         
         // 화살표 마우스위치로 이동
+        Vector3 result_position;
         Vector3 position = _arrow.transform.position;
         Vector3 new_position = Vector3.Lerp(position, new Vector3(worldPosition.x, worldPosition.y, 0),
             followSpeed * Time.deltaTime);
 
         if (Vector3.Distance(position, new_position) >= maxMoveDistance)
         {
-            Debug.Log("ddd");
-            position += (-position+new_position).normalized * maxMoveDistance;
+            result_position = position + (-position+new_position).normalized * maxMoveDistance;
         }
         else
         {
-            position = new_position;
+            result_position = new_position;
         }
         
-        
-
         // 방향 계산
         Vector3 direction = worldPosition - position;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg; // 필요하면 각도 추가
@@ -217,11 +215,11 @@ public class ArrowController : MonoBehaviour
             Vector3 normal = groundRaycast.normal; // 충돌한 표면의 법선 벡터
 
             // 땅을 넘지 않도록 충돌 지점 바로 앞에 위치를 설정
-            transform.position = hitPoint + normal * 1f; // 땅을 넘지 않게 약간 떨어진 위치로 설정
+            transform.position = hitPoint + normal * 2f; // 땅을 넘지 않게 약간 떨어진 위치로 설정
         }
         else
         {
-            _arrow.transform.position = position;
+            _arrow.transform.position = result_position;
         }
     }
 
