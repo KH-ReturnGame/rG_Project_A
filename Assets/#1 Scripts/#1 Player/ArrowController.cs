@@ -23,7 +23,7 @@ public class ArrowController : MonoBehaviour
     public float followSpeed;
     public float rotationSpeed;
     public List<GameObject> hitObjects = new List<GameObject>();
-    private float maxMoveDistance = 0.5f;
+    private float maxMoveDistance = 1f;
 
     //화살 움직임 Method_2
     private Vector2 _startMousePosition; //초기 마우스 위치
@@ -53,6 +53,14 @@ public class ArrowController : MonoBehaviour
 
     //업데이트
     public void Update()
+    {
+        //화살 속력 계속 체크
+        _velocity[1] = _velocity[0];
+        _velocity[0] = _arrow.GetComponent<Rigidbody2D>().velocity;
+    }
+    
+    //고정 업데이트
+    private void FixedUpdate()
     {
         if(GameManager.Instance.isPaused) return;
         
@@ -88,12 +96,8 @@ public class ArrowController : MonoBehaviour
             }
             
         }
-        
-        //화살 속력 계속 체크
-        _velocity[1] = _velocity[0];
-        _velocity[0] = _arrow.GetComponent<Rigidbody2D>().velocity;
     }
-    
+
     //화살 활성화 비활성화 조절
     public void ActivateArrow(bool control)
     {
@@ -195,7 +199,7 @@ public class ArrowController : MonoBehaviour
 
         if (Vector3.Distance(position, new_position) >= maxMoveDistance)
         {
-            result_position = position + (-position+new_position).normalized * maxMoveDistance;
+            result_position = position + (-position+new_position).normalized;
         }
         else
         {
@@ -241,7 +245,7 @@ public class ArrowController : MonoBehaviour
         else
         {
             player.RemoveState(PlayerStats.IsArrowOnWall);
-            _arrow.transform.position = result_position;
+            _arrow.transform.position = Vector3.Lerp(_arrow.transform.position,result_position,Time.unscaledDeltaTime * 75f);
         }
     }
 
