@@ -109,7 +109,7 @@ public class GameManager : MonoBehaviour
         {
             PauseGame();
         }
-        else if (!isSettingMenuView)
+        else if (!isEscMenuView)
         {
             ResumeGame();
         }
