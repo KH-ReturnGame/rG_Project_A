@@ -38,6 +38,7 @@ public class ArrowController : MonoBehaviour
     private GameObject _head;
     private SpriteRenderer _spriteRenderer;
     public Sprite[] sprites;
+    private Vector2[] _velocity = new Vector2[2];
 
     //기본 초기화
     public void Start()
@@ -46,6 +47,8 @@ public class ArrowController : MonoBehaviour
         _arrowRigidbody = _arrow.GetComponent<Rigidbody2D>();
         _head = player.GetPlayerObj(PlayerObj.Head);
         _spriteRenderer = _arrow.GetComponent<SpriteRenderer>();
+        
+        _velocity[0] = new Vector2(0, 0);
     }
 
     //업데이트
@@ -84,6 +87,10 @@ public class ArrowController : MonoBehaviour
             }
             
         }
+        
+        //화살 속력 계속 체크
+        _velocity[1] = _velocity[0];
+        _velocity[0] = _arrow.GetComponent<Rigidbody2D>().velocity;
     }
     
     //화살 활성화 비활성화 조절
@@ -269,8 +276,7 @@ public class ArrowController : MonoBehaviour
                 //스프라이트 전환
                 _spriteRenderer.sprite = sprites[1];
                 _head.SetActive(false);
-                GetComponent<Rigidbody2D>().velocity = new Vector2((_directionMouse.normalized.x) * (_l / 5),
-                    (_directionMouse.normalized.y) * (_l / 5));
+                GetComponent<Rigidbody2D>().velocity = _velocity[1];
                 Debug.Log("화살 머리 합체");
             }
             else if (!other.transform.CompareTag("Head"))
