@@ -126,7 +126,7 @@ public class ArrowController : MonoBehaviour
     //마우스 클릭 이벤트 함수
     public void OnDragArrowMouse(InputAction.CallbackContext context)
     {
-        if (!player.IsContainState(PlayerStats.CanControlArrow) || player.IsContainState(PlayerStats.IsFly))
+        if (!player.IsContainState(PlayerStats.CanControlArrow) || player.IsContainState(PlayerStats.IsFly) || player.IsContainState(PlayerStats.IsCollision))
         {
             return;
         }
@@ -189,8 +189,7 @@ public class ArrowController : MonoBehaviour
         Quaternion targetRotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
         // 화살표 회전 -> 마우스 방향으로
-        _arrow.transform.rotation = Quaternion.RotateTowards(_arrow.transform.rotation, targetRotation,
-            rotationSpeed * Time.unscaledDeltaTime);
+        _arrow.transform.rotation = Quaternion.RotateTowards(_arrow.transform.rotation, targetRotation, rotationSpeed * Time.unscaledDeltaTime);
         
         //레이캐스트 쏴서 바닥 통과 막기
         RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, direction, 20);
@@ -208,6 +207,8 @@ public class ArrowController : MonoBehaviour
         bool groundHit = hitObjects.Exists(obj => (obj.CompareTag("ground")||obj.CompareTag("Door")));
         if (groundHit && Vector2.Distance(hitpoint, transform.position) <= 2)
         {
+            player.AddState(PlayerStats.IsArrowOnWall);
+            player.AddState(PlayerStats.IsCollision);
             RaycastHit2D groundRaycast = Array.Find(hits, hit => hit.collider && (hit.collider.CompareTag("ground")||hit.collider.CompareTag("Door")));
 
             // ground 오브젝트와 충돌한 경우, transform의 위치를 조정하여 땅을 넘지 않도록 한다.
@@ -215,10 +216,11 @@ public class ArrowController : MonoBehaviour
             Vector3 normal = groundRaycast.normal; // 충돌한 표면의 법선 벡터
 
             // 땅을 넘지 않도록 충돌 지점 바로 앞에 위치를 설정
-            transform.position = hitPoint + normal * 2f; // 땅을 넘지 않게 약간 떨어진 위치로 설정
+            _arrow.transform.position = hitPoint + normal * 1.65f; // 땅을 넘지 않게 약간 떨어진 위치로 설정
         }
         else
         {
+            player.RemoveState(PlayerStats.IsArrowOnWall);
             _arrow.transform.position = result_position;
         }
     }
@@ -270,5 +272,14 @@ public class ArrowController : MonoBehaviour
             }
         }
     }
-    
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        player.RemoveState(PlayerStats.IsCollision);
+    }
+
+    private void OnCollisionExit2D(Collision2D other)
+    {
+        player.RemoveState(PlayerStats.IsCollision);
+    }
 }
