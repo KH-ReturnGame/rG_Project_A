@@ -5913,7 +5913,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1185104179}
   controlMethod: 1
-  followSpeed: 10
+  followSpeed: 15
   rotationSpeed: 500
   hitObjects: []
   currentMousePosition: {x: 0, y: 0}

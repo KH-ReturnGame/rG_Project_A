@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
     //게임 일시정지
     public bool isPaused = false;
     public bool hasFocus;
-    
+
     //인스턴스화 되었을때
     public void Awake()
     {
@@ -46,6 +46,7 @@ public class GameManager : MonoBehaviour
         //기타 매니저들 가져오기
         SL = GetComponent<SceneLoader>();
         SM = GetComponent<SignalManager>();
+        Application.targetFrameRate = 200;
     }
     
     //게임 매니저 속성으로 접근과 관련된 규약 지정하는 부분
