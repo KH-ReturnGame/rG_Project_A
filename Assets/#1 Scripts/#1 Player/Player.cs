@@ -9,6 +9,7 @@ public enum PlayerStats
     IsOnClick,
     IsFly,
     IsArrowOnWall,
+    IsCollisionMethod2,
     IsCollision,
 }
 
@@ -43,8 +44,9 @@ public class Player : MonoBehaviour
         _states[(int)PlayerStats.IsOnClick] = new PlayerOwnedStates.IsOnClick();
         _states[(int)PlayerStats.IsFly] = new PlayerOwnedStates.IsFly();
         _states[(int)PlayerStats.IsArrowOnWall] = new PlayerOwnedStates.IsArrowOnWall();
+        _states[(int)PlayerStats.IsCollisionMethod2] = new PlayerOwnedStates.IsCollisionMethod2();
         _states[(int)PlayerStats.IsCollision] = new PlayerOwnedStates.IsCollision();
-
+        
         _stateManager = new StateManager<Player>();
         _stateManager.Setup(this,StateCount,_states);
     }

@@ -75,6 +75,14 @@ public class ArrowController : MonoBehaviour
         else
         {
             _arrowRigidbody.gravityScale = 1f;
+            if (!player.IsContainState(PlayerStats.IsCollision))
+            {
+                Vector3 direction = GetComponent<Rigidbody2D>().velocity;
+                float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg; // 필요하면 각도 추가
+                Quaternion targetRotation = Quaternion.AngleAxis(angle, Vector3.forward);
+                _arrow.transform.rotation = Quaternion.RotateTowards(_arrow.transform.rotation, targetRotation, rotationSpeed * Time.unscaledDeltaTime);
+            }
+            
         }
     }
     
@@ -126,7 +134,7 @@ public class ArrowController : MonoBehaviour
     //마우스 클릭 이벤트 함수
     public void OnDragArrowMouse(InputAction.CallbackContext context)
     {
-        if (!player.IsContainState(PlayerStats.CanControlArrow) || player.IsContainState(PlayerStats.IsFly) || player.IsContainState(PlayerStats.IsCollision))
+        if (!player.IsContainState(PlayerStats.CanControlArrow) || player.IsContainState(PlayerStats.IsFly) || player.IsContainState(PlayerStats.IsCollisionMethod2))
         {
             return;
         }
@@ -208,7 +216,7 @@ public class ArrowController : MonoBehaviour
         if (groundHit && Vector2.Distance(hitpoint, transform.position) <= 2)
         {
             player.AddState(PlayerStats.IsArrowOnWall);
-            player.AddState(PlayerStats.IsCollision);
+            player.AddState(PlayerStats.IsCollisionMethod2);
             RaycastHit2D groundRaycast = Array.Find(hits, hit => hit.collider && (hit.collider.CompareTag("ground")||hit.collider.CompareTag("Door")));
 
             // ground 오브젝트와 충돌한 경우, transform의 위치를 조정하여 땅을 넘지 않도록 한다.
@@ -239,6 +247,14 @@ public class ArrowController : MonoBehaviour
             _l = Mathf.Sqrt(Mathf.Pow((currentMousePosition.x - _startMousePosition.x), 2) +
                            Mathf.Pow(currentMousePosition.y - _startMousePosition.y, 2));
             _arrowControlObj.GetComponent<RectTransform>().sizeDelta = new Vector2(50, _l + 100);
+        }
+        else
+        {
+            //화살 회전 관련
+            Vector3 direction = GetComponent<Rigidbody2D>().velocity;
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg; // 필요하면 각도 추가
+            Quaternion targetRotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            _arrow.transform.rotation = Quaternion.RotateTowards(_arrow.transform.rotation, targetRotation, rotationSpeed * Time.unscaledDeltaTime);
         }
     }
 
@@ -271,15 +287,18 @@ public class ArrowController : MonoBehaviour
                 
             }
         }
+        player.AddState(PlayerStats.IsCollision);
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
+        player.RemoveState(PlayerStats.IsCollisionMethod2);
         player.RemoveState(PlayerStats.IsCollision);
     }
 
     private void OnCollisionExit2D(Collision2D other)
     {
+        player.RemoveState(PlayerStats.IsCollisionMethod2);
         player.RemoveState(PlayerStats.IsCollision);
     }
 }
