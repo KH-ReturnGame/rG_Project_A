@@ -23,6 +23,7 @@ public class ArrowController : MonoBehaviour
     public float followSpeed;
     public float rotationSpeed;
     public List<GameObject> hitObjects = new List<GameObject>();
+    private float maxMoveDistance = 0.5f;
 
     //화살 움직임 Method_2
     private Vector2 _startMousePosition; //초기 마우스 위치
@@ -34,21 +35,20 @@ public class ArrowController : MonoBehaviour
     private Vector2 _directionMouse; //자신과 마우스와의 방향
 
     //화살 머리 합체
-    private PlayerMovement _pm;
     private GameObject _head;
-    private GameObject _body;
     private SpriteRenderer _spriteRenderer;
     public Sprite[] sprites;
+    private Vector2[] _velocity = new Vector2[2];
 
     //기본 초기화
     public void Start()
     {
         _arrow = player.GetPlayerObj(PlayerObj.Arrow);
         _arrowRigidbody = _arrow.GetComponent<Rigidbody2D>();
-        _pm = player.GetComponent<PlayerMovement>();
         _head = player.GetPlayerObj(PlayerObj.Head);
-        _body = player.GetPlayerObj(PlayerObj.Body);
         _spriteRenderer = _arrow.GetComponent<SpriteRenderer>();
+        
+        _velocity[0] = new Vector2(0, 0);
     }
 
     //업데이트
@@ -64,6 +64,7 @@ public class ArrowController : MonoBehaviour
                 //조작 방법 1일때
                 case "1":
                     _arrowRigidbody.gravityScale = 0;
+                    _arrowRigidbody.velocity = Vector3.zero;
                     GetComponent<PolygonCollider2D>().isTrigger = true;
                     ControlMethod_1();
                     break;
@@ -78,7 +79,19 @@ public class ArrowController : MonoBehaviour
         else
         {
             _arrowRigidbody.gravityScale = 1f;
+            if (!player.IsContainState(PlayerStats.IsCollision))
+            {
+                Vector3 direction = GetComponent<Rigidbody2D>().velocity;
+                float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg; // 필요하면 각도 추가
+                Quaternion targetRotation = Quaternion.AngleAxis(angle, Vector3.forward);
+                _arrow.transform.rotation = Quaternion.RotateTowards(_arrow.transform.rotation, targetRotation, rotationSpeed * Time.unscaledDeltaTime);
+            }
+            
         }
+        
+        //화살 속력 계속 체크
+        _velocity[1] = _velocity[0];
+        _velocity[0] = _arrow.GetComponent<Rigidbody2D>().velocity;
     }
     
     //화살 활성화 비활성화 조절
@@ -147,7 +160,10 @@ public class ArrowController : MonoBehaviour
         else if (context.canceled)
         {
             player.RemoveState(PlayerStats.IsOnClick);
-            player.AddState(PlayerStats.IsFly);
+            if (!player.IsContainState(PlayerStats.IsCollisionMethod2))
+            {
+                player.AddState(PlayerStats.IsFly);
+            }
             Destroy(_arrowControlObj);
             
             transform.rotation = Quaternion.Euler(new Vector3(0, 0, _angle));
@@ -172,21 +188,30 @@ public class ArrowController : MonoBehaviour
         Vector3 worldPosition = UnityEngine.Camera.main.ScreenToWorldPoint(mousePosition);
         
         // 화살표 마우스위치로 이동
+        Vector3 result_position;
         Vector3 position = _arrow.transform.position;
-        position = Vector3.Lerp(position, new Vector3(worldPosition.x, worldPosition.y, 0),
-            followSpeed * Time.unscaledDeltaTime);
+        Vector3 new_position = Vector3.Lerp(position, new Vector3(worldPosition.x, worldPosition.y, 0),
+            followSpeed * Time.deltaTime);
 
+        if (Vector3.Distance(position, new_position) >= maxMoveDistance)
+        {
+            result_position = position + (-position+new_position).normalized * maxMoveDistance;
+        }
+        else
+        {
+            result_position = new_position;
+        }
+        
         // 방향 계산
         Vector3 direction = worldPosition - position;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg; // 필요하면 각도 추가
         Quaternion targetRotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
         // 화살표 회전 -> 마우스 방향으로
-        _arrow.transform.rotation = Quaternion.RotateTowards(_arrow.transform.rotation, targetRotation,
-            rotationSpeed * Time.unscaledDeltaTime);
+        _arrow.transform.rotation = Quaternion.RotateTowards(_arrow.transform.rotation, targetRotation, rotationSpeed * Time.unscaledDeltaTime);
         
         //레이캐스트 쏴서 바닥 통과 막기
-        RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, direction, 50f);
+        RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, direction, 20);
         hitObjects.Clear();
         Vector2 hitpoint = new Vector2(0,0);
         foreach (var hit in hits)
@@ -201,6 +226,8 @@ public class ArrowController : MonoBehaviour
         bool groundHit = hitObjects.Exists(obj => (obj.CompareTag("ground")||obj.CompareTag("Door")));
         if (groundHit && Vector2.Distance(hitpoint, transform.position) <= 2)
         {
+            player.AddState(PlayerStats.IsArrowOnWall);
+            player.AddState(PlayerStats.IsCollisionMethod2);
             RaycastHit2D groundRaycast = Array.Find(hits, hit => hit.collider && (hit.collider.CompareTag("ground")||hit.collider.CompareTag("Door")));
 
             // ground 오브젝트와 충돌한 경우, transform의 위치를 조정하여 땅을 넘지 않도록 한다.
@@ -208,11 +235,13 @@ public class ArrowController : MonoBehaviour
             Vector3 normal = groundRaycast.normal; // 충돌한 표면의 법선 벡터
 
             // 땅을 넘지 않도록 충돌 지점 바로 앞에 위치를 설정
-            transform.position = hitPoint + normal * 1f; // 땅을 넘지 않게 약간 떨어진 위치로 설정
+            Vector3 targetPosition = hitPoint + normal * 2f;
+            _arrow.transform.position = Vector3.Lerp(_arrow.transform.position, targetPosition, Time.unscaledDeltaTime * 10f);
         }
         else
         {
-            _arrow.transform.position = position;
+            player.RemoveState(PlayerStats.IsArrowOnWall);
+            _arrow.transform.position = result_position;
         }
     }
 
@@ -231,6 +260,14 @@ public class ArrowController : MonoBehaviour
                            Mathf.Pow(currentMousePosition.y - _startMousePosition.y, 2));
             _arrowControlObj.GetComponent<RectTransform>().sizeDelta = new Vector2(50, _l + 100);
         }
+        else
+        {
+            //화살 회전 관련
+            Vector3 direction = GetComponent<Rigidbody2D>().velocity;
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg; // 필요하면 각도 추가
+            Quaternion targetRotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            _arrow.transform.rotation = Quaternion.RotateTowards(_arrow.transform.rotation, targetRotation, rotationSpeed * Time.unscaledDeltaTime);
+        }
     }
 
     //화살이 아무 곳에나 충돌하면 Method 1로 변경
@@ -244,8 +281,7 @@ public class ArrowController : MonoBehaviour
                 //스프라이트 전환
                 _spriteRenderer.sprite = sprites[1];
                 _head.SetActive(false);
-                GetComponent<Rigidbody2D>().velocity = new Vector2((_directionMouse.normalized.x) * (_l / 5),
-                    (_directionMouse.normalized.y) * (_l / 5));
+                GetComponent<Rigidbody2D>().velocity = _velocity[1];
                 Debug.Log("화살 머리 합체");
             }
             else if (!other.transform.CompareTag("Head"))
@@ -262,6 +298,48 @@ public class ArrowController : MonoBehaviour
                 
             }
         }
+        player.AddState(PlayerStats.IsCollision);
     }
     
+    private void OnCollisionStay2D(Collision2D other)
+    {
+        if (!player.IsContainState(PlayerStats.IsOnClick))
+        {
+            //화살 머리 합체!
+            if (other.transform.CompareTag("Head") && player.IsContainState(PlayerStats.IsFly))
+            {
+                //스프라이트 전환
+                _spriteRenderer.sprite = sprites[1];
+                _head.SetActive(false);
+                GetComponent<Rigidbody2D>().velocity = _velocity[1];
+                Debug.Log("화살 머리 합체");
+            }
+            else if (!other.transform.CompareTag("Head"))
+            {
+                player.RemoveState(PlayerStats.IsFly);
+                ChangeArrow("1");
+                _spriteRenderer.sprite = sprites[0];
+
+                if ((other.transform.CompareTag("ground") || other.transform.CompareTag("Door")) && !_head.activeSelf)
+                {
+                    _head.transform.position = other.contacts[0].point + other.contacts[0].normal * 1f; // 땅을 넘지 않게 약간 떨어진 위치로 설정
+                    _head.SetActive(true);
+                }
+                
+            }
+        }
+        player.AddState(PlayerStats.IsCollision);
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        player.RemoveState(PlayerStats.IsCollisionMethod2);
+        player.RemoveState(PlayerStats.IsCollision);
+    }
+
+    private void OnCollisionExit2D(Collision2D other)
+    {
+        player.RemoveState(PlayerStats.IsCollisionMethod2);
+        player.RemoveState(PlayerStats.IsCollision);
+    }
 }

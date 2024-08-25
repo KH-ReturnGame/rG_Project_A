@@ -17,22 +17,23 @@ public class ChangeMovementUI : MonoBehaviour
 
     public void Update()
     {
+        float dt = ((!GameManager.Instance.hasFocus) ? Time.unscaledDeltaTime : Time.deltaTime);
         switch (pm.controlMode)
         {
             case "Head":
-                HeadUI.localScale = Vector3.Slerp(HeadUI.localScale, new Vector3(1, 1, 1), 10 * Time.unscaledDeltaTime);
-                BodyUI.localScale = Vector3.Slerp(BodyUI.localScale, new Vector3(0.7f, 0.7f, 0.7f), 10 * Time.unscaledDeltaTime);
-                ArrowUI.localScale = Vector3.Slerp(ArrowUI.localScale, new Vector3(0.7f, 0.7f, 0.7f), 10 * Time.unscaledDeltaTime);
+                HeadUI.localScale = Vector3.Slerp(HeadUI.localScale, new Vector3(1, 1, 1), 10 * dt);
+                BodyUI.localScale = Vector3.Slerp(BodyUI.localScale, new Vector3(0.7f, 0.7f, 0.7f), 10 * dt);
+                ArrowUI.localScale = Vector3.Slerp(ArrowUI.localScale, new Vector3(0.7f, 0.7f, 0.7f), 10 * dt);
                 break;
             case "Body":
-                HeadUI.localScale = Vector3.Slerp(HeadUI.localScale, new Vector3(0.7f, 0.7f, 0.7f), 10 * Time.unscaledDeltaTime);
-                BodyUI.localScale = Vector3.Slerp(BodyUI.localScale, new Vector3(1, 1, 1), 10 * Time.unscaledDeltaTime);
-                ArrowUI.localScale = Vector3.Slerp(ArrowUI.localScale, new Vector3(0.7f, 0.7f, 0.7f), 10 * Time.unscaledDeltaTime);
+                HeadUI.localScale = Vector3.Slerp(HeadUI.localScale, new Vector3(0.7f, 0.7f, 0.7f), 10 * dt);
+                BodyUI.localScale = Vector3.Slerp(BodyUI.localScale, new Vector3(1, 1, 1), 10 * dt);
+                ArrowUI.localScale = Vector3.Slerp(ArrowUI.localScale, new Vector3(0.7f, 0.7f, 0.7f), 10 * dt);
                 break;
             case "Arrow":
-                HeadUI.localScale = Vector3.Slerp(HeadUI.localScale, new Vector3(0.7f, 0.7f, 0.7f), 10 * Time.unscaledDeltaTime);
-                BodyUI.localScale = Vector3.Slerp(BodyUI.localScale, new Vector3(0.7f, 0.7f, 0.7f), 10 * Time.unscaledDeltaTime);
-                ArrowUI.localScale = Vector3.Slerp(ArrowUI.localScale, new Vector3(1, 1, 1), 10 * Time.unscaledDeltaTime);
+                HeadUI.localScale = Vector3.Slerp(HeadUI.localScale, new Vector3(0.7f, 0.7f, 0.7f), 10 * dt);
+                BodyUI.localScale = Vector3.Slerp(BodyUI.localScale, new Vector3(0.7f, 0.7f, 0.7f), 10 * dt);
+                ArrowUI.localScale = Vector3.Slerp(ArrowUI.localScale, new Vector3(1, 1, 1), 10 * dt);
                 break;
         }
     }

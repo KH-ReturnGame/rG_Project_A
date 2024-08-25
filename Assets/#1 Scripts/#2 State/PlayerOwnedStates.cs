@@ -75,4 +75,49 @@ namespace PlayerOwnedStates
             
         }
     }
+    public class IsArrowOnWall : State<Player>
+    {
+        public override void Enter(Player player)
+        {
+            
+        }
+        public override void Execute(Player player)
+        {
+            
+        }
+        public override void Exit(Player player)
+        {
+            
+        }
+    }
+    public class IsCollisionMethod2 : State<Player>
+    {
+        public override void Enter(Player player)
+        {
+            
+        }
+        public override void Execute(Player player)
+        {
+            
+        }
+        public override void Exit(Player player)
+        {
+            
+        }
+    }
+    public class IsCollision : State<Player>
+    {
+        public override void Enter(Player player)
+        {
+            
+        }
+        public override void Execute(Player player)
+        {
+            
+        }
+        public override void Exit(Player player)
+        {
+            
+        }
+    }
 }

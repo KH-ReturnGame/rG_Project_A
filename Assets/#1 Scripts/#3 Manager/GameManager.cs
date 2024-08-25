@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
 
     //게임 일시정지
     public bool isPaused = false;
+    public bool hasFocus;
     
     //인스턴스화 되었을때
     public void Awake()
@@ -101,6 +102,39 @@ public class GameManager : MonoBehaviour
         }
     }
     
+    //유니티 일시정지 이벤트
+    private void OnApplicationPause(bool pauseStatus)
+    {
+        if (pauseStatus)
+        {
+            PauseGame();
+        }
+        else if (!isSettingMenuView)
+        {
+            ResumeGame();
+        }
+    }
+    
+    //유니티 다른 화면 넘어갔을때
+    private void OnApplicationFocus(bool focus)
+    {
+        hasFocus = focus;
+    }
+    
+    //게임 일시정지
+    public void PauseGame()
+    {
+        isPaused = true;
+        Time.timeScale = 0;
+    }
+
+    //게임 재개
+    public void ResumeGame()
+    {
+        isPaused = false;
+        Time.timeScale = 1;
+    }
+    
     //Esc 메뉴 무한 체크
     public void Update()
     {
@@ -110,29 +144,15 @@ public class GameManager : MonoBehaviour
             if (isEscMenuView)
             {
                 PauseGame();
+                GameObject canvas = GameObject.FindGameObjectWithTag("canvas");
+                CreatedEscMenu = Instantiate(EscMenuObj, canvas.transform, false);
             }
             else
             {
                 ResumeGame();
+                Destroy(CreatedEscMenu);
             }
         }
-    }
-    
-    //게임 일시정지
-    public void PauseGame()
-    {
-        isPaused = true;
-        Time.timeScale = 0;
-        GameObject canvas = GameObject.FindGameObjectWithTag("canvas");
-        CreatedEscMenu = Instantiate(EscMenuObj, canvas.transform, false);
-    }
-
-    //게임 재개
-    public void ResumeGame()
-    {
-        isPaused = false;
-        Time.timeScale = 1;
-        Destroy(CreatedEscMenu);
     }
 
     //설정 메뉴 열고 끄기
@@ -179,7 +199,7 @@ public class GameManager : MonoBehaviour
     //카메라 관리
     public void ChangeCameraTarget(GameObject obj)
     {
-        GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>().ChangeTarget(obj);
+        GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraMove>().ChangeTarget(obj);
     }
     
     //신호 관리
