@@ -64,6 +64,7 @@ public class ArrowController : MonoBehaviour
                 //조작 방법 1일때
                 case "1":
                     _arrowRigidbody.gravityScale = 0;
+                    _arrowRigidbody.velocity = Vector3.zero;
                     GetComponent<PolygonCollider2D>().isTrigger = true;
                     ControlMethod_1();
                     break;
@@ -141,7 +142,7 @@ public class ArrowController : MonoBehaviour
     //마우스 클릭 이벤트 함수
     public void OnDragArrowMouse(InputAction.CallbackContext context)
     {
-        if (!player.IsContainState(PlayerStats.CanControlArrow) || player.IsContainState(PlayerStats.IsFly) || player.IsContainState(PlayerStats.IsCollisionMethod2))
+        if (!player.IsContainState(PlayerStats.CanControlArrow) || player.IsContainState(PlayerStats.IsFly))
         {
             return;
         }
@@ -159,7 +160,10 @@ public class ArrowController : MonoBehaviour
         else if (context.canceled)
         {
             player.RemoveState(PlayerStats.IsOnClick);
-            player.AddState(PlayerStats.IsFly);
+            if (!player.IsContainState(PlayerStats.IsCollisionMethod2))
+            {
+                player.AddState(PlayerStats.IsFly);
+            }
             Destroy(_arrowControlObj);
             
             transform.rotation = Quaternion.Euler(new Vector3(0, 0, _angle));
@@ -267,6 +271,36 @@ public class ArrowController : MonoBehaviour
 
     //화살이 아무 곳에나 충돌하면 Method 1로 변경
     private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (!player.IsContainState(PlayerStats.IsOnClick))
+        {
+            //화살 머리 합체!
+            if (other.transform.CompareTag("Head") && player.IsContainState(PlayerStats.IsFly))
+            {
+                //스프라이트 전환
+                _spriteRenderer.sprite = sprites[1];
+                _head.SetActive(false);
+                GetComponent<Rigidbody2D>().velocity = _velocity[1];
+                Debug.Log("화살 머리 합체");
+            }
+            else if (!other.transform.CompareTag("Head"))
+            {
+                player.RemoveState(PlayerStats.IsFly);
+                ChangeArrow("1");
+                _spriteRenderer.sprite = sprites[0];
+
+                if ((other.transform.CompareTag("ground") || other.transform.CompareTag("Door")) && !_head.activeSelf)
+                {
+                    _head.transform.position = other.contacts[0].point + other.contacts[0].normal * 1f; // 땅을 넘지 않게 약간 떨어진 위치로 설정
+                    _head.SetActive(true);
+                }
+                
+            }
+        }
+        player.AddState(PlayerStats.IsCollision);
+    }
+    
+    private void OnCollisionStay2D(Collision2D other)
     {
         if (!player.IsContainState(PlayerStats.IsOnClick))
         {
