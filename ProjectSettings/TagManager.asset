@@ -12,6 +12,7 @@ TagManager:
   - Arrow
   - Door
   - Button
+  - camera
   layers:
   - Default
   - TransparentFX

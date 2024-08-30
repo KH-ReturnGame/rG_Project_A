@@ -12,6 +12,8 @@ public class ProceduralAnimations
     //애니메이션 설정 변수 3개
     private float _k1, _k2, _k3;
 
+    private bool _first = true;
+
     //기본 세팅 메서드
     public void init_E(float f, float z, float r, float x0, float rrr)
     {
@@ -53,6 +55,13 @@ public class ProceduralAnimations
     {
         const float MIN_DELTA_TIME = 0.0001f;
         T = Mathf.Max(T, MIN_DELTA_TIME);
+        
+        if (_first)
+        {
+            _first = false;
+            
+            return _Y;
+        }
         
         //타겟 좌표 변화량은 현재 타겟 좌표 - 이전 타겟 좌표를 시간으로 나눈 것이고
         Xd = (X - _Xp) / T;

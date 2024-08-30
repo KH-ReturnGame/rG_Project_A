@@ -25,37 +25,41 @@ public class CameraMove : MonoBehaviour
         TargetObj = target;
     }
 
-    //기타 초기화
-    public void Start()
+    public void Awake()
     {
-        transform.position = GameObject.FindWithTag("Player").GetComponent<Player>().GetPlayerObj(PlayerObj.Head)
-            .GetComponent<Transform>().position;
-        miniCam.transform.position = GameObject.FindWithTag("Player").GetComponent<Player>().GetPlayerObj(PlayerObj.Body)
-            .GetComponent<Transform>().position;
-        
-        
+        //
+        // transform.position = GameObject.FindWithTag("Player").GetComponent<Player>().GetPlayerObj(PlayerObj.Head)
+        //     .GetComponent<Transform>().position;
+        // miniCam.transform.position = GameObject.FindWithTag("Player").GetComponent<Player>().GetPlayerObj(PlayerObj.Body)
+        //     .GetComponent<Transform>().position;
+    }
+
+    //기타 초기화
+    public void Init()
+    {
         //ProceduralAnimation 초기화
         _paX = new ProceduralAnimations();
         _paY = new ProceduralAnimations();
         
         //내부 변수 초기화
-        _paX.init_E(F,Z,R,0,Q);
-        _paY.init_E(F,Z,R,0,Q);
+        _paX.init_E(F,Z,R,transform.position.x,Q);
+        _paY.init_E(F,Z,R,transform.position.y,Q);
         
         //ProceduralAnimation 초기화
         _pax = new ProceduralAnimations();
         _pay = new ProceduralAnimations();
         
         //내부 변수 초기화
-        _pax.init_E(F,Z,R,0,Q);
-        _pay.init_E(F,Z,R,0,Q);
+        _pax.init_E(F,Z,R,miniCam.transform.position.x,Q);
+        _pay.init_E(F,Z,R,miniCam.transform.position.y,Q);
     }
 
     public void Update()
     {
+        
         float dt = ((!GameManager.Instance.hasFocus) ? Time.unscaledDeltaTime : Time.deltaTime);
         //일시정지 상태가 아니라면
-        if (!GameManager.Instance.isPaused)
+        if (!GameManager.Instance.isPaused && GameManager.Instance.isReset)
         {
             //타겟 물체들 Null 아닐때만
             if (TargetObj is not null)

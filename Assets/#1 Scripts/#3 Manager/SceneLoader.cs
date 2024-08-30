@@ -19,8 +19,9 @@ public class SceneLoader : MonoBehaviour
     public void ChangeLevel(int l, LoadSceneMode mode)
     {
         string level = "Level_" + l;
+        GameManager.Instance.isReset = false;
         StartCoroutine(LoadSceneAsync(level, mode));
-        PlayerPrefs.SetInt("level",l);
+        GameManager.Instance.SaveLevel(l);
         _currentLevel = l;
     }
 
