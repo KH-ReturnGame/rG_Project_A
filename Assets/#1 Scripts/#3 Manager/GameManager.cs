@@ -9,6 +9,9 @@ public class GameManager : MonoBehaviour
     //Instance 정적 변수
     public static GameManager inst;
     
+    //개발자 조작
+    private string control_level = "";
+    
     //씬 로더 & 시그널 매니저
     private SceneLoader SL;
     private SignalManager SM;
@@ -159,6 +162,69 @@ public class GameManager : MonoBehaviour
                 Destroy(CreatedEscMenu);
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            control_level += "1";
+            Debug.Log(control_level);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            control_level += "2";
+            Debug.Log(control_level);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            control_level += "3";
+            Debug.Log(control_level);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            control_level += "4";
+            Debug.Log(control_level);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            control_level += "5";
+            Debug.Log(control_level);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha6))
+        {
+            control_level += "6";
+            Debug.Log(control_level);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha7))
+        {
+            control_level += "7";
+            Debug.Log(control_level);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha8))
+        {
+            control_level += "8";
+            Debug.Log(control_level);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha9))
+        {
+            control_level += "9";
+            Debug.Log(control_level);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha0))
+        {
+            control_level += "0";
+            Debug.Log(control_level);
+        }
+        if (Input.GetKeyDown(KeyCode.Backspace))
+        {
+            control_level = "";
+            Debug.Log(control_level);
+        }
+        if (Input.GetKeyDown(KeyCode.Minus))
+        {
+            int level = int.Parse(control_level);
+            PlayerPrefs.SetInt("level",level);
+            Debug.Log(PlayerPrefs.GetInt("level"));
+        }
+        
     }
 
     //설정 메뉴 열고 끄기
