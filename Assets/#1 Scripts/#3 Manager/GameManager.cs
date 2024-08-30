@@ -219,7 +219,6 @@ public class GameManager : MonoBehaviour
 
         if (PlayerPrefs.GetInt("level")!=1 &&CheckLoadScene("Level_" + (PlayerPrefs.GetInt("level") - 1)))
         {
-            Debug.Log("jjjjj");
             StartCoroutine(GameObject.FindWithTag("MainCamera").GetComponent<CameraMove>().MoveCamera(cam.position));
         }
         else

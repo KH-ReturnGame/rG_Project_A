@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CameraMove : MonoBehaviour
@@ -9,7 +10,7 @@ public class CameraMove : MonoBehaviour
     
     //메인 카메라 애니메이션
     [SerializeField]
-    private GameObject TargetObj;
+    //private GameObject TargetObj;
     private ProceduralAnimations _paX;
     private ProceduralAnimations _paY;
 
@@ -26,7 +27,7 @@ public class CameraMove : MonoBehaviour
     public void ChangeTarget(GameObject target)
     {
         //miniCamTarget = TargetObj;
-        TargetObj = target;
+        //TargetObj = target;
     }
 
     public void Awake()
@@ -62,7 +63,14 @@ public class CameraMove : MonoBehaviour
     {
         target_position = pos;
         move = true;
-        yield return new WaitForSeconds(3f);
+        while (true)
+        {
+            if (Vector3.Distance(pos, transform.position) <= 0.001)
+            {
+                break;
+            }
+            yield return new WaitForFixedUpdate();
+        }
         move = false;
     }
 
@@ -70,7 +78,7 @@ public class CameraMove : MonoBehaviour
     {
         if(!GameManager.Instance.isPaused && move)
         {
-            transform.position = Vector3.Slerp(target_position,transform.position, Time.unscaledDeltaTime);
+            transform.position = Vector3.Lerp(transform.position,target_position, 10*Time.deltaTime);
         }
         // float dt = ((!GameManager.Instance.hasFocus) ? Time.unscaledDeltaTime : Time.deltaTime);
         // //일시정지 상태가 아니라면
