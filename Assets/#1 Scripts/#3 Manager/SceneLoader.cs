@@ -7,6 +7,7 @@ using System.Collections;
 public enum Scenes
 {
     MainMenu,
+    main
 }
 
 public class SceneLoader : MonoBehaviour
@@ -19,6 +20,7 @@ public class SceneLoader : MonoBehaviour
     {
         string level = "Level_" + l;
         StartCoroutine(LoadSceneAsync(level, mode));
+        PlayerPrefs.SetInt("level",l);
         _currentLevel = l;
     }
 

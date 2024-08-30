@@ -24,7 +24,8 @@ public class MainMenu : MonoBehaviour
         StartButton.GetComponent<Button>().onClick.AddListener(ClickStartButton);
         EasyButton.GetComponent<Button>().onClick.AddListener(() =>
         {
-            GameManager.Instance.ChangeLevel(1,LoadSceneMode.Single);
+            GameManager.Instance.ChangeScene(Scenes.main,LoadSceneMode.Single);
+            GameManager.Instance.ChangeLevel(PlayerPrefs.HasKey("level")?PlayerPrefs.GetInt("level"):1,LoadSceneMode.Additive);
         });
         HardButton.GetComponent<Button>().onClick.AddListener(() =>
         {

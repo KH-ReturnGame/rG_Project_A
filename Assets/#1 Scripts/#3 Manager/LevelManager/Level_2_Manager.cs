@@ -6,6 +6,16 @@ using UnityEngine.SceneManagement;
 
 public class Level_2_Manager : MonoBehaviour
 {
+    public Transform head;
+    public Transform body;
+    public Transform arrow;
+    public void Awake()
+    {
+        Player player = GameObject.FindWithTag("Player").GetComponent<Player>();
+        player.GetPlayerObj(PlayerObj.Head).GetComponent<Transform>().position = head.position;
+        player.GetPlayerObj(PlayerObj.Body).GetComponent<Transform>().position = body.position;
+        player.GetPlayerObj(PlayerObj.Arrow).GetComponent<Transform>().position = arrow.position;
+    }
     private void OnTriggerEnter2D(Collider2D other)
     {
         

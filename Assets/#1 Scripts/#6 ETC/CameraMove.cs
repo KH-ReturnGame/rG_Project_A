@@ -28,6 +28,12 @@ public class CameraMove : MonoBehaviour
     //기타 초기화
     public void Start()
     {
+        transform.position = GameObject.FindWithTag("Player").GetComponent<Player>().GetPlayerObj(PlayerObj.Head)
+            .GetComponent<Transform>().position;
+        miniCam.transform.position = GameObject.FindWithTag("Player").GetComponent<Player>().GetPlayerObj(PlayerObj.Body)
+            .GetComponent<Transform>().position;
+        
+        
         //ProceduralAnimation 초기화
         _paX = new ProceduralAnimations();
         _paY = new ProceduralAnimations();

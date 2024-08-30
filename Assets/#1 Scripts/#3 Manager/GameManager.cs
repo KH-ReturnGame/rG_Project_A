@@ -46,6 +46,8 @@ public class GameManager : MonoBehaviour
         //기타 매니저들 가져오기
         SL = GetComponent<SceneLoader>();
         SM = GetComponent<SignalManager>();
+        
+        PlayerPrefs.SetInt("level",1);
     }
     
     //게임 매니저 속성으로 접근과 관련된 규약 지정하는 부분
@@ -194,6 +196,11 @@ public class GameManager : MonoBehaviour
     public bool CheckLoadScene(Scenes scene)
     {
         return SL.CheckLoadScene(scene);
+    }
+
+    public void SaveLevel(int level)
+    {
+        PlayerPrefs.SetInt("level",level);
     }
 
     //카메라 관리
