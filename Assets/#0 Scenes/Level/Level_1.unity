@@ -4982,8 +4982,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2060627708}
-  - component: {fileID: 2060627709}
   - component: {fileID: 2060627710}
+  - component: {fileID: 2060627709}
   m_Layer: 0
   m_Name: Level_Manager
   m_TagString: Untagged
@@ -5031,7 +5031,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 40.1033, y: -2.0065417}
+  m_Offset: {x: -31.671944, y: -2.0065417}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -5042,7 +5042,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 13.349068, y: 5.0130835}
+  m_Size: {x: 4.4806747, y: 5.0130835}
   m_EdgeRadius: 0
 --- !u!1 &2086772242
 GameObject:
