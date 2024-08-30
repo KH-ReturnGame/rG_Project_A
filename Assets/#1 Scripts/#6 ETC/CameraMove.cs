@@ -63,7 +63,7 @@ public class CameraMove : MonoBehaviour
     {
         target_position = pos;
         move = true;
-        while (true)
+        while (this!=null && transform!=null)
         {
             if (Vector3.Distance(pos, transform.position) <= 0.001)
             {
