@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.Events;
@@ -212,10 +213,19 @@ public class GameManager : MonoBehaviour
         player.GetPlayerObj(PlayerObj.Head).GetComponent<Transform>().position = head.position;
         player.GetPlayerObj(PlayerObj.Body).GetComponent<Transform>().position = body.position;
         player.GetPlayerObj(PlayerObj.Arrow).GetComponent<Transform>().position = arrow.position;
-        GameObject.FindWithTag("MainCamera").transform.position = cam.position;
-        GameObject.FindWithTag("camera").transform.position = cam.position;
+        //GameObject.FindWithTag("camera").transform.position = cam.position;
         //GameObject.FindWithTag("MainCamera").GetComponent<CameraMove>().Init();
         //isReset = true;
+
+        if (PlayerPrefs.GetInt("level")!=1 &&CheckLoadScene("Level_" + (PlayerPrefs.GetInt("level") - 1)))
+        {
+            Debug.Log("jjjjj");
+            StartCoroutine(GameObject.FindWithTag("MainCamera").GetComponent<CameraMove>().MoveCamera(cam.position));
+        }
+        else
+        {
+            GameObject.FindWithTag("MainCamera").transform.position = cam.position;
+        }
     }
 
     //카메라 관리

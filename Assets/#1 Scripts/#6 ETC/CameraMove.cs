@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class CameraMove : MonoBehaviour
@@ -17,6 +18,9 @@ public class CameraMove : MonoBehaviour
     // public GameObject miniCamTarget;
     // private ProceduralAnimations _pax;
     // private ProceduralAnimations _pay;
+
+    private Vector3 target_position;
+    private bool move = false;
     
     //따라다닐 물체 변경
     public void ChangeTarget(GameObject target)
@@ -54,9 +58,20 @@ public class CameraMove : MonoBehaviour
         // _pay.init_E(F,Z,R,miniCam.transform.position.y,Q);
     }
 
+    public IEnumerator MoveCamera(Vector3 pos)
+    {
+        target_position = pos;
+        move = true;
+        yield return new WaitForSeconds(3f);
+        move = false;
+    }
+
     public void Update()
     {
-        
+        if(!GameManager.Instance.isPaused && move)
+        {
+            transform.position = Vector3.Slerp(target_position,transform.position, Time.unscaledDeltaTime);
+        }
         // float dt = ((!GameManager.Instance.hasFocus) ? Time.unscaledDeltaTime : Time.deltaTime);
         // //일시정지 상태가 아니라면
         // if (!GameManager.Instance.isPaused && GameManager.Instance.isReset)
