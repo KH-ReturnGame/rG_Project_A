@@ -94,7 +94,7 @@ public class PlayerMovement : MonoBehaviour
                 _arrow.GetComponent<PolygonCollider2D>().isTrigger = false;
                 
                 _nowRigidbody = _headRigidbody;
-                GameManager.Instance.ChangeCameraTarget(_head);
+                //GameManager.Instance.ChangeCameraTarget(_head);
                 return;
             }
             case "leftShift":
@@ -113,7 +113,7 @@ public class PlayerMovement : MonoBehaviour
                 _arrow.GetComponent<PolygonCollider2D>().isTrigger = false;
                 
                 _nowRigidbody = _bodyRigidbody;
-                GameManager.Instance.ChangeCameraTarget(_body);
+                //GameManager.Instance.ChangeCameraTarget(_body);
                 return;
             }
         }

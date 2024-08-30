@@ -439,7 +439,7 @@ GameObject:
   m_Layer: 0
   m_Name: ground
   m_TagString: ground
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -3278,6 +3278,7 @@ MonoBehaviour:
   head: {fileID: 889344335}
   body: {fileID: 455984475}
   arrow: {fileID: 649845587}
+  cam: {fileID: 2671400031123685979}
 --- !u!61 &2060627710
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3359,5 +3360,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7879242741332153349, guid: 3ebb1fc623a964872a23b4bb98541f9c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7879242741332153349, guid: 3ebb1fc623a964872a23b4bb98541f9c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 14.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7879242741332153349, guid: 3ebb1fc623a964872a23b4bb98541f9c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3ebb1fc623a964872a23b4bb98541f9c, type: 3}
+--- !u!4 &2671400031123685979 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7879242741332153349, guid: 3ebb1fc623a964872a23b4bb98541f9c, type: 3}
+  m_PrefabInstance: {fileID: 2671400031123685978}
+  m_PrefabAsset: {fileID: 0}

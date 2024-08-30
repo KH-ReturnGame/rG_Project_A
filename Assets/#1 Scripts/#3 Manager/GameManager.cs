@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
     public bool hasFocus;
     
     //씬로드 세팅 여부
-    public bool isReset = false;
+    //public bool isReset = false;
     
     //인스턴스화 되었을때
     public void Awake()
@@ -206,17 +206,16 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetInt("level",level);
     }
 
-    public void ResetPlayer(Transform head, Transform body, Transform arrow)
+    public void ResetPlayer(Transform head, Transform body, Transform arrow, Transform cam)
     {
         Player player = GameObject.FindWithTag("Player").GetComponent<Player>();
         player.GetPlayerObj(PlayerObj.Head).GetComponent<Transform>().position = head.position;
         player.GetPlayerObj(PlayerObj.Body).GetComponent<Transform>().position = body.position;
         player.GetPlayerObj(PlayerObj.Arrow).GetComponent<Transform>().position = arrow.position;
-        GameObject.FindWithTag("MainCamera").transform.position = body.position;
-        GameObject.FindWithTag("camera").transform.position = head.position;
-        // Debug.Log(GameObject.FindWithTag("MainCamera").transform.position);
-        GameObject.FindWithTag("MainCamera").GetComponent<CameraMove>().Init();
-        isReset = true;
+        GameObject.FindWithTag("MainCamera").transform.position = cam.position;
+        GameObject.FindWithTag("camera").transform.position = cam.position;
+        //GameObject.FindWithTag("MainCamera").GetComponent<CameraMove>().Init();
+        //isReset = true;
     }
 
     //카메라 관리

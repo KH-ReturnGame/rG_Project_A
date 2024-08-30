@@ -9,12 +9,10 @@ public class Level_4_Manager : MonoBehaviour
     public Transform head;
     public Transform body;
     public Transform arrow;
+    public Transform cam;
     public void Awake()
     {
-        Player player = GameObject.FindWithTag("Player").GetComponent<Player>();
-        player.GetPlayerObj(PlayerObj.Head).GetComponent<Transform>().position = head.position;
-        player.GetPlayerObj(PlayerObj.Body).GetComponent<Transform>().position = body.position;
-        player.GetPlayerObj(PlayerObj.Arrow).GetComponent<Transform>().position = arrow.position;
+        GameManager.Instance.ResetPlayer(head,body,arrow,cam);
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
