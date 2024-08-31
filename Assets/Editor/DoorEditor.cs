@@ -7,7 +7,7 @@ public class DoorEditor : Editor
     private string[] signalOptions = new string[] { "0","1","2","3","4","5","6","7","8","9" };
     private string[] doorTypeOptions = new string[] { "위아래", "회전" };
     private string[] rotateTypeOptions = new string[] { "바로 회전", "한칸 띄워서 회전" };
-    //private string[] rotateType2_Optinos = new string[] { "한방향 회전", "신호에 맞춰 회전" };
+    //private string[] rotateType2_Optinos = new string[] { "어떤 신호든 감지 시 회전", "켜질때만 회전" };
 
     public override void OnInspectorGUI()
     {
