@@ -43,6 +43,10 @@ public class SceneLoader : MonoBehaviour
     }
 
     //기타 씬 로드 관련 함수들
+    public void UnLoadScene(string scene)
+    {
+        SceneManager.UnloadSceneAsync(scene);
+    }
     public void UnLoadScene(Scenes scene)
     {
         SceneManager.UnloadSceneAsync(scene.ToString());

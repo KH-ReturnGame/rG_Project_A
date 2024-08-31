@@ -26,9 +26,10 @@ public class GameManager : MonoBehaviour
     public bool isSettingMenuView;
     private GameObject CreatedSettingMenu;
 
-    //게임 일시정지
+    //게임 상태관련
     public bool isPaused = false;
     public bool hasFocus;
+    public bool isPlayGame;
     
     //씬로드 세팅 여부
     //public bool isReset = false;
@@ -54,7 +55,7 @@ public class GameManager : MonoBehaviour
         SL = GetComponent<SceneLoader>();
         SM = GetComponent<SignalManager>();
         
-        PlayerPrefs.SetInt("level",1);
+        //PlayerPrefs.SetInt("level",1);
     }
     
     //게임 매니저 속성으로 접근과 관련된 규약 지정하는 부분
@@ -253,6 +254,10 @@ public class GameManager : MonoBehaviour
         SL.ChangeScene(scene,mode);
     }
 
+    public void UnLoadScene(string scene)
+    {
+        SL.UnLoadScene(scene);
+    }
     public void UnLoadScene(Scenes scene)
     {
         SL.UnLoadScene(scene);
@@ -275,6 +280,8 @@ public class GameManager : MonoBehaviour
 
     public void ResetPlayer(Transform head, Transform body, Transform arrow, Transform cam)
     {
+        isPlayGame = true;
+        
         Player player = GameObject.FindWithTag("Player").GetComponent<Player>();
         player.GetPlayerObj(PlayerObj.Head).GetComponent<Transform>().position = head.position;
         player.GetPlayerObj(PlayerObj.Body).GetComponent<Transform>().position = body.position;
