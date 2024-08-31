@@ -19,6 +19,7 @@ public class FootHoldButton : MonoBehaviour
     public int SignalType = 0;
     public bool oneUse = false;
     private int useCount = 0;
+    public bool onOnly = false;
     
     //버튼 자체 신호
     public bool signal = false;
@@ -29,7 +30,7 @@ public class FootHoldButton : MonoBehaviour
     //버튼 눌림을 위한 충돌 시작할때 이벤트 함수
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log(oneUse+""+useCount);
+        //Debug.Log(oneUse+""+useCount);
         if (oneUse && useCount >= 1)
         {
             return;
@@ -50,6 +51,7 @@ public class FootHoldButton : MonoBehaviour
         {
             signal = true;
             GameManager.Instance.ChangeSignal(SignalType, signal);
+            useCount += onOnly ? 1 : 0;
             moveButton("enter");
         }
 
@@ -60,11 +62,12 @@ public class FootHoldButton : MonoBehaviour
             GameManager.Instance.ChangeSignal(SignalType,signal);
             if (signal)
             {
+                useCount += onOnly ? 1 : 0;
                 moveButton("enter");
             }
             else
             {
-                useCount++;
+                useCount += onOnly ? 0 : 1;
                 moveButton("exit");
             }
         }
@@ -93,7 +96,7 @@ public class FootHoldButton : MonoBehaviour
         {
             signal = false;
             GameManager.Instance.ChangeSignal(SignalType,signal);
-            useCount++;
+            useCount += onOnly ? 0 : 1;
             moveButton("exit");
         }
     }
