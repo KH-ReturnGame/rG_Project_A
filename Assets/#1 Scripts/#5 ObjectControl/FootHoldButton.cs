@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
 using ColorUtility = UnityEngine.ColorUtility;
 
 public class FootHoldButton : MonoBehaviour
@@ -16,6 +17,8 @@ public class FootHoldButton : MonoBehaviour
     [HideInInspector]
     public int flip = 1;
     public int SignalType = 0;
+    public bool oneUse = false;
+    private int useCount = 0;
     
     //버튼 자체 신호
     public bool signal = false;
@@ -26,6 +29,12 @@ public class FootHoldButton : MonoBehaviour
     //버튼 눌림을 위한 충돌 시작할때 이벤트 함수
     private void OnTriggerEnter2D(Collider2D other)
     {
+        Debug.Log(oneUse+""+useCount);
+        if (oneUse && useCount >= 1)
+        {
+            return;
+        }
+        
         //감지된 오브젝트 눌림 리스트에 추가 감지하지 않을 놈들이면 그냥 return;
         if (other.CompareTag("Head") || other.CompareTag("Body") || other.CompareTag("Arrow"))
         {
@@ -55,6 +64,7 @@ public class FootHoldButton : MonoBehaviour
             }
             else
             {
+                useCount++;
                 moveButton("exit");
             }
         }
@@ -63,6 +73,11 @@ public class FootHoldButton : MonoBehaviour
     //버튼 눌림을 위한 충돌 해제 이벤트 함수
     private void OnTriggerExit2D(Collider2D other)
     {
+        if (oneUse && useCount >= 1)
+        {
+            return;
+        }
+        
         //감지된 오브젝트 눌림 리스트에 제거 감지하지 않을 놈들이면 그냥 return;
         if (other.CompareTag("Head") || other.CompareTag("Body") || other.CompareTag("Arrow"))
         {
@@ -78,6 +93,7 @@ public class FootHoldButton : MonoBehaviour
         {
             signal = false;
             GameManager.Instance.ChangeSignal(SignalType,signal);
+            useCount++;
             moveButton("exit");
         }
     }
