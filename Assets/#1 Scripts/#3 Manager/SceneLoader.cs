@@ -1,6 +1,6 @@
 using UnityEngine.SceneManagement;
 using UnityEngine;
-using System;
+using UnityEngine.UI;
 using System.Collections;
 
 //레벨 이외의 호출 가능한 씬들
@@ -20,6 +20,7 @@ public class SceneLoader : MonoBehaviour
     {
         string level = "Level_" + l;
         //GameManager.Instance.isReset = false;
+        SceneManager.LoadScene("SceneLoad");
         StartCoroutine(LoadSceneAsync(level, mode));
         GameManager.Instance.SaveLevel(l);
         _currentLevel = l;
@@ -35,11 +36,28 @@ public class SceneLoader : MonoBehaviour
     private IEnumerator LoadSceneAsync(string sceneName, LoadSceneMode mode)
     {
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName, mode);
+        asyncLoad.allowSceneActivation = false;
+
+        float timer = 0f;
         while (!asyncLoad.isDone)
         {
             yield return null;
+            if (asyncLoad.progress < 0.9f)
+            {
+                GameObject.FindGameObjectWithTag("loding").GetComponent<Slider>().value = asyncLoad.progress;
+            }
+            else
+            {
+                timer += Time.unscaledDeltaTime;
+                GameObject.FindGameObjectWithTag("loding").GetComponent<Slider>().value = Mathf.Lerp(0.9f, 1f, timer);
+                if (GameObject.FindGameObjectWithTag("loding").GetComponent<Slider>().value >= 1f)
+                {
+                    asyncLoad.allowSceneActivation = true;
+                    Debug.Log("Scene loaded: " + sceneName);
+                    yield break;
+                }
+            }
         }
-        Debug.Log("Scene loaded: " + sceneName);
     }
 
     //기타 씬 로드 관련 함수들
