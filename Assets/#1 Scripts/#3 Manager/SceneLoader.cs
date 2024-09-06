@@ -53,7 +53,7 @@ public class SceneLoader : MonoBehaviour
             while (true)
             {
                 yield return null;
-                Debug.Log(asyncLoad.progress);
+                //Debug.Log(asyncLoad.progress);
                 if (asyncLoad.progress < 0.9f)
                 {
                     GameObject.FindGameObjectWithTag("loding").GetComponent<Image>().fillAmount = asyncLoad.progress;
@@ -119,7 +119,7 @@ public class SceneLoader : MonoBehaviour
                 levelLoadOperation.allowSceneActivation = true;
             }
             
-            Debug.Log(levelLoadOperation.progress);
+            //Debug.Log(levelLoadOperation.progress);
         }
 
         GameManager.Instance.SaveLevel(level);

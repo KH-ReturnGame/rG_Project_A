@@ -50,7 +50,7 @@ public class Door : MonoBehaviour, ISignalReceive
             {
                 //위 아래로 작동하는 문이고 신호가 true 이면 올리기
                 transform.position =
-                    Vector3.Lerp(transform.position, new Vector3(startpos.x,startpos.y+4f, 0), 10f*Time.unscaledDeltaTime);
+                    Vector3.Lerp(transform.position, new Vector3(startpos.x,startpos.y+5f, 0), 10f*Time.unscaledDeltaTime);
             }
             else
             {
