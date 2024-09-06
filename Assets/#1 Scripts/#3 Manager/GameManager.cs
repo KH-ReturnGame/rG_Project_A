@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
     public bool isPaused = false;
     public bool hasFocus;
     public bool isPlayGame;
+    public bool isLoding;
     
     //씬로드 세팅 여부
     //public bool isReset = false;
@@ -148,7 +149,7 @@ public class GameManager : MonoBehaviour
     //Esc 메뉴 무한 체크
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && !isSettingMenuView)
+        if (Input.GetKeyDown(KeyCode.Escape) && !isSettingMenuView && !isLoding)
         {
             isEscMenuView = !isEscMenuView;
             if (isEscMenuView)

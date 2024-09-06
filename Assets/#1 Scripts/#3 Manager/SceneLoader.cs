@@ -40,6 +40,7 @@ public class SceneLoader : MonoBehaviour
     //코루틴으로 로드해서 로딩 될때까지 기다리다가 씬 로드하기
     IEnumerator LoadScene()
     {
+        GameManager.Instance.isLoding = true;
         yield return SceneManager.LoadSceneAsync("SceneLoad", LoadSceneMode.Single);
         
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(_nextScene,_nextMode);
@@ -70,6 +71,7 @@ public class SceneLoader : MonoBehaviour
                 }
             }
         }
+        GameManager.Instance.isLoding = false;
     }
     
     public void LoadMainAndLevel(int level)
@@ -79,6 +81,7 @@ public class SceneLoader : MonoBehaviour
 
     private IEnumerator LoadMainAndLevelCoroutine(int level)
     {
+        GameManager.Instance.isLoding = true;
         // 로딩 씬 로드
         yield return SceneManager.LoadSceneAsync("SceneLoad", LoadSceneMode.Single);
 
@@ -122,6 +125,7 @@ public class SceneLoader : MonoBehaviour
         _currentLevel = level;
 
         Debug.Log("Main and Level scenes loaded");
+        GameManager.Instance.isLoding = false;
     }
 
     //기타 씬 로드 관련 함수들
