@@ -234,7 +234,7 @@ public class ArrowController : MonoBehaviour
             Vector3 normal = groundRaycast.normal; // 충돌한 표면의 법선 벡터
 
             // 땅을 넘지 않도록 충돌 지점 바로 앞에 위치를 설정
-            Vector3 targetPosition = hitPoint + normal * 2f;
+            Vector3 targetPosition = hitPoint + normal * 5f;
             _arrow.transform.position = Vector3.Lerp(_arrow.transform.position, targetPosition, Time.deltaTime * 10f); // Time.deltaTime 적용
         }
         else

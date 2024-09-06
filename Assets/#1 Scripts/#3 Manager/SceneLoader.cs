@@ -98,7 +98,7 @@ public class SceneLoader : MonoBehaviour
         {
             yield return null;
             loadingImage.fillAmount = mainLoadOperation.progress/2;
-            Debug.Log(mainLoadOperation.progress);
+            //Debug.Log(mainLoadOperation.progress);
         }
 
         // level 씬 로드 시작
@@ -125,7 +125,7 @@ public class SceneLoader : MonoBehaviour
         GameManager.Instance.SaveLevel(level);
         _currentLevel = level;
 
-        Debug.Log("Main and Level scenes loaded");
+        //Debug.Log("Main and Level scenes loaded");
         GameManager.Instance.isLoding = false;
     }
 

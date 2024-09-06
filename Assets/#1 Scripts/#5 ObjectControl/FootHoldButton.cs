@@ -31,7 +31,7 @@ public class FootHoldButton : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         //Debug.Log(oneUse+""+useCount);
-        if (oneUse && useCount >= 1)
+        if ((oneUse && useCount >= 1) || (other.CompareTag("Arrow") && other.gameObject.GetComponent<ArrowController>().controlMethod == "1"))
         {
             return;
         }
@@ -76,7 +76,7 @@ public class FootHoldButton : MonoBehaviour
     //버튼 눌림을 위한 충돌 해제 이벤트 함수
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (oneUse && useCount >= 1)
+        if ((oneUse && useCount >= 1)||(other.CompareTag("Arrow") && other.gameObject.GetComponent<ArrowController>().controlMethod == "1"))
         {
             return;
         }
