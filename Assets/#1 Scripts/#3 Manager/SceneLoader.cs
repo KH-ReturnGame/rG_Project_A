@@ -24,6 +24,7 @@ public class SceneLoader : MonoBehaviour
     {
         _nextScene = "Level_" + l;
         _nextMode = mode;
+        StartCoroutine(LoadScene());
         
         GameManager.Instance.SaveLevel(l);
         _currentLevel = l;

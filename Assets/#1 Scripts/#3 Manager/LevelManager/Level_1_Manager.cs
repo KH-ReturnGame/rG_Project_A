@@ -20,7 +20,7 @@ public class Level_1_Manager : MonoBehaviour
         
         if ((other.CompareTag("Body") || other.CompareTag("Head") || other.CompareTag("Arrow")) && !GameManager.Instance.CheckLoadScene("Level_2"))
         {
-            GameManager.Instance.ChangeLevel(2,LoadSceneMode.Additive);
+            GameManager.Instance.LoadMainAndLevel(2);
         }
     }
 }
