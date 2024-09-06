@@ -1,4 +1,5 @@
 using System;
+using PlayerOwnedStates;
 using UnityEngine;
 
 public enum PlayerStats
@@ -11,6 +12,7 @@ public enum PlayerStats
     IsArrowOnWall,
     IsCollisionMethod2,
     IsCollision,
+    CanShoot,
 }
 
 public enum PlayerObj
@@ -46,9 +48,11 @@ public class Player : MonoBehaviour
         _states[(int)PlayerStats.IsArrowOnWall] = new PlayerOwnedStates.IsArrowOnWall();
         _states[(int)PlayerStats.IsCollisionMethod2] = new PlayerOwnedStates.IsCollisionMethod2();
         _states[(int)PlayerStats.IsCollision] = new PlayerOwnedStates.IsCollision();
+        _states[(int)PlayerStats.CanShoot] = new PlayerOwnedStates.CanShoot();
         
         _stateManager = new StateManager<Player>();
         _stateManager.Setup(this,StateCount,_states);
+        AddState(PlayerStats.CanShoot);
     }
     
     //업데이트 메소드

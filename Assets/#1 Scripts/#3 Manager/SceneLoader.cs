@@ -67,12 +67,12 @@ public class SceneLoader : MonoBehaviour
                     {
                         asyncLoad.allowSceneActivation = true;
                         Debug.Log("Scene loaded: " + _nextScene);
+                        GameManager.Instance.isLoding = false;
                         yield break;
                     }
                 }
             }
         }
-        GameManager.Instance.isLoding = false;
     }
     
     public void LoadMainAndLevel(int level)

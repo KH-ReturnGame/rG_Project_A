@@ -33,6 +33,8 @@ public class ArrowController : MonoBehaviour
     private float _angle; //각도
     private float _l; //길이
     private Vector2 _directionMouse; //자신과 마우스와의 방향
+    private bool wasDragging = false;
+    private float arrowCooldown = 0.2f;
 
     //화살 머리 합체
     private GameObject _head;
@@ -91,6 +93,11 @@ public class ArrowController : MonoBehaviour
         //화살 속력 계속 체크
         _velocity[1] = _velocity[0];
         _velocity[0] = _arrow.GetComponent<Rigidbody2D>().velocity;
+
+        if (!GameManager.Instance.isPaused && !player.IsContainState(PlayerStats.IsOnClick) && _arrowControlObj != null)
+        {
+            Destroy(_arrowControlObj);
+        }
     }
     
     //화살 활성화 비활성화 조절
@@ -141,13 +148,13 @@ public class ArrowController : MonoBehaviour
     //마우스 클릭 이벤트 함수
     public void OnDragArrowMouse(InputAction.CallbackContext context)
     {
-        if (!player.IsContainState(PlayerStats.CanControlArrow) || player.IsContainState(PlayerStats.IsFly))
+        if (!player.IsContainState(PlayerStats.CanControlArrow) || player.IsContainState(PlayerStats.IsFly) || !player.IsContainState(PlayerStats.CanShoot))
         {
             return;
         }
 
         //눌렀을때 Method2로 변경
-        if (context.started && !GameManager.inst.isPaused)
+        if (context.started && !GameManager.Instance.isPaused)
         {
             ChangeArrow("2");
             _startMousePosition = currentMousePosition;
@@ -163,9 +170,12 @@ public class ArrowController : MonoBehaviour
             {
                 player.AddState(PlayerStats.IsFly);
             }
-            Destroy(_arrowControlObj);
-            
-            transform.rotation = Quaternion.Euler(new Vector3(0, 0, _angle));
+
+            if (!GameManager.Instance.isPaused)
+            {
+                //Destroy(_arrowControlObj);
+                transform.rotation = Quaternion.Euler(new Vector3(0, 0, _angle));
+            }
             GetComponent<Rigidbody2D>().velocity = Vector3.zero;
             GetComponent<Rigidbody2D>().velocity = new Vector2((_directionMouse.normalized.x) * (_l / 5),
                 (_directionMouse.normalized.y) * (_l / 5));
@@ -177,6 +187,12 @@ public class ArrowController : MonoBehaviour
         {
             player.AddState(PlayerStats.IsOnClick);
         }
+    }
+    private IEnumerator ArrowCooldown()
+    {
+        player.RemoveState(PlayerStats.CanShoot);
+        yield return new WaitForSeconds(arrowCooldown);
+        player.AddState(PlayerStats.CanShoot);
     }
     
     //Method_1 핵심 함수
