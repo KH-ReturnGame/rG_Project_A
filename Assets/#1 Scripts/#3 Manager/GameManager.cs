@@ -278,6 +278,11 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetInt("level",level);
     }
 
+    public void LoadMainAndLevel(int level)
+    {
+        SL.LoadMainAndLevel(level);
+    }
+
     public void ResetPlayer(Transform head, Transform body, Transform arrow, Transform cam)
     {
         isPlayGame = true;

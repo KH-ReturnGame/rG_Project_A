@@ -30,8 +30,7 @@ public class EscMenu : MonoBehaviour
         });
         RestartButton.onClick.AddListener(() =>
         {
-            GameManager.Instance.ChangeScene(Scenes.main,LoadSceneMode.Single);
-            GameManager.Instance.ChangeLevel(PlayerPrefs.GetInt("level"),LoadSceneMode.Additive);
+            GameManager.Instance.LoadMainAndLevel(PlayerPrefs.GetInt("level"));
             GameManager.Instance.isPaused = false;
             GameManager.Instance.isEscMenuView = false;
             Time.timeScale = 1;

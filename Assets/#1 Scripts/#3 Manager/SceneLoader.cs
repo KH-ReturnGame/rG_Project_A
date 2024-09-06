@@ -1,3 +1,4 @@
+using System;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,13 +16,15 @@ public class SceneLoader : MonoBehaviour
     //현재 레벨 , n ~~~ = n레벨
     private int _currentLevel = 1;
 
+    private string _nextScene;
+    private LoadSceneMode _nextMode;
+
     //레벨씬 전환
     public void ChangeLevel(int l, LoadSceneMode mode)
     {
-        string level = "Level_" + l;
-        //GameManager.Instance.isReset = false;
-        SceneManager.LoadScene("SceneLoad");
-        StartCoroutine(LoadSceneAsync(level, mode));
+        _nextScene = "Level_" + l;
+        _nextMode = mode;
+        
         GameManager.Instance.SaveLevel(l);
         _currentLevel = l;
     }
@@ -29,35 +32,96 @@ public class SceneLoader : MonoBehaviour
     //일반적인 씬 전환
     public void ChangeScene(Scenes scene, LoadSceneMode mode)
     {
-        StartCoroutine(LoadSceneAsync(scene.ToString(), mode));
+        _nextScene = scene.ToString();
+        _nextMode = mode;
+        StartCoroutine(LoadScene());
     }
 
     //코루틴으로 로드해서 로딩 될때까지 기다리다가 씬 로드하기
-    private IEnumerator LoadSceneAsync(string sceneName, LoadSceneMode mode)
+    IEnumerator LoadScene()
     {
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName, mode);
-        asyncLoad.allowSceneActivation = false;
-
-        float timer = 0f;
-        while (!asyncLoad.isDone)
+        yield return SceneManager.LoadSceneAsync("SceneLoad", LoadSceneMode.Single);
+        
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(_nextScene,_nextMode);
+        if (asyncLoad != null)
         {
-            yield return null;
-            if (asyncLoad.progress < 0.9f)
+            asyncLoad.allowSceneActivation = false;
+
+            float timer = 0f;
+            while (true)
             {
-                GameObject.FindGameObjectWithTag("loding").GetComponent<Slider>().value = asyncLoad.progress;
-            }
-            else
-            {
-                timer += Time.unscaledDeltaTime;
-                GameObject.FindGameObjectWithTag("loding").GetComponent<Slider>().value = Mathf.Lerp(0.9f, 1f, timer);
-                if (GameObject.FindGameObjectWithTag("loding").GetComponent<Slider>().value >= 1f)
+                yield return null;
+                Debug.Log(asyncLoad.progress);
+                if (asyncLoad.progress < 0.9f)
                 {
-                    asyncLoad.allowSceneActivation = true;
-                    Debug.Log("Scene loaded: " + sceneName);
-                    yield break;
+                    GameObject.FindGameObjectWithTag("loding").GetComponent<Image>().fillAmount = asyncLoad.progress;
+                }
+                else
+                {
+                    timer += Time.unscaledDeltaTime;
+                    GameObject.FindGameObjectWithTag("loding").GetComponent<Image>().fillAmount =
+                        Mathf.Lerp(0.9f, 1f, timer);
+                    if (GameObject.FindGameObjectWithTag("loding").GetComponent<Image>().fillAmount >= 1f)
+                    {
+                        asyncLoad.allowSceneActivation = true;
+                        Debug.Log("Scene loaded: " + _nextScene);
+                        yield break;
+                    }
                 }
             }
         }
+    }
+    
+    public void LoadMainAndLevel(int level)
+    {
+        StartCoroutine(LoadMainAndLevelCoroutine(level));
+    }
+
+    private IEnumerator LoadMainAndLevelCoroutine(int level)
+    {
+        // 로딩 씬 로드
+        yield return SceneManager.LoadSceneAsync("SceneLoad", LoadSceneMode.Single);
+
+        // main 씬 로드
+        AsyncOperation mainLoadOperation = SceneManager.LoadSceneAsync("main", LoadSceneMode.Single);
+        mainLoadOperation.allowSceneActivation = false;
+
+        float timer = 0f;
+        Image loadingImage = GameObject.FindGameObjectWithTag("loding").GetComponent<Image>();
+
+        // main 씬 0.9까지 로드
+        while (mainLoadOperation.progress < 0.9f)
+        {
+            yield return null;
+            loadingImage.fillAmount = mainLoadOperation.progress/2;
+            Debug.Log(mainLoadOperation.progress);
+        }
+
+        // level 씬 로드 시작
+        AsyncOperation levelLoadOperation = SceneManager.LoadSceneAsync("Level_" + level, LoadSceneMode.Additive);
+        levelLoadOperation.allowSceneActivation = false;
+
+        // level 씬 로드 완료 대기
+        while (!levelLoadOperation.isDone)
+        {
+            yield return null;
+        
+            timer += Time.unscaledDeltaTime;
+            loadingImage.fillAmount = Mathf.Lerp(0.5f, 1f, timer);
+        
+            if (loadingImage.fillAmount >= 1f)
+            {
+                mainLoadOperation.allowSceneActivation = true;
+                levelLoadOperation.allowSceneActivation = true;
+            }
+            
+            Debug.Log(levelLoadOperation.progress);
+        }
+
+        GameManager.Instance.SaveLevel(level);
+        _currentLevel = level;
+
+        Debug.Log("Main and Level scenes loaded");
     }
 
     //기타 씬 로드 관련 함수들
