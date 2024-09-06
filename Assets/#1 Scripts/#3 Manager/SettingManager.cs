@@ -4,21 +4,27 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class SettingManageer : MonoBehaviour
+public class SettingManager : MonoBehaviour
 {
-    
+    // 해상도 설정
     public TMP_Dropdown resolutionDropdown;
- 
     private List<Resolution> resolutions = new List<Resolution>();
     private int optimalResolutionIndex = 0;
-    
+
+    // 전체화면 모드 설정
+    public TMP_Dropdown fullscreenDropdown;
+    private List<string> fullscreenModes = new List<string> { "창모드", "전체화면", "전체화면 창모드" };
+
+    // 세팅 메뉴 종료
     public void ExitSetting()
     {
         GameManager.Instance.ToggleSettingMenu();
     }
- 
+
+    // Start
     private void Start()
     {
+        // 해상도 설정
         resolutions.Add(new Resolution { width = 1280, height = 720 });
         resolutions.Add(new Resolution { width = 1280, height = 800 });
         resolutions.Add(new Resolution { width = 1440, height = 900 });
@@ -31,11 +37,9 @@ public class SettingManageer : MonoBehaviour
         resolutions.Add(new Resolution { width = 2560, height = 1600 });
         resolutions.Add(new Resolution { width = 2880, height = 1800 });
         resolutions.Add(new Resolution { width = 3480, height = 2160 });
- 
+
         resolutionDropdown.ClearOptions();
- 
         List<string> options = new List<string>();
- 
         for (int i = 0; i < resolutions.Count; i++)
         {
             string option = resolutions[i].width + " x " + resolutions[i].height;
@@ -48,18 +52,62 @@ public class SettingManageer : MonoBehaviour
             }
             options.Add(option);
         }
- 
         resolutionDropdown.AddOptions(options);
-        resolutionDropdown.value = optimalResolutionIndex;
-        resolutionDropdown.RefreshShownValue();
- 
-        // 게임이 가장 적합한 해상도로 시작되도록 설정합니다.
-        SetResolution(optimalResolutionIndex);
+        
+        fullscreenDropdown.AddOptions(fullscreenModes);
+
+        // 저장된 해상도 및 전체화면 모드 로드
+        LoadResolution();
+        LoadFullscreenMode();
+
+        // 드롭다운 이벤트 리스너 등록
+        resolutionDropdown.onValueChanged.AddListener(SetResolution);
+        fullscreenDropdown.onValueChanged.AddListener(SetFullscreenMode);
     }
- 
+
+    // 해상도 설정 로드
+    private void LoadResolution()
+    {
+        int savedResolutionIndex = PlayerPrefs.GetInt("ResolutionIndex", optimalResolutionIndex);
+        resolutionDropdown.value = savedResolutionIndex;
+        resolutionDropdown.RefreshShownValue();
+        SetResolution(savedResolutionIndex);
+    }
+
+    // 전체화면 모드 설정 로드
+    private void LoadFullscreenMode()
+    {
+        // 현재 화면 모드 가져오기
+        FullScreenMode currentMode = Screen.fullScreenMode;
+        int savedFullscreenMode = PlayerPrefs.GetInt("FullscreenMode", (int)currentMode);
+        fullscreenDropdown.value = savedFullscreenMode;
+        fullscreenDropdown.RefreshShownValue();
+        SetFullscreenMode(savedFullscreenMode);
+    }
+
+    // 해상도 설정
     public void SetResolution(int resolutionIndex)
     {
+        PlayerPrefs.SetInt("ResolutionIndex", resolutionIndex);
         Resolution resolution = resolutions[resolutionIndex];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+    }
+
+    // 전체화면 모드 설정
+    public void SetFullscreenMode(int modeIndex)
+    {
+        PlayerPrefs.SetInt("FullscreenMode", modeIndex);
+        switch (modeIndex)
+        {
+            case 0: // 창모드
+                Screen.fullScreenMode = FullScreenMode.Windowed;
+                break;
+            case 1: // 전체화면
+                Screen.fullScreenMode = FullScreenMode.ExclusiveFullScreen;
+                break;
+            case 2: // 전체화면 창모드
+                Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
+                break;
+        }
     }
 }
