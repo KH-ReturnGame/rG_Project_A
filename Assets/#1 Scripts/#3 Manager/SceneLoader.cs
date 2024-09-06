@@ -60,7 +60,7 @@ public class SceneLoader : MonoBehaviour
                 }
                 else
                 {
-                    timer += Time.unscaledDeltaTime;
+                    timer += Time.deltaTime;
                     GameObject.FindGameObjectWithTag("loding").GetComponent<Image>().fillAmount =
                         Mathf.Lerp(0.9f, 1f, timer);
                     if (GameObject.FindGameObjectWithTag("loding").GetComponent<Image>().fillAmount >= 1f)
@@ -110,7 +110,7 @@ public class SceneLoader : MonoBehaviour
         {
             yield return null;
         
-            timer += Time.unscaledDeltaTime;
+            timer += Time.deltaTime;
             loadingImage.fillAmount = Mathf.Lerp(0.5f, 1f, timer);
         
             if (loadingImage.fillAmount >= 1f)

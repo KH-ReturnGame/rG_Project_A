@@ -52,7 +52,7 @@ public class ArrowController : MonoBehaviour
     }
 
     //업데이트
-    public void Update()
+    public void FixedUpdate()
     {
         if(GameManager.Instance.isPaused) return;
         
@@ -84,9 +84,8 @@ public class ArrowController : MonoBehaviour
                 Vector3 direction = GetComponent<Rigidbody2D>().velocity;
                 float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg; // 필요하면 각도 추가
                 Quaternion targetRotation = Quaternion.AngleAxis(angle, Vector3.forward);
-                _arrow.transform.rotation = Quaternion.RotateTowards(_arrow.transform.rotation, targetRotation, rotationSpeed * Time.unscaledDeltaTime);
+                _arrow.transform.rotation = Quaternion.RotateTowards(_arrow.transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
             }
-            
         }
         
         //화살 속력 계속 체크
@@ -191,7 +190,7 @@ public class ArrowController : MonoBehaviour
         Vector3 result_position;
         Vector3 position = _arrow.transform.position;
         Vector3 new_position = Vector3.Lerp(position, new Vector3(worldPosition.x, worldPosition.y, 0),
-            followSpeed * Time.deltaTime);
+            followSpeed * Time.deltaTime); // Time.deltaTime 적용
 
         if (Vector3.Distance(position, new_position) >= maxMoveDistance)
         {
@@ -208,7 +207,7 @@ public class ArrowController : MonoBehaviour
         Quaternion targetRotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
         // 화살표 회전 -> 마우스 방향으로
-        _arrow.transform.rotation = Quaternion.RotateTowards(_arrow.transform.rotation, targetRotation, rotationSpeed * Time.unscaledDeltaTime);
+        _arrow.transform.rotation = Quaternion.RotateTowards(_arrow.transform.rotation, targetRotation, rotationSpeed * Time.deltaTime); // Time.deltaTime 적용
         
         //레이캐스트 쏴서 바닥 통과 막기
         RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, direction, 20);
@@ -236,7 +235,7 @@ public class ArrowController : MonoBehaviour
 
             // 땅을 넘지 않도록 충돌 지점 바로 앞에 위치를 설정
             Vector3 targetPosition = hitPoint + normal * 2f;
-            _arrow.transform.position = Vector3.Lerp(_arrow.transform.position, targetPosition, Time.unscaledDeltaTime * 10f);
+            _arrow.transform.position = Vector3.Lerp(_arrow.transform.position, targetPosition, Time.deltaTime * 10f); // Time.deltaTime 적용
         }
         else
         {
@@ -266,7 +265,7 @@ public class ArrowController : MonoBehaviour
             Vector3 direction = GetComponent<Rigidbody2D>().velocity;
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg; // 필요하면 각도 추가
             Quaternion targetRotation = Quaternion.AngleAxis(angle, Vector3.forward);
-            _arrow.transform.rotation = Quaternion.RotateTowards(_arrow.transform.rotation, targetRotation, rotationSpeed * Time.unscaledDeltaTime);
+            _arrow.transform.rotation = Quaternion.RotateTowards(_arrow.transform.rotation, targetRotation, rotationSpeed * Time.deltaTime); // Time.deltaTime 적용
         }
     }
 
