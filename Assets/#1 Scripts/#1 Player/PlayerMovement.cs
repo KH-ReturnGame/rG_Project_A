@@ -124,7 +124,7 @@ public class PlayerMovement : MonoBehaviour
     //머리 몸 화살 전환 함수
     public void ChangeControl(string controlmode)
     {
-        if (GameManager.Instance.isPaused)
+        if (GameManager.Instance.isPaused || player.IsContainState(PlayerStats.IsOnClick))
         {
             return;
         }
