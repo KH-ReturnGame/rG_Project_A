@@ -76,6 +76,30 @@ public class PlayerMovement : MonoBehaviour
         }
     }
     
+    //머리 몸 결합 입력받기
+    public void OnCombinePlayer(InputAction.CallbackContext context)
+    {
+        if (context.started )
+        {
+            if (player.IsContainState(PlayerStats.CanCombine) && !player.IsContainState(PlayerStats.IsCombine))
+            {
+                //결합
+                Debug.Log("결합");
+                ChangeControl("q");
+                player.RemoveState(PlayerStats.CanCombine);
+                player.AddState(PlayerStats.IsCombine);
+            }
+            else if(player.IsContainState(PlayerStats.IsCombine))
+            {
+                //결합 해제
+                Debug.Log("해제");
+                player.AddState(PlayerStats.CanCombine);
+                player.RemoveState(PlayerStats.IsCombine);
+            }
+        }
+        
+    }
+    
     //머리 몸 화살 전환 함수
     public void ChangeControl(string controlmode)
     {

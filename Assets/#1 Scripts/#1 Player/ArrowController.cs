@@ -33,7 +33,6 @@ public class ArrowController : MonoBehaviour
     private float _angle; //각도
     private float _l; //길이
     private Vector2 _directionMouse; //자신과 마우스와의 방향
-    private bool wasDragging = false;
     private float arrowCooldown = 0.2f;
 
     //화살 머리 합체

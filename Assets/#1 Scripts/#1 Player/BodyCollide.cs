@@ -18,6 +18,11 @@ public class BodyCollide : MonoBehaviour
             _collideCount++;
             //Debug.Log("몸 바닥 닿음");
         }
+
+        if ((other.CompareTag("Head") && name == "body_combine_check"))
+        {
+            player.AddState(PlayerStats.CanCombine);
+        }
     }
 
     public void OnTriggerExit2D(Collider2D other)
@@ -33,6 +38,11 @@ public class BodyCollide : MonoBehaviour
                 player.RemoveState(PlayerStats.BodyIsGround);  
             }
             //Debug.Log("몸  바닥 떨어짐");
+        }
+        
+        if ((other.CompareTag("Head") && name == "body_combine_check"))
+        {
+            player.RemoveState(PlayerStats.CanCombine);
         }
     }
 }

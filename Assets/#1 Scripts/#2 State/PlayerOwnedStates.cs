@@ -135,4 +135,34 @@ namespace PlayerOwnedStates
             
         }
     }
+    public class CanCombine : State<Player>
+    {
+        public override void Enter(Player player)
+        {
+            
+        }
+        public override void Execute(Player player)
+        {
+            
+        }
+        public override void Exit(Player player)
+        {
+            
+        }
+    }
+    public class IsCombine : State<Player>
+    {
+        public override void Enter(Player player)
+        {
+            
+        }
+        public override void Execute(Player player)
+        {
+            
+        }
+        public override void Exit(Player player)
+        {
+            
+        }
+    }
 }

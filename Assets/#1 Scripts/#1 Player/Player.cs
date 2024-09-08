@@ -13,6 +13,8 @@ public enum PlayerStats
     IsCollisionMethod2,
     IsCollision,
     CanShoot,
+    CanCombine,
+    IsCombine,
 }
 
 public enum PlayerObj
@@ -49,6 +51,8 @@ public class Player : MonoBehaviour
         _states[(int)PlayerStats.IsCollisionMethod2] = new PlayerOwnedStates.IsCollisionMethod2();
         _states[(int)PlayerStats.IsCollision] = new PlayerOwnedStates.IsCollision();
         _states[(int)PlayerStats.CanShoot] = new PlayerOwnedStates.CanShoot();
+        _states[(int)PlayerStats.CanCombine] = new PlayerOwnedStates.CanCombine();
+        _states[(int)PlayerStats.IsCombine] = new PlayerOwnedStates.IsCombine();
         
         _stateManager = new StateManager<Player>();
         _stateManager.Setup(this,StateCount,_states);
