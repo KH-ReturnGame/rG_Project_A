@@ -28,6 +28,10 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D _nowRigidbody;
     public string controlMode;
     
+    //머리 몸 합체 관련
+    private SpriteRenderer _spriteRenderer;
+    public Sprite[] sprites;
+    
     //기본 초기화
     private void Start()
     {
@@ -37,6 +41,9 @@ public class PlayerMovement : MonoBehaviour
         _headRigidbody = _head.GetComponent<Rigidbody2D>();
         _arrow = player.GetPlayerObj(PlayerObj.Arrow);
         _nowRigidbody = _bodyRigidbody;
+
+        _spriteRenderer = _body.GetComponent<SpriteRenderer>();
+        
         controlMode = "Body";
     }
 
@@ -85,9 +92,15 @@ public class PlayerMovement : MonoBehaviour
             {
                 //결합
                 Debug.Log("결합");
-                ChangeControl("q");
+                ChangeControl("e");
                 player.RemoveState(PlayerStats.CanCombine);
                 player.AddState(PlayerStats.IsCombine);
+                
+                _spriteRenderer.sprite = sprites[1];
+                _head.SetActive(false);
+
+                _body.GetComponent<PolygonCollider2D>().enabled = true;
+                _body.GetComponent<BoxCollider2D>().enabled = false;
             }
             else if(player.IsContainState(PlayerStats.IsCombine))
             {
@@ -95,6 +108,14 @@ public class PlayerMovement : MonoBehaviour
                 Debug.Log("해제");
                 player.AddState(PlayerStats.CanCombine);
                 player.RemoveState(PlayerStats.IsCombine);
+                
+                _spriteRenderer.sprite = sprites[0];
+                _head.GetComponent<Transform>().position =
+                    _body.GetComponent<Transform>().position + new Vector3(0, 2, 0);
+                _head.SetActive(true);
+
+                _body.GetComponent<PolygonCollider2D>().enabled = false;
+                _body.GetComponent<BoxCollider2D>().enabled = true;
             }
         }
         
@@ -112,7 +133,7 @@ public class PlayerMovement : MonoBehaviour
         {
             case "q":
             {
-                if(controlMode == "Head") return;
+                if(controlMode == "Head" || player.IsContainState(PlayerStats.IsCombine)) return;
                 controlMode = "Head";
                 _arrow.GetComponent<ArrowController>().ActivateArrow(false);
                 _arrow.GetComponent<PolygonCollider2D>().isTrigger = false;
