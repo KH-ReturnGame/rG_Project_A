@@ -23,7 +23,7 @@ public class ArrowController : MonoBehaviour
     public float followSpeed;
     public float rotationSpeed;
     public List<GameObject> hitObjects = new List<GameObject>();
-    private float maxMoveDistance = 0.5f;
+    private float maxMoveDistance = 0.25f;
 
     //화살 움직임 Method_2
     private Vector2 _startMousePosition; //초기 마우스 위치
@@ -254,7 +254,7 @@ public class ArrowController : MonoBehaviour
             Vector3 normal = groundRaycast.normal; // 충돌한 표면의 법선 벡터
 
             // 땅을 넘지 않도록 충돌 지점 바로 앞에 위치를 설정
-            Vector3 targetPosition = hitPoint + normal * 5f;
+            Vector3 targetPosition = hitPoint + normal * 1.5f;
             _arrow.transform.position = Vector3.Lerp(_arrow.transform.position, targetPosition, Time.deltaTime * 10f); // Time.deltaTime 적용
         }
         else

@@ -76,13 +76,13 @@ public class FootHoldButton : MonoBehaviour
     //버튼 눌림을 위한 충돌 해제 이벤트 함수
     private void OnTriggerExit2D(Collider2D other)
     {
-        if ((oneUse && useCount >= 1)||(other.CompareTag("Arrow") && GameObject.FindWithTag("Player").GetComponent<Player>().IsContainState(PlayerStats.CanControlArrow)))
+        if ((oneUse && useCount >= 1))
         {
             return;
         }
         
         //감지된 오브젝트 눌림 리스트에 제거 감지하지 않을 놈들이면 그냥 return;
-        if (other.CompareTag("Head") || other.CompareTag("Body") || other.CompareTag("Arrow"))
+        if (other.CompareTag("Head") || other.CompareTag("Body") || other.CompareTag("Arrow") || (other.CompareTag("Arrow")))
         {
             downObj.Remove(other);
         }
