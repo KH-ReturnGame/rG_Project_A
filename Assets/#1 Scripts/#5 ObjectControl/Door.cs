@@ -16,6 +16,9 @@ public class Door : MonoBehaviour, ISignalReceive
     
     //문 자체 신호 관련
     private bool Signal = false;
+
+    public bool ismove;
+    private Vector3 prevTransform;
     
     public void Start()
     {
@@ -34,6 +37,8 @@ public class Door : MonoBehaviour, ISignalReceive
 
         //시작 위치
         startpos = new Vector2(transform.position.x, transform.position.y);
+
+        prevTransform = transform.position;
     }
 
     //ISignalReceive 인터페이스에 있는 이벤트 함수 신호가 변경되면 호출됨
@@ -48,12 +53,14 @@ public class Door : MonoBehaviour, ISignalReceive
         {
             if (Signal)
             {
+                ismove = true;
                 //위 아래로 작동하는 문이고 신호가 true 이면 올리기
                 transform.position =
                     Vector3.Lerp(transform.position, new Vector3(startpos.x,startpos.y+5f, 0), 10f*Time.unscaledDeltaTime);
             }
             else
             {
+                ismove = true;
                 //위 아래로 작동하는 문이고 신호가 false 이면 내리기
                 transform.position =
                     Vector3.Lerp(transform.position, new Vector3(startpos.x, startpos.y, 0), 10f*Time.unscaledDeltaTime);
@@ -63,6 +70,7 @@ public class Door : MonoBehaviour, ISignalReceive
         {
             if (Signal)
             {
+                ismove = true;
                 //회전하는 문이고 신호가 true 이면 회전 ㄱㄱ
                 originAngle = rotateTransform.rotation.z;
                 Quaternion targetRotation = Quaternion.AngleAxis(angle, Vector3.forward);
@@ -70,10 +78,18 @@ public class Door : MonoBehaviour, ISignalReceive
             }
             else
             {
+                ismove = true;
                 //회전하는 문이고 신호가 false 이면 원상복구
                 Quaternion targetRotation = Quaternion.AngleAxis(originAngle, Vector3.forward);
                 rotateTransform.rotation = Quaternion.RotateTowards(rotateTransform.rotation, targetRotation, 500 * Time.unscaledDeltaTime);
             }
         }
+
+        if (Vector3.Distance(prevTransform,transform.position) <= 0.05f)
+        {
+            ismove = false;
+        }
+
+        prevTransform = transform.position;
     }
 }
