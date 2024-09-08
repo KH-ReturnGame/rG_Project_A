@@ -164,6 +164,11 @@ public class ArrowController : MonoBehaviour
         //뗄때 화살 날리기
         else if (context.canceled)
         {
+            if (!player.IsContainState(PlayerStats.IsOnClick))
+            {
+                return;
+            }
+            
             player.RemoveState(PlayerStats.IsOnClick);
             if (!player.IsContainState(PlayerStats.IsCollisionMethod2))
             {
@@ -308,36 +313,7 @@ public class ArrowController : MonoBehaviour
                 {
                     _head.transform.position = other.contacts[0].point + other.contacts[0].normal * 1f; // 땅을 넘지 않게 약간 떨어진 위치로 설정
                     _head.SetActive(true);
-                }
-                
-            }
-        }
-        player.AddState(PlayerStats.IsCollision);
-    }
-    
-    private void OnCollisionStay2D(Collision2D other)
-    {
-        if (!player.IsContainState(PlayerStats.IsOnClick))
-        {
-            //화살 머리 합체!
-            if (other.transform.CompareTag("Head") && player.IsContainState(PlayerStats.IsFly))
-            {
-                //스프라이트 전환
-                _spriteRenderer.sprite = sprites[1];
-                _head.SetActive(false);
-                GetComponent<Rigidbody2D>().velocity = _velocity[1];
-                Debug.Log("화살 머리 합체");
-            }
-            else if (!other.transform.CompareTag("Head"))
-            {
-                player.RemoveState(PlayerStats.IsFly);
-                ChangeArrow("1");
-                _spriteRenderer.sprite = sprites[0];
-
-                if ((other.transform.CompareTag("ground") || other.transform.CompareTag("Door")) && !_head.activeSelf && !player.IsContainState(PlayerStats.IsCombine))
-                {
-                    _head.transform.position = other.contacts[0].point + other.contacts[0].normal * 1f; // 땅을 넘지 않게 약간 떨어진 위치로 설정
-                    _head.SetActive(true);
+                    StartCoroutine(ArrowCooldown());
                 }
                 
             }
