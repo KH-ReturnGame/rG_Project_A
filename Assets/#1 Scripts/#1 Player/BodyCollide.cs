@@ -8,6 +8,8 @@ public class BodyCollide : MonoBehaviour
     
     private int _collideCount;
 
+    private bool _collideDoor;
+
     public void OnTriggerEnter2D(Collider2D other)
     {
         if ((other.CompareTag("ground") && name == "body_ground_check")||
@@ -18,10 +20,15 @@ public class BodyCollide : MonoBehaviour
             _collideCount++;
             //Debug.Log("몸 바닥 닿음");
         }
-
+        //-------------------------------------
         if ((other.CompareTag("Head") && name == "body_combine_check"))
         {
             player.AddState(PlayerStats.CanCombine);
+        }
+        //-------------------------------------
+        if (other.CompareTag("door_collide") && other.name == "body" && name == "Body" && !player.IsContainState(PlayerStats.IsCombine))
+        {
+            _collideDoor = true;
         }
     }
 
@@ -35,14 +42,19 @@ public class BodyCollide : MonoBehaviour
             _collideCount--;
             if (_collideCount == 0)
             {
-                player.RemoveState(PlayerStats.BodyIsGround);  
+                player.RemoveState(PlayerStats.BodyIsGround);
             }
             //Debug.Log("몸  바닥 떨어짐");
         }
-        
+        //-------------------------------------
         if ((other.CompareTag("Head") && name == "body_combine_check"))
         {
             player.RemoveState(PlayerStats.CanCombine);
+        }
+        //-------------------------------------
+        if (other.CompareTag("door_collide") && other.name == "body" && name == "Body" && !player.IsContainState(PlayerStats.IsCombine))
+        {
+            _collideDoor = false;
         }
     }
 }
