@@ -52,7 +52,15 @@ public class PlayerMovement : MonoBehaviour
     {
         if (controlMode == "Arrow") return;
         //기본 좌우 움직임
-        _nowRigidbody.velocity = new Vector2(_movementInputDirection * movementSpeed, _nowRigidbody.velocity.y);
+
+        if (!player.IsContainState(PlayerStats.Push))
+        {
+            _nowRigidbody.velocity = new Vector2(_movementInputDirection * movementSpeed, _nowRigidbody.velocity.y);
+        }
+        else
+        {
+            
+        }
     }
     
     //좌우 입력받기

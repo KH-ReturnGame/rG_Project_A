@@ -1,4 +1,5 @@
 using System;
+using PlayerOwnedStates;
 using UnityEngine.Tilemaps;
 using UnityEngine;
 
@@ -9,6 +10,7 @@ public class BodyCollide : MonoBehaviour
     private int _collideCount;
 
     private bool _collideDoor;
+    private Door door;
 
     public void OnTriggerEnter2D(Collider2D other)
     {
@@ -26,9 +28,16 @@ public class BodyCollide : MonoBehaviour
             player.AddState(PlayerStats.CanCombine);
         }
         //-------------------------------------
-        if (other.CompareTag("door_collide") && other.name == "body" && name == "Body" && !player.IsContainState(PlayerStats.IsCombine))
+        if (other.CompareTag("door_collide") && other.name == "body" && name == "Body" && !player.IsContainState(PlayerStats.IsCombine) && CompareTag("Body") && !_collideDoor)
         {
             _collideDoor = true;
+        }
+        //-------------------------------------
+        if (other.CompareTag("Door") && other.name == "door_tile" && name == "Body" && !player.IsContainState(PlayerStats.IsCombine) && _collideDoor && other.transform.parent.transform.parent.GetComponent<Door>().DoorType == "UpDown")
+        {
+            player.AddState(PlayerStats.Push);
+            door = other.transform.parent.transform.parent.GetComponent<Door>();
+            Debug.Log("밀쳐");
         }
     }
 
@@ -52,9 +61,32 @@ public class BodyCollide : MonoBehaviour
             player.RemoveState(PlayerStats.CanCombine);
         }
         //-------------------------------------
-        if (other.CompareTag("door_collide") && other.name == "body" && name == "Body" && !player.IsContainState(PlayerStats.IsCombine))
+        if (other.CompareTag("door_collide") && other.name == "body" && name == "Body" && !player.IsContainState(PlayerStats.IsCombine) && CompareTag("Body") && _collideDoor)
         {
             _collideDoor = false;
+            if (player.IsContainState(PlayerStats.Push))
+            {
+                player.RemoveState(PlayerStats.Push);
+                Debug.Log("ㄴㄴ");
+            }
         }
+        //-------------------------------------
+        /*if (other.CompareTag("Door") && other.name == "door_tile" && name == "Body" && !player.IsContainState(PlayerStats.IsCombine) && other.transform.parent.transform.parent.GetComponent<Door>().DoorType == "UpDown" && !_collideDoor)
+        {
+            player.RemoveState(PlayerStats.Push);
+            Debug.Log("ㄴㄴ");
+        }*/
+    }
+
+    public void Update()
+    {
+        /*if (player.IsContainState(PlayerStats.Push) && door)
+        {
+            //플레이어 옆으로 밀기
+            /*Vector3 vec = player.GetPlayerObj(PlayerObj.Body).transform.position;
+            vec = new Vector3(door.push*50 + vec.x, vec.y, vec.z);
+            Debug.Log(vec +"/" + player.GetPlayerObj(PlayerObj.Body).transform.position +"/"+ (door.push*50 + vec.x, vec.y, vec.z));#1#
+            player.GetPlayerObj(PlayerObj.Body).transform.position = new Vector3(0, player.GetPlayerObj(PlayerObj.Body).transform.position.y, 0);
+        }*/
     }
 }

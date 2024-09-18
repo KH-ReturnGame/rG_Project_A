@@ -15,6 +15,7 @@ public enum PlayerStats
     CanShoot,
     CanCombine,
     IsCombine,
+    Push,
 }
 
 public enum PlayerObj
@@ -53,6 +54,8 @@ public class Player : MonoBehaviour
         _states[(int)PlayerStats.CanShoot] = new PlayerOwnedStates.CanShoot();
         _states[(int)PlayerStats.CanCombine] = new PlayerOwnedStates.CanCombine();
         _states[(int)PlayerStats.IsCombine] = new PlayerOwnedStates.IsCombine();
+        _states[(int)PlayerStats.Push] = new PlayerOwnedStates.Push();
+        
         
         _stateManager = new StateManager<Player>();
         _stateManager.Setup(this,StateCount,_states);

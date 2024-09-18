@@ -23271,6 +23271,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8100244401185494656, guid: 60714e0ab60994edcab552afbb267748, type: 3}
+      propertyPath: DoorType
+      value: UpDown
+      objectReference: {fileID: 0}
+    - target: {fileID: 8100244401185494656, guid: 60714e0ab60994edcab552afbb267748, type: 3}
       propertyPath: SignalType
       value: 1
       objectReference: {fileID: 0}

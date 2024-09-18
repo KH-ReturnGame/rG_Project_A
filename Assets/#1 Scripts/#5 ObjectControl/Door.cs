@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using DG.Tweening;
 
 public class Door : MonoBehaviour, ISignalReceive
 {
@@ -7,6 +8,8 @@ public class Door : MonoBehaviour, ISignalReceive
     [HideInInspector] public int SignalType;
     [HideInInspector] public string DoorType;
     [HideInInspector] public int RotateType;
+    public int push = 1;
+    
     public float angle;
     
     //실제 문 로직 관련
@@ -44,19 +47,18 @@ public class Door : MonoBehaviour, ISignalReceive
     
     private void Update()
     {
+
         if (DoorType == "UpDown")
         {
             if (Signal)
             {
-                //위 아래로 작동하는 문이고 신호가 true 이면 올리기
-                transform.position =
-                    Vector3.Lerp(transform.position, new Vector3(startpos.x,startpos.y+5f, 0), 10f*Time.unscaledDeltaTime);
+                // 신호가 true일 때 위로 이동 (부드러운 애니메이션)
+                transform.DOMoveY(startpos.y + 5f, 1f); // 1초 동안 위로 이동
             }
             else
             {
-                //위 아래로 작동하는 문이고 신호가 false 이면 내리기
-                transform.position =
-                    Vector3.Lerp(transform.position, new Vector3(startpos.x, startpos.y, 0), 10f*Time.unscaledDeltaTime);
+                // 신호가 false일 때 아래로 이동
+                transform.DOMoveY(startpos.y, 1f); // 1초 동안 아래로 이동
             }
         }
         else
