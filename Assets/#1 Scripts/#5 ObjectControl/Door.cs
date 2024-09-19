@@ -37,6 +37,9 @@ public class Door : MonoBehaviour, ISignalReceive
 
         //시작 위치
         startpos = new Vector2(transform.position.x, transform.position.y);
+        
+        // 첫 번째 값은 일반 tweens, 두 번째 값은 시퀀스 tweens 용량입니다.
+        DOTween.SetTweensCapacity(2000, 100); // 2000개의 일반 tweens, 100개의 시퀀스를 설정
     }
 
     //ISignalReceive 인터페이스에 있는 이벤트 함수 신호가 변경되면 호출됨
