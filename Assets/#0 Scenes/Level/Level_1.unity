@@ -23200,11 +23200,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4075516769756486819, guid: 01c18077a1a554d93a0060b03a4c9b24, type: 3}
       propertyPath: DoorType
-      value: Rotate
+      value: UpDown
       objectReference: {fileID: 0}
     - target: {fileID: 4075516769756486819, guid: 01c18077a1a554d93a0060b03a4c9b24, type: 3}
       propertyPath: RotateType
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4075516769756486819, guid: 01c18077a1a554d93a0060b03a4c9b24, type: 3}
       propertyPath: SignalType

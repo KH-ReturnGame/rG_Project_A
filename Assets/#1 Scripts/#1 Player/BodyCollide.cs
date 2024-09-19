@@ -36,14 +36,14 @@ public class BodyCollide : MonoBehaviour
             return;
         }
         //-------------------------------------
-        if (other.CompareTag("door_collide") && other.name == "body" && name == "Body" && !player.IsContainState(PlayerStats.IsCombine) && CompareTag("Body") && !_collideDoor)
+        if (other.CompareTag("door_collide") && other.name == "body" && name == "body_door_check" && !player.IsContainState(PlayerStats.IsCombine) && CompareTag("DoorCheck") && !_collideDoor)
         {
             _collideDoor = true;
             Debug.Log("밀쳐 콜라이더 들어왔어");
             return;
         }
         //-------------------------------------
-        if (other.CompareTag("Door") && other.name == "door" && name == "Body" && !player.IsContainState(PlayerStats.IsCombine) && _collideDoor && 
+        if (other.CompareTag("Door") && other.name == "door" && name == "body_door_check" && !player.IsContainState(PlayerStats.IsCombine) && _collideDoor && 
             other.transform.parent.transform.parent.GetComponent<Door>().DoorType == "UpDown" && !other.transform.parent.transform.parent.GetComponent<Door>().Signal)
         {
             player.AddState(PlayerStats.Push);
@@ -75,7 +75,7 @@ public class BodyCollide : MonoBehaviour
             player.RemoveState(PlayerStats.CanCombine);
         }
         //-------------------------------------
-        if (other.CompareTag("door_collide") && other.name == "body" && name == "Body" && !player.IsContainState(PlayerStats.IsCombine) && CompareTag("Body") && _collideDoor)
+        if (other.CompareTag("door_collide") && other.name == "body" && name == "body_door_check" && !player.IsContainState(PlayerStats.IsCombine) && CompareTag("DoorCheck") && _collideDoor)
         {
             _collideDoor = false;
             Debug.Log("밀쳐 콜라이더 나왔어");

@@ -16,6 +16,7 @@ TagManager:
   - loding
   - CombineCheck
   - door_collide
+  - DoorCheck
   layers:
   - Default
   - TransparentFX
