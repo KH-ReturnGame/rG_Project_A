@@ -1352,6 +1352,9 @@ MonoBehaviour:
   SettingMenuObj: {fileID: 7452956515628437014, guid: 93646d0d679ca624c8d425bc01ad84d5, type: 3}
   isSettingMenuView: 0
   isPaused: 0
+  hasFocus: 0
+  isPlayGame: 0
+  isLoding: 0
 --- !u!114 &2106650886
 MonoBehaviour:
   m_ObjectHideFlags: 0

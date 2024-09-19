@@ -15,7 +15,11 @@ public class BodyCollide : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log(other.name);
+        if (name == "Body" && other.name == "door_tile")
+        {
+            Debug.Log(other.name);
+        }
+        
         if ((other.CompareTag("ground") && name == "body_ground_check")||
             (other.CompareTag("Head") && name == "body_ground_check")||
             (other.CompareTag("Door") && name == "body_ground_check"))
@@ -23,20 +27,23 @@ public class BodyCollide : MonoBehaviour
             player.AddState(PlayerStats.BodyIsGround);
             _collideCount++;
             //Debug.Log("몸 바닥 닿음");
+            return;
         }
         //-------------------------------------
         if ((other.CompareTag("Head") && name == "body_combine_check"))
         {
             player.AddState(PlayerStats.CanCombine);
+            return;
         }
         //-------------------------------------
         if (other.CompareTag("door_collide") && other.name == "body" && name == "Body" && !player.IsContainState(PlayerStats.IsCombine) && CompareTag("Body") && !_collideDoor)
         {
             _collideDoor = true;
             Debug.Log("밀쳐 콜라이더 들어왔어");
+            return;
         }
         //-------------------------------------
-        if (other.CompareTag("Door") && other.name == "door_tile" && name == "Body" && !player.IsContainState(PlayerStats.IsCombine) && _collideDoor && 
+        if (other.CompareTag("Door") && other.name == "door" && name == "Body" && !player.IsContainState(PlayerStats.IsCombine) && _collideDoor && 
             other.transform.parent.transform.parent.GetComponent<Door>().DoorType == "UpDown" && !other.transform.parent.transform.parent.GetComponent<Door>().Signal)
         {
             player.AddState(PlayerStats.Push);

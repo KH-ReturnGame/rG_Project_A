@@ -55,13 +55,25 @@ public class Door : MonoBehaviour, ISignalReceive
         {
             if (Signal)
             {
-                // 신호가 true일 때 위로 이동 (부드러운 애니메이션)
-                transform.DOMoveY(startpos.y + 5f, 1f).SetUpdate(true); // 1초 동안 위로 이동
+                // // 문이 위로 이동할 때
+                // transform.DOMoveY(startpos.y + 5f, 1f).SetUpdate(true).OnComplete(() =>
+                // {
+                //     // Transform 동기화
+                //     Physics2D.SyncTransforms();
+                // });
+                transform.position =
+                    Vector3.Lerp(transform.position, new Vector3(startpos.x,startpos.y+5f, 0), 1f*Time.unscaledDeltaTime);
             }
             else
             {
-                // 신호가 false일 때 아래로 이동
-                transform.DOMoveY(startpos.y, 1f).SetUpdate(true); // 1초 동안 아래로 이동
+                // // 문이 아래로 이동할 때
+                // transform.DOMoveY(startpos.y, 1f).SetUpdate(true).OnComplete(() =>
+                // {
+                //     // Transform 동기화
+                //     Physics2D.SyncTransforms();
+                // });
+                transform.position =
+                    Vector3.Lerp(transform.position, new Vector3(startpos.x, startpos.y, 0), 1f*Time.unscaledDeltaTime);
             }
         }
         else
