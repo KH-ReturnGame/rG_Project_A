@@ -1,5 +1,6 @@
 using System;
 using PlayerOwnedStates;
+using Unity.VisualScripting;
 using UnityEngine.Tilemaps;
 using UnityEngine;
 
@@ -14,6 +15,7 @@ public class BodyCollide : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D other)
     {
+        Debug.Log(other.name);
         if ((other.CompareTag("ground") && name == "body_ground_check")||
             (other.CompareTag("Head") && name == "body_ground_check")||
             (other.CompareTag("Door") && name == "body_ground_check"))
@@ -31,13 +33,18 @@ public class BodyCollide : MonoBehaviour
         if (other.CompareTag("door_collide") && other.name == "body" && name == "Body" && !player.IsContainState(PlayerStats.IsCombine) && CompareTag("Body") && !_collideDoor)
         {
             _collideDoor = true;
+            Debug.Log("밀쳐 콜라이더 들어왔어");
         }
         //-------------------------------------
-        if (other.CompareTag("Door") && other.name == "door_tile" && name == "Body" && !player.IsContainState(PlayerStats.IsCombine) && _collideDoor && other.transform.parent.transform.parent.GetComponent<Door>().DoorType == "UpDown")
+        if (other.CompareTag("Door") && other.name == "door_tile" && name == "Body" && !player.IsContainState(PlayerStats.IsCombine) && _collideDoor && 
+            other.transform.parent.transform.parent.GetComponent<Door>().DoorType == "UpDown" && !other.transform.parent.transform.parent.GetComponent<Door>().Signal)
         {
             player.AddState(PlayerStats.Push);
             door = other.transform.parent.transform.parent.GetComponent<Door>();
             Debug.Log("밀쳐");
+            
+            Rigidbody2D playerRigidbody = player.GetPlayerObj(PlayerObj.Body).GetComponent<Rigidbody2D>();
+            playerRigidbody.velocity = new Vector2(door.push * 10, playerRigidbody.velocity.y);
         }
     }
 
@@ -64,6 +71,7 @@ public class BodyCollide : MonoBehaviour
         if (other.CompareTag("door_collide") && other.name == "body" && name == "Body" && !player.IsContainState(PlayerStats.IsCombine) && CompareTag("Body") && _collideDoor)
         {
             _collideDoor = false;
+            Debug.Log("밀쳐 콜라이더 나왔어");
             if (player.IsContainState(PlayerStats.Push))
             {
                 player.RemoveState(PlayerStats.Push);

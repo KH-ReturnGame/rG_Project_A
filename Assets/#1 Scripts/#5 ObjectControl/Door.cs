@@ -18,7 +18,7 @@ public class Door : MonoBehaviour, ISignalReceive
     private Transform rotateTransform;
     
     //문 자체 신호 관련
-    private bool Signal = false;
+    public bool Signal = false;
     
     public void Start()
     {
@@ -56,12 +56,12 @@ public class Door : MonoBehaviour, ISignalReceive
             if (Signal)
             {
                 // 신호가 true일 때 위로 이동 (부드러운 애니메이션)
-                transform.DOMoveY(startpos.y + 5f, 1f); // 1초 동안 위로 이동
+                transform.DOMoveY(startpos.y + 5f, 1f).SetUpdate(true); // 1초 동안 위로 이동
             }
             else
             {
                 // 신호가 false일 때 아래로 이동
-                transform.DOMoveY(startpos.y, 1f); // 1초 동안 아래로 이동
+                transform.DOMoveY(startpos.y, 1f).SetUpdate(true); // 1초 동안 아래로 이동
             }
         }
         else
