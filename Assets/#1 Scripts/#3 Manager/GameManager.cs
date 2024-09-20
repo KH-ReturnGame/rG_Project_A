@@ -304,6 +304,9 @@ public class GameManager : MonoBehaviour
         {
             GameObject.FindWithTag("MainCamera").transform.position = cam.position;
         }
+        
+        // 로딩 씬 언로드
+        UnLoadScene("SceneLoad");
     }
 
     //카메라 관리
