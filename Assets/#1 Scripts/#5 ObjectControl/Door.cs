@@ -64,7 +64,7 @@ public class Door : MonoBehaviour, ISignalReceive
                 //     Physics2D.SyncTransforms();
                 // });
                 transform.position =
-                    Vector3.Lerp(transform.position, new Vector3(startpos.x,startpos.y+5f, 0), 10f*Time.unscaledDeltaTime);
+                    Vector3.Lerp(transform.position, new Vector3(startpos.x,startpos.y+5f, 0), 20f*Time.unscaledDeltaTime);
             }
             else
             {
@@ -75,7 +75,7 @@ public class Door : MonoBehaviour, ISignalReceive
                 //     Physics2D.SyncTransforms();
                 // });
                 transform.position =
-                    Vector3.Lerp(transform.position, new Vector3(startpos.x, startpos.y, 0), 10f*Time.unscaledDeltaTime);
+                    Vector3.Lerp(transform.position, new Vector3(startpos.x, startpos.y, 0), 20f*Time.unscaledDeltaTime);
             }
         }
         else

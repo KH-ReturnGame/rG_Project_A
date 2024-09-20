@@ -66,7 +66,9 @@ public class BodyCollide : MonoBehaviour
             }
 
             // 부드럽게 이동하는 코루틴 시작
-            Vector3 targetPos = door.returnPos().transform.position;
+            Vector3 targetPos = new Vector3(
+                (other.transform.position.x < player.GetPlayerObj(PlayerObj.Body).transform.position.x) ? other.transform.position.x + door.push * 1.7f : other.transform.position.x - door.push * 1.7f,
+                other.transform.position.y, other.transform.position.z);
             StartCoroutine(MoveToPosition(targetPos, moveDuration));
 
             pcol = player.GetPlayerObj(PlayerObj.Body).GetComponent<Collider2D>();
