@@ -27,6 +27,11 @@ public class FootHoldButton : MonoBehaviour
     //버튼 눌림 관련해서 누가 눌렀는지
     public List<Collider2D> downObj;
 
+    private void Start()
+    {
+        GameManager.Instance.AddChangeObj(gameObject,SignalType);
+    }
+
     //버튼 눌림을 위한 충돌 시작할때 이벤트 함수
     private void OnTriggerEnter2D(Collider2D other)
     {

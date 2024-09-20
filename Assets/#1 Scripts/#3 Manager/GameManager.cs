@@ -330,5 +330,15 @@ public class GameManager : MonoBehaviour
     {
         SM.RemSendObj(obj);
     }
+
+    public void AddChangeObj(GameObject obj, int index)
+    {
+        SM.AddChangeObj(obj, index);
+    }
+
+    public void RemChangeObj(GameObject obj)
+    {
+        SM.RemChangeObj(obj);
+    }
     
 }
