@@ -25,11 +25,6 @@ public class BodyCollide : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D other)
     {
-        if (name == "Body" && other.name == "door_tile")
-        {
-            Debug.Log(other.name);
-        }
-        
         if ((other.CompareTag("ground") && name == "body_ground_check")||
             (other.CompareTag("Head") && name == "body_ground_check")||
             (other.CompareTag("Door") && name == "body_ground_check"))
@@ -51,7 +46,7 @@ public class BodyCollide : MonoBehaviour
         if (other.CompareTag("door_collide") && other.name == "body" && name == "body_door_check" && !player.IsContainState(PlayerStats.IsCombine) && CompareTag("DoorCheck") && !_collideDoor)
         {
             _collideDoor = true;
-            Debug.Log("밀쳐 콜라이더 들어왔어");
+            //Debug.Log("밀쳐 콜라이더 들어왔어");
             return;
         }
         //-------------------------------------
@@ -60,7 +55,7 @@ public class BodyCollide : MonoBehaviour
         {
             player.AddState(PlayerStats.Push);
             door = other.transform.parent.transform.parent.GetComponent<Door>();
-            Debug.Log("밀쳐");
+            //Debug.Log("밀쳐");
 
             // 플레이어의 Rigidbody2D 가져오기
             bodyRigidbody = player.GetPlayerObj(PlayerObj.Body).GetComponent<Rigidbody2D>();

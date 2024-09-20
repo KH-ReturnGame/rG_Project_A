@@ -9,8 +9,6 @@ public class Door : MonoBehaviour, ISignalReceive
     [HideInInspector] public string DoorType;
     [HideInInspector] public int RotateType;
     public int push = 1;
-
-    public GameObject PosObj;
     
     public float angle;
     
@@ -94,10 +92,5 @@ public class Door : MonoBehaviour, ISignalReceive
                 rotateTransform.rotation = Quaternion.RotateTowards(rotateTransform.rotation, targetRotation, 500 * Time.unscaledDeltaTime);
             }
         }
-    }
-
-    public GameObject returnPos()
-    {
-        return PosObj;
     }
 }

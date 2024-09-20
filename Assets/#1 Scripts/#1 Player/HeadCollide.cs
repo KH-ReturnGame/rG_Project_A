@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine.Tilemaps;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -9,6 +10,14 @@ public class HeadCollide : MonoBehaviour
     
     private GameObject _head;
     private int _collideCount;
+    
+    private bool _collideDoor;
+    private Door door;
+    private Collider2D[] colliders;
+    private Collider2D dcol;
+    private Rigidbody2D headRigidbody;
+    
+    private float moveDuration = 0.1f;
 
     public void Start()
     {
@@ -31,6 +40,48 @@ public class HeadCollide : MonoBehaviour
             //Debug.Log("머리 바닥 닿음");
         }
         
+        //머리 문 충돌처리
+        //-------------------------------------
+        if (other.CompareTag("door_collide") && other.name == "head" && name == "Head" && CompareTag("Head") && !_collideDoor)
+        {
+            _collideDoor = true;
+            Debug.Log("밀쳐 콜라이더 들어왔어");
+            return;
+        }
+        //-------------------------------------
+    }
+
+    public void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("Door") && other.gameObject.name == "door" && name == "Head" && _collideDoor &&
+            other.transform.parent.transform.parent.GetComponent<Door>().DoorType == "UpDown" && !other.transform.parent.transform.parent.GetComponent<Door>().Signal)
+        {
+            player.AddState(PlayerStats.Push);
+            door = other.transform.parent.transform.parent.GetComponent<Door>();
+            Debug.Log("밀쳐");
+
+            // 플레이어의 Rigidbody2D 가져오기
+            headRigidbody = player.GetPlayerObj(PlayerObj.Head).GetComponent<Rigidbody2D>();
+            if (headRigidbody == null)
+            {
+                Debug.LogError("플레이어에 Rigidbody2D가 필요합니다.");
+                return;
+            }
+ 
+            dcol = other.gameObject.GetComponent<Collider2D>();
+            colliders = player.GetPlayerObj(PlayerObj.Head).GetComponents<Collider2D>();
+            foreach (Collider2D col in colliders)
+            {
+                Physics2D.IgnoreCollision(col, dcol, true);
+            }
+
+            // 부드럽게 이동하는 코루틴 시작
+            Vector3 targetPos = new Vector3(
+                (other.transform.position.x < player.GetPlayerObj(PlayerObj.Head).transform.position.x) ? other.transform.position.x + door.push * 1.6f : other.transform.position.x - door.push * 1.6f,
+                other.transform.position.y, other.transform.position.z);
+            StartCoroutine(MoveToPosition(targetPos, moveDuration));
+            return;
+        }
     }
 
     public void OnTriggerExit2D(Collider2D other)
@@ -46,6 +97,37 @@ public class HeadCollide : MonoBehaviour
                 player.RemoveState(PlayerStats.HeadIsGround);  
             }
             //Debug.Log("머리 바닥 떨어짐");
+        }
+        //-------------------------------------
+        if (other.CompareTag("door_collide") && other.name == "head" && name == "Head" && CompareTag("Head") && _collideDoor)
+        {
+            _collideDoor = false;
+            //Debug.Log("밀쳐 콜라이더 나왔어");
+        }
+    }
+    private IEnumerator MoveToPosition(Vector3 targetPosition, float duration)
+    {
+        Vector3 startPosition = headRigidbody.position;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsedTime / duration); // 시간 비율 계산
+            Vector2 newPosition = Vector2.Lerp(startPosition, targetPosition, t); // 위치 보간
+            headRigidbody.MovePosition(new Vector2(newPosition.x, headRigidbody.position.y)); // Y축은 유지하고 X축만 이동
+
+            yield return null; // 다음 프레임까지 대기
+        }
+
+        // 최종적으로 정확한 타겟 위치로 이동
+        headRigidbody.MovePosition(new Vector2(targetPosition.x, headRigidbody.position.y));
+        
+        player.RemoveState(PlayerStats.Push);
+        //Debug.Log("ㄴㄴ");
+        foreach (Collider2D col in colliders)
+        {
+            Physics2D.IgnoreCollision(col, dcol, false);
         }
     }
 }
