@@ -103,8 +103,8 @@ public class PlayerMovement : MonoBehaviour
                 _spriteRenderer.sprite = sprites[1];
                 _head.SetActive(false);
 
-                _body.GetComponent<PolygonCollider2D>().enabled = true;
-                _body.GetComponent<BoxCollider2D>().enabled = false;
+                _body.GetComponents<BoxCollider2D>()[1].enabled = true;
+                _body.GetComponents<BoxCollider2D>()[0].enabled = false;
             }
             else if(player.IsContainState(PlayerStats.IsCombine))
             {
@@ -118,8 +118,8 @@ public class PlayerMovement : MonoBehaviour
                     _body.GetComponent<Transform>().position + new Vector3(0, 2, 0);
                 _head.SetActive(true);
 
-                _body.GetComponent<PolygonCollider2D>().enabled = false;
-                _body.GetComponent<BoxCollider2D>().enabled = true;
+                _body.GetComponents<BoxCollider2D>()[1].enabled = false;
+                _body.GetComponents<BoxCollider2D>()[0].enabled = true;
             }
         }
         
