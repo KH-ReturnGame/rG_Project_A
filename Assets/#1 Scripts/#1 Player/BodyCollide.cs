@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using PlayerOwnedStates;
 using Unity.VisualScripting;
 using UnityEngine.Tilemaps;
@@ -12,6 +13,12 @@ public class BodyCollide : MonoBehaviour
 
     private bool _collideDoor;
     private Door door;
+
+    private Collider2D pcol;
+    private Collider2D dcol;
+    
+    private Rigidbody2D playerRigidbody;
+    public float moveDuration = 0.2f;
 
     public void OnTriggerEnter2D(Collider2D other)
     {
@@ -43,15 +50,28 @@ public class BodyCollide : MonoBehaviour
             return;
         }
         //-------------------------------------
-        if (other.CompareTag("Door") && other.name == "door" && name == "body_door_check" && !player.IsContainState(PlayerStats.IsCombine) && _collideDoor && 
+        if (other.CompareTag("Door") && other.name == "door" && name == "body_door_check" && !player.IsContainState(PlayerStats.IsCombine) && _collideDoor &&
             other.transform.parent.transform.parent.GetComponent<Door>().DoorType == "UpDown" && !other.transform.parent.transform.parent.GetComponent<Door>().Signal)
         {
             player.AddState(PlayerStats.Push);
             door = other.transform.parent.transform.parent.GetComponent<Door>();
             Debug.Log("밀쳐");
-            
-            Rigidbody2D playerRigidbody = player.GetPlayerObj(PlayerObj.Body).GetComponent<Rigidbody2D>();
-            playerRigidbody.velocity = new Vector2(door.push * 10, playerRigidbody.velocity.y);
+
+            // 플레이어의 Rigidbody2D 가져오기
+            playerRigidbody = player.GetPlayerObj(PlayerObj.Body).GetComponent<Rigidbody2D>();
+            if (playerRigidbody == null)
+            {
+                Debug.LogError("플레이어에 Rigidbody2D가 필요합니다.");
+                return;
+            }
+
+            // 부드럽게 이동하는 코루틴 시작
+            Vector3 targetPos = door.returnPos().transform.position;
+            StartCoroutine(MoveToPosition(targetPos, moveDuration));
+
+            pcol = player.GetPlayerObj(PlayerObj.Body).GetComponent<Collider2D>();
+            dcol = other.GetComponent<Collider2D>();
+            Physics2D.IgnoreCollision(pcol, dcol, true);
         }
     }
 
@@ -70,7 +90,7 @@ public class BodyCollide : MonoBehaviour
             //Debug.Log("몸  바닥 떨어짐");
         }
         //-------------------------------------
-        if ((other.CompareTag("Head") && name == "body_combine_check"))
+        if (other.CompareTag("Head") && name == "body_combine_check")
         {
             player.RemoveState(PlayerStats.CanCombine);
         }
@@ -79,11 +99,12 @@ public class BodyCollide : MonoBehaviour
         {
             _collideDoor = false;
             Debug.Log("밀쳐 콜라이더 나왔어");
-            if (player.IsContainState(PlayerStats.Push))
-            {
-                player.RemoveState(PlayerStats.Push);
-                Debug.Log("ㄴㄴ");
-            }
+            // if (player.IsContainState(PlayerStats.Push))
+            // {
+            //     player.RemoveState(PlayerStats.Push);
+            //     Debug.Log("ㄴㄴ");
+            //     Physics2D.IgnoreCollision(pcol, dcol, true);
+            // }
         }
         //-------------------------------------
         /*if (other.CompareTag("Door") && other.name == "door_tile" && name == "Body" && !player.IsContainState(PlayerStats.IsCombine) && other.transform.parent.transform.parent.GetComponent<Door>().DoorType == "UpDown" && !_collideDoor)
@@ -91,6 +112,29 @@ public class BodyCollide : MonoBehaviour
             player.RemoveState(PlayerStats.Push);
             Debug.Log("ㄴㄴ");
         }*/
+    }
+    
+    private IEnumerator MoveToPosition(Vector3 targetPosition, float duration)
+    {
+        Vector3 startPosition = playerRigidbody.position;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsedTime / duration); // 시간 비율 계산
+            Vector2 newPosition = Vector2.Lerp(startPosition, targetPosition, t); // 위치 보간
+            playerRigidbody.MovePosition(new Vector2(newPosition.x, playerRigidbody.position.y)); // Y축은 유지하고 X축만 이동
+
+            yield return null; // 다음 프레임까지 대기
+        }
+
+        // 최종적으로 정확한 타겟 위치로 이동
+        playerRigidbody.MovePosition(new Vector2(targetPosition.x, playerRigidbody.position.y));
+        
+        player.RemoveState(PlayerStats.Push);
+        Debug.Log("ㄴㄴ");
+        Physics2D.IgnoreCollision(pcol, dcol, false);
     }
 
     public void Update()

@@ -23210,6 +23210,10 @@ PrefabInstance:
       propertyPath: SignalType
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4714898929491242407, guid: 01c18077a1a554d93a0060b03a4c9b24, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.7
+      objectReference: {fileID: 0}
     - target: {fileID: 9014816789308005442, guid: 01c18077a1a554d93a0060b03a4c9b24, type: 3}
       propertyPath: m_Name
       value: Door 2

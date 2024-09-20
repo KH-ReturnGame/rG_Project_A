@@ -57,10 +57,6 @@ public class PlayerMovement : MonoBehaviour
         {
             _nowRigidbody.velocity = new Vector2(_movementInputDirection * movementSpeed, _nowRigidbody.velocity.y);
         }
-        else
-        {
-            
-        }
     }
     
     //좌우 입력받기
