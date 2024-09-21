@@ -21,5 +21,13 @@ public class Level_3_Manager : MonoBehaviour
         {
             GameManager.Instance.LoadMainAndLevel(4);
         }
+        
+        if((other.CompareTag("Body") || other.CompareTag("Head") || other.CompareTag("Arrow")) && !GameObject.FindWithTag("Player").GetComponent<Player>().IsContainState(PlayerStats.IsCombine))
+        {
+            GameManager.Instance.LoadMainAndLevel(PlayerPrefs.GetInt("level"));
+            GameManager.Instance.isPaused = false;
+            GameManager.Instance.isEscMenuView = false;
+            Time.timeScale = 1;
+        }
     }
 }
