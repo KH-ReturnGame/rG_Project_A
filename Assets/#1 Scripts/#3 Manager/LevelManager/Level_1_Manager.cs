@@ -12,7 +12,7 @@ public class Level_1_Manager : MonoBehaviour
     public Transform cam;
     public void Awake()
     {
-        GameManager.Instance.ResetPlayer(head,body,arrow,cam);
+        GameManager.Instance.ResetPlayer(head,body,arrow,cam,true,true,false);
     }
 
     private void OnTriggerEnter2D(Collider2D other)

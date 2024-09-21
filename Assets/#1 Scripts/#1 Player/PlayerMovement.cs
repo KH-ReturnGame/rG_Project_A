@@ -137,7 +137,7 @@ public class PlayerMovement : MonoBehaviour
         {
             case "q":
             {
-                if(controlMode == "Head" || player.IsContainState(PlayerStats.IsCombine)) return;
+                if(controlMode == "Head" || player.IsContainState(PlayerStats.IsCombine) || !GameManager.Instance.useHead) return;
                 controlMode = "Head";
                 _arrow.GetComponent<ArrowController>().ActivateArrow(false);
                 _arrow.GetComponent<PolygonCollider2D>().isTrigger = false;
@@ -148,7 +148,7 @@ public class PlayerMovement : MonoBehaviour
             }
             case "leftShift":
             {
-                if(controlMode == "Arrow") return;
+                if(controlMode == "Arrow" || !GameManager.Instance.useArrow) return;
                 controlMode = "Arrow";
                 _arrow.GetComponent<ArrowController>().ActivateArrow(true);
                 _arrow.GetComponent<PolygonCollider2D>().isTrigger = true;
@@ -156,7 +156,7 @@ public class PlayerMovement : MonoBehaviour
             }
             case "e":
             {
-                if(controlMode == "Body") return;
+                if(controlMode == "Body" || !GameManager.Instance.useBody) return;
                 controlMode = "Body";
                 _arrow.GetComponent<ArrowController>().ActivateArrow(false);
                 _arrow.GetComponent<PolygonCollider2D>().isTrigger = false;

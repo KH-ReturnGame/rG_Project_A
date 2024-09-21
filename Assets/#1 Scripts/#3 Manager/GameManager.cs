@@ -32,6 +32,11 @@ public class GameManager : MonoBehaviour
     public bool isPlayGame;
     public bool isLoding;
     
+    //레벨 상태관련
+    public bool useHead;
+    public bool useBody;
+    public bool useArrow;
+    
     //씬로드 세팅 여부
     //public bool isReset = false;
     
@@ -284,17 +289,22 @@ public class GameManager : MonoBehaviour
         SL.LoadMainAndLevel(level);
     }
 
-    public void ResetPlayer(Transform head, Transform body, Transform arrow, Transform cam)
+    public void ResetPlayer(Transform head, Transform body, Transform arrow, Transform cam, bool usehead, bool usebody, bool usearrow)
     {
         isPlayGame = true;
+
+        useHead = usehead;
+        useBody = usebody;
+        useArrow = usearrow;
         
         Player player = GameObject.FindWithTag("Player").GetComponent<Player>();
         player.GetPlayerObj(PlayerObj.Head).GetComponent<Transform>().position = head.position;
         player.GetPlayerObj(PlayerObj.Body).GetComponent<Transform>().position = body.position;
         player.GetPlayerObj(PlayerObj.Arrow).GetComponent<Transform>().position = arrow.position;
-        //GameObject.FindWithTag("camera").transform.position = cam.position;
-        //GameObject.FindWithTag("MainCamera").GetComponent<CameraMove>().Init();
-        //isReset = true;
+        
+        player.GetPlayerObj(PlayerObj.Head).SetActive(usehead);
+        player.GetPlayerObj(PlayerObj.Body).SetActive(usebody);
+        player.GetPlayerObj(PlayerObj.Arrow).SetActive(usearrow);
 
         if (PlayerPrefs.GetInt("level")!=1 &&CheckLoadScene("Level_" + (PlayerPrefs.GetInt("level") - 1)))
         {
