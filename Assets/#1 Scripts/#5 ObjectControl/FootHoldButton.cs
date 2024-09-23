@@ -115,15 +115,15 @@ public class FootHoldButton : MonoBehaviour
         //그리고 눌리는 방향이 y방향인지
         if (downDirection == "Y")
         {
-            transform.position = new Vector3(transform.position.x, transform.position.y - 0.2f*flip*f,
-                transform.position.z);
+            transform.GetChild(0).transform.position = new Vector3(transform.GetChild(0).transform.position.x, transform.GetChild(0).transform.position.y - 0.1f*flip*f,
+                transform.GetChild(0).transform.position.z);
         }
         
         //눌리는 방향이 x방향인지
         else
         {
-            transform.position = new Vector3(transform.position.x - 0.2f*flip*f, transform.position.y,
-                transform.position.z);
+            transform.GetChild(0).transform.position = new Vector3(transform.GetChild(0).transform.position.x - 0.1f*flip*f, transform.GetChild(0).transform.position.y,
+                transform.GetChild(0).transform.position.z);
         }
     }
 
@@ -135,12 +135,12 @@ public class FootHoldButton : MonoBehaviour
         if (signal)
         {
             ColorUtility.TryParseHtmlString("#96FF7F",out color);
-            GetComponent<SpriteRenderer>().color = color;
+            transform.GetChild(0).GetComponent<SpriteRenderer>().color = color;
         }
         else
         {
             ColorUtility.TryParseHtmlString("#919191",out color);
-            GetComponent<SpriteRenderer>().color = color;
+            transform.GetChild(0).GetComponent<SpriteRenderer>().color = color;
         }
     }
 }
