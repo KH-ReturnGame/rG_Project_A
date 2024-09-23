@@ -24,7 +24,7 @@ public class SettingManager : MonoBehaviour
     // Start
     private void Start()
     {
-        // 해상도 설정
+        // 해상도 설정 리스트 추가
         resolutions.Add(new Resolution { width = 1280, height = 720 });
         resolutions.Add(new Resolution { width = 1280, height = 800 });
         resolutions.Add(new Resolution { width = 1440, height = 900 });
@@ -43,7 +43,6 @@ public class SettingManager : MonoBehaviour
         for (int i = 0; i < resolutions.Count; i++)
         {
             string option = resolutions[i].width + " x " + resolutions[i].height;
-            // 가장 적합한 해상도에 별표를 표기합니다.
             if (resolutions[i].width == Screen.currentResolution.width &&
                 resolutions[i].height == Screen.currentResolution.height)
             {
@@ -53,18 +52,26 @@ public class SettingManager : MonoBehaviour
             options.Add(option);
         }
         resolutionDropdown.AddOptions(options);
-        
+    
         fullscreenDropdown.AddOptions(fullscreenModes);
 
-        // 저장된 해상도 및 전체화면 모드 로드
-        LoadResolution();
+        // 해상도 및 전체화면 모드 로드 (이미 설정된 값이 있는지 확인)
+        if (!PlayerPrefs.HasKey("ResolutionIndex"))
+        {
+            PlayerPrefs.SetInt("ResolutionIndex", optimalResolutionIndex);
+            SetResolution(optimalResolutionIndex); // 처음 실행될 때만 설정
+        }
+        else
+        {
+            LoadResolution(); // 설정된 값이 있으면 로드
+        }
+
         LoadFullscreenMode();
 
         // 드롭다운 이벤트 리스너 등록
         resolutionDropdown.onValueChanged.AddListener(SetResolution);
         fullscreenDropdown.onValueChanged.AddListener(SetFullscreenMode);
     }
-
     // 해상도 설정 로드
     private void LoadResolution()
     {
