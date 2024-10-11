@@ -435,6 +435,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 730492495}
     m_Modifications:
+    - target: {fileID: 6040659819837664239, guid: 2e965aaa61b824c40837c6f7aef70d5a, type: 3}
+      propertyPath: SignalType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6433807957502365363, guid: 2e965aaa61b824c40837c6f7aef70d5a, type: 3}
       propertyPath: SignalType
       value: 1
@@ -501,6 +505,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 730492495}
     m_Modifications:
+    - target: {fileID: 6040659819837664239, guid: 2e965aaa61b824c40837c6f7aef70d5a, type: 3}
+      propertyPath: SignalType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6433807957502365363, guid: 2e965aaa61b824c40837c6f7aef70d5a, type: 3}
       propertyPath: SignalType
       value: 1
