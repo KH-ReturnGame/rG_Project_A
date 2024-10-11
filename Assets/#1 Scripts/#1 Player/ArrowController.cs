@@ -170,10 +170,15 @@ public class ArrowController : MonoBehaviour
             }
             
             player.RemoveState(PlayerStats.IsOnClick);
-            if (!player.IsContainState(PlayerStats.IsCollisionMethod2))
+            /*if (!player.IsContainState(PlayerStats.IsCollisionMethod2))
             {
                 player.AddState(PlayerStats.IsFly);
             }
+            else
+            {
+                Debug.Log("날리는거 아니다");
+            }*/
+            player.AddState(PlayerStats.IsFly);
 
             if (!GameManager.Instance.isPaused)
             {
