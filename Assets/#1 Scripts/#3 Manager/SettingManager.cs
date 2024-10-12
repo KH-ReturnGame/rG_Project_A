@@ -10,6 +10,7 @@ public class SettingManager : MonoBehaviour
     public TMP_Dropdown resolutionDropdown;
     private List<Resolution> resolutions = new List<Resolution>();
     private int optimalResolutionIndex = 0;
+    private Resolution currentResolution; // 현재 해상도를 저장하는 변수
 
     // 전체화면 모드 설정
     public TMP_Dropdown fullscreenDropdown;
@@ -42,6 +43,9 @@ public class SettingManager : MonoBehaviour
         resolutions.Add(new Resolution { width = 2880, height = 1800 });
         resolutions.Add(new Resolution { width = 3480, height = 2160 });
 
+        // 현재 해상도 저장
+        currentResolution = Screen.currentResolution;
+        
         resolutionDropdown.ClearOptions();
         List<string> options = new List<string>();
         for (int i = 0; i < resolutions.Count; i++)
@@ -95,15 +99,20 @@ public class SettingManager : MonoBehaviour
         int savedFullscreenMode = PlayerPrefs.GetInt("FullscreenMode", (int)currentMode);
         fullscreenDropdown.value = savedFullscreenMode;
         fullscreenDropdown.RefreshShownValue();
-        SetFullscreenMode(savedFullscreenMode);
+        //SetFullscreenMode(savedFullscreenMode);
     }
 
     // 해상도 설정
     public void SetResolution(int resolutionIndex)
     {
-        PlayerPrefs.SetInt("ResolutionIndex", resolutionIndex);
-        Resolution resolution = resolutions[resolutionIndex];
-        Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+        // 현재 해상도와 선택된 해상도를 비교하여 다를 경우에만 설정 변경
+        Resolution selectedResolution = resolutions[resolutionIndex];
+        if (selectedResolution.width != currentResolution.width || selectedResolution.height != currentResolution.height)
+        {
+            PlayerPrefs.SetInt("ResolutionIndex", resolutionIndex);
+            Screen.SetResolution(selectedResolution.width, selectedResolution.height, Screen.fullScreen);
+            currentResolution = selectedResolution; // 새로운 해상도를 현재 해상도로 저장
+        }
     }
 
     // 전체화면 모드 설정
