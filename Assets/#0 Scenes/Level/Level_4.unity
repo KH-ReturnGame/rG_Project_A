@@ -1093,7 +1093,7 @@ CompositeCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -1131,6 +1131,24 @@ CompositeCollider2D:
         Y: -90000000
       - X: -230000000
         Y: -90000000
+  - m_Collider: {fileID: 208898981}
+    m_ColliderPaths:
+    - - X: -30000000
+        Y: 250000000
+      - X: -130000000
+        Y: 250000000
+      - X: -130000000
+        Y: -20000000
+      - X: -30000000
+        Y: -20000000
+    - - X: -120000000
+        Y: -10000000
+      - X: -120000000
+        Y: 240000000
+      - X: -40000000
+        Y: 240000000
+      - X: -40000000
+        Y: -10000000
   m_CompositePaths:
     m_Paths:
     - - {x: -23.000029, y: -9}
@@ -1147,6 +1165,14 @@ CompositeCollider2D:
       - {x: -28.000029, y: 34}
       - {x: -29, y: 33.999973}
       - {x: -28.999971, y: -9}
+    - - {x: -3.0000293, y: -2}
+      - {x: -3.0000293, y: 25}
+      - {x: -13, y: 24.999971}
+      - {x: -12.99997, y: -2}
+    - - {x: -4, y: -0.9999706}
+      - {x: -12, y: -0.9999706}
+      - {x: -11.99997, y: 24}
+      - {x: -4, y: 23.999971}
   m_VertexDistance: 0.0005
   m_OffsetDistance: 0.00005
 --- !u!50 &208898980

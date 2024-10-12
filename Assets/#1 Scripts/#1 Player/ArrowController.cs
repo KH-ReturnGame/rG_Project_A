@@ -314,7 +314,7 @@ public class ArrowController : MonoBehaviour
                 ChangeArrow("1");
                 _spriteRenderer.sprite = sprites[0];
 
-                if ((other.transform.CompareTag("ground") || other.transform.CompareTag("Door")|| other.transform.CompareTag("arrow_wall")) && !_head.activeSelf && !player.IsContainState(PlayerStats.IsCombine))
+                if ((other.transform.CompareTag("ground") || other.transform.CompareTag("Door")/*|| other.transform.CompareTag("arrow_wall")*/) && !_head.activeSelf && !player.IsContainState(PlayerStats.IsCombine))
                 {
                     _head.transform.position = other.contacts[0].point + other.contacts[0].normal * 1f; // 땅을 넘지 않게 약간 떨어진 위치로 설정
                     _head.SetActive(true);
