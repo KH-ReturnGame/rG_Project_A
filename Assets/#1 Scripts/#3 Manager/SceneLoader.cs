@@ -206,14 +206,18 @@ public class SceneLoader : MonoBehaviour
         {
             GameManager.Instance.LoadMainAndLevel(num);
         }
-        
-        if(other.CompareTag("Arrow")||((other.CompareTag("Body") || other.CompareTag("Head")) && !GameObject.FindWithTag("Player").GetComponent<Player>().IsContainState(PlayerStats.IsCombine)))
+
+        if (num != 2 && num != 3)
         {
-            GameManager.Instance.LoadMainAndLevel(PlayerPrefs.GetInt("level"));
-            GameManager.Instance.isPaused = false;
-            GameManager.Instance.isEscMenuView = false;
-            Time.timeScale = 1;
+            if(other.CompareTag("Arrow")||((other.CompareTag("Body") || other.CompareTag("Head")) && !GameObject.FindWithTag("Player").GetComponent<Player>().IsContainState(PlayerStats.IsCombine)))
+            {
+                GameManager.Instance.LoadMainAndLevel(PlayerPrefs.GetInt("level"));
+                GameManager.Instance.isPaused = false;
+                GameManager.Instance.isEscMenuView = false;
+                Time.timeScale = 1;
+            }
         }
+        
     }
     
 }
