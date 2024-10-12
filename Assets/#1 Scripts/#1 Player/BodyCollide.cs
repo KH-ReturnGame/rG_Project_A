@@ -27,8 +27,7 @@ public class BodyCollide : MonoBehaviour
     {
         if ((other.CompareTag("ground") && name == "body_ground_check")||
             (other.CompareTag("Head") && name == "body_ground_check")||
-            (other.CompareTag("Door") && name == "body_ground_check")||
-            (other.CompareTag("Arrow") && name == "body_ground_check"))
+            (other.CompareTag("Door") && name == "body_ground_check"))
         {
             player.AddState(PlayerStats.BodyIsGround);
             _collideCount++;

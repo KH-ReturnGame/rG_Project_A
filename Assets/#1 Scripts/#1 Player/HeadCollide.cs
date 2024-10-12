@@ -33,7 +33,8 @@ public class HeadCollide : MonoBehaviour
     {
         if ((other.CompareTag("ground") && name == "head_ground_check")||
             (other.CompareTag("Body") && name == "head_ground_check")||
-            (other.CompareTag("Door") && name == "head_ground_check"))
+            (other.CompareTag("Door") && name == "head_ground_check")||
+            (other.CompareTag("Arrow") && name == "body_ground_check"))
         {
             player.AddState(PlayerStats.HeadIsGround);
             _collideCount++;
