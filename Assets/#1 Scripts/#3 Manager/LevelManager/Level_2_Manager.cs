@@ -16,10 +16,6 @@ public class Level_2_Manager : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if ((other.CompareTag("Body") || other.CompareTag("Head") || other.CompareTag("Arrow")) && !GameManager.Instance.CheckLoadScene("Level_3") &&
-            (GameObject.FindWithTag("Player").GetComponent<Player>().IsContainState(PlayerStats.IsCombine)))
-        {
-            GameManager.Instance.LoadMainAndLevel(3);
-        }
+        GameManager.Instance.CheckChangeScene(other,2);
     }
 }

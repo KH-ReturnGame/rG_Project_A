@@ -319,6 +319,11 @@ public class GameManager : MonoBehaviour
         UnLoadScene("SceneLoad");
     }
 
+    public void CheckChangeScene(Collider2D other, int num)
+    {
+        SL.CheckChangeScene(other,num);
+    }
+
     //카메라 관리
     public void ChangeCameraTarget(GameObject obj)
     {

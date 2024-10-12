@@ -197,4 +197,23 @@ public class SceneLoader : MonoBehaviour
         return SceneManager.GetSceneByName(scene.ToString()).isLoaded;
     }
     
+    //씬 전환
+    public void CheckChangeScene(Collider2D other, int num)
+    {
+        num += 1;
+        if ((other.CompareTag("Body") ) && !GameManager.Instance.CheckLoadScene("Level_"+num) &&
+            (GameObject.FindWithTag("Player").GetComponent<Player>().IsContainState(PlayerStats.IsCombine)))
+        {
+            GameManager.Instance.LoadMainAndLevel(num);
+        }
+        
+        if(other.CompareTag("Arrow")||((other.CompareTag("Body") || other.CompareTag("Head")) && !GameObject.FindWithTag("Player").GetComponent<Player>().IsContainState(PlayerStats.IsCombine)))
+        {
+            GameManager.Instance.LoadMainAndLevel(PlayerPrefs.GetInt("level"));
+            GameManager.Instance.isPaused = false;
+            GameManager.Instance.isEscMenuView = false;
+            Time.timeScale = 1;
+        }
+    }
+    
 }

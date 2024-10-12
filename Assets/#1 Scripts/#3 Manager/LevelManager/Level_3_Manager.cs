@@ -16,18 +16,6 @@ public class Level_3_Manager : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if ((other.CompareTag("Body") || other.CompareTag("Head") || other.CompareTag("Arrow")) && !GameManager.Instance.CheckLoadScene("Level_4") &&
-            (GameObject.FindWithTag("Player").GetComponent<Player>().IsContainState(PlayerStats.IsCombine)))
-        {
-            GameManager.Instance.LoadMainAndLevel(4);
-        }
-        
-        if(other.CompareTag("Arrow")||((other.CompareTag("Body") || other.CompareTag("Head")) && !GameObject.FindWithTag("Player").GetComponent<Player>().IsContainState(PlayerStats.IsCombine)))
-        {
-            GameManager.Instance.LoadMainAndLevel(PlayerPrefs.GetInt("level"));
-            GameManager.Instance.isPaused = false;
-            GameManager.Instance.isEscMenuView = false;
-            Time.timeScale = 1;
-        }
+        GameManager.Instance.CheckChangeScene(other,3);
     }
 }
