@@ -15,6 +15,10 @@ public class SettingManager : MonoBehaviour
     public TMP_Dropdown fullscreenDropdown;
     private List<string> fullscreenModes = new List<string> { "창모드", "전체화면", "전체화면 창모드" };
 
+    // 소리 슬라이더
+    public Slider bgm_slider;
+    public Slider sound_slider;
+
     // 세팅 메뉴 종료
     public void ExitSetting()
     {
@@ -52,10 +56,9 @@ public class SettingManager : MonoBehaviour
             options.Add(option);
         }
         resolutionDropdown.AddOptions(options);
-    
         fullscreenDropdown.AddOptions(fullscreenModes);
 
-        // 해상도 및 전체화면 모드 로드 (이미 설정된 값이 있는지 확인)
+        // 해상도 및 전체화면 모드 로드
         if (!PlayerPrefs.HasKey("ResolutionIndex"))
         {
             PlayerPrefs.SetInt("ResolutionIndex", optimalResolutionIndex);
@@ -67,11 +70,15 @@ public class SettingManager : MonoBehaviour
         }
 
         LoadFullscreenMode();
+        LoadAudioSettings(); // 오디오 설정 로드
 
-        // 드롭다운 이벤트 리스너 등록
+        // 이벤트 리스너 등록
         resolutionDropdown.onValueChanged.AddListener(SetResolution);
         fullscreenDropdown.onValueChanged.AddListener(SetFullscreenMode);
+        bgm_slider.onValueChanged.AddListener(ChangeBgmSlider);
+        sound_slider.onValueChanged.AddListener(ChangeSoundSlider);
     }
+
     // 해상도 설정 로드
     private void LoadResolution()
     {
@@ -84,7 +91,6 @@ public class SettingManager : MonoBehaviour
     // 전체화면 모드 설정 로드
     private void LoadFullscreenMode()
     {
-        // 현재 화면 모드 가져오기
         FullScreenMode currentMode = Screen.fullScreenMode;
         int savedFullscreenMode = PlayerPrefs.GetInt("FullscreenMode", (int)currentMode);
         fullscreenDropdown.value = savedFullscreenMode;
@@ -116,5 +122,40 @@ public class SettingManager : MonoBehaviour
                 Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
                 break;
         }
+    }
+
+    // BGM 슬라이더 값 변경
+    public void ChangeBgmSlider(float value)
+    {
+        PlayerPrefs.SetFloat("BgmVolume", value); // 값 저장
+        GameObject[] audios = GameObject.FindGameObjectsWithTag("bgm");
+        foreach (var audio in audios)
+        {
+            audio.GetComponent<AudioSource>().volume = 0.4f * value;
+        }
+    }
+
+    // 사운드 슬라이더 값 변경
+    public void ChangeSoundSlider(float value)
+    {
+        PlayerPrefs.SetFloat("SoundVolume", value); // 값 저장
+        GameObject[] audios = GameObject.FindGameObjectsWithTag("sound");
+        foreach (var audio in audios)
+        {
+            audio.GetComponent<AudioSource>().volume = value;
+        }
+    }
+
+    // 오디오 설정 로드
+    public void LoadAudioSettings()
+    {
+        float savedBgmVolume = PlayerPrefs.GetFloat("BgmVolume", 1f); // 기본값 1
+        float savedSoundVolume = PlayerPrefs.GetFloat("SoundVolume", 1f); // 기본값 1
+
+        bgm_slider.value = savedBgmVolume;
+        sound_slider.value = savedSoundVolume;
+
+        ChangeBgmSlider(savedBgmVolume); // 로드된 값 적용
+        ChangeSoundSlider(savedSoundVolume); // 로드된 값 적용
     }
 }

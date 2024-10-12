@@ -61,6 +61,17 @@ public class GameManager : MonoBehaviour
         SL = GetComponent<SceneLoader>();
         SM = GetComponent<SignalManager>();
         
+        GameObject[] audios = GameObject.FindGameObjectsWithTag("bgm");
+        foreach (var audio in audios)
+        {
+            audio.GetComponent<AudioSource>().volume = 0.4f*PlayerPrefs.GetFloat("BgmVolume", 1f);
+        }
+        audios = GameObject.FindGameObjectsWithTag("sound");
+        foreach (var audio in audios)
+        {
+            audio.GetComponent<AudioSource>().volume = 0.4f*PlayerPrefs.GetFloat("SoundVolume", 1f);
+        }
+        
         //PlayerPrefs.SetInt("level",1);
     }
     

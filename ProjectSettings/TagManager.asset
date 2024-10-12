@@ -18,6 +18,8 @@ TagManager:
   - door_collide
   - DoorCheck
   - arrow_wall
+  - bgm
+  - sound
   layers:
   - Default
   - TransparentFX
