@@ -17,6 +17,7 @@ TagManager:
   - CombineCheck
   - door_collide
   - DoorCheck
+  - arrow_wall
   layers:
   - Default
   - TransparentFX
@@ -29,7 +30,7 @@ TagManager:
   - Arrow
   - Door
   - Player
-  - 
+  - arrow_wall
   - 
   - 
   - 

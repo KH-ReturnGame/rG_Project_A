@@ -241,18 +241,18 @@ public class ArrowController : MonoBehaviour
         foreach (var hit in hits)
         {
             hitObjects.Add(hit.collider.gameObject);
-            if (hit.transform.CompareTag("ground") || hit.transform.CompareTag("Door"))
+            if (hit.transform.CompareTag("ground") || hit.transform.CompareTag("Door") || hit.transform.CompareTag("arrow_wall"))
             {
                 hitpoint = hit.point;
                 break;
             }
         }
-        bool groundHit = hitObjects.Exists(obj => (obj.CompareTag("ground")||obj.CompareTag("Door")));
+        bool groundHit = hitObjects.Exists(obj => (obj.CompareTag("ground")||obj.CompareTag("Door")|| obj.CompareTag("arrow_wall")));
         if (groundHit && Vector2.Distance(hitpoint, transform.position) <= 2)
         {
             player.AddState(PlayerStats.IsArrowOnWall);
             player.AddState(PlayerStats.IsCollisionMethod2);
-            RaycastHit2D groundRaycast = Array.Find(hits, hit => hit.collider && (hit.collider.CompareTag("ground")||hit.collider.CompareTag("Door")));
+            RaycastHit2D groundRaycast = Array.Find(hits, hit => hit.collider && (hit.collider.CompareTag("ground")||hit.collider.CompareTag("Door")|| hit.collider.CompareTag("arrow_wall")));
 
             // ground 오브젝트와 충돌한 경우, transform의 위치를 조정하여 땅을 넘지 않도록 한다.
             Vector3 hitPoint = groundRaycast.point; // 충돌한 지점
@@ -314,7 +314,7 @@ public class ArrowController : MonoBehaviour
                 ChangeArrow("1");
                 _spriteRenderer.sprite = sprites[0];
 
-                if ((other.transform.CompareTag("ground") || other.transform.CompareTag("Door")) && !_head.activeSelf && !player.IsContainState(PlayerStats.IsCombine))
+                if ((other.transform.CompareTag("ground") || other.transform.CompareTag("Door")|| other.transform.CompareTag("arrow_wall")) && !_head.activeSelf && !player.IsContainState(PlayerStats.IsCombine))
                 {
                     _head.transform.position = other.contacts[0].point + other.contacts[0].normal * 1f; // 땅을 넘지 않게 약간 떨어진 위치로 설정
                     _head.SetActive(true);
