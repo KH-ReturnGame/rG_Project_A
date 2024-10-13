@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.U2D;
 
 public class SettingManager : MonoBehaviour
 {
@@ -112,8 +113,21 @@ public class SettingManager : MonoBehaviour
             PlayerPrefs.SetInt("ResolutionIndex", resolutionIndex);
             Screen.SetResolution(selectedResolution.width, selectedResolution.height, Screen.fullScreen);
             currentResolution = selectedResolution; // 새로운 해상도를 현재 해상도로 저장
+
+            // 해상도 변경 후 Pixel Perfect Camera 업데이트
+            /*var pixelPerfectCamera = Camera.main.GetComponent<PixelPerfectCamera>();
+            if (pixelPerfectCamera != null)
+            {
+                
+                
+                pixelPerfectCamera.assetsPPU = 24; // 혹은 사용자가 정의한 다른 값으로 설정
+                pixelPerfectCamera.refResolutionX = selectedResolution.width;
+                pixelPerfectCamera.refResolutionY = selectedResolution.height;
+            }*/
         }
     }
+
+
 
     // 전체화면 모드 설정
     public void SetFullscreenMode(int modeIndex)
