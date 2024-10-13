@@ -10,6 +10,8 @@ public class Level_1_Manager : MonoBehaviour
     public Transform body;
     public Transform arrow;
     public Transform cam;
+    
+    
     public void Awake()
     {
         GameManager.Instance.ResetPlayer(head,body,arrow,cam,true,true,false);
