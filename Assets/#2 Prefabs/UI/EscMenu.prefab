@@ -380,7 +380,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uC124\uC815"
+  m_text: Setting
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ebbbf215723634508b2727ea7949f021, type: 2}
   m_sharedMaterial: {fileID: -9072510167425914012, guid: ebbbf215723634508b2727ea7949f021, type: 2}
@@ -693,7 +693,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uAC8C\uC784 \uC885\uB8CC"
+  m_text: EXIT
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ebbbf215723634508b2727ea7949f021, type: 2}
   m_sharedMaterial: {fileID: -9072510167425914012, guid: ebbbf215723634508b2727ea7949f021, type: 2}
@@ -828,7 +828,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uB2E4\uC2DC \uC2DC\uC791"
+  m_text: Restart
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ebbbf215723634508b2727ea7949f021, type: 2}
   m_sharedMaterial: {fileID: -9072510167425914012, guid: ebbbf215723634508b2727ea7949f021, type: 2}
@@ -1207,7 +1207,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uBA54\uB274\uD654\uBA74"
+  m_text: Menu
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ebbbf215723634508b2727ea7949f021, type: 2}
   m_sharedMaterial: {fileID: -9072510167425914012, guid: ebbbf215723634508b2727ea7949f021, type: 2}
