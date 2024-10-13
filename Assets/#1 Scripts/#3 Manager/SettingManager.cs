@@ -15,7 +15,7 @@ public class SettingManager : MonoBehaviour
 
     // 전체화면 모드 설정
     public TMP_Dropdown fullscreenDropdown;
-    private List<string> fullscreenModes = new List<string> { "창모드", "전체화면", "전체화면 창모드" };
+    private List<string> fullscreenModes = new List<string> { "Windowed", "ExclusiveFullScreen", "FullScreenWindow" };
 
     // 소리 슬라이더
     public Slider bgm_slider;
