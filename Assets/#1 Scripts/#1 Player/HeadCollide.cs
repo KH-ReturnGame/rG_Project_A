@@ -50,6 +50,12 @@ public class HeadCollide : MonoBehaviour
             return;
         }
         //-------------------------------------
+        // if (other.CompareTag("Body"))
+        // {
+        //     Debug.Log("바꿈");
+        //     player.GetPlayerObj(PlayerObj.Body).GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionX;
+        //     player.GetPlayerObj(PlayerObj.Body).GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
+        // }
     }
 
     public void OnCollisionEnter2D(Collision2D other)
@@ -106,6 +112,12 @@ public class HeadCollide : MonoBehaviour
             _collideDoor = false;
             //Debug.Log("밀쳐 콜라이더 나왔어");
         }
+        // if (other.CompareTag("Body"))
+        // {
+        //     Debug.Log("안바꿈");
+        //     player.GetPlayerObj(PlayerObj.Body).GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
+        //     player.GetPlayerObj(PlayerObj.Body).GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
+        // }
     }
     private IEnumerator MoveToPosition(Vector3 targetPosition, float duration)
     {
