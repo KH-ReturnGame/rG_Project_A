@@ -1,5 +1,6 @@
 using System;
 using Unity.VisualScripting;
+using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
@@ -103,8 +104,13 @@ public class PlayerMovement : MonoBehaviour
                 _spriteRenderer.sprite = sprites[1];
                 _head.SetActive(false);
 
-                _body.GetComponents<PolygonCollider2D>()[1].enabled = true;
-                _body.GetComponents<PolygonCollider2D>()[0].enabled = false;
+                AnimatorStateInfo stateInfo = _body.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0);
+                float currentNormalizedTime = stateInfo.normalizedTime % 1;
+                _body.GetComponent<Animator>().SetBool("isCombine",true);
+                // 새로운 상태에서 동일한 프레임 위치부터 시작하도록 설정
+                _body.GetComponent<Animator>().Play("ver2_combine_anime_idle", 0, currentNormalizedTime);
+                // _body.GetComponents<PolygonCollider2D>()[1].enabled = true;
+                // _body.GetComponents<PolygonCollider2D>()[0].enabled = false;
             }
             else if(player.IsContainState(PlayerStats.IsCombine))
             {
@@ -118,8 +124,13 @@ public class PlayerMovement : MonoBehaviour
                     _body.GetComponent<Transform>().position + new Vector3(0, 2, 0);
                 _head.SetActive(true);
 
-                _body.GetComponents<PolygonCollider2D>()[1].enabled = false;
-                _body.GetComponents<PolygonCollider2D>()[0].enabled = true;
+                AnimatorStateInfo stateInfo = _body.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0);
+                float currentNormalizedTime = stateInfo.normalizedTime % 1;
+                _body.GetComponent<Animator>().SetBool("isCombine",false);
+                _body.GetComponent<Animator>().Play("ver2_body_anime_stop", 0, currentNormalizedTime);
+                _head.GetComponent<Transform>().rotation = Quaternion.Euler(0, 0, 0);
+                // _body.GetComponents<PolygonCollider2D>()[1].enabled = false;
+                // _body.GetComponents<PolygonCollider2D>()[0].enabled = true;
             }
         }
         
