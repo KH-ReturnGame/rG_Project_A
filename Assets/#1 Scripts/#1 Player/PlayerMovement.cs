@@ -1,6 +1,8 @@
 using System;
 using Unity.VisualScripting;
-using UnityEditor.Animations;
+#if UNITY_EDITOR
+using UnityEditor.Animations; // Editor 관련 코드를 감쌉니다.
+#endif
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
@@ -109,8 +111,8 @@ public class PlayerMovement : MonoBehaviour
                 _body.GetComponent<Animator>().SetBool("isCombine",true);
                 // 새로운 상태에서 동일한 프레임 위치부터 시작하도록 설정
                 _body.GetComponent<Animator>().Play("ver2_combine_anime_idle", 0, currentNormalizedTime);
-                // _body.GetComponents<PolygonCollider2D>()[1].enabled = true;
-                // _body.GetComponents<PolygonCollider2D>()[0].enabled = false;
+                _body.GetComponents<PolygonCollider2D>()[1].enabled = true;
+                _body.GetComponents<PolygonCollider2D>()[0].enabled = false;
             }
             else if(player.IsContainState(PlayerStats.IsCombine))
             {
@@ -129,8 +131,8 @@ public class PlayerMovement : MonoBehaviour
                 _body.GetComponent<Animator>().SetBool("isCombine",false);
                 _body.GetComponent<Animator>().Play("ver2_body_anime_stop", 0, currentNormalizedTime);
                 _head.GetComponent<Transform>().rotation = Quaternion.Euler(0, 0, 0);
-                // _body.GetComponents<PolygonCollider2D>()[1].enabled = false;
-                // _body.GetComponents<PolygonCollider2D>()[0].enabled = true;
+                _body.GetComponents<PolygonCollider2D>()[1].enabled = false;
+                _body.GetComponents<PolygonCollider2D>()[0].enabled = true;
             }
         }
         
