@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
     private float _movementInputDirection;
     public float movementSpeed;
     public float jumpForce;
+    public float rotationForce = 30f; // 회전력의 크기
 
     //몸 관련
     private GameObject _body;
@@ -59,6 +60,15 @@ public class PlayerMovement : MonoBehaviour
         if (!player.IsContainState(PlayerStats.Push))
         {
             _nowRigidbody.velocity = new Vector2(_movementInputDirection * movementSpeed, _nowRigidbody.velocity.y);
+
+            if (_nowRigidbody == _headRigidbody)
+            {
+                // 이동 방향과 반대 방향으로 회전하기 위해 음수를 곱함
+                float torque = -_movementInputDirection * rotationForce;
+
+                // Z축을 기준으로 회전력 적용 (2D에서는 Z축 회전)
+                _nowRigidbody.AddTorque(torque);
+            }
         }
     }
     
