@@ -3,9 +3,8 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class CustomDistanceJoint : MonoBehaviour
 {
-    public Rigidbody2D connectedBody;   // 연결할 다른 Rigidbody2D
-    public float targetDistance = 2f;   // 유지할 고정 거리
-    public float dampingFactor = 0.1f;  // 속도에 비례하는 감쇠 계수
+    public Rigidbody2D connectedBody; // 연결할 다른 Rigidbody2D
+    public float targetDistance = 2f; // 유지할 고정 거리
 
     private Rigidbody2D rb;
 
@@ -41,31 +40,32 @@ public class CustomDistanceJoint : MonoBehaviour
         // 거리 오차 계산
         float distanceError = currentDistance - targetDistance;
 
+        if (Mathf.Approximately(distanceError, 0f))
+            return; // 거리 오차가 없으면 보정 필요 없음
+
         // 방향 벡터 계산
         Vector2 direction = delta / currentDistance;
 
+        // 보정 속도 계산
+        float correctionRate = distanceError / Time.fixedDeltaTime;
+
         // 두 객체의 상대 속도 계산
         Vector2 relativeVelocity = rb.velocity - connectedBody.velocity;
-
-        // 상대 속도의 거리 방향 성분
         float velocityAlongDirection = Vector2.Dot(relativeVelocity, direction);
 
-        // 감쇠력 계산 (속도에 비례)
-        float dampingForce = velocityAlongDirection * dampingFactor;
-
-        // 필요한 보정 속도 계산 (감쇠 적용)
-        float correctionRate = (distanceError / Time.fixedDeltaTime) - dampingForce;
+        // 필요한 보정 속도
+        float correctionSpeed = correctionRate - velocityAlongDirection;
 
         // 질량에 따른 보정량 분배
         float totalMass = rb.mass + connectedBody.mass;
         float ratioA = rb.mass / totalMass;
-        float ratioB = connectedBody.mass / totalMass;
 
-        // 보정 충격량 계산
-        Vector2 correctionImpulse = direction * (correctionRate * totalMass);
+        Debug.Log(Mathf.Sqrt(Mathf.Pow(rb.velocity.x,2) + Mathf.Pow(rb.velocity.y,2)));
+        // 보정 힘 계산
+        Vector2 correctionImpulse = direction * (correctionSpeed * totalMass);
 
         // 힘 적용
-        rb.AddForce(correctionImpulse * ratioA, ForceMode2D.Impulse);
-        connectedBody.AddForce(-correctionImpulse * ratioB, ForceMode2D.Impulse);
+        rb.AddForce(correctionImpulse * ratioA / Mathf.Max(Mathf.Sqrt(Mathf.Pow(rb.velocity.x,2) + Mathf.Pow(rb.velocity.y,2)),1), ForceMode2D.Impulse);
+        //connectedBody.AddForce(-correctionImpulse * ratioB, ForceMode2D.Impulse);
     }
 }
