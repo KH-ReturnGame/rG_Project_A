@@ -5,6 +5,9 @@ public class CustomDistanceJoint : MonoBehaviour
 {
     public Rigidbody2D connectedBody; // 연결할 다른 Rigidbody2D
     public float targetDistance = 2f; // 유지할 고정 거리
+    public float maxSpeed = 5f; // 최대 속도 (이 값을 넘을 때 감속 효과 추가)
+    public float dampingFactor = 0.05f; // 감속을 위한 댐핑 비율 (조정 가능)
+    public float minSpeedForDamping = 2f; // 감속이 시작되는 최소 속도
 
     private Rigidbody2D rb;
 
@@ -58,14 +61,27 @@ public class CustomDistanceJoint : MonoBehaviour
 
         // 질량에 따른 보정량 분배
         float totalMass = rb.mass + connectedBody.mass;
-        float ratioA = rb.mass / totalMass;
+        float ratioA = connectedBody.mass / totalMass;
 
-        Debug.Log(Mathf.Sqrt(Mathf.Pow(rb.velocity.x,2) + Mathf.Pow(rb.velocity.y,2)));
         // 보정 힘 계산
         Vector2 correctionImpulse = direction * (correctionSpeed * totalMass);
 
+        // 속도 초과 시 감속 적용
+        float currentSpeed = rb.velocity.magnitude;
+        if (currentSpeed > maxSpeed)
+        {
+            float speedFactor = maxSpeed / currentSpeed;
+            correctionImpulse *= speedFactor;
+        }
+
+        // 추가: 일정 속도 이상일 때만 댐핑 적용
+        Vector2 dampingImpulse = Vector2.zero;
+        if (currentSpeed > minSpeedForDamping)
+        {
+            dampingImpulse = -rb.velocity * dampingFactor; // 속도에 비례하는 감속력
+        }
+
         // 힘 적용
-        rb.AddForce(correctionImpulse * ratioA / Mathf.Max(Mathf.Sqrt(Mathf.Pow(rb.velocity.x,2) + Mathf.Pow(rb.velocity.y,2)),1), ForceMode2D.Impulse);
-        //connectedBody.AddForce(-correctionImpulse * ratioB, ForceMode2D.Impulse);
+        rb.AddForce(correctionImpulse * ratioA + dampingImpulse, ForceMode2D.Impulse);
     }
 }
