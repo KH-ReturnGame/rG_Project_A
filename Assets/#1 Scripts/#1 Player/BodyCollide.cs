@@ -31,6 +31,7 @@ public class BodyCollide : MonoBehaviour
         {
             player.AddState(PlayerStats.BodyIsGround);
             _collideCount++;
+            
             //Debug.Log("몸 바닥 닿음");
             return;
         }
