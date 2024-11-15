@@ -63,12 +63,12 @@ public class ArrowController : MonoBehaviour
             switch (controlMethod)
             {
                 //조작 방법 1일때
-                case "1":
-                    _arrowRigidbody.gravityScale = 0;
-                    _arrowRigidbody.velocity = Vector3.zero;
-                    GetComponent<PolygonCollider2D>().isTrigger = true;
-                    ControlMethod_1();
-                    break;
+                // case "1":
+                //     _arrowRigidbody.gravityScale = 0;
+                //     _arrowRigidbody.velocity = Vector3.zero;
+                //     GetComponent<PolygonCollider2D>().isTrigger = true;
+                //     ControlMethod_1();
+                //     break;
                 //조작 방법 2일때
                 case "2":
                     GetComponent<PolygonCollider2D>().isTrigger = false;
@@ -185,6 +185,7 @@ public class ArrowController : MonoBehaviour
                 //Destroy(_arrowControlObj);
                 transform.rotation = Quaternion.Euler(new Vector3(0, 0, _angle));
             }
+            GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
             GetComponent<Rigidbody2D>().velocity = Vector3.zero;
             GetComponent<Rigidbody2D>().velocity = new Vector2((_directionMouse.normalized.x) * (_l / 5),
                 (_directionMouse.normalized.y) * (_l / 5));
@@ -205,69 +206,69 @@ public class ArrowController : MonoBehaviour
     }
     
     //Method_1 핵심 함수
-    public void ControlMethod_1()
-    {
-        Vector3 mousePosition = Input.mousePosition;
-        mousePosition.z = UnityEngine.Camera.main.nearClipPlane; // 카메라와의 거리 설정
-        Vector3 worldPosition = UnityEngine.Camera.main.ScreenToWorldPoint(mousePosition);
-        
-        // 화살표 마우스위치로 이동
-        Vector3 result_position;
-        Vector3 position = _arrow.transform.position;
-        Vector3 new_position = Vector3.Lerp(position, new Vector3(worldPosition.x, worldPosition.y, 0),
-            followSpeed * Time.deltaTime); // Time.deltaTime 적용
-
-        if (Vector3.Distance(position, new_position) >= maxMoveDistance)
-        {
-            result_position = position + (-position+new_position).normalized * maxMoveDistance;
-        }
-        else
-        {
-            result_position = new_position;
-        }
-        
-        // 방향 계산
-        Vector3 direction = worldPosition - position;
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg; // 필요하면 각도 추가
-        Quaternion targetRotation = Quaternion.AngleAxis(angle, Vector3.forward);
-
-        // 화살표 회전 -> 마우스 방향으로
-        _arrow.transform.rotation = Quaternion.RotateTowards(_arrow.transform.rotation, targetRotation, rotationSpeed * Time.deltaTime); // Time.deltaTime 적용
-        
-        //레이캐스트 쏴서 바닥 통과 막기
-        RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, direction, 20);
-        hitObjects.Clear();
-        Vector2 hitpoint = new Vector2(0,0);
-        foreach (var hit in hits)
-        {
-            hitObjects.Add(hit.collider.gameObject);
-            if (hit.transform.CompareTag("ground") || hit.transform.CompareTag("Door") || hit.transform.CompareTag("arrow_wall"))
-            {
-                hitpoint = hit.point;
-                break;
-            }
-        }
-        bool groundHit = hitObjects.Exists(obj => (obj.CompareTag("ground")||obj.CompareTag("Door")|| obj.CompareTag("arrow_wall")));
-        if (groundHit && Vector2.Distance(hitpoint, transform.position) <= 2)
-        {
-            player.AddState(PlayerStats.IsArrowOnWall);
-            player.AddState(PlayerStats.IsCollisionMethod2);
-            RaycastHit2D groundRaycast = Array.Find(hits, hit => hit.collider && (hit.collider.CompareTag("ground")||hit.collider.CompareTag("Door")|| hit.collider.CompareTag("arrow_wall")));
-
-            // ground 오브젝트와 충돌한 경우, transform의 위치를 조정하여 땅을 넘지 않도록 한다.
-            Vector3 hitPoint = groundRaycast.point; // 충돌한 지점
-            Vector3 normal = groundRaycast.normal; // 충돌한 표면의 법선 벡터
-
-            // 땅을 넘지 않도록 충돌 지점 바로 앞에 위치를 설정
-            Vector3 targetPosition = hitPoint + normal * 1.2f;
-            _arrow.transform.position = Vector3.Lerp(_arrow.transform.position, targetPosition, Time.deltaTime * 10f); // Time.deltaTime 적용
-        }
-        else
-        {
-            player.RemoveState(PlayerStats.IsArrowOnWall);
-            _arrow.transform.position = result_position;
-        }
-    }
+    // public void ControlMethod_1()
+    // {
+    //     Vector3 mousePosition = Input.mousePosition;
+    //     mousePosition.z = UnityEngine.Camera.main.nearClipPlane; // 카메라와의 거리 설정
+    //     Vector3 worldPosition = UnityEngine.Camera.main.ScreenToWorldPoint(mousePosition);
+    //     
+    //     // 화살표 마우스위치로 이동
+    //     Vector3 result_position;
+    //     Vector3 position = _arrow.transform.position;
+    //     Vector3 new_position = Vector3.Lerp(position, new Vector3(worldPosition.x, worldPosition.y, 0),
+    //         followSpeed * Time.deltaTime); // Time.deltaTime 적용
+    //
+    //     if (Vector3.Distance(position, new_position) >= maxMoveDistance)
+    //     {
+    //         result_position = position + (-position+new_position).normalized * maxMoveDistance;
+    //     }
+    //     else
+    //     {
+    //         result_position = new_position;
+    //     }
+    //     
+    //     // 방향 계산
+    //     Vector3 direction = worldPosition - position;
+    //     float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg; // 필요하면 각도 추가
+    //     Quaternion targetRotation = Quaternion.AngleAxis(angle, Vector3.forward);
+    //
+    //     // 화살표 회전 -> 마우스 방향으로
+    //     _arrow.transform.rotation = Quaternion.RotateTowards(_arrow.transform.rotation, targetRotation, rotationSpeed * Time.deltaTime); // Time.deltaTime 적용
+    //     
+    //     //레이캐스트 쏴서 바닥 통과 막기
+    //     RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, direction, 20);
+    //     hitObjects.Clear();
+    //     Vector2 hitpoint = new Vector2(0,0);
+    //     foreach (var hit in hits)
+    //     {
+    //         hitObjects.Add(hit.collider.gameObject);
+    //         if (hit.transform.CompareTag("ground") || hit.transform.CompareTag("Door") || hit.transform.CompareTag("arrow_wall"))
+    //         {
+    //             hitpoint = hit.point;
+    //             break;
+    //         }
+    //     }
+    //     bool groundHit = hitObjects.Exists(obj => (obj.CompareTag("ground")||obj.CompareTag("Door")|| obj.CompareTag("arrow_wall")));
+    //     if (groundHit && Vector2.Distance(hitpoint, transform.position) <= 2)
+    //     {
+    //         player.AddState(PlayerStats.IsArrowOnWall);
+    //         player.AddState(PlayerStats.IsCollisionMethod2);
+    //         RaycastHit2D groundRaycast = Array.Find(hits, hit => hit.collider && (hit.collider.CompareTag("ground")||hit.collider.CompareTag("Door")|| hit.collider.CompareTag("arrow_wall")));
+    //
+    //         // ground 오브젝트와 충돌한 경우, transform의 위치를 조정하여 땅을 넘지 않도록 한다.
+    //         Vector3 hitPoint = groundRaycast.point; // 충돌한 지점
+    //         Vector3 normal = groundRaycast.normal; // 충돌한 표면의 법선 벡터
+    //
+    //         // 땅을 넘지 않도록 충돌 지점 바로 앞에 위치를 설정
+    //         Vector3 targetPosition = hitPoint + normal * 1.2f;
+    //         _arrow.transform.position = Vector3.Lerp(_arrow.transform.position, targetPosition, Time.deltaTime * 10f); // Time.deltaTime 적용
+    //     }
+    //     else
+    //     {
+    //         player.RemoveState(PlayerStats.IsArrowOnWall);
+    //         _arrow.transform.position = result_position;
+    //     }
+    // }
 
     //Method_2 핵심 함수
     public void ControlMethod_2()
@@ -303,14 +304,16 @@ public class ArrowController : MonoBehaviour
             if (other.transform.CompareTag("Head") && player.IsContainState(PlayerStats.IsFly))
             {
                 //스프라이트 전환
-                _spriteRenderer.sprite = sprites[1];
-                _head.SetActive(false);
-                GetComponent<Rigidbody2D>().velocity = _velocity[1];
-                Debug.Log("화살 머리 합체");
+                // _spriteRenderer.sprite = sprites[1];
+                // _head.SetActive(false);
+                // GetComponent<Rigidbody2D>().velocity = _velocity[1];
+                // Debug.Log("화살 머리 합체");
             }
             else if (!other.transform.CompareTag("Head"))
             {
                 player.RemoveState(PlayerStats.IsFly);
+                GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+                GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
                 ChangeArrow("1");
                 _spriteRenderer.sprite = sprites[0];
 
