@@ -652,9 +652,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      wall2_18: 382014875
-      wall2_14: -428797253
       wall2_24: 1379307816
+      wall2_14: -428797253
+      wall2_15: 220233814
       wall2_4: 1847845199
       wall2_0: -1352695578
       wall2_1: -728812480
@@ -675,7 +675,7 @@ TextureImporter:
       wall2_16: -773925375
       wall2_13: -882407184
       wall2_17: -2146531469
-      wall2_15: 220233814
+      wall2_18: 382014875
       wall2_10: 1768148963
   spritePackingTag: 
   pSDRemoveMatte: 0
