@@ -61,7 +61,7 @@ public class HeadCollide : MonoBehaviour
     public void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Door") && other.gameObject.name == "door" && name == "Head" && _collideDoor &&
-            other.transform.parent.transform.parent.GetComponent<Door>().DoorType == "UpDown" && !other.transform.parent.transform.parent.GetComponent<Door>().Signal)
+            other.transform.parent.transform.parent.GetComponent<Door>().DoorType == "UpDown" /*&& !other.transform.parent.transform.parent.GetComponent<Door>().Signal*/)
         {
             player.AddState(PlayerStats.Push);
             door = other.transform.parent.transform.parent.GetComponent<Door>();
@@ -121,6 +121,7 @@ public class HeadCollide : MonoBehaviour
     }
     private IEnumerator MoveToPosition(Vector3 targetPosition, float duration)
     {
+        Debug.Log("wtfsdfasdf");
         Vector3 startPosition = headRigidbody.position;
         float elapsedTime = 0f;
 

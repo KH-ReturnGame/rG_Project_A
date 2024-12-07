@@ -24799,6 +24799,30 @@ PrefabInstance:
       propertyPath: SignalType
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9014816787639425331, guid: 01c18077a1a554d93a0060b03a4c9b24, type: 3}
+      propertyPath: m_Size.y
+      value: 12.288362
+      objectReference: {fileID: 0}
+    - target: {fileID: 9014816787639425331, guid: 01c18077a1a554d93a0060b03a4c9b24, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.14418077
+      objectReference: {fileID: 0}
+    - target: {fileID: 9014816788674865541, guid: 01c18077a1a554d93a0060b03a4c9b24, type: 3}
+      propertyPath: m_Size.y
+      value: 12.238615
+      objectReference: {fileID: 0}
+    - target: {fileID: 9014816788674865541, guid: 01c18077a1a554d93a0060b03a4c9b24, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.11930752
+      objectReference: {fileID: 0}
+    - target: {fileID: 9014816788798153815, guid: 01c18077a1a554d93a0060b03a4c9b24, type: 3}
+      propertyPath: m_Size.y
+      value: 12.238614
+      objectReference: {fileID: 0}
+    - target: {fileID: 9014816788798153815, guid: 01c18077a1a554d93a0060b03a4c9b24, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.11930704
+      objectReference: {fileID: 0}
     - target: {fileID: 9014816789308005442, guid: 01c18077a1a554d93a0060b03a4c9b24, type: 3}
       propertyPath: m_Name
       value: Door 2 (1)
@@ -24981,13 +25005,29 @@ PrefabInstance:
       propertyPath: SignalType
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9014816787639425331, guid: 01c18077a1a554d93a0060b03a4c9b24, type: 3}
+      propertyPath: m_Size.y
+      value: 12.437602
+      objectReference: {fileID: 0}
+    - target: {fileID: 9014816787639425331, guid: 01c18077a1a554d93a0060b03a4c9b24, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.21880102
+      objectReference: {fileID: 0}
+    - target: {fileID: 9014816788674865541, guid: 01c18077a1a554d93a0060b03a4c9b24, type: 3}
+      propertyPath: m_Size.y
+      value: 12.238614
+      objectReference: {fileID: 0}
+    - target: {fileID: 9014816788674865541, guid: 01c18077a1a554d93a0060b03a4c9b24, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.11930704
+      objectReference: {fileID: 0}
     - target: {fileID: 9014816788798153815, guid: 01c18077a1a554d93a0060b03a4c9b24, type: 3}
       propertyPath: m_Size.y
-      value: 8.901133
+      value: 12.234181
       objectReference: {fileID: 0}
     - target: {fileID: 9014816788798153815, guid: 01c18077a1a554d93a0060b03a4c9b24, type: 3}
       propertyPath: m_Offset.y
-      value: -1.5494337
+      value: 0.1170907
       objectReference: {fileID: 0}
     - target: {fileID: 9014816789308005442, guid: 01c18077a1a554d93a0060b03a4c9b24, type: 3}
       propertyPath: m_Name
@@ -25058,6 +25098,30 @@ PrefabInstance:
     - target: {fileID: 4075516769756486819, guid: 01c18077a1a554d93a0060b03a4c9b24, type: 3}
       propertyPath: SignalType
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9014816787639425331, guid: 01c18077a1a554d93a0060b03a4c9b24, type: 3}
+      propertyPath: m_Size.y
+      value: 12.332207
+      objectReference: {fileID: 0}
+    - target: {fileID: 9014816787639425331, guid: 01c18077a1a554d93a0060b03a4c9b24, type: 3}
+      propertyPath: m_Offset.y
+      value: -2.1661034
+      objectReference: {fileID: 0}
+    - target: {fileID: 9014816788674865541, guid: 01c18077a1a554d93a0060b03a4c9b24, type: 3}
+      propertyPath: m_Size.y
+      value: 12.526557
+      objectReference: {fileID: 0}
+    - target: {fileID: 9014816788674865541, guid: 01c18077a1a554d93a0060b03a4c9b24, type: 3}
+      propertyPath: m_Offset.y
+      value: -2.2632785
+      objectReference: {fileID: 0}
+    - target: {fileID: 9014816788798153815, guid: 01c18077a1a554d93a0060b03a4c9b24, type: 3}
+      propertyPath: m_Size.y
+      value: 12.332207
+      objectReference: {fileID: 0}
+    - target: {fileID: 9014816788798153815, guid: 01c18077a1a554d93a0060b03a4c9b24, type: 3}
+      propertyPath: m_Offset.y
+      value: -2.1661034
       objectReference: {fileID: 0}
     - target: {fileID: 9014816789308005442, guid: 01c18077a1a554d93a0060b03a4c9b24, type: 3}
       propertyPath: m_Name

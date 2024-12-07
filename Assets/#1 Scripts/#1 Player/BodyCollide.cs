@@ -59,7 +59,7 @@ public class BodyCollide : MonoBehaviour
         }
         //-------------------------------------
         if (other.CompareTag("Door") && other.name == "door" && name == "body_door_check" && !player.IsContainState(PlayerStats.IsCombine) && _collideDoor &&
-            other.transform.parent.transform.parent.GetComponent<Door>().DoorType == "UpDown" && !other.transform.parent.transform.parent.GetComponent<Door>().Signal)
+            other.transform.parent.transform.parent.GetComponent<Door>().DoorType == "UpDown"/* && !other.transform.parent.transform.parent.GetComponent<Door>().Signal*/)
         {
             player.AddState(PlayerStats.Push);
             door = other.transform.parent.transform.parent.GetComponent<Door>();
