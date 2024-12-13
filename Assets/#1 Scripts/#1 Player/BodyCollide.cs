@@ -33,7 +33,8 @@ public class BodyCollide : MonoBehaviour
     {
         if ((other.CompareTag("ground") && name == "body_ground_check")||
             (other.CompareTag("Head") && name == "body_ground_check")||
-            (other.CompareTag("Door") && name == "body_ground_check"))
+            (other.CompareTag("Door") && name == "body_ground_check")||
+            (other.CompareTag("Arrow") && name == "body_ground_check"))
         {
             player.AddState(PlayerStats.BodyIsGround);
             _collideCount++;
@@ -132,7 +133,8 @@ public class BodyCollide : MonoBehaviour
         //땅에서 떨어졌다고 땅감지 콜라이더가 체크하면 땅감지 해제
         if ((other.CompareTag("ground")&&name == "body_ground_check")||
             (other.CompareTag("Head") && name == "body_ground_check")||
-            (other.CompareTag("Door") && name == "body_ground_check"))
+            (other.CompareTag("Door") && name == "body_ground_check")||
+            (other.CompareTag("Arrow") && name == "body_ground_check"))
         {
             _collideCount--;
             if (_collideCount == 0)
