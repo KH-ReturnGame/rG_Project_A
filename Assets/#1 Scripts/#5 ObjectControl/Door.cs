@@ -11,6 +11,7 @@ public class Door : MonoBehaviour, ISignalReceive
     public int push = 1;
     
     public float angle;
+    public int updown = 1;
     
     //실제 문 로직 관련
     private float originAngle;
@@ -62,7 +63,7 @@ public class Door : MonoBehaviour, ISignalReceive
                 //     Physics2D.SyncTransforms();
                 // });
                 transform.position =
-                    Vector3.Lerp(transform.position, new Vector3(startpos.x,startpos.y+5f, 0), 20f*Time.unscaledDeltaTime);
+                    Vector3.Lerp(transform.position, new Vector3(startpos.x,startpos.y+(5f*updown), 0), 20f*Time.unscaledDeltaTime);
             }
             else
             {
