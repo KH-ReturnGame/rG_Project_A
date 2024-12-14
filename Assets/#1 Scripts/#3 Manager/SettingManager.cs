@@ -12,7 +12,7 @@ public class SettingManager : MonoBehaviour
     private List<Resolution> resolutions = new List<Resolution>();
     private int optimalResolutionIndex = 0;
     private Resolution currentResolution; // 현재 해상도를 저장하는 변수
-    public PixelPerfectCamera pixelPerfectCamera;
+    //public PixelPerfectCamera pixelPerfectCamera;
 
     // 전체화면 모드 설정
     public TMP_Dropdown fullscreenDropdown;
@@ -31,7 +31,7 @@ public class SettingManager : MonoBehaviour
     // Start
     private void Start()
     {
-        pixelPerfectCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<PixelPerfectCamera>();
+       // pixelPerfectCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<PixelPerfectCamera>();
         
         // 해상도 설정 리스트 추가
         resolutions.Add(new Resolution { width = 1280, height = 720 });
@@ -128,17 +128,17 @@ public class SettingManager : MonoBehaviour
             Screen.SetResolution(selectedResolution.width, selectedResolution.height, Screen.fullScreen);
             currentResolution = selectedResolution; // 새로운 해상도를 현재 해상도로 저장
 
-            // Pixel Perfect Camera의 ReferenceResolution 업데이트
-            if (pixelPerfectCamera != null)
-            {
-                pixelPerfectCamera.refResolutionX = selectedResolution.width;
-                pixelPerfectCamera.refResolutionY = selectedResolution.height;
-                
-                // Pixel Perfect Camera 업데이트 강제 반영
-                pixelPerfectCamera.enabled = false; // 일단 비활성화
-                pixelPerfectCamera.enabled = true;  // 다시 활성화
-                
-            }
+            // // Pixel Perfect Camera의 ReferenceResolution 업데이트
+            // if (pixelPerfectCamera != null)
+            // {
+            //     pixelPerfectCamera.refResolutionX = selectedResolution.width;
+            //     pixelPerfectCamera.refResolutionY = selectedResolution.height;
+            //     
+            //     // Pixel Perfect Camera 업데이트 강제 반영
+            //     pixelPerfectCamera.enabled = false; // 일단 비활성화
+            //     pixelPerfectCamera.enabled = true;  // 다시 활성화
+            //     
+            // }
         }
     }
 
