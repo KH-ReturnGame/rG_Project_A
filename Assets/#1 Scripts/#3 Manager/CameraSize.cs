@@ -1,4 +1,5 @@
 using UnityEngine;
+
 public class CameraSize : MonoBehaviour
 {
     private float targetAspect = 16.0f / 9.0f;
@@ -9,6 +10,7 @@ public class CameraSize : MonoBehaviour
         float windowAspect = (float)Screen.width / (float)Screen.height;
         // 목표 화면 비율과 현재 화면 비율의 차이 계산
         float scaleHeight = windowAspect / targetAspect;
+        float scaleWidth = targetAspect / windowAspect;
 
         // 카메라 가져오기
         Camera camera = GetComponent<Camera>();
@@ -26,10 +28,22 @@ public class CameraSize : MonoBehaviour
 
             camera.rect = rect;
         }
+        else if (scaleWidth < 1.0f)
+        {
+            // 현재 화면이 목표 비율보다 가로로 긴 경우
+            // 가로 부분을 잘라내고 검정색 여백을 추가
+            Rect rect = camera.rect;
+
+            rect.width = scaleWidth;
+            rect.height = 1.0f;
+            rect.x = (1.0f - scaleWidth) / 2.0f;
+            rect.y = 0;
+
+            camera.rect = rect;
+        }
         else
         {
-            // 가로로 화면이 긴 경우
-            // 카메라가 화면을 가로로 확장해서 보여줌 (여백 없이)
+            // 목표 비율과 동일한 경우
             Rect rect = camera.rect;
 
             rect.width = 1.0f;
@@ -37,7 +51,7 @@ public class CameraSize : MonoBehaviour
             rect.x = 0;
             rect.y = 0;
 
-            camera.rect = rect;  // 전체 화면 사용 (좌우 확장)
+            camera.rect = rect;
         }
     }
 
