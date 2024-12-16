@@ -23,7 +23,7 @@ public class ArrowController : MonoBehaviour
     public float followSpeed;
     public float rotationSpeed;
     public List<GameObject> hitObjects = new List<GameObject>();
-    private float maxMoveDistance = 0.25f;
+    //private float maxMoveDistance = 0.25f;
 
     //화살 움직임 Method_2
     private Vector2 _startMousePosition; //초기 마우스 위치

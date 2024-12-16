@@ -219,7 +219,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -344,7 +344,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: EASY
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cc116d8d867f245539168ad6b67199d2, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 92814b469200d438790965d54cddc823, type: 2}
   m_sharedMaterial: {fileID: -9072510167425914012, guid: ebbbf215723634508b2727ea7949f021, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -479,7 +479,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\uC900\uBE44\uC911..."
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cc116d8d867f245539168ad6b67199d2, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 92814b469200d438790965d54cddc823, type: 2}
   m_sharedMaterial: {fileID: -9072510167425914012, guid: ebbbf215723634508b2727ea7949f021, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -614,7 +614,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: HARD
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cc116d8d867f245539168ad6b67199d2, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 92814b469200d438790965d54cddc823, type: 2}
   m_sharedMaterial: {fileID: -9072510167425914012, guid: ebbbf215723634508b2727ea7949f021, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -979,7 +979,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -1188,7 +1188,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 25
+  m_AdditionalShaderChannelsFlag: 1
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -1273,8 +1273,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: START
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cc116d8d867f245539168ad6b67199d2, type: 2}
-  m_sharedMaterial: {fileID: -2275816142124355507, guid: cc116d8d867f245539168ad6b67199d2, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 92814b469200d438790965d54cddc823, type: 2}
+  m_sharedMaterial: {fileID: 1706105746797537668, guid: 92814b469200d438790965d54cddc823, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
