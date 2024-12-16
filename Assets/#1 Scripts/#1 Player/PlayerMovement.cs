@@ -35,6 +35,7 @@ public class PlayerMovement : MonoBehaviour
     //머리 몸 합체 관련
     private SpriteRenderer _spriteRenderer;
     public Sprite[] sprites;
+    public Material[] material;
     
     //기본 초기화
     private void Start()
@@ -123,6 +124,7 @@ public class PlayerMovement : MonoBehaviour
                 _body.GetComponent<Animator>().Play("ver2_combine_anime_idle", 0, currentNormalizedTime);
                 _body.GetComponents<PolygonCollider2D>()[1].enabled = true;
                 _body.GetComponents<PolygonCollider2D>()[0].enabled = false;
+                _body.GetComponent<SpriteRenderer>().material = material[1];
             }
             else if(player.IsContainState(PlayerStats.IsCombine))
             {
@@ -143,6 +145,7 @@ public class PlayerMovement : MonoBehaviour
                 _head.GetComponent<Transform>().rotation = Quaternion.Euler(0, 0, 0);
                 _body.GetComponents<PolygonCollider2D>()[1].enabled = false;
                 _body.GetComponents<PolygonCollider2D>()[0].enabled = true;
+                _body.GetComponent<SpriteRenderer>().material = material[0];
             }
         }
         

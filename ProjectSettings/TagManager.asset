@@ -57,3 +57,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: heal
+    uniqueID: 3559338805
+    locked: 0
+  - name: body
+    uniqueID: 2778691025
+    locked: 0

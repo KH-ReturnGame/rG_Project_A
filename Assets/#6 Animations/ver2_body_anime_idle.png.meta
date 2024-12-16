@@ -210,7 +210,7 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures:
-    - texture: {fileID: 2800000, guid: a1506519e1221454da1eb843f5465558, type: 3}
+    - texture: {fileID: 2800000, guid: 02a0eeae0490946a3b7b412b7a013096, type: 3}
       name: hello
     nameFileIdTable:
       ver2_body_anime_stop-Sheet_1: 2073913752
