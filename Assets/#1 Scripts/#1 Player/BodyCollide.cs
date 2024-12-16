@@ -23,12 +23,6 @@ public class BodyCollide : MonoBehaviour
     
     private float moveDuration = 0.1f;
 
-    IEnumerator off()
-    {
-        yield return new WaitForSeconds(0.1f);
-        player.GetComponent<Player>().GetPlayerObj(PlayerObj.Body).GetComponent<Animator>().SetBool("isGround",false);
-    }
-
     public void OnTriggerEnter2D(Collider2D other)
     {
         if ((other.CompareTag("ground") && name == "body_ground_check")||
@@ -39,7 +33,6 @@ public class BodyCollide : MonoBehaviour
             player.AddState(PlayerStats.BodyIsGround);
             _collideCount++;
             player.GetComponent<Player>().GetPlayerObj(PlayerObj.Body).GetComponent<Animator>().SetBool("isGround",true);
-            StartCoroutine("off");
             //Debug.Log("몸 바닥 닿음");
             return;
         }
