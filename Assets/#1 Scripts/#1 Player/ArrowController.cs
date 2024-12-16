@@ -114,9 +114,9 @@ public class ArrowController : MonoBehaviour
         //화살 조작이 가능해졌으면 물리법칙 초기화 + Method_1로
         if (player.IsContainState(PlayerStats.CanControlArrow))
         {
-            _arrowRigidbody.gravityScale = 0;
-            _arrowRigidbody.velocity = Vector3.zero;
-            ChangeArrow("1");
+            //_arrowRigidbody.gravityScale = 0;
+            //_arrowRigidbody.velocity = Vector3.zero;
+            //ChangeArrow("1");
         }
     }
 
@@ -160,6 +160,7 @@ public class ArrowController : MonoBehaviour
             GameObject canvas = GameObject.FindGameObjectWithTag("canvas");
             _arrowControlObj = Instantiate(arrowControlPrefab, canvas.transform);
             _arrowControlObj.transform.position = _startMousePosition;
+            Time.timeScale = 0.25f;
         }
         //뗄때 화살 날리기
         else if (context.canceled)
@@ -327,6 +328,8 @@ public class ArrowController : MonoBehaviour
             }
         }
         player.AddState(PlayerStats.IsCollision);
+        Debug.Log(other.transform.name);
+        Time.timeScale = 1f;
     }
 
     private void OnTriggerExit2D(Collider2D other)

@@ -3,6 +3,7 @@ using Unity.VisualScripting;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 public class GameManager : MonoBehaviour
 {
@@ -31,6 +32,7 @@ public class GameManager : MonoBehaviour
     public bool hasFocus;
     public bool isPlayGame;
     public bool isLoding;
+    public float timeScale = 1f;
     
     //레벨 상태관련
     public bool useHead;
@@ -152,6 +154,7 @@ public class GameManager : MonoBehaviour
     public void PauseGame()
     {
         isPaused = true;
+        timeScale = Time.timeScale;
         Time.timeScale = 0;
     }
 
@@ -159,7 +162,7 @@ public class GameManager : MonoBehaviour
     public void ResumeGame()
     {
         isPaused = false;
-        Time.timeScale = 1;
+        Time.timeScale = timeScale;
     }
     
     //Esc 메뉴 무한 체크

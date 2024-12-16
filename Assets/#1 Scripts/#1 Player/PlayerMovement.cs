@@ -175,7 +175,7 @@ public class PlayerMovement : MonoBehaviour
                 controlMode = "Arrow";
                 _arrow.GetComponent<ArrowController>().ActivateArrow(true);
                 _arrow.GetComponent<PolygonCollider2D>().isTrigger = true;
-                player.RemoveState(PlayerStats.IsFly);
+                //player.RemoveState(PlayerStats.IsFly);
                 
                 return;
             }
