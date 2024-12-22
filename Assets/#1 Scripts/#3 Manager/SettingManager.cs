@@ -35,17 +35,10 @@ public class SettingManager : MonoBehaviour
         
         // 해상도 설정 리스트 추가
         resolutions.Add(new Resolution { width = 1280, height = 720 });
-        resolutions.Add(new Resolution { width = 1280, height = 800 });
-        resolutions.Add(new Resolution { width = 1440, height = 900 });
         resolutions.Add(new Resolution { width = 1600, height = 900 });
-        resolutions.Add(new Resolution { width = 1680, height = 1050 });
         resolutions.Add(new Resolution { width = 1920, height = 1080 });
-        resolutions.Add(new Resolution { width = 1920, height = 1200 });
-        resolutions.Add(new Resolution { width = 2048, height = 1280 });
         resolutions.Add(new Resolution { width = 2560, height = 1440 });
-        resolutions.Add(new Resolution { width = 2560, height = 1600 });
-        resolutions.Add(new Resolution { width = 2880, height = 1800 });
-        resolutions.Add(new Resolution { width = 3480, height = 2160 });
+        resolutions.Add(new Resolution { width = 3840, height = 2160 });
 
         // 현재 해상도 저장
         currentResolution = Screen.currentResolution;
