@@ -29,6 +29,7 @@ public class ArrowController : MonoBehaviour
     private Vector2 _startMousePosition; //초기 마우스 위치
     [SerializeField] private Vector2 currentMousePosition; //실시간 마우스 위치
     public GameObject arrowControlPrefab; //조작하는거 보여주기 위한 오브젝트
+    public LineRenderer line;
     private GameObject _arrowControlObj; //실제 생성된 인스턴스
     private float _angle; //각도
     private float _l; //길이
@@ -157,9 +158,11 @@ public class ArrowController : MonoBehaviour
         {
             ChangeArrow("2");
             _startMousePosition = currentMousePosition;
-            GameObject canvas = GameObject.FindGameObjectWithTag("canvas");
-            _arrowControlObj = Instantiate(arrowControlPrefab, canvas.transform);
-            _arrowControlObj.transform.position = _startMousePosition;
+            //GameObject canvas = GameObject.FindGameObjectWithTag("canvas");
+            //_arrowControlObj = Instantiate(arrowControlPrefab, canvas.transform);
+            //_arrowControlObj.transform.position = _startMousePosition;
+            line.enabled = true;
+            line.positionCount = 2;
             Time.timeScale = 0.25f;
         }
         //뗄때 화살 날리기
@@ -192,6 +195,7 @@ public class ArrowController : MonoBehaviour
                 (_directionMouse.normalized.y) * (_l / 5));
             
             _arrowRigidbody.gravityScale = 1f;
+            line.enabled = false;
         }
         //중간
         else
@@ -279,12 +283,17 @@ public class ArrowController : MonoBehaviour
             //회전 관련
             _directionMouse = currentMousePosition - _startMousePosition;
             _angle = Mathf.Atan2(_directionMouse.y, _directionMouse.x) * Mathf.Rad2Deg;
-            _arrowControlObj.transform.rotation = Quaternion.Euler(new Vector3(0, 0, _angle - 90f));
+            //_arrowControlObj.transform.rotation = Quaternion.Euler(new Vector3(0, 0, _angle - 90f));
 
             //길이 관련
             _l = Mathf.Sqrt(Mathf.Pow((currentMousePosition.x - _startMousePosition.x), 2) +
                            Mathf.Pow(currentMousePosition.y - _startMousePosition.y, 2));
-            _arrowControlObj.GetComponent<RectTransform>().sizeDelta = new Vector2(50, _l + 100);
+            //_arrowControlObj.GetComponent<RectTransform>().sizeDelta = new Vector2(50, _l + 100);
+            Vector3 pos_0 = new Vector3(GetComponent<Transform>().position.x, GetComponent<Transform>().position.y, -1f);
+            Vector3 pos_1 = new Vector3(Camera.main.ScreenToWorldPoint(currentMousePosition).x,
+                Camera.main.ScreenToWorldPoint(currentMousePosition).y, -1f);
+            line.SetPosition(0, pos_0);
+            line.SetPosition(1, pos_1);
         }
         else
         {
