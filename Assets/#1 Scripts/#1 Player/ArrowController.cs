@@ -86,7 +86,7 @@ public class ArrowController : MonoBehaviour
                 Vector3 direction = GetComponent<Rigidbody2D>().velocity;
                 float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg; // 필요하면 각도 추가
                 Quaternion targetRotation = Quaternion.AngleAxis(angle, Vector3.forward);
-                _arrow.transform.rotation = Quaternion.RotateTowards(_arrow.transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+                //_arrow.transform.rotation = Quaternion.RotateTowards(_arrow.transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
             }
         }
         
@@ -344,8 +344,8 @@ public class ArrowController : MonoBehaviour
                 
             }
         }
+        //Debug.Log("나 추가");
         player.AddState(PlayerStats.IsCollision);
-        Debug.Log("d");
         _arrow.GetComponent<ArrowController>().ActivateArrow(false);
         _arrow.GetComponent<PolygonCollider2D>().isTrigger = false;
         Time.timeScale = 1f;

@@ -96,7 +96,7 @@ public class PlayerMovement : MonoBehaviour
     //머리, 몸 전환 입력받기
     public void OnChangePlayer(InputAction.CallbackContext context)
     {
-        Debug.Log(context.control.name);
+        //Debug.Log(context.control.name);
         if (context.started)
         {
             ChangeControl(context.control.name);

@@ -6,7 +6,7 @@ using System.Linq;
 public class SignalManager : MonoBehaviour
 {
     // 실제 신호 값들
-    private bool[] Signal = new bool[10];
+    private bool[] Signal = new bool[20];
 
     // 어떤 물체는 어떤 신호가 변경되었을 때 반응할지
     private Dictionary<GameObject, int> SendObj = new Dictionary<GameObject, int>();
@@ -17,7 +17,7 @@ public class SignalManager : MonoBehaviour
     // Signal 초기화
     private void Start()
     {
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 20; i++)
         {
             Signal[i] = false;
         }

@@ -36,7 +36,7 @@ public class FootHoldButton : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         //Debug.Log(oneUse+""+useCount);
-        if ((oneUse && useCount >= 1) || (other.CompareTag("Arrow") && GameObject.FindWithTag("Player").GetComponent<Player>().IsContainState(PlayerStats.CanControlArrow)))
+        if ((oneUse && useCount >= 1) /*|| (other.CompareTag("Arrow") && GameObject.FindWithTag("Player").GetComponent<Player>().IsContainState(PlayerStats.CanControlArrow))*/)
         {
             return;
         }

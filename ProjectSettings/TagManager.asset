@@ -20,6 +20,7 @@ TagManager:
   - arrow_wall
   - bgm
   - sound
+  - arrow_break
   layers:
   - Default
   - TransparentFX
