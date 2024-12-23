@@ -77,25 +77,25 @@ public class MainMenu : MonoBehaviour
         if (StartButtonToggle)
         {
             startRectT.anchoredPosition3D =
-                Vector3.Slerp(startRectT.anchoredPosition3D, new Vector3(840, 100, 0), 10f*Time.unscaledDeltaTime);
+                Vector3.Slerp(startRectT.anchoredPosition3D, new Vector3(670, 100, 0), 10f*Time.unscaledDeltaTime);
 
             easyRectT.anchoredPosition3D =
-                Vector3.Slerp(easyRectT.anchoredPosition3D, new Vector3(840, -10, 0), 10f*Time.unscaledDeltaTime);
+                Vector3.Slerp(easyRectT.anchoredPosition3D, new Vector3(670, -10, 0), 10f*Time.unscaledDeltaTime);
             
             hardRectT.anchoredPosition3D =
-                Vector3.Slerp(hardRectT.anchoredPosition3D, new Vector3(840, -110, 0), 10f*Time.unscaledDeltaTime);
+                Vector3.Slerp(hardRectT.anchoredPosition3D, new Vector3(670, -110, 0), 10f*Time.unscaledDeltaTime);
 
         }
         else
         {
             startRectT.anchoredPosition3D =
-                Vector3.Slerp(startRectT.anchoredPosition3D, new Vector3(840, 0, 0), 10f*Time.unscaledDeltaTime);
+                Vector3.Slerp(startRectT.anchoredPosition3D, new Vector3(670, 0, 0), 10f*Time.unscaledDeltaTime);
             
             easyRectT.anchoredPosition3D =
-                Vector3.Slerp(easyRectT.anchoredPosition3D, new Vector3(840, 90, 0), 10f*Time.unscaledDeltaTime);
+                Vector3.Slerp(easyRectT.anchoredPosition3D, new Vector3(670, 90, 0), 10f*Time.unscaledDeltaTime);
             
             hardRectT.anchoredPosition3D =
-                Vector3.Slerp(hardRectT.anchoredPosition3D, new Vector3(840, -10, 0), 10f*Time.unscaledDeltaTime);
+                Vector3.Slerp(hardRectT.anchoredPosition3D, new Vector3(670, -10, 0), 10f*Time.unscaledDeltaTime);
         }
     }
 }
