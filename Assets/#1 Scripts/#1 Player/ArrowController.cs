@@ -80,7 +80,7 @@ public class ArrowController : MonoBehaviour
         //조작 가능하지 않을때 중력 만들어주기
         else
         {
-            _arrowRigidbody.gravityScale = 1f;
+            //_arrowRigidbody.gravityScale = 1f;
             if (!player.IsContainState(PlayerStats.IsCollision))
             {
                 Vector3 direction = GetComponent<Rigidbody2D>().velocity;
@@ -166,7 +166,7 @@ public class ArrowController : MonoBehaviour
             line.positionCount = 2;
             _arrow.GetComponent<ArrowController>().ActivateArrow(true);
             _arrow.GetComponent<PolygonCollider2D>().isTrigger = true;
-            Time.timeScale = 0.25f;
+            Time.timeScale = 0.5f;
         }
         //뗄때 화살 날리기
         else if (context.canceled)
@@ -277,7 +277,7 @@ public class ArrowController : MonoBehaviour
     //     {
     //         player.RemoveState(PlayerStats.IsArrowOnWall);
     //         _arrow.transform.position = result_position;
-    //     }
+    //     } 아니야
     // }
 
     //Method_2 핵심 함수
@@ -293,8 +293,9 @@ public class ArrowController : MonoBehaviour
             //_arrowControlObj.transform.rotation = Quaternion.Euler(new Vector3(0, 0, _angle - 90f));
 
             //길이 관련
-            _l = Mathf.Sqrt(Mathf.Pow((cur.x - pos.x), 2) +
-                           Mathf.Pow(cur.y - pos.y, 2)) * 10f;
+            // _l = Mathf.Sqrt(Mathf.Pow((cur.x - pos.x), 2) +
+            //                Mathf.Pow(cur.y - pos.y, 2)) * 10f;
+            _l = 150;
             //_arrowControlObj.GetComponent<RectTransform>().sizeDelta = new Vector2(50, _l + 100);
             Vector3 pos_0 = new Vector3(pos.x, pos.y, -1f);
             Vector3 pos_1 = new Vector3(Camera.main.ScreenToWorldPoint(currentMousePosition).x,
@@ -326,7 +327,7 @@ public class ArrowController : MonoBehaviour
                 // GetComponent<Rigidbody2D>().velocity = _velocity[1];
                 // Debug.Log("화살 머리 합체");
             }
-            else if (!other.transform.CompareTag("Head"))
+            else if (!other.transform.CompareTag("Head") && !other.transform.CompareTag("Body"))
             {
                 player.RemoveState(PlayerStats.IsFly);
                 GetComponent<Rigidbody2D>().velocity = Vector2.zero;
