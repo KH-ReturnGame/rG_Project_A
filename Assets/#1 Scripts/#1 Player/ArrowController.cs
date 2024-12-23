@@ -148,7 +148,7 @@ public class ArrowController : MonoBehaviour
     //마우스 클릭 이벤트 함수
     public void OnDragArrowMouse(InputAction.CallbackContext context)
     {
-        if (/*!player.IsContainState(PlayerStats.CanControlArrow)*/ player.IsContainState(PlayerStats.IsFly) || !player.IsContainState(PlayerStats.CanShoot))
+        if (/*!player.IsContainState(PlayerStats.CanControlArrow)*/ player.IsContainState(PlayerStats.IsFly) || !player.IsContainState(PlayerStats.CanShoot) || !GameManager.Instance.useArrow)
         {
             return;
             

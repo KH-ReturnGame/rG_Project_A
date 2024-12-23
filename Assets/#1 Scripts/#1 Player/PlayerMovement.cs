@@ -31,6 +31,7 @@ public class PlayerMovement : MonoBehaviour
     //현재 조작할 오브젝트
     private Rigidbody2D _nowRigidbody;
     public string controlMode;
+    private bool toggle = true; // true가 몸, false가 머리
     
     //머리 몸 합체 관련
     private SpriteRenderer _spriteRenderer;
@@ -95,6 +96,7 @@ public class PlayerMovement : MonoBehaviour
     //머리, 몸 전환 입력받기
     public void OnChangePlayer(InputAction.CallbackContext context)
     {
+        Debug.Log(context.control.name);
         if (context.started)
         {
             ChangeControl(context.control.name);
@@ -154,22 +156,22 @@ public class PlayerMovement : MonoBehaviour
     //머리 몸 화살 전환 함수
     public void ChangeControl(string controlmode)
     {
-        if (GameManager.Instance.isPaused || player.IsContainState(PlayerStats.IsOnClick))
+        if (GameManager.Instance.isPaused)
         {
             return;
         }
         
         switch (controlmode)
         {
-            case "q":
-            {
-                if(controlMode == "Head" || player.IsContainState(PlayerStats.IsCombine) || !GameManager.Instance.useHead) return;
-                controlMode = "Head";
-                
-                _nowRigidbody = _headRigidbody;
-                //GameManager.Instance.ChangeCameraTarget(_head);
-                return;
-            }
+            // case "q":
+            // {
+            //     if(controlMode == "Head" || player.IsContainState(PlayerStats.IsCombine) || !GameManager.Instance.useHead) return;
+            //     controlMode = "Head";
+            //     
+            //     _nowRigidbody = _headRigidbody;
+            //     //GameManager.Instance.ChangeCameraTarget(_head);
+            //     return;
+            // }
             // case "leftShift":
             // {
             //     if(controlMode == "Arrow" || !GameManager.Instance.useArrow) return;
@@ -180,17 +182,35 @@ public class PlayerMovement : MonoBehaviour
             //     
             //     return;
             // }
-            case "e":
-            {
-                if(controlMode == "Body" || !GameManager.Instance.useBody) return;
-                controlMode = "Body";
-                
-                _nowRigidbody = _bodyRigidbody;
-                //GameManager.Instance.ChangeCameraTarget(_body);
-                return;
-            }
+            // case "e":
+            // {
+            //     if(controlMode == "Body" || !GameManager.Instance.useBody) return;
+            //     controlMode = "Body";
+            //     
+            //     _nowRigidbody = _bodyRigidbody;
+            //     //GameManager.Instance.ChangeCameraTarget(_body);
+            //     return;
+            // }
             case "leftShift":
             {
+                if (toggle)
+                {
+                    if(controlMode == "Head" || player.IsContainState(PlayerStats.IsCombine) || !GameManager.Instance.useHead) return;
+                    controlMode = "Head";
+                
+                    _nowRigidbody = _headRigidbody;
+                    //GameManager.Instance.ChangeCameraTarget(_head);
+                    toggle = !toggle;
+                }
+                else
+                {
+                    if(controlMode == "Body" || !GameManager.Instance.useBody) return;
+                    controlMode = "Body";
+                
+                    _nowRigidbody = _bodyRigidbody;
+                    //GameManager.Instance.ChangeCameraTarget(_body);
+                    toggle = !toggle;
+                }
                 return;
             }
         }
