@@ -13,7 +13,7 @@ public class ChangeMovementUI : MonoBehaviour
 
     public RectTransform HeadUI;
     public RectTransform BodyUI;
-    public RectTransform ArrowUI;
+    //public RectTransform ArrowUI;
 
     public void Update()
     {
@@ -23,30 +23,30 @@ public class ChangeMovementUI : MonoBehaviour
             case "Head":
                 HeadUI.localScale = Vector3.Slerp(HeadUI.localScale, new Vector3(1, 1, 1), 10 * dt);
                 BodyUI.localScale = Vector3.Slerp(BodyUI.localScale, new Vector3(0.7f, 0.7f, 0.7f), 10 * dt);
-                ArrowUI.localScale = Vector3.Slerp(ArrowUI.localScale, new Vector3(0.7f, 0.7f, 0.7f), 10 * dt);
+                //ArrowUI.localScale = Vector3.Slerp(ArrowUI.localScale, new Vector3(0.7f, 0.7f, 0.7f), 10 * dt);
                 break;
             case "Body":
                 HeadUI.localScale = Vector3.Slerp(HeadUI.localScale, new Vector3(0.7f, 0.7f, 0.7f), 10 * dt);
                 BodyUI.localScale = Vector3.Slerp(BodyUI.localScale, new Vector3(1, 1, 1), 10 * dt);
-                ArrowUI.localScale = Vector3.Slerp(ArrowUI.localScale, new Vector3(0.7f, 0.7f, 0.7f), 10 * dt);
+                //ArrowUI.localScale = Vector3.Slerp(ArrowUI.localScale, new Vector3(0.7f, 0.7f, 0.7f), 10 * dt);
                 break;
             case "Arrow":
                 HeadUI.localScale = Vector3.Slerp(HeadUI.localScale, new Vector3(0.7f, 0.7f, 0.7f), 10 * dt);
                 BodyUI.localScale = Vector3.Slerp(BodyUI.localScale, new Vector3(0.7f, 0.7f, 0.7f), 10 * dt);
-                ArrowUI.localScale = Vector3.Slerp(ArrowUI.localScale, new Vector3(1, 1, 1), 10 * dt);
+                //ArrowUI.localScale = Vector3.Slerp(ArrowUI.localScale, new Vector3(1, 1, 1), 10 * dt);
                 break;
         }
 
         var headUILocalPosition = HeadUI.anchoredPosition3D;
         var bodyUILocalPosition = BodyUI.anchoredPosition3D;
 
-        headUILocalPosition.x = (!GameManager.Instance.useArrow) ? -60 : -120;
-        bodyUILocalPosition.x = (!GameManager.Instance.useArrow) ? 60 : 0;
+        headUILocalPosition.x = -60;
+        bodyUILocalPosition.x = 60;
 
         HeadUI.anchoredPosition = headUILocalPosition;
         BodyUI.anchoredPosition = bodyUILocalPosition;
 
-        ArrowUI.gameObject.SetActive(GameManager.Instance.useArrow);
+        //ArrowUI.gameObject.SetActive(GameManager.Instance.useArrow);
 
         
         

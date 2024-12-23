@@ -285,16 +285,18 @@ public class ArrowController : MonoBehaviour
     {
         if (player.IsContainState(PlayerStats.IsOnClick))
         {
+            Vector3 cur = Camera.main.ScreenToWorldPoint(currentMousePosition);
+            Vector3 pos = GetComponent<Transform>().position;
             //회전 관련
-            _directionMouse = currentMousePosition - _startMousePosition;
+            _directionMouse = cur - pos;
             _angle = Mathf.Atan2(_directionMouse.y, _directionMouse.x) * Mathf.Rad2Deg;
             //_arrowControlObj.transform.rotation = Quaternion.Euler(new Vector3(0, 0, _angle - 90f));
 
             //길이 관련
-            _l = Mathf.Sqrt(Mathf.Pow((currentMousePosition.x - _startMousePosition.x), 2) +
-                           Mathf.Pow(currentMousePosition.y - _startMousePosition.y, 2));
+            _l = Mathf.Sqrt(Mathf.Pow((cur.x - pos.x), 2) +
+                           Mathf.Pow(cur.y - pos.y, 2)) * 10f;
             //_arrowControlObj.GetComponent<RectTransform>().sizeDelta = new Vector2(50, _l + 100);
-            Vector3 pos_0 = new Vector3(GetComponent<Transform>().position.x, GetComponent<Transform>().position.y, -1f);
+            Vector3 pos_0 = new Vector3(pos.x, pos.y, -1f);
             Vector3 pos_1 = new Vector3(Camera.main.ScreenToWorldPoint(currentMousePosition).x,
                 Camera.main.ScreenToWorldPoint(currentMousePosition).y, -1f);
             line.SetPosition(0, pos_0);
