@@ -34,7 +34,8 @@ public class HeadCollide : MonoBehaviour
         if ((other.CompareTag("ground") && name == "head_ground_check")||
             (other.CompareTag("Body") && name == "head_ground_check")||
             (other.CompareTag("Door") && name == "head_ground_check")||
-            (other.CompareTag("Arrow") && name == "head_ground_check"))
+            (other.CompareTag("Arrow") && name == "head_ground_check")||
+            (other.CompareTag("arrow_break") && name == "head_ground_check"))
         {
             player.AddState(PlayerStats.HeadIsGround);
             _collideCount++;
@@ -97,7 +98,8 @@ public class HeadCollide : MonoBehaviour
         if ((other.CompareTag("ground")&&name == "head_ground_check")||
             (other.CompareTag("Body") && name == "head_ground_check")||
             (other.CompareTag("Door") && name == "head_ground_check")||
-            (other.CompareTag("Arrow") && name == "head_ground_check"))
+            (other.CompareTag("Arrow") && name == "head_ground_check")||
+            (other.CompareTag("arrow_break") && name == "head_ground_check"))
         {   
             _collideCount--;
             if (_collideCount == 0)

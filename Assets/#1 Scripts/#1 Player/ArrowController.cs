@@ -341,7 +341,6 @@ public class ArrowController : MonoBehaviour
                     _head.SetActive(true);
                     StartCoroutine(ArrowCooldown());
                 }
-                
             }
         }
         //Debug.Log("나 추가");
