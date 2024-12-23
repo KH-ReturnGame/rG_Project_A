@@ -35,6 +35,8 @@ public class ArrowController : MonoBehaviour
     private float _l; //길이
     private Vector2 _directionMouse; //자신과 마우스와의 방향
     private float arrowCooldown = 0.2f;
+    private int layer1;
+    private int layer2;
 
     //화살 머리 합체
     private GameObject _head;
@@ -200,6 +202,12 @@ public class ArrowController : MonoBehaviour
             
             _arrowRigidbody.gravityScale = 1f;
             line.enabled = false;
+            // 특정 레이어의 충돌 활성화/비활성화 설정
+            layer1 = LayerMask.NameToLayer("Arrow"); 
+            layer2 = LayerMask.NameToLayer("Head");
+
+            // 두 레이어 간 충돌 비활성화
+            Physics2D.IgnoreLayerCollision(layer1, layer2, true);
         }
         //중간
         else
@@ -347,6 +355,8 @@ public class ArrowController : MonoBehaviour
         player.AddState(PlayerStats.IsCollision);
         _arrow.GetComponent<ArrowController>().ActivateArrow(false);
         _arrow.GetComponent<PolygonCollider2D>().isTrigger = false;
+        // 두 레이어 간 충돌 활성화
+        Physics2D.IgnoreLayerCollision(layer1, layer2, false);
         Time.timeScale = 1f;
     }
 
