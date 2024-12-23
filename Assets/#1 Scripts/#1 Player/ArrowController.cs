@@ -202,12 +202,18 @@ public class ArrowController : MonoBehaviour
             
             _arrowRigidbody.gravityScale = 1f;
             line.enabled = false;
-            // 특정 레이어의 충돌 활성화/비활성화 설정
+            
             layer1 = LayerMask.NameToLayer("Arrow"); 
             layer2 = LayerMask.NameToLayer("Head");
-
-            // 두 레이어 간 충돌 비활성화
             Physics2D.IgnoreLayerCollision(layer1, layer2, true);
+            
+            int arrowLayerMask = 1 << layer1; // "Arrow" 레이어의 LayerMask 비트값
+
+            // 기존 ColliderMask 값을 가져옴
+            int currentMask =player.GetPlayerObj(PlayerObj.Body).GetComponent<PlatformEffector2D>().colliderMask;
+            
+            currentMask &= ~arrowLayerMask;
+            player.GetPlayerObj(PlayerObj.Body).GetComponent<PlatformEffector2D>().colliderMask = currentMask;
         }
         //중간
         else
@@ -357,6 +363,15 @@ public class ArrowController : MonoBehaviour
         _arrow.GetComponent<PolygonCollider2D>().isTrigger = false;
         // 두 레이어 간 충돌 활성화
         Physics2D.IgnoreLayerCollision(layer1, layer2, false);
+        
+        int arrowLayerMask = 1 << layer1; // "Arrow" 레이어의 LayerMask 비트값
+
+        // 기존 ColliderMask 값을 가져옴
+        int currentMask = player.GetPlayerObj(PlayerObj.Body).GetComponent<PlatformEffector2D>().colliderMask;
+            
+        currentMask |= arrowLayerMask; // 추가
+        player.GetPlayerObj(PlayerObj.Body).GetComponent<PlatformEffector2D>().colliderMask = currentMask;
+        
         Time.timeScale = 1f;
     }
 
