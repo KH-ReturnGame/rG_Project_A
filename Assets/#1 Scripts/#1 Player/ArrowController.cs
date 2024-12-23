@@ -162,7 +162,6 @@ public class ArrowController : MonoBehaviour
             //GameObject canvas = GameObject.FindGameObjectWithTag("canvas");
             //_arrowControlObj = Instantiate(arrowControlPrefab, canvas.transform);
             //_arrowControlObj.transform.position = _startMousePosition;
-            line.enabled = true;
             line.positionCount = 2;
             _arrow.GetComponent<ArrowController>().ActivateArrow(true);
             _arrow.GetComponent<PolygonCollider2D>().isTrigger = true;
@@ -302,6 +301,7 @@ public class ArrowController : MonoBehaviour
                 Camera.main.ScreenToWorldPoint(currentMousePosition).y, -1f);
             line.SetPosition(0, pos_0);
             line.SetPosition(1, pos_1);
+            line.enabled = true;
         }
         else
         {
