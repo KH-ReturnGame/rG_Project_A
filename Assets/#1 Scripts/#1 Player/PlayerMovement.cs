@@ -165,29 +165,25 @@ public class PlayerMovement : MonoBehaviour
             {
                 if(controlMode == "Head" || player.IsContainState(PlayerStats.IsCombine) || !GameManager.Instance.useHead) return;
                 controlMode = "Head";
-                _arrow.GetComponent<ArrowController>().ActivateArrow(false);
-                _arrow.GetComponent<PolygonCollider2D>().isTrigger = false;
                 
                 _nowRigidbody = _headRigidbody;
                 //GameManager.Instance.ChangeCameraTarget(_head);
                 return;
             }
-            case "leftShift":
-            {
-                if(controlMode == "Arrow" || !GameManager.Instance.useArrow) return;
-                controlMode = "Arrow";
-                _arrow.GetComponent<ArrowController>().ActivateArrow(true);
-                _arrow.GetComponent<PolygonCollider2D>().isTrigger = true;
-                //player.RemoveState(PlayerStats.IsFly);
-                
-                return;
-            }
+            // case "leftShift":
+            // {
+            //     if(controlMode == "Arrow" || !GameManager.Instance.useArrow) return;
+            //     controlMode = "Arrow";
+            //     _arrow.GetComponent<ArrowController>().ActivateArrow(true);
+            //     _arrow.GetComponent<PolygonCollider2D>().isTrigger = true;
+            //     //player.RemoveState(PlayerStats.IsFly);
+            //     
+            //     return;
+            // }
             case "e":
             {
                 if(controlMode == "Body" || !GameManager.Instance.useBody) return;
                 controlMode = "Body";
-                _arrow.GetComponent<ArrowController>().ActivateArrow(false);
-                _arrow.GetComponent<PolygonCollider2D>().isTrigger = false;
                 
                 _nowRigidbody = _bodyRigidbody;
                 //GameManager.Instance.ChangeCameraTarget(_body);

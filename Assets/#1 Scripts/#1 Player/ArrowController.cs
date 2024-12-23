@@ -148,9 +148,10 @@ public class ArrowController : MonoBehaviour
     //마우스 클릭 이벤트 함수
     public void OnDragArrowMouse(InputAction.CallbackContext context)
     {
-        if (!player.IsContainState(PlayerStats.CanControlArrow) || player.IsContainState(PlayerStats.IsFly) || !player.IsContainState(PlayerStats.CanShoot))
+        if (/*!player.IsContainState(PlayerStats.CanControlArrow)*/ player.IsContainState(PlayerStats.IsFly) || !player.IsContainState(PlayerStats.CanShoot))
         {
             return;
+            
         }
 
         //눌렀을때 Method2로 변경
@@ -163,6 +164,8 @@ public class ArrowController : MonoBehaviour
             //_arrowControlObj.transform.position = _startMousePosition;
             line.enabled = true;
             line.positionCount = 2;
+            _arrow.GetComponent<ArrowController>().ActivateArrow(true);
+            _arrow.GetComponent<PolygonCollider2D>().isTrigger = true;
             Time.timeScale = 0.25f;
         }
         //뗄때 화살 날리기
@@ -189,8 +192,10 @@ public class ArrowController : MonoBehaviour
                 //Destroy(_arrowControlObj);
                 transform.rotation = Quaternion.Euler(new Vector3(0, 0, _angle));
             }
+            
+            
             GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
-            GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+            //GetComponent<Rigidbody2D>().velocity = Vector3.zero;
             GetComponent<Rigidbody2D>().velocity = new Vector2((_directionMouse.normalized.x) * (_l / 5),
                 (_directionMouse.normalized.y) * (_l / 5));
             
@@ -337,7 +342,9 @@ public class ArrowController : MonoBehaviour
             }
         }
         player.AddState(PlayerStats.IsCollision);
-        Debug.Log(other.transform.name);
+        Debug.Log("d");
+        _arrow.GetComponent<ArrowController>().ActivateArrow(false);
+        _arrow.GetComponent<PolygonCollider2D>().isTrigger = false;
         Time.timeScale = 1f;
     }
 
