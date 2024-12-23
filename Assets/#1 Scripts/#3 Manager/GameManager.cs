@@ -318,7 +318,8 @@ public class GameManager : MonoBehaviour
         
         player.GetPlayerObj(PlayerObj.Head).SetActive(usehead);
         player.GetPlayerObj(PlayerObj.Body).SetActive(usebody);
-        player.GetPlayerObj(PlayerObj.Arrow).SetActive(usearrow);
+        player.GetPlayerObj(PlayerObj.Arrow).SetActive(false);
+        //player.GetPlayerObj(PlayerObj.Arrow).SetActive(usearrow);
 
         if (PlayerPrefs.GetInt("level")!=1 &&CheckLoadScene("Level_" + (PlayerPrefs.GetInt("level") - 1)))
         {

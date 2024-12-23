@@ -21,6 +21,7 @@ TagManager:
   - bgm
   - sound
   - arrow_break
+  - arrow_create
   layers:
   - Default
   - TransparentFX

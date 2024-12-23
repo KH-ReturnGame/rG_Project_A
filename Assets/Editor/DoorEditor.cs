@@ -4,7 +4,7 @@ using UnityEditor;
 [CustomEditor(typeof(Door))]
 public class DoorEditor : Editor
 {
-    private string[] signalOptions = new string[] { "0","1","2","3","4","5","6","7","8","9" };
+    private string[] signalOptions = new string[] { "0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19" };
     private string[] doorTypeOptions = new string[] { "위아래", "회전" };
     private string[] rotateTypeOptions = new string[] { "바로 회전", "한칸 띄워서 회전" };
     private string[] updownOptions = new string[] { "1","-1"};
