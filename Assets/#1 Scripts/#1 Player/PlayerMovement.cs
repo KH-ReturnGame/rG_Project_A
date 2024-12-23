@@ -189,6 +189,10 @@ public class PlayerMovement : MonoBehaviour
                 //GameManager.Instance.ChangeCameraTarget(_body);
                 return;
             }
+            case "leftShift":
+            {
+                return;
+            }
         }
     }
 }
