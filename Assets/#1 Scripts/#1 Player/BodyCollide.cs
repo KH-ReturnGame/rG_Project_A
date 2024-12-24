@@ -37,6 +37,14 @@ public class BodyCollide : MonoBehaviour
             //Debug.Log("몸 바닥 닿음");
             return;
         }
+
+        if (other.gameObject.CompareTag("die_ground") && name == "body_ground_check")
+        {
+            GameManager.Instance.LoadMainAndLevel(PlayerPrefs.GetInt("level"));
+            GameManager.Instance.isPaused = false;
+            GameManager.Instance.isEscMenuView = false;
+        }
+
         //-------------------------------------
         if ((other.CompareTag("Head") && name == "body_combine_check"))
         {

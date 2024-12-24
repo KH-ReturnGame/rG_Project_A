@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace PlayerOwnedStates
 {
     public class BodyIsGround : State<Player>
@@ -166,6 +168,21 @@ namespace PlayerOwnedStates
         }
     }
     public class Push : State<Player>
+    {
+        public override void Enter(Player player)
+        {
+            
+        }
+        public override void Execute(Player player)
+        {
+            
+        }
+        public override void Exit(Player player)
+        {
+            
+        }
+    }
+    public class HasArrow : State<Player>
     {
         public override void Enter(Player player)
         {

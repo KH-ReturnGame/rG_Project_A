@@ -39,12 +39,14 @@ public class ArrowCreate: MonoBehaviour, ISignalReceive
             
             
             player.GetPlayerObj(PlayerObj.Arrow).SetActive(true);
+            player.AddState(PlayerStats.HasArrow);
         }
         //화살 삭제
         else
         {
             //Debug.Log("화살 지운다!!!!");
             player.GetPlayerObj(PlayerObj.Arrow).SetActive(false);
+            player.RemoveState(PlayerStats.HasArrow);
             Time.timeScale = 1f;
         }
     }

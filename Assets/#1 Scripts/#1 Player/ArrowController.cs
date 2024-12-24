@@ -150,7 +150,7 @@ public class ArrowController : MonoBehaviour
     //마우스 클릭 이벤트 함수
     public void OnDragArrowMouse(InputAction.CallbackContext context)
     {
-        if (/*!player.IsContainState(PlayerStats.CanControlArrow)*/ player.IsContainState(PlayerStats.IsFly) || !player.IsContainState(PlayerStats.CanShoot) || !GameManager.Instance.useArrow)
+        if (/*!player.IsContainState(PlayerStats.CanControlArrow)*/ player.IsContainState(PlayerStats.IsFly) || !player.IsContainState(PlayerStats.CanShoot) || !GameManager.Instance.useArrow || !player.IsContainState(PlayerStats.HasArrow))
         {
             return;
             
@@ -333,6 +333,7 @@ public class ArrowController : MonoBehaviour
         if (other.transform.CompareTag("arrow_break"))
         {
             gameObject.SetActive(false);
+            player.RemoveState(PlayerStats.HasArrow);
             Time.timeScale = 1f;
         }
         

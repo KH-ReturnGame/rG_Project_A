@@ -41,6 +41,14 @@ public class HeadCollide : MonoBehaviour
             _collideCount++;
             //Debug.Log("머리 바닥 닿음");
         }
+
+        if (other.gameObject.CompareTag("die_ground") && name == "head_ground_check")
+        {
+            GameManager.Instance.LoadMainAndLevel(PlayerPrefs.GetInt("level"));
+            GameManager.Instance.isPaused = false;
+            GameManager.Instance.isEscMenuView = false;
+            Time.timeScale = 1;
+        }
         
         //머리 문 충돌처리
         //-------------------------------------
