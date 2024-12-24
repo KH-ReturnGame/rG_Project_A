@@ -308,7 +308,7 @@ public class ArrowController : MonoBehaviour
             //길이 관련
             // _l = Mathf.Sqrt(Mathf.Pow((cur.x - pos.x), 2) +
             //                Mathf.Pow(cur.y - pos.y, 2)) * 10f;
-            _l = 150;
+            _l = 300;
             //_arrowControlObj.GetComponent<RectTransform>().sizeDelta = new Vector2(50, _l + 100);
             Vector3 pos_0 = new Vector3(pos.x, pos.y, -1f);
             Vector3 pos_1 = new Vector3(Camera.main.ScreenToWorldPoint(currentMousePosition).x,
@@ -330,6 +330,12 @@ public class ArrowController : MonoBehaviour
     //화살이 아무 곳에나 충돌하면 Method 1로 변경
     private void OnCollisionEnter2D(Collision2D other)
     {
+        if (other.transform.CompareTag("arrow_break"))
+        {
+            gameObject.SetActive(false);
+            Time.timeScale = 1f;
+        }
+        
         if (!player.IsContainState(PlayerStats.IsOnClick))
         {
             //화살 머리 합체!

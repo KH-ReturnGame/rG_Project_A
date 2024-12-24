@@ -49,7 +49,7 @@ public class SignalManager : MonoBehaviour
 
             if (item.Key.tag == "Button")
             {
-                finalSignal = finalSignal || item.Key.GetComponent<FootHoldButton>().signal;
+                finalSignal = finalSignal || item.Key.GetComponent<FootHoldButton>().Signal;
             }
             else
             {

@@ -22,7 +22,7 @@ public class FootHoldButton : MonoBehaviour
     public bool onOnly = false;
     
     //버튼 자체 신호
-    public bool signal = false;
+    public bool Signal = false;
 
     //버튼 눌림 관련해서 누가 눌렀는지
     public List<Collider2D> downObj;
@@ -52,10 +52,10 @@ public class FootHoldButton : MonoBehaviour
         }
         
         //만약 단 한개의 오브젝트만 감지되었고 아직 안눌렸다면? ++ 토글 버튼이 아니라면
-        if (downObj.Count == 1 && !signal && !isToggle)
+        if (downObj.Count == 1 && !Signal && !isToggle)
         {
-            signal = true;
-            GameManager.Instance.ChangeSignal(SignalType, signal);
+            Signal = true;
+            GameManager.Instance.ChangeSignal(SignalType, Signal);
             useCount += onOnly ? 1 : 0;
             moveButton("enter");
         }
@@ -63,9 +63,9 @@ public class FootHoldButton : MonoBehaviour
         //만약 단 한개의 오브젝트만 감지되었고 토글 버튼이라면?
         if (downObj.Count == 1 && isToggle)
         {
-            signal = !signal;
-            GameManager.Instance.ChangeSignal(SignalType,signal);
-            if (signal)
+            Signal = !Signal;
+            GameManager.Instance.ChangeSignal(SignalType,Signal);
+            if (Signal)
             {
                 useCount += onOnly ? 1 : 0;
                 moveButton("enter");
@@ -97,10 +97,10 @@ public class FootHoldButton : MonoBehaviour
         }
         
         //만약 버튼위에 아무 오브젝트도 없고 눌린 상태라면? ++ 토글 버튼이 아니라면
-        if (downObj.Count == 0 && signal && !isToggle)
+        if (downObj.Count == 0 && Signal && !isToggle)
         {
-            signal = false;
-            GameManager.Instance.ChangeSignal(SignalType,signal);
+            Signal = false;
+            GameManager.Instance.ChangeSignal(SignalType,Signal);
             useCount += onOnly ? 0 : 1;
             moveButton("exit");
         }
@@ -132,7 +132,7 @@ public class FootHoldButton : MonoBehaviour
     {
         //919191,96FF7F
         Color color;
-        if (signal)
+        if (Signal)
         {
             ColorUtility.TryParseHtmlString("#96FF7F",out color);
             transform.GetChild(0).GetComponent<SpriteRenderer>().color = color;

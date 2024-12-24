@@ -20,7 +20,7 @@ public class ArrowCreate: MonoBehaviour, ISignalReceive
         //화살 생성
         if (signal)
         {
-            Debug.Log("화살 만든다");
+            //Debug.Log("화살 만든다");
             player.GetPlayerObj(PlayerObj.Arrow).GetComponent<Transform>().position = transform.position;
             player.GetPlayerObj(PlayerObj.Arrow).GetComponent<Transform>().rotation = Quaternion.Euler(new Vector3(0, 0, 0));
             
@@ -30,7 +30,7 @@ public class ArrowCreate: MonoBehaviour, ISignalReceive
             int layer1 = LayerMask.NameToLayer("Arrow"); 
             int layer2 = LayerMask.NameToLayer("Head");
             Physics2D.IgnoreLayerCollision(layer1, layer2, true);
-            int arrowLayerMask = 1 << layer1; // "Arrow" 레이어의 LayerMask 비트값
+            int arrowLayerMask = 1 << layer1; 
             // 기존 ColliderMask 값을 가져옴
             int currentMask =player.GetPlayerObj(PlayerObj.Body).GetComponent<PlatformEffector2D>().colliderMask;
             currentMask &= ~arrowLayerMask;
@@ -43,8 +43,9 @@ public class ArrowCreate: MonoBehaviour, ISignalReceive
         //화살 삭제
         else
         {
-            Debug.Log("화살 지운다!!!!");
+            //Debug.Log("화살 지운다!!!!");
             player.GetPlayerObj(PlayerObj.Arrow).SetActive(false);
+            Time.timeScale = 1f;
         }
     }
     
