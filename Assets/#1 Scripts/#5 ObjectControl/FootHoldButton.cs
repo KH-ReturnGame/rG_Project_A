@@ -20,6 +20,7 @@ public class FootHoldButton : MonoBehaviour
     public bool oneUse = false;
     private int useCount = 0;
     public bool onOnly = false;
+    public bool canClickArrow = true;
     
     //버튼 자체 신호
     public bool Signal = false;
@@ -35,18 +36,22 @@ public class FootHoldButton : MonoBehaviour
     //버튼 눌림을 위한 충돌 시작할때 이벤트 함수
     private void OnTriggerEnter2D(Collider2D other)
     {
-        //Debug.Log(oneUse+""+useCount);
-        if ((oneUse && useCount >= 1) /*|| (other.CompareTag("Arrow") && GameObject.FindWithTag("Player").GetComponent<Player>().IsContainState(PlayerStats.CanControlArrow))*/)
-        {
-            return;
-        }
-        
         //감지된 오브젝트 눌림 리스트에 추가 감지하지 않을 놈들이면 그냥 return;
-        if (other.CompareTag("Head") || other.CompareTag("Body") || other.CompareTag("Arrow"))
+        if ((other.CompareTag("Head") || other.CompareTag("Body")))
+        {
+            downObj.Add(other);
+        }
+        else if (other.CompareTag("Arrow") && canClickArrow)
         {
             downObj.Add(other);
         }
         else
+        {
+            return;
+        }
+        
+        //Debug.Log(oneUse+""+useCount);
+        if ((oneUse && useCount >= 1) /*|| (other.CompareTag("Arrow") && GameObject.FindWithTag("Player").GetComponent<Player>().IsContainState(PlayerStats.CanControlArrow))*/)
         {
             return;
         }
@@ -81,17 +86,21 @@ public class FootHoldButton : MonoBehaviour
     //버튼 눌림을 위한 충돌 해제 이벤트 함수
     private void OnTriggerExit2D(Collider2D other)
     {
-        if ((oneUse && useCount >= 1))
-        {
-            return;
-        }
-        
         //감지된 오브젝트 눌림 리스트에 제거 감지하지 않을 놈들이면 그냥 return;
-        if (other.CompareTag("Head") || other.CompareTag("Body") || other.CompareTag("Arrow") || (other.CompareTag("Arrow")))
+        if (other.CompareTag("Head") || other.CompareTag("Body"))
+        {
+            downObj.Remove(other);
+        }
+        else if ((other.CompareTag("Arrow") && canClickArrow))
         {
             downObj.Remove(other);
         }
         else
+        {
+            return;
+        }
+        
+        if ((oneUse && useCount >= 1))
         {
             return;
         }

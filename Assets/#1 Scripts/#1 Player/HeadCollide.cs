@@ -44,10 +44,10 @@ public class HeadCollide : MonoBehaviour
 
         if (other.gameObject.CompareTag("die_ground") && name == "head_ground_check")
         {
+            Time.timeScale = 1;
             GameManager.Instance.LoadMainAndLevel(PlayerPrefs.GetInt("level"));
             GameManager.Instance.isPaused = false;
             GameManager.Instance.isEscMenuView = false;
-            Time.timeScale = 1;
         }
         
         //머리 문 충돌처리

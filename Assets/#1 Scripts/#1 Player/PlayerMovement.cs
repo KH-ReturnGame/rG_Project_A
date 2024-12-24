@@ -54,7 +54,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     //움직임 무한 적용~~
-    private void Update()
+    private void FixedUpdate()
     {
         if (controlMode == "Arrow") return;
         //기본 좌우 움직임

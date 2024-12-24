@@ -40,6 +40,7 @@ public class BodyCollide : MonoBehaviour
 
         if (other.gameObject.CompareTag("die_ground") && name == "body_ground_check")
         {
+            Time.timeScale = 1;
             GameManager.Instance.LoadMainAndLevel(PlayerPrefs.GetInt("level"));
             GameManager.Instance.isPaused = false;
             GameManager.Instance.isEscMenuView = false;
