@@ -112,7 +112,10 @@ public class PlayerMovement : MonoBehaviour
             {
                 //결합
                 Debug.Log("결합");
-                ChangeControl("e");
+                if (controlMode == "Head")
+                {
+                    ChangeControl("leftShift");
+                }
                 player.RemoveState(PlayerStats.CanCombine);
                 player.AddState(PlayerStats.IsCombine);
                 
