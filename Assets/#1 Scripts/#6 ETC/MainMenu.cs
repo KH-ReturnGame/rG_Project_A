@@ -50,6 +50,16 @@ public class MainMenu : MonoBehaviour
         }
     }
 
+    public void ClickSettingButton()
+    {
+        GameManager.Instance.ToggleSettingMenu();
+    }
+
+    public void ClickExitBtn()
+    {
+        Application.Quit();
+    }
+
     IEnumerator Active()
     {
         if (StartButtonToggle)

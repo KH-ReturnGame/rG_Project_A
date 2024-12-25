@@ -104,5 +104,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/#0 Scenes/Level/Level_30.unity
     guid: ed4c5bb79741f444d84a61663e94e407
+  - enabled: 1
+    path: Assets/#0 Scenes/EndingScene.unity
+    guid: 3a3269e86b8c1494d918290c01847da4
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: fa7cc8f43ce0c2b49853d6641f4552e7, type: 2}

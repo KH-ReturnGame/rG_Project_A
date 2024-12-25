@@ -120,7 +120,7 @@ public class SignalManager : MonoBehaviour
     // 어떤 물체가 어떤 신호를 주는지 딕셔너리 추가 함수
     public void AddChangeObj(GameObject obj, int index)
     {
-        Debug.Log(obj.name + "을 "+index+"번 신호로 관리 시작했습니다.");
+        //Debug.Log(obj.name + "을 "+index+"번 신호로 관리 시작했습니다.");
         ChangeObj.Add(obj, index);
     }
     

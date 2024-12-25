@@ -170,6 +170,10 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape) && !isSettingMenuView && !isLoding)
         {
+            if (CheckLoadScene(Scenes.MainMenu))
+            {
+                return;
+            }
             isEscMenuView = !isEscMenuView;
             if (isEscMenuView)
             {
