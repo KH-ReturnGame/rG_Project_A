@@ -8,7 +8,8 @@ using System.Collections;
 public enum Scenes
 {
     MainMenu,
-    main
+    main,
+    EndingScene,
 }
 
 public class SceneLoader : MonoBehaviour
