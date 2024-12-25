@@ -93,6 +93,7 @@ public class rankManager : MonoBehaviour
                                                 }
                                             });
                                     }
+                                    GameManager.Instance.ChangeScene(Scenes.MainMenu,LoadSceneMode.Single);
                                 }
                                 else {
                                     // 기존 사용자가 없다면 새로 데이터 추가
