@@ -709,7 +709,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &633101926
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2038,6 +2038,8 @@ MonoBehaviour:
   useHead: 0
   useBody: 0
   useArrow: 0
+  totalTime: 0
+  isSpeedRun: 0
 --- !u!114 &2106650886
 MonoBehaviour:
   m_ObjectHideFlags: 0
