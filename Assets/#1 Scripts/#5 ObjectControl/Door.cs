@@ -8,6 +8,8 @@ public class Door : MonoBehaviour, ISignalReceive
     [HideInInspector] public int SignalType;
     [HideInInspector] public string DoorType;
     [HideInInspector] public int RotateType;
+    [HideInInspector] public int xyType;
+    
     public int push = 1;
     
     public float angle;
@@ -54,27 +56,31 @@ public class Door : MonoBehaviour, ISignalReceive
 
         if (DoorType == "UpDown")
         {
-            if (Signal)
+            if (xyType == 0)
             {
-                // // 문이 위로 이동할 때
-                // transform.DOMoveY(startpos.y + 5f, 1f).SetUpdate(true).OnComplete(() =>
-                // {
-                //     // Transform 동기화
-                //     Physics2D.SyncTransforms();
-                // });
-                transform.position =
-                    Vector3.Lerp(transform.position, new Vector3(startpos.x,startpos.y+(5f*updown), 0), 20f*Time.unscaledDeltaTime);
+                if (Signal)
+                {
+                    transform.position =
+                        Vector3.Lerp(transform.position, new Vector3(startpos.x,startpos.y+(5f*updown), 0), 20f*Time.unscaledDeltaTime);
+                }
+                else
+                {
+                    transform.position =
+                        Vector3.Lerp(transform.position, new Vector3(startpos.x, startpos.y, 0), 20f*Time.unscaledDeltaTime);
+                }
             }
             else
             {
-                // // 문이 아래로 이동할 때
-                // transform.DOMoveY(startpos.y, 1f).SetUpdate(true).OnComplete(() =>
-                // {
-                //     // Transform 동기화
-                //     Physics2D.SyncTransforms();
-                // });
-                transform.position =
-                    Vector3.Lerp(transform.position, new Vector3(startpos.x, startpos.y, 0), 20f*Time.unscaledDeltaTime);
+                if (Signal)
+                {
+                    transform.position =
+                        Vector3.Lerp(transform.position, new Vector3(startpos.x+(5f*updown),startpos.y, 0), 20f*Time.unscaledDeltaTime);
+                }
+                else
+                {
+                    transform.position =
+                        Vector3.Lerp(transform.position, new Vector3(startpos.x, startpos.y, 0), 20f*Time.unscaledDeltaTime);
+                }
             }
         }
         else
