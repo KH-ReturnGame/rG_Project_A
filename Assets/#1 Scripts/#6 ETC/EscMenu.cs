@@ -27,6 +27,7 @@ public class EscMenu : MonoBehaviour
             GameManager.Instance.isPaused = false;
             GameManager.inst.isPlayGame = false;
             Time.timeScale = 1;
+            GameManager.Instance.isSpeedRun = false;
         });
         RestartButton.onClick.AddListener(() =>
         {

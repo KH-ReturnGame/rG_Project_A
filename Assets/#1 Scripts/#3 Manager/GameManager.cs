@@ -39,6 +39,10 @@ public class GameManager : MonoBehaviour
     public bool useBody;
     public bool useArrow;
     
+    //타이머
+    public float totalTime;
+    public bool isSpeedRun = false;
+    
     //씬로드 세팅 여부
     //public bool isReset = false;
     
@@ -168,6 +172,13 @@ public class GameManager : MonoBehaviour
     //Esc 메뉴 무한 체크
     public void Update()
     {
+        if (isSpeedRun && !CheckLoadScene(Scenes.MainMenu) && !CheckLoadScene(Scenes.EndingScene) &&!CheckLoadScene(Scenes.SceneLoad) && !isEscMenuView)
+        {
+            totalTime += Time.deltaTime;
+            Debug.Log(totalTime);
+        }
+        
+        
         if (Input.GetKeyDown(KeyCode.Escape) && !isSettingMenuView && !isLoding)
         {
             if (CheckLoadScene(Scenes.MainMenu))

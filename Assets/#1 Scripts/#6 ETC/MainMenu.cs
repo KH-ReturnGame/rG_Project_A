@@ -29,7 +29,11 @@ public class MainMenu : MonoBehaviour
         });
         HardButton.GetComponent<Button>().onClick.AddListener(() =>
         {
-            
+            //뭔가 타이머 시작을 해야함
+            PlayerPrefs.SetInt("level",1);
+            GameManager.Instance.LoadMainAndLevel(1);
+            GameManager.Instance.isSpeedRun = true;
+            GameManager.Instance.totalTime = 0f;
         });
 
         startRectT = StartButton.GetComponent<RectTransform>();

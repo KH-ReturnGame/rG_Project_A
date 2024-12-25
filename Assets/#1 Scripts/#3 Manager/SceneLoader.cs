@@ -10,6 +10,7 @@ public enum Scenes
     MainMenu,
     main,
     EndingScene,
+    SceneLoad,
 }
 
 public class SceneLoader : MonoBehaviour

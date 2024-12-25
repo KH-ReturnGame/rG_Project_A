@@ -78,6 +78,7 @@ public class EndingScene : MonoBehaviour
 
         camera.transform.position = targetPosition; // 정확히 목표 위치로 설정
 
+        Debug.Log(GameManager.Instance.totalTime);
         yield return new WaitForSeconds(5f);
         GameManager.Instance.ChangeScene(Scenes.MainMenu,LoadSceneMode.Single);
     }
