@@ -23,6 +23,7 @@ TagManager:
   - arrow_break
   - arrow_create
   - die_ground
+  - show_timer
   layers:
   - Default
   - TransparentFX

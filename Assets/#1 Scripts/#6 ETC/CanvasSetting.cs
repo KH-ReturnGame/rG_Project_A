@@ -9,7 +9,7 @@ public class CanvasSetting : MonoBehaviour
         Canvas canvas = GetComponent<Canvas>();
         if (canvas != null)
         {
-            canvas.additionalShaderChannels = AdditionalCanvasShaderChannels.Normal;
+            //canvas.additionalShaderChannels = AdditionalCanvasShaderChannels.Normal;
         }
     }
 }

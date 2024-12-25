@@ -1,6 +1,9 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class EndingScene : MonoBehaviour
 {
@@ -12,6 +15,13 @@ public class EndingScene : MonoBehaviour
     private float waitTime = 3f; // 줌아웃 후 대기 시간
     public Vector3 targetPosition; // 카메라 이동 목표 위치
     private float moveDuration = 1.5f; // 카메라 이동 시간
+
+    public GameObject EndingUI;
+    public GameObject SpeedrunUI;
+    public Button btn;
+    public TMP_InputField input;
+    public GameObject mainbtn;
+    public TextMeshProUGUI txt;
 
     void Start()
     {
@@ -79,7 +89,29 @@ public class EndingScene : MonoBehaviour
         camera.transform.position = targetPosition; // 정확히 목표 위치로 설정
 
         Debug.Log(GameManager.Instance.totalTime);
-        yield return new WaitForSeconds(5f);
+        EndingUI.SetActive(true);
+        if (GameManager.Instance.isSpeedRun)
+        {
+            SpeedrunUI.SetActive(true);
+            txt.text = GameManager.Instance.totalTime.ToString("F2") + "s 만에 클리어!!";
+        }
+        else
+        {
+            mainbtn.SetActive(true);
+        }
+    }
+
+    public void Rank_Btn()
+    {
+        btn.interactable = false;
+        input.interactable = false;
+        string id = input.text.Trim();
+        Debug.Log("ddd");
+        GetComponent<rankManager>().SetRank(2,id,GameManager.Instance.totalTime.ToString(),false);
+    }
+
+    public void Main_Btn()
+    {
         GameManager.Instance.ChangeScene(Scenes.MainMenu,LoadSceneMode.Single);
     }
 }
