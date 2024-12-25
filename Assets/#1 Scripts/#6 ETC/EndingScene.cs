@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EndingScene : MonoBehaviour
 {
@@ -8,7 +9,7 @@ public class EndingScene : MonoBehaviour
     private float zoomOutSize = 200f; // 줌아웃 크기
     private float zoomInSize = 20.5f; // 줌인 크기
     private float zoomDuration = 1.5f; // 줌아웃/줌인 지속 시간
-    private float waitTime = 1f; // 줌아웃 후 대기 시간
+    private float waitTime = 3f; // 줌아웃 후 대기 시간
     public Vector3 targetPosition; // 카메라 이동 목표 위치
     private float moveDuration = 1.5f; // 카메라 이동 시간
 
@@ -76,5 +77,8 @@ public class EndingScene : MonoBehaviour
         }
 
         camera.transform.position = targetPosition; // 정확히 목표 위치로 설정
+
+        yield return new WaitForSeconds(5f);
+        GameManager.Instance.ChangeScene(Scenes.MainMenu,LoadSceneMode.Single);
     }
 }
