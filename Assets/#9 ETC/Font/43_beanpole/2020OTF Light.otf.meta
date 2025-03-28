@@ -1,0 +1,24 @@
+fileFormatVersion: 2
+guid: dbcedd3140f0d4a5ebbd32020650f69a
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - BEANPOLE 2020OTF
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: b7778142511624b88a571df8a13890e6, type: 3}
+  - {fileID: 12800000, guid: 61de8c4f0f88645c3b2b97344d234876, type: 3}
+  - {fileID: 12800000, guid: bb3d9889f40be4880b115ccd0e19c9c7, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using DG.Tweening;
 
 public class Door : MonoBehaviour, ISignalReceive
 {
@@ -7,7 +8,12 @@ public class Door : MonoBehaviour, ISignalReceive
     [HideInInspector] public int SignalType;
     [HideInInspector] public string DoorType;
     [HideInInspector] public int RotateType;
+    [HideInInspector] public int xyType;
+    
+    public int push = 1;
+    
     public float angle;
+    public int updown = 1;
     
     //실제 문 로직 관련
     private float originAngle;
@@ -15,7 +21,7 @@ public class Door : MonoBehaviour, ISignalReceive
     private Transform rotateTransform;
     
     //문 자체 신호 관련
-    private bool Signal = false;
+    public bool Signal = false;
     
     public void Start()
     {
@@ -34,6 +40,9 @@ public class Door : MonoBehaviour, ISignalReceive
 
         //시작 위치
         startpos = new Vector2(transform.position.x, transform.position.y);
+        
+        // 첫 번째 값은 일반 tweens, 두 번째 값은 시퀀스 tweens 용량입니다.
+        DOTween.SetTweensCapacity(2000, 100); // 2000개의 일반 tweens, 100개의 시퀀스를 설정
     }
 
     //ISignalReceive 인터페이스에 있는 이벤트 함수 신호가 변경되면 호출됨
@@ -44,19 +53,34 @@ public class Door : MonoBehaviour, ISignalReceive
     
     private void Update()
     {
+
         if (DoorType == "UpDown")
         {
-            if (Signal)
+            if (xyType == 0)
             {
-                //위 아래로 작동하는 문이고 신호가 true 이면 올리기
-                transform.position =
-                    Vector3.Lerp(transform.position, new Vector3(startpos.x,startpos.y+4f, 0), 10f*Time.unscaledDeltaTime);
+                if (Signal)
+                {
+                    transform.position =
+                        Vector3.Lerp(transform.position, new Vector3(startpos.x,startpos.y+(5f*updown), 0), 20f*Time.unscaledDeltaTime);
+                }
+                else
+                {
+                    transform.position =
+                        Vector3.Lerp(transform.position, new Vector3(startpos.x, startpos.y, 0), 20f*Time.unscaledDeltaTime);
+                }
             }
             else
             {
-                //위 아래로 작동하는 문이고 신호가 false 이면 내리기
-                transform.position =
-                    Vector3.Lerp(transform.position, new Vector3(startpos.x, startpos.y, 0), 10f*Time.unscaledDeltaTime);
+                if (Signal)
+                {
+                    transform.position =
+                        Vector3.Lerp(transform.position, new Vector3(startpos.x+(5f*updown),startpos.y, 0), 20f*Time.unscaledDeltaTime);
+                }
+                else
+                {
+                    transform.position =
+                        Vector3.Lerp(transform.position, new Vector3(startpos.x, startpos.y, 0), 20f*Time.unscaledDeltaTime);
+                }
             }
         }
         else

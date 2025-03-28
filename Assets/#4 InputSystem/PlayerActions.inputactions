@@ -58,6 +58,15 @@
                     "processors": "",
                     "interactions": "Press",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "CombinePlayer",
+                    "type": "Button",
+                    "id": "7755785e-a179-4205-b6c3-bfb1bdb2ffc7",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -212,6 +221,17 @@
                     "processors": "",
                     "groups": "PC",
                     "action": "DragArrowMouse",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a95e6762-add2-40f9-bcaa-461fef839f85",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "CombinePlayer",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

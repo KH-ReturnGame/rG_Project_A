@@ -24,11 +24,16 @@ public class MainMenu : MonoBehaviour
         StartButton.GetComponent<Button>().onClick.AddListener(ClickStartButton);
         EasyButton.GetComponent<Button>().onClick.AddListener(() =>
         {
-            GameManager.Instance.ChangeLevel(1,LoadSceneMode.Single);
+            int level = PlayerPrefs.HasKey("level") ? PlayerPrefs.GetInt("level") : 1;
+            GameManager.Instance.LoadMainAndLevel(level);
         });
         HardButton.GetComponent<Button>().onClick.AddListener(() =>
         {
-            
+            //뭔가 타이머 시작을 해야함
+            PlayerPrefs.SetInt("level",1);
+            GameManager.Instance.LoadMainAndLevel(1);
+            GameManager.Instance.isSpeedRun = true;
+            GameManager.Instance.totalTime = 0f;
         });
 
         startRectT = StartButton.GetComponent<RectTransform>();
@@ -47,6 +52,16 @@ public class MainMenu : MonoBehaviour
         {
             StartCoroutine("Active");
         }
+    }
+
+    public void ClickSettingButton()
+    {
+        GameManager.Instance.ToggleSettingMenu();
+    }
+
+    public void ClickExitBtn()
+    {
+        Application.Quit();
     }
 
     IEnumerator Active()
@@ -76,25 +91,25 @@ public class MainMenu : MonoBehaviour
         if (StartButtonToggle)
         {
             startRectT.anchoredPosition3D =
-                Vector3.Slerp(startRectT.anchoredPosition3D, new Vector3(840, 100, 0), 10f*Time.unscaledDeltaTime);
+                Vector3.Slerp(startRectT.anchoredPosition3D, new Vector3(670, 100, 0), 10f*Time.unscaledDeltaTime);
 
             easyRectT.anchoredPosition3D =
-                Vector3.Slerp(easyRectT.anchoredPosition3D, new Vector3(840, -10, 0), 10f*Time.unscaledDeltaTime);
+                Vector3.Slerp(easyRectT.anchoredPosition3D, new Vector3(670, -10, 0), 10f*Time.unscaledDeltaTime);
             
             hardRectT.anchoredPosition3D =
-                Vector3.Slerp(hardRectT.anchoredPosition3D, new Vector3(840, -110, 0), 10f*Time.unscaledDeltaTime);
+                Vector3.Slerp(hardRectT.anchoredPosition3D, new Vector3(670, -110, 0), 10f*Time.unscaledDeltaTime);
 
         }
         else
         {
             startRectT.anchoredPosition3D =
-                Vector3.Slerp(startRectT.anchoredPosition3D, new Vector3(840, 0, 0), 10f*Time.unscaledDeltaTime);
+                Vector3.Slerp(startRectT.anchoredPosition3D, new Vector3(670, 0, 0), 10f*Time.unscaledDeltaTime);
             
             easyRectT.anchoredPosition3D =
-                Vector3.Slerp(easyRectT.anchoredPosition3D, new Vector3(840, 90, 0), 10f*Time.unscaledDeltaTime);
+                Vector3.Slerp(easyRectT.anchoredPosition3D, new Vector3(670, 90, 0), 10f*Time.unscaledDeltaTime);
             
             hardRectT.anchoredPosition3D =
-                Vector3.Slerp(hardRectT.anchoredPosition3D, new Vector3(840, -10, 0), 10f*Time.unscaledDeltaTime);
+                Vector3.Slerp(hardRectT.anchoredPosition3D, new Vector3(670, -10, 0), 10f*Time.unscaledDeltaTime);
         }
     }
 }

@@ -12,6 +12,18 @@ TagManager:
   - Arrow
   - Door
   - Button
+  - camera
+  - loding
+  - CombineCheck
+  - door_collide
+  - DoorCheck
+  - arrow_wall
+  - bgm
+  - sound
+  - arrow_break
+  - arrow_create
+  - die_ground
+  - show_timer
   layers:
   - Default
   - TransparentFX
@@ -24,7 +36,7 @@ TagManager:
   - Arrow
   - Door
   - Player
-  - 
+  - arrow_wall
   - 
   - 
   - 
@@ -48,4 +60,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: heal
+    uniqueID: 3559338805
+    locked: 0
+  - name: body
+    uniqueID: 2778691025
     locked: 0

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
 using ColorUtility = UnityEngine.ColorUtility;
 
 public class FootHoldButton : MonoBehaviour
@@ -16,18 +17,31 @@ public class FootHoldButton : MonoBehaviour
     [HideInInspector]
     public int flip = 1;
     public int SignalType = 0;
+    public bool oneUse = false;
+    private int useCount = 0;
+    public bool onOnly = false;
+    public bool canClickArrow = true;
     
     //버튼 자체 신호
-    public bool signal = false;
+    public bool Signal = false;
 
     //버튼 눌림 관련해서 누가 눌렀는지
     public List<Collider2D> downObj;
+
+    private void Start()
+    {
+        GameManager.Instance.AddChangeObj(gameObject,SignalType);
+    }
 
     //버튼 눌림을 위한 충돌 시작할때 이벤트 함수
     private void OnTriggerEnter2D(Collider2D other)
     {
         //감지된 오브젝트 눌림 리스트에 추가 감지하지 않을 놈들이면 그냥 return;
-        if (other.CompareTag("Head") || other.CompareTag("Body") || other.CompareTag("Arrow"))
+        if ((other.CompareTag("Head") || other.CompareTag("Body")))
+        {
+            downObj.Add(other);
+        }
+        else if (other.CompareTag("Arrow") && canClickArrow)
         {
             downObj.Add(other);
         }
@@ -36,25 +50,34 @@ public class FootHoldButton : MonoBehaviour
             return;
         }
         
-        //만약 단 한개의 오브젝트만 감지되었고 아직 안눌렸다면? ++ 토글 버튼이 아니라면
-        if (downObj.Count == 1 && !signal && !isToggle)
+        //Debug.Log(oneUse+""+useCount);
+        if ((oneUse && useCount >= 1) /*|| (other.CompareTag("Arrow") && GameObject.FindWithTag("Player").GetComponent<Player>().IsContainState(PlayerStats.CanControlArrow))*/)
         {
-            signal = true;
-            GameManager.Instance.ChangeSignal(SignalType, signal);
+            return;
+        }
+        
+        //만약 단 한개의 오브젝트만 감지되었고 아직 안눌렸다면? ++ 토글 버튼이 아니라면
+        if (downObj.Count == 1 && !Signal && !isToggle)
+        {
+            Signal = true;
+            GameManager.Instance.ChangeSignal(SignalType, Signal);
+            useCount += onOnly ? 1 : 0;
             moveButton("enter");
         }
 
         //만약 단 한개의 오브젝트만 감지되었고 토글 버튼이라면?
         if (downObj.Count == 1 && isToggle)
         {
-            signal = !signal;
-            GameManager.Instance.ChangeSignal(SignalType,signal);
-            if (signal)
+            Signal = !Signal;
+            GameManager.Instance.ChangeSignal(SignalType,Signal);
+            if (Signal)
             {
+                useCount += onOnly ? 1 : 0;
                 moveButton("enter");
             }
             else
             {
+                useCount += onOnly ? 0 : 1;
                 moveButton("exit");
             }
         }
@@ -64,7 +87,11 @@ public class FootHoldButton : MonoBehaviour
     private void OnTriggerExit2D(Collider2D other)
     {
         //감지된 오브젝트 눌림 리스트에 제거 감지하지 않을 놈들이면 그냥 return;
-        if (other.CompareTag("Head") || other.CompareTag("Body") || other.CompareTag("Arrow"))
+        if (other.CompareTag("Head") || other.CompareTag("Body"))
+        {
+            downObj.Remove(other);
+        }
+        else if ((other.CompareTag("Arrow") && canClickArrow))
         {
             downObj.Remove(other);
         }
@@ -73,11 +100,17 @@ public class FootHoldButton : MonoBehaviour
             return;
         }
         
-        //만약 버튼위에 아무 오브젝트도 없고 눌린 상태라면? ++ 토글 버튼이 아니라면
-        if (downObj.Count == 0 && signal && !isToggle)
+        if ((oneUse && useCount >= 1))
         {
-            signal = false;
-            GameManager.Instance.ChangeSignal(SignalType,signal);
+            return;
+        }
+        
+        //만약 버튼위에 아무 오브젝트도 없고 눌린 상태라면? ++ 토글 버튼이 아니라면
+        if (downObj.Count == 0 && Signal && !isToggle)
+        {
+            Signal = false;
+            GameManager.Instance.ChangeSignal(SignalType,Signal);
+            useCount += onOnly ? 0 : 1;
             moveButton("exit");
         }
     }
@@ -91,15 +124,15 @@ public class FootHoldButton : MonoBehaviour
         //그리고 눌리는 방향이 y방향인지
         if (downDirection == "Y")
         {
-            transform.position = new Vector3(transform.position.x, transform.position.y - 0.2f*flip*f,
-                transform.position.z);
+            transform.GetChild(0).transform.position = new Vector3(transform.GetChild(0).transform.position.x, transform.GetChild(0).transform.position.y - 0.1f*flip*f,
+                transform.GetChild(0).transform.position.z);
         }
         
         //눌리는 방향이 x방향인지
         else
         {
-            transform.position = new Vector3(transform.position.x - 0.2f*flip*f, transform.position.y,
-                transform.position.z);
+            transform.GetChild(0).transform.position = new Vector3(transform.GetChild(0).transform.position.x - 0.1f*flip*f, transform.GetChild(0).transform.position.y,
+                transform.GetChild(0).transform.position.z);
         }
     }
 
@@ -108,15 +141,15 @@ public class FootHoldButton : MonoBehaviour
     {
         //919191,96FF7F
         Color color;
-        if (signal)
+        if (Signal)
         {
             ColorUtility.TryParseHtmlString("#96FF7F",out color);
-            GetComponent<SpriteRenderer>().color = color;
+            transform.GetChild(0).GetComponent<SpriteRenderer>().color = color;
         }
         else
         {
             ColorUtility.TryParseHtmlString("#919191",out color);
-            GetComponent<SpriteRenderer>().color = color;
+            transform.GetChild(0).GetComponent<SpriteRenderer>().color = color;
         }
     }
 }

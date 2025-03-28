@@ -1,12 +1,18 @@
 using System;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 public class GameManager : MonoBehaviour
 {
     //Instance 정적 변수
     public static GameManager inst;
+    
+    //개발자 조작
+    private string control_level = "";
     
     //씬 로더 & 시그널 매니저
     private SceneLoader SL;
@@ -22,9 +28,24 @@ public class GameManager : MonoBehaviour
     public bool isSettingMenuView;
     private GameObject CreatedSettingMenu;
 
-    //게임 일시정지
+    //게임 상태관련
     public bool isPaused = false;
     public bool hasFocus;
+    public bool isPlayGame;
+    public bool isLoding;
+    public float timeScale = 1f;
+    
+    //레벨 상태관련
+    public bool useHead;
+    public bool useBody;
+    public bool useArrow;
+    
+    //타이머
+    public float totalTime;
+    public bool isSpeedRun = false;
+    
+    //씬로드 세팅 여부
+    //public bool isReset = false;
     
     //인스턴스화 되었을때
     public void Awake()
@@ -46,6 +67,19 @@ public class GameManager : MonoBehaviour
         //기타 매니저들 가져오기
         SL = GetComponent<SceneLoader>();
         SM = GetComponent<SignalManager>();
+        
+        GameObject[] audios = GameObject.FindGameObjectsWithTag("bgm");
+        foreach (var audio in audios)
+        {
+            audio.GetComponent<AudioSource>().volume = 0.4f*PlayerPrefs.GetFloat("BgmVolume", 1f);
+        }
+        audios = GameObject.FindGameObjectsWithTag("sound");
+        foreach (var audio in audios)
+        {
+            audio.GetComponent<AudioSource>().volume = 0.4f*PlayerPrefs.GetFloat("SoundVolume", 1f);
+        }
+        
+        //PlayerPrefs.SetInt("level",1);
     }
     
     //게임 매니저 속성으로 접근과 관련된 규약 지정하는 부분
@@ -109,7 +143,7 @@ public class GameManager : MonoBehaviour
         {
             PauseGame();
         }
-        else if (!isSettingMenuView)
+        else if (!isEscMenuView)
         {
             ResumeGame();
         }
@@ -125,6 +159,7 @@ public class GameManager : MonoBehaviour
     public void PauseGame()
     {
         isPaused = true;
+        timeScale = Time.timeScale;
         Time.timeScale = 0;
     }
 
@@ -132,14 +167,25 @@ public class GameManager : MonoBehaviour
     public void ResumeGame()
     {
         isPaused = false;
-        Time.timeScale = 1;
+        Time.timeScale = timeScale;
     }
     
     //Esc 메뉴 무한 체크
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && !isSettingMenuView)
+        if (isSpeedRun && !CheckLoadScene(Scenes.MainMenu) && !CheckLoadScene(Scenes.EndingScene) &&!CheckLoadScene(Scenes.SceneLoad) && !isEscMenuView)
         {
+            totalTime += Time.deltaTime;
+            Debug.Log(totalTime);
+        }
+        
+        
+        if (Input.GetKeyDown(KeyCode.Escape) && !isSettingMenuView && !isLoding)
+        {
+            if (CheckLoadScene(Scenes.MainMenu))
+            {
+                return;
+            }
             isEscMenuView = !isEscMenuView;
             if (isEscMenuView)
             {
@@ -153,6 +199,69 @@ public class GameManager : MonoBehaviour
                 Destroy(CreatedEscMenu);
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            control_level += "1";
+            Debug.Log(control_level);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            control_level += "2";
+            Debug.Log(control_level);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            control_level += "3";
+            Debug.Log(control_level);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            control_level += "4";
+            Debug.Log(control_level);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            control_level += "5";
+            Debug.Log(control_level);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha6))
+        {
+            control_level += "6";
+            Debug.Log(control_level);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha7))
+        {
+            control_level += "7";
+            Debug.Log(control_level);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha8))
+        {
+            control_level += "8";
+            Debug.Log(control_level);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha9))
+        {
+            control_level += "9";
+            Debug.Log(control_level);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha0))
+        {
+            control_level += "0";
+            Debug.Log(control_level);
+        }
+        if (Input.GetKeyDown(KeyCode.Backspace))
+        {
+            control_level = "";
+            Debug.Log(control_level);
+        }
+        if (Input.GetKeyDown(KeyCode.Minus))
+        {
+            int level = int.Parse(control_level);
+            PlayerPrefs.SetInt("level",level);
+            Debug.Log(PlayerPrefs.GetInt("level"));
+        }
+        
     }
 
     //설정 메뉴 열고 끄기
@@ -181,6 +290,10 @@ public class GameManager : MonoBehaviour
         SL.ChangeScene(scene,mode);
     }
 
+    public void UnLoadScene(string scene)
+    {
+        SL.UnLoadScene(scene);
+    }
     public void UnLoadScene(Scenes scene)
     {
         SL.UnLoadScene(scene);
@@ -194,6 +307,52 @@ public class GameManager : MonoBehaviour
     public bool CheckLoadScene(Scenes scene)
     {
         return SL.CheckLoadScene(scene);
+    }
+
+    public void SaveLevel(int level)
+    {
+        PlayerPrefs.SetInt("level",level);
+    }
+
+    public void LoadMainAndLevel(int level)
+    {
+        SL.LoadMainAndLevel(level);
+    }
+
+    public void ResetPlayer(Transform head, Transform body, Transform arrow, Transform cam, bool usehead, bool usebody, bool usearrow)
+    {
+        isPlayGame = true;
+
+        useHead = usehead;
+        useBody = usebody;
+        useArrow = usearrow;
+        
+        Player player = GameObject.FindWithTag("Player").GetComponent<Player>();
+        player.GetPlayerObj(PlayerObj.Head).GetComponent<Transform>().position = head.position;
+        player.GetPlayerObj(PlayerObj.Body).GetComponent<Transform>().position = body.position;
+        player.GetPlayerObj(PlayerObj.Arrow).GetComponent<Transform>().position = arrow.position;
+        
+        player.GetPlayerObj(PlayerObj.Head).SetActive(usehead);
+        player.GetPlayerObj(PlayerObj.Body).SetActive(usebody);
+        player.GetPlayerObj(PlayerObj.Arrow).SetActive(false);
+        //player.GetPlayerObj(PlayerObj.Arrow).SetActive(usearrow);
+
+        if (PlayerPrefs.GetInt("level")!=1 &&CheckLoadScene("Level_" + (PlayerPrefs.GetInt("level") - 1)))
+        {
+            StartCoroutine(GameObject.FindWithTag("MainCamera").GetComponent<CameraMove>().MoveCamera(cam.position));
+        }
+        else
+        {
+            GameObject.FindWithTag("MainCamera").transform.position = cam.position;
+        }
+        
+        // 로딩 씬 언로드
+        UnLoadScene("SceneLoad");
+    }
+
+    public void CheckChangeScene(Collider2D other, int num)
+    {
+        SL.CheckChangeScene(other,num);
     }
 
     //카메라 관리
@@ -219,6 +378,16 @@ public class GameManager : MonoBehaviour
     public void RemSendObj(GameObject obj)
     {
         SM.RemSendObj(obj);
+    }
+
+    public void AddChangeObj(GameObject obj, int index)
+    {
+        SM.AddChangeObj(obj, index);
+    }
+
+    public void RemChangeObj(GameObject obj)
+    {
+        SM.RemChangeObj(obj);
     }
     
 }

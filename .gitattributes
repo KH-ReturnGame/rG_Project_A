@@ -14,3 +14,13 @@ Pro/Pretendard-SemiBold filter=lfs diff=lfs merge=lfs -text
 SDF.asset filter=lfs diff=lfs merge=lfs -text
 Assets/TextMesh[[:space:]]Pro/Pretendard-SemiBold[[:space:]]SDF.asset filter=lfs diff=lfs merge=lfs -text
 Assets/\#9[[:space:]]ETC/TextMesh[[:space:]]Pro/Pretendard-SemiBold[[:space:]]SDF.asset filter=lfs diff=lfs merge=lfs -text
+Library/PackageCache/com.unity.burst@1.8.2/.Runtime/libburst-llvm-14.dylib filter=lfs diff=lfs merge=lfs -text
+.git/lfs/objects/0d/69/0d6945662faa4d32c18089faa7ba55b36905ce3e2071c85dacdcd9034655d9af filter=lfs diff=lfs merge=lfs -text
+Assets/\#9[[:space:]]ETC/TextMesh[[:space:]]Pro/Fonts/New[[:space:]]Universal[[:space:]]Render[[:space:]]Pipeline[[:space:]]Asset.asset.asset filter=lfs diff=lfs merge=lfs -text
+Assets/\#9[[:space:]]ETC/TextMesh[[:space:]]Pro/Fonts/2020OTF[[:space:]]Bold[[:space:]]SDF.asset filter=lfs diff=lfs merge=lfs -text
+Assets/\#9[[:space:]]ETC/Font/Galmuri7[[:space:]]SDF.asset filter=lfs diff=lfs merge=lfs -text
+Assets/\#9[[:space:]]ETC/Font/Galmuri14[[:space:]]SDF.asset filter=lfs diff=lfs merge=lfs -text
+Assets/\#9[[:space:]]ETC/Font/빈폴2020-Bold/빈폴[[:space:]]2020[[:space:]]Bold[[:space:]]SDF.asset filter=lfs diff=lfs merge=lfs -text
+Library/PlayerDataCache/OSXUniversal/Data/sharedassets0.assets.resS filter=lfs diff=lfs merge=lfs -text
+Assets/Firebase/Plugins/x86_64/FirebaseCppApp-12_5_0.bundle filter=lfs diff=lfs merge=lfs -text
+Assets/Firebase/Plugins/x86_64/FirebaseCppApp-12_5_0.so filter=lfs diff=lfs merge=lfs -text
