@@ -92,6 +92,7 @@ public class EndingScene : MonoBehaviour
         EndingUI.SetActive(true);
         if (GameManager.Instance.isSpeedRun)
         {
+            mainbtn.SetActive(true);
             SpeedrunUI.SetActive(true);
             txt.text = GameManager.Instance.totalTime.ToString("F2") + "s 만에 클리어!!";
         }
@@ -105,9 +106,9 @@ public class EndingScene : MonoBehaviour
     {
         btn.interactable = false;
         input.interactable = false;
-        string id = input.text.Trim();
-        Debug.Log("ddd");
-        GetComponent<rankManager>().SetRank(2,id,GameManager.Instance.totalTime.ToString(),false);
+        //string id = input.text.Trim();
+        //Debug.Log("ddd");
+        //GetComponent<rankManager>().SetRank(2,id,GameManager.Instance.totalTime.ToString(),false);
     }
 
     public void Main_Btn()
