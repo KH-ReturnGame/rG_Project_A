@@ -90,46 +90,74 @@ public class SceneLoader : MonoBehaviour
         yield return SceneManager.LoadSceneAsync("SceneLoad", LoadSceneMode.Single);
         Debug.Log("SceneLoad loaded");
 
-        AsyncOperation mainLoadOperation = SceneManager.LoadSceneAsync("main", LoadSceneMode.Additive);
-        mainLoadOperation.allowSceneActivation = false;
-        Debug.Log("Started loading main scene");
+        // main 씬 먼저 로드
+        AsyncOperation mainLoadOperation = SceneManager.LoadSceneAsync("main", LoadSceneMode.Single);
+        while (!mainLoadOperation.isDone)
+        {
+            Debug.Log("Main loading progress: " + mainLoadOperation.progress);
+            yield return null;
+        }
+        Debug.Log("Main scene loaded");
 
+        // Level 씬 로드
         AsyncOperation levelLoadOperation = SceneManager.LoadSceneAsync("Level_" + level, LoadSceneMode.Additive);
-        levelLoadOperation.allowSceneActivation = false;
-        Debug.Log("Started loading Level_" + level);
-
-        Image loadingImage = GameObject.FindGameObjectWithTag("loding").GetComponent<Image>();
-        if (loadingImage == null)
+        while (!levelLoadOperation.isDone)
         {
-            Debug.LogError("Loading image not found!");
-            yield break;
-        }
-
-        float timer = 0f;
-        while (mainLoadOperation.progress < 0.9f || levelLoadOperation.progress < 0.9f)
-        {
+            Debug.Log("Level loading progress: " + levelLoadOperation.progress);
             yield return null;
-            float progress = Mathf.Min(mainLoadOperation.progress, levelLoadOperation.progress);
-            loadingImage.fillAmount = Mathf.Lerp(0, 0.9f, progress);
-            Debug.Log($"Loading progress - Main: {mainLoadOperation.progress}, Level: {levelLoadOperation.progress}");
         }
-
-        Debug.Log("Both scenes reached 90% loading");
-        while (loadingImage.fillAmount < 1f)
-        {
-            yield return null;
-            timer += Time.deltaTime;
-            loadingImage.fillAmount = Mathf.Lerp(0.9f, 1f, timer);
-        }
-
-        Debug.Log("Activating scenes");
-        mainLoadOperation.allowSceneActivation = true;
-        levelLoadOperation.allowSceneActivation = true;
+        Debug.Log("Level_" + level + " loaded");
 
         GameManager.Instance.SaveLevel(level);
         _currentLevel = level;
         GameManager.Instance.isLoding = false;
-        Debug.Log("Scenes activated and loading complete");
+        Debug.Log("Scenes loaded successfully");
+        // GameManager.Instance.isLoding = true;
+        // Debug.Log("Starting LoadMainAndLevelCoroutine for level: " + level);
+        //
+        // yield return SceneManager.LoadSceneAsync("SceneLoad", LoadSceneMode.Single);
+        // Debug.Log("SceneLoad loaded");
+        //
+        // AsyncOperation mainLoadOperation = SceneManager.LoadSceneAsync("main", LoadSceneMode.Additive);
+        // mainLoadOperation.allowSceneActivation = false;
+        // Debug.Log("Started loading main scene");
+        //
+        // AsyncOperation levelLoadOperation = SceneManager.LoadSceneAsync("Level_" + level, LoadSceneMode.Additive);
+        // levelLoadOperation.allowSceneActivation = false;
+        // Debug.Log("Started loading Level_" + level);
+        //
+        // Image loadingImage = GameObject.FindGameObjectWithTag("loding").GetComponent<Image>();
+        // if (loadingImage == null)
+        // {
+        //     Debug.LogError("Loading image not found!");
+        //     yield break;
+        // }
+        //
+        // float timer = 0f;
+        // while (mainLoadOperation.progress < 0.9f || levelLoadOperation.progress < 0.9f)
+        // {
+        //     yield return null;
+        //     float progress = Mathf.Min(mainLoadOperation.progress, levelLoadOperation.progress);
+        //     loadingImage.fillAmount = Mathf.Lerp(0, 0.9f, progress);
+        //     Debug.Log($"Loading progress - Main: {mainLoadOperation.progress}, Level: {levelLoadOperation.progress}");
+        // }
+        //
+        // Debug.Log("Both scenes reached 90% loading");
+        // while (loadingImage.fillAmount < 1f)
+        // {
+        //     yield return null;
+        //     timer += Time.deltaTime;
+        //     loadingImage.fillAmount = Mathf.Lerp(0.9f, 1f, timer);
+        // }
+        //
+        // Debug.Log("Activating scenes");
+        // mainLoadOperation.allowSceneActivation = true;
+        // levelLoadOperation.allowSceneActivation = true;
+        //
+        // GameManager.Instance.SaveLevel(level);
+        // _currentLevel = level;
+        // GameManager.Instance.isLoding = false;
+        // Debug.Log("Scenes activated and loading complete");
     }
     
     // private IEnumerator LoadMainAndLevelCoroutine(int level)
