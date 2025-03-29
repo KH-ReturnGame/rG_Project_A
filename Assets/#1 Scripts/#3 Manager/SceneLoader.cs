@@ -82,38 +82,39 @@ public class SceneLoader : MonoBehaviour
         StartCoroutine(LoadMainAndLevelCoroutine(level));
     }
     
-    private IEnumerator LoadMainAndLevelCoroutine(int level)
+    IEnumerator LoadMainAndLevelCoroutine(int level)
     {
         GameManager.Instance.isLoding = true;
-    
-        // 로딩 씬 로드
+        Debug.Log("Starting LoadMainAndLevelCoroutine for level: " + level);
+
         yield return SceneManager.LoadSceneAsync("SceneLoad", LoadSceneMode.Single);
-    
-        // main 씬 비동기 로드
+        Debug.Log("SceneLoad loaded");
+
         AsyncOperation mainLoadOperation = SceneManager.LoadSceneAsync("main", LoadSceneMode.Additive);
         mainLoadOperation.allowSceneActivation = false;
-    
-        // level 씬 비동기 로드
+        Debug.Log("Started loading main scene");
+
         AsyncOperation levelLoadOperation = SceneManager.LoadSceneAsync("Level_" + level, LoadSceneMode.Additive);
         levelLoadOperation.allowSceneActivation = false;
+        Debug.Log("Started loading Level_" + level);
 
         Image loadingImage = GameObject.FindGameObjectWithTag("loding").GetComponent<Image>();
-    
-        float timer = 0f;
+        if (loadingImage == null)
+        {
+            Debug.LogError("Loading image not found!");
+            yield break;
+        }
 
-        // 두 씬 모두 0.9까지 로드될 때까지 대기
+        float timer = 0f;
         while (mainLoadOperation.progress < 0.9f || levelLoadOperation.progress < 0.9f)
         {
             yield return null;
-
-            // 로딩 바 채우기: 두 씬의 progress 값을 사용하여 로딩 바 업데이트
             float progress = Mathf.Min(mainLoadOperation.progress, levelLoadOperation.progress);
             loadingImage.fillAmount = Mathf.Lerp(0, 0.9f, progress);
-
-            timer += Time.deltaTime;
+            Debug.Log($"Loading progress - Main: {mainLoadOperation.progress}, Level: {levelLoadOperation.progress}");
         }
 
-        // 씬이 로드되었으나 활성화가 되지 않은 상태에서 로딩 바 0.9 -> 1.0까지 채우기
+        Debug.Log("Both scenes reached 90% loading");
         while (loadingImage.fillAmount < 1f)
         {
             yield return null;
@@ -121,14 +122,14 @@ public class SceneLoader : MonoBehaviour
             loadingImage.fillAmount = Mathf.Lerp(0.9f, 1f, timer);
         }
 
-        // 두 씬을 모두 활성화
+        Debug.Log("Activating scenes");
         mainLoadOperation.allowSceneActivation = true;
         levelLoadOperation.allowSceneActivation = true;
 
         GameManager.Instance.SaveLevel(level);
         _currentLevel = level;
-
         GameManager.Instance.isLoding = false;
+        Debug.Log("Scenes activated and loading complete");
     }
     
     // private IEnumerator LoadMainAndLevelCoroutine(int level)
