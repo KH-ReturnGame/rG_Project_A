@@ -1,62 +1,36 @@
 using UnityEngine;
 
-public class CameraSize : MonoBehaviour
+public class CameraSize: MonoBehaviour
 {
-    private float targetAspect = 16.0f / 9.0f;
-    
-    void Update()
+    public float targetWidth = 1920f; // 원하는 기준 가로 해상도
+    public float targetHeight = 1080f; // 원하는 기준 세로 해상도
+    public float pixelsPerUnit = 100f; // 픽셀 단위
+
+    void Start()
     {
-        // 현재 화면 비율 계산
-        float windowAspect = (float)Screen.width / (float)Screen.height;
-        // 목표 화면 비율과 현재 화면 비율의 차이 계산
-        float scaleHeight = windowAspect / targetAspect;
-        float scaleWidth = targetAspect / windowAspect;
+        AdjustCameraSize();
+    }
 
-        // 카메라 가져오기
-        Camera camera = GetComponent<Camera>();
+    void AdjustCameraSize()
+    {
+        Camera cam = GetComponent<Camera>();
 
-        if (scaleHeight < 1.0f)
+        // 현재 화면 비율
+        float screenAspect = (float)Screen.width / Screen.height;
+        // 타겟 비율
+        float targetAspect = targetWidth / targetHeight;
+
+        if (screenAspect >= targetAspect)
         {
-            // 현재 화면이 목표 비율보다 세로로 긴 경우
-            // 세로 부분을 잘라내고 검정색 여백을 추가
-            Rect rect = camera.rect;
-
-            rect.width = 1.0f;
-            rect.height = scaleHeight;
-            rect.x = 0;
-            rect.y = (1.0f - scaleHeight) / 2.0f;
-
-            camera.rect = rect;
-        }
-        else if (scaleWidth < 1.0f)
-        {
-            // 현재 화면이 목표 비율보다 가로로 긴 경우
-            // 가로 부분을 잘라내고 검정색 여백을 추가
-            Rect rect = camera.rect;
-
-            rect.width = scaleWidth;
-            rect.height = 1.0f;
-            rect.x = (1.0f - scaleWidth) / 2.0f;
-            rect.y = 0;
-
-            camera.rect = rect;
+            // 화면이 더 넓은 경우 (좌우 여백이 생김)
+            float differenceInSize = targetAspect / screenAspect;
+            cam.orthographicSize = targetHeight / (2 * pixelsPerUnit);
         }
         else
         {
-            // 목표 비율과 동일한 경우
-            Rect rect = camera.rect;
-
-            rect.width = 1.0f;
-            rect.height = 1.0f;
-            rect.x = 0;
-            rect.y = 0;
-
-            camera.rect = rect;
+            // 화면이 더 좁은 경우 (상하 여백이 생김)
+            float differenceInSize = screenAspect / targetAspect;
+            cam.orthographicSize = (targetHeight / (2 * pixelsPerUnit)) / differenceInSize;
         }
-    }
-
-    void OnPreCull()
-    {
-        GL.Clear(true, true, Color.black);
     }
 }

@@ -5,6 +5,7 @@ using UnityEditor.Animations; // Editor 관련 코드를 감쌉니다.
 #endif
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.PlayerLoop;
 using UnityEngine.Serialization;
 
 public class PlayerMovement : MonoBehaviour
@@ -72,41 +73,29 @@ public class PlayerMovement : MonoBehaviour
                 _nowRigidbody.AddTorque(torque);
             }
         }
+
+        CheckInput();
     }
-    
-    //좌우 입력받기
-    public void OnMove(InputAction.CallbackContext context)
+
+    private void CheckInput()
     {
-        _movementInputDirection = context.ReadValue<float>();
-    }
-    
-    //점프 입력받기
-    public void OnJump(InputAction.CallbackContext context)
-    {
-        if (!context.started || controlMode == "Arrow")
-            return;
-        if ((_nowRigidbody==_bodyRigidbody && player.IsContainState(PlayerStats.BodyIsGround))||
-            (_nowRigidbody==_headRigidbody && player.IsContainState(PlayerStats.HeadIsGround)))
+        //
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            _nowRigidbody.velocity = new Vector2(_nowRigidbody.velocity.x, 0);
-            _nowRigidbody.velocity = new Vector2(_nowRigidbody.velocity.x, jumpForce);
+            if ((_nowRigidbody==_bodyRigidbody && player.IsContainState(PlayerStats.BodyIsGround))||
+                (_nowRigidbody==_headRigidbody && player.IsContainState(PlayerStats.HeadIsGround)))
+            {
+                _nowRigidbody.velocity = new Vector2(_nowRigidbody.velocity.x, 0);
+                _nowRigidbody.velocity = new Vector2(_nowRigidbody.velocity.x, jumpForce);
+            }
         }
-    }
-    
-    //머리, 몸 전환 입력받기
-    public void OnChangePlayer(InputAction.CallbackContext context)
-    {
-        //Debug.Log(context.control.name);
-        if (context.started)
+        //
+        if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-            ChangeControl(context.control.name);
+            ChangeControl("leftShift");
         }
-    }
-    
-    //머리 몸 결합 입력받기
-    public void OnCombinePlayer(InputAction.CallbackContext context)
-    {
-        if (context.started )
+        //
+        if (Input.GetKeyDown(KeyCode.F))
         {
             if (player.IsContainState(PlayerStats.CanCombine) && !player.IsContainState(PlayerStats.IsCombine))
             {
@@ -153,8 +142,91 @@ public class PlayerMovement : MonoBehaviour
                 _body.GetComponent<SpriteRenderer>().material = material[0];
             }
         }
-        
+        //
+        _movementInputDirection = Input.GetAxis("Horizontal");
     }
+
+    //좌우 입력받기
+    // public void OnMove(InputAction.CallbackContext context)
+    // {
+    //     _movementInputDirection = context.ReadValue<float>();
+    // }
+    
+    //점프 입력받기
+    // public void OnJump(InputAction.CallbackContext context)
+    // {
+    //     if (!context.started || controlMode == "Arrow")
+    //         return;
+    //     if ((_nowRigidbody==_bodyRigidbody && player.IsContainState(PlayerStats.BodyIsGround))||
+    //         (_nowRigidbody==_headRigidbody && player.IsContainState(PlayerStats.HeadIsGround)))
+    //     {
+    //         _nowRigidbody.velocity = new Vector2(_nowRigidbody.velocity.x, 0);
+    //         _nowRigidbody.velocity = new Vector2(_nowRigidbody.velocity.x, jumpForce);
+    //     }
+    // }
+    
+    //머리, 몸 전환 입력받기
+    // public void OnChangePlayer(InputAction.CallbackContext context)
+    // {
+    //     //Debug.Log(context.control.name);
+    //     if (context.started)
+    //     {
+    //         ChangeControl(context.control.name);
+    //     }
+    // }
+    
+    //머리 몸 결합 입력받기
+    // public void OnCombinePlayer(InputAction.CallbackContext context)
+    // {
+    //     if (context.started )
+    //     {
+    //         if (player.IsContainState(PlayerStats.CanCombine) && !player.IsContainState(PlayerStats.IsCombine))
+    //         {
+    //             //결합
+    //             Debug.Log("결합");
+    //             if (controlMode == "Head")
+    //             {
+    //                 ChangeControl("leftShift");
+    //             }
+    //             player.RemoveState(PlayerStats.CanCombine);
+    //             player.AddState(PlayerStats.IsCombine);
+    //             
+    //             _spriteRenderer.sprite = sprites[1];
+    //             _head.SetActive(false);
+    //
+    //             AnimatorStateInfo stateInfo = _body.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0);
+    //             float currentNormalizedTime = stateInfo.normalizedTime % 1;
+    //             _body.GetComponent<Animator>().SetBool("isCombine",true);
+    //             // 새로운 상태에서 동일한 프레임 위치부터 시작하도록 설정
+    //             _body.GetComponent<Animator>().Play("ver2_combine_anime_idle", 0, currentNormalizedTime);
+    //             _body.GetComponents<PolygonCollider2D>()[1].enabled = true;
+    //             _body.GetComponents<PolygonCollider2D>()[0].enabled = false;
+    //             _body.GetComponent<SpriteRenderer>().material = material[1];
+    //         }
+    //         else if(player.IsContainState(PlayerStats.IsCombine))
+    //         {
+    //             //결합 해제
+    //             Debug.Log("해제");
+    //             player.AddState(PlayerStats.CanCombine);
+    //             player.RemoveState(PlayerStats.IsCombine);
+    //             
+    //             _spriteRenderer.sprite = sprites[0];
+    //             _head.GetComponent<Transform>().position =
+    //                 _body.GetComponent<Transform>().position + new Vector3(0, 2, 0);
+    //             _head.SetActive(true);
+    //
+    //             AnimatorStateInfo stateInfo = _body.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0);
+    //             float currentNormalizedTime = stateInfo.normalizedTime % 1;
+    //             _body.GetComponent<Animator>().SetBool("isCombine",false);
+    //             _body.GetComponent<Animator>().Play("ver2_body_anime_stop", 0, currentNormalizedTime);
+    //             _head.GetComponent<Transform>().rotation = Quaternion.Euler(0, 0, 0);
+    //             _body.GetComponents<PolygonCollider2D>()[1].enabled = false;
+    //             _body.GetComponents<PolygonCollider2D>()[0].enabled = true;
+    //             _body.GetComponent<SpriteRenderer>().material = material[0];
+    //         }
+    //     }
+    //     
+    // }
     
     //머리 몸 화살 전환 함수
     public void ChangeControl(string controlmode)
