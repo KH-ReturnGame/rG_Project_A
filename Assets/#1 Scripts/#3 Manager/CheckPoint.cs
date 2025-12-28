@@ -51,15 +51,35 @@ public class CheckPoint : MonoBehaviour
         }
     }
     
-    // Editor-only: Draw checkpoint visual in scene view
+    // OnTriggerEnter2D는 이미 2D용이므로 OK!
+// 하지만 Gizmo 그리기 부분을 2D에 맞게 수정:
+
     private void OnDrawGizmos()
     {
         Gizmos.color = hasBeenActivated ? Color.green : Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, 1f);
-        
-        // Draw checkpoint number
+    
+        // 3D: Gizmos.DrawWireSphere(transform.position, 1f);
+        // 2D: 원형으로 그리기
+        DrawCircleGizmo(transform.position, 1f);
+    
 #if UNITY_EDITOR
         UnityEditor.Handles.Label(transform.position + Vector3.up * 1.5f, $"Checkpoint {checkPointNumber}");
 #endif
+    }
+
+// 2D용 원 그리기 헬퍼 함수 추가
+    private void DrawCircleGizmo(Vector3 center, float radius)
+    {
+        int segments = 32;
+        float angle = 0f;
+        Vector3 lastPoint = center + new Vector3(radius, 0, 0);
+    
+        for (int i = 1; i <= segments; i++)
+        {
+            angle = i * 360f / segments * Mathf.Deg2Rad;
+            Vector3 newPoint = center + new Vector3(Mathf.Cos(angle) * radius, Mathf.Sin(angle) * radius, 0);
+            Gizmos.DrawLine(lastPoint, newPoint);
+            lastPoint = newPoint;
+        }
     }
 }

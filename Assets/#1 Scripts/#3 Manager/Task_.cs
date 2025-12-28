@@ -74,23 +74,25 @@ public class MovePlayerTask : Task_
         {
             return isDone;
         }
-        
-        // Safety check
+    
         if (playerTransform == null || targetTransform == null)
         {
             Debug.LogError("MovePlayerTask: Player or target transform became null during execution!");
             EndTask();
             return true;
         }
-        
-        float currentDistance = Vector3.Distance(playerTransform.position, targetTransform.position);
-        
-        // Log distance occasionally for debugging
-        if (Time.frameCount % 30 == 0) // Log every 30 frames
+    
+        // 2D용으로 수정: Vector2.Distance 사용
+        float currentDistance = Vector2.Distance(
+            new Vector2(playerTransform.position.x, playerTransform.position.y),
+            new Vector2(targetTransform.position.x, targetTransform.position.y)
+        );
+    
+        if (Time.frameCount % 30 == 0)
         {
             Debug.Log($"Distance to target: {currentDistance}, Need: {completionDistance}");
         }
-        
+    
         if (currentDistance <= completionDistance)
         {
             Debug.Log($"MovePlayerTask: Player reached target! Distance: {currentDistance}");
