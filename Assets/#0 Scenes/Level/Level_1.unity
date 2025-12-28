@@ -258,6 +258,80 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 68963858}
   m_CullTransparentMesh: 1
+--- !u!1 &181558633
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 181558635}
+  - component: {fileID: 181558634}
+  - component: {fileID: 181558636}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &181558634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 181558633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62260f020b1d70449a39c152328f78f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  checkPointNumber: 0
+  activateOnce: 1
+  visualIndicator: {fileID: 0}
+--- !u!4 &181558635
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 181558633}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -31.5, y: 16.6, z: -0.19704819}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &181558636
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 181558633}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 1.7197056, y: 0.10748243}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 4.439411, y: 5.514228}
+  m_EdgeRadius: 0
 --- !u!1 &185735033
 GameObject:
   m_ObjectHideFlags: 0
@@ -25050,7 +25124,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6433807957502365374, guid: 2e965aaa61b824c40837c6f7aef70d5a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 26
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 6433807957502365374, guid: 2e965aaa61b824c40837c6f7aef70d5a, type: 3}
       propertyPath: m_LocalPosition.z
@@ -25418,27 +25492,19 @@ CompositeCollider2D:
       - X: 120000000
         Y: 330000000
       - X: 120000000
-        Y: 260000000
-      - X: 70000000
-        Y: 260000000
-      - X: 70000000
-        Y: 250000000
+        Y: 140000000
+      - X: -50000000
+        Y: 140000000
+      - X: -50000000
+        Y: 130000000
       - X: 130000000
-        Y: 250000000
+        Y: 130000000
       - X: 130000000
         Y: 330000000
       - X: 330000000
         Y: 330000000
       - X: 330000000
         Y: -40000000
-    - - X: -20000000
-        Y: 200000000
-      - X: -70000000
-        Y: 200000000
-      - X: -70000000
-        Y: 190000000
-      - X: -20000000
-        Y: 190000000
     - - X: -120000000
         Y: 110000000
       - X: -170000000
@@ -25501,16 +25567,12 @@ CompositeCollider2D:
       - {x: -28, y: 20.000029}
       - {x: -27.999971, y: 33}
       - {x: 12, y: 32.999973}
-      - {x: 11.99997, y: 26}
-      - {x: 7, y: 25.999971}
-      - {x: 7.0000296, y: 25}
-      - {x: 13, y: 25.000029}
+      - {x: 11.99997, y: 14}
+      - {x: -5, y: 13.999971}
+      - {x: -4.999971, y: 13}
+      - {x: 13, y: 13.00003}
       - {x: 13.00003, y: 33}
       - {x: 33, y: 32.999973}
-    - - {x: -2.0000293, y: 19}
-      - {x: -2.0000293, y: 20}
-      - {x: -7, y: 19.999971}
-      - {x: -6.9999704, y: 19}
     - - {x: -12.00003, y: 10}
       - {x: -12.00003, y: 11}
       - {x: -17, y: 10.99997}
@@ -27028,6 +27090,186 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+  - first: {x: -5, y: 13, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 11
+      m_TileSpriteIndex: 11
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
+  - first: {x: -4, y: 13, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 11
+      m_TileSpriteIndex: 11
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
+  - first: {x: -3, y: 13, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 11
+      m_TileSpriteIndex: 11
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
+  - first: {x: -2, y: 13, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 11
+      m_TileSpriteIndex: 11
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
+  - first: {x: -1, y: 13, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 11
+      m_TileSpriteIndex: 11
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
+  - first: {x: 0, y: 13, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 11
+      m_TileSpriteIndex: 11
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
+  - first: {x: 1, y: 13, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 11
+      m_TileSpriteIndex: 11
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
+  - first: {x: 2, y: 13, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 11
+      m_TileSpriteIndex: 11
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
+  - first: {x: 3, y: 13, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 11
+      m_TileSpriteIndex: 11
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
+  - first: {x: 4, y: 13, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 11
+      m_TileSpriteIndex: 11
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
+  - first: {x: 5, y: 13, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 11
+      m_TileSpriteIndex: 11
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
+  - first: {x: 6, y: 13, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 11
+      m_TileSpriteIndex: 11
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
+  - first: {x: 7, y: 13, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 11
+      m_TileSpriteIndex: 11
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
+  - first: {x: 8, y: 13, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 11
+      m_TileSpriteIndex: 11
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
+  - first: {x: 9, y: 13, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 11
+      m_TileSpriteIndex: 11
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
+  - first: {x: 10, y: 13, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 11
+      m_TileSpriteIndex: 11
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
+  - first: {x: 11, y: 13, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 11
+      m_TileSpriteIndex: 11
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
+  - first: {x: 12, y: 13, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 11
+      m_TileSpriteIndex: 11
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
   - first: {x: 33, y: 13, z: 0}
     second:
       serializedVersion: 2
@@ -27039,6 +27281,16 @@ Tilemap:
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
   - first: {x: -35, y: 14, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 11
+      m_TileSpriteIndex: 11
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
+  - first: {x: 12, y: 14, z: 0}
     second:
       serializedVersion: 2
       m_TileIndex: 11
@@ -27068,6 +27320,16 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+  - first: {x: 12, y: 15, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 11
+      m_TileSpriteIndex: 11
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
   - first: {x: 33, y: 15, z: 0}
     second:
       serializedVersion: 2
@@ -27079,6 +27341,16 @@ Tilemap:
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
   - first: {x: -35, y: 16, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 11
+      m_TileSpriteIndex: 11
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
+  - first: {x: 12, y: 16, z: 0}
     second:
       serializedVersion: 2
       m_TileIndex: 11
@@ -27108,6 +27380,16 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+  - first: {x: 12, y: 17, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 11
+      m_TileSpriteIndex: 11
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
   - first: {x: 33, y: 17, z: 0}
     second:
       serializedVersion: 2
@@ -27119,6 +27401,16 @@ Tilemap:
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
   - first: {x: -35, y: 18, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 11
+      m_TileSpriteIndex: 11
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
+  - first: {x: 12, y: 18, z: 0}
     second:
       serializedVersion: 2
       m_TileIndex: 11
@@ -27278,47 +27570,7 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
-  - first: {x: -7, y: 19, z: 0}
-    second:
-      serializedVersion: 2
-      m_TileIndex: 11
-      m_TileSpriteIndex: 11
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_TileObjectToInstantiateIndex: 65535
-      dummyAlignment: 0
-      m_AllTileFlags: 1073741825
-  - first: {x: -6, y: 19, z: 0}
-    second:
-      serializedVersion: 2
-      m_TileIndex: 11
-      m_TileSpriteIndex: 11
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_TileObjectToInstantiateIndex: 65535
-      dummyAlignment: 0
-      m_AllTileFlags: 1073741825
-  - first: {x: -5, y: 19, z: 0}
-    second:
-      serializedVersion: 2
-      m_TileIndex: 11
-      m_TileSpriteIndex: 11
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_TileObjectToInstantiateIndex: 65535
-      dummyAlignment: 0
-      m_AllTileFlags: 1073741825
-  - first: {x: -4, y: 19, z: 0}
-    second:
-      serializedVersion: 2
-      m_TileIndex: 11
-      m_TileSpriteIndex: 11
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_TileObjectToInstantiateIndex: 65535
-      dummyAlignment: 0
-      m_AllTileFlags: 1073741825
-  - first: {x: -3, y: 19, z: 0}
+  - first: {x: 12, y: 19, z: 0}
     second:
       serializedVersion: 2
       m_TileIndex: 11
@@ -27348,6 +27600,16 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+  - first: {x: 12, y: 20, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 11
+      m_TileSpriteIndex: 11
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
   - first: {x: 33, y: 20, z: 0}
     second:
       serializedVersion: 2
@@ -27359,6 +27621,16 @@ Tilemap:
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
   - first: {x: -29, y: 21, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 11
+      m_TileSpriteIndex: 11
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
+  - first: {x: 12, y: 21, z: 0}
     second:
       serializedVersion: 2
       m_TileIndex: 11
@@ -27388,6 +27660,16 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+  - first: {x: 12, y: 22, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 11
+      m_TileSpriteIndex: 11
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
   - first: {x: 33, y: 22, z: 0}
     second:
       serializedVersion: 2
@@ -27399,6 +27681,16 @@ Tilemap:
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
   - first: {x: -29, y: 23, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 11
+      m_TileSpriteIndex: 11
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
+  - first: {x: 12, y: 23, z: 0}
     second:
       serializedVersion: 2
       m_TileIndex: 11
@@ -27428,6 +27720,16 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+  - first: {x: 12, y: 24, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 11
+      m_TileSpriteIndex: 11
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
   - first: {x: 33, y: 24, z: 0}
     second:
       serializedVersion: 2
@@ -27439,56 +27741,6 @@ Tilemap:
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
   - first: {x: -29, y: 25, z: 0}
-    second:
-      serializedVersion: 2
-      m_TileIndex: 11
-      m_TileSpriteIndex: 11
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_TileObjectToInstantiateIndex: 65535
-      dummyAlignment: 0
-      m_AllTileFlags: 1073741825
-  - first: {x: 7, y: 25, z: 0}
-    second:
-      serializedVersion: 2
-      m_TileIndex: 11
-      m_TileSpriteIndex: 11
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_TileObjectToInstantiateIndex: 65535
-      dummyAlignment: 0
-      m_AllTileFlags: 1073741825
-  - first: {x: 8, y: 25, z: 0}
-    second:
-      serializedVersion: 2
-      m_TileIndex: 11
-      m_TileSpriteIndex: 11
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_TileObjectToInstantiateIndex: 65535
-      dummyAlignment: 0
-      m_AllTileFlags: 1073741825
-  - first: {x: 9, y: 25, z: 0}
-    second:
-      serializedVersion: 2
-      m_TileIndex: 11
-      m_TileSpriteIndex: 11
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_TileObjectToInstantiateIndex: 65535
-      dummyAlignment: 0
-      m_AllTileFlags: 1073741825
-  - first: {x: 10, y: 25, z: 0}
-    second:
-      serializedVersion: 2
-      m_TileIndex: 11
-      m_TileSpriteIndex: 11
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_TileObjectToInstantiateIndex: 65535
-      dummyAlignment: 0
-      m_AllTileFlags: 1073741825
-  - first: {x: 11, y: 25, z: 0}
     second:
       serializedVersion: 2
       m_TileIndex: 11
@@ -28382,7 +28634,7 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 273
+  - m_RefCount: 292
     m_Data: {fileID: 11400000, guid: 2d8fef421ad674ddf8edc6dd755a2e89, type: 2}
   - m_RefCount: 0
     m_Data: {fileID: 0}
@@ -28415,7 +28667,7 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 273
+  - m_RefCount: 292
     m_Data: {fileID: 21300000, guid: 862f58419ce164e8491579c3debcf979, type: 3}
   - m_RefCount: 0
     m_Data: {fileID: 0}
@@ -28426,7 +28678,7 @@ Tilemap:
   - m_RefCount: 0
     m_Data: {fileID: 0}
   m_TileMatrixArray:
-  - m_RefCount: 273
+  - m_RefCount: 292
     m_Data:
       e00: 1
       e01: 0
@@ -28445,7 +28697,7 @@ Tilemap:
       e32: 0
       e33: 1
   m_TileColorArray:
-  - m_RefCount: 273
+  - m_RefCount: 292
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
@@ -28894,22 +29146,370 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
       propertyPath: tutorialSteps.Array.size
-      value: 1
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
       propertyPath: tutorialSteps.Array.data[0].taskType
       value: wait
       objectReference: {fileID: 0}
     - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[1].taskType
+      value: wait
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[2].taskType
+      value: wait
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[3].taskType
+      value: key-press
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[4].taskType
+      value: key-press
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[5].taskType
+      value: wait
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[6].taskType
+      value: key-press
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[7].taskType
+      value: wait
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[8].taskType
+      value: wait
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[9].taskType
+      value: wait
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[10].taskType
+      value: wait
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[11].taskType
+      value: wait
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[12].taskType
+      value: wait
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[3].primaryKey
+      value: 97
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[4].primaryKey
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[5].primaryKey
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[6].primaryKey
+      value: 32
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[7].primaryKey
+      value: 32
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[8].primaryKey
+      value: 32
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[9].primaryKey
+      value: 32
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
       propertyPath: tutorialSteps.Array.data[0].description
-      value: "\uAE30\uBCF8 \uC124\uBA85"
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[10].primaryKey
+      value: 32
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[11].primaryKey
+      value: 32
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[12].primaryKey
+      value: 32
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[1].description
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[2].description
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[3].description
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[4].description
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[5].description
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[6].description
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[7].description
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
       propertyPath: tutorialSteps.Array.data[0].taskParameter
-      value: 10
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[1].taskParameter
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[2].taskParameter
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[3].taskParameter
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[4].taskParameter
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[5].taskParameter
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[6].taskParameter
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[7].taskParameter
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[8].taskParameter
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[9].taskParameter
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[10].taskParameter
+      value: 5.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[11].taskParameter
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[12].taskParameter
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[11].requiredCheckpoint
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[12].requiredCheckpoint
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[2].multiKeys.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[3].multiKeys.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[4].multiKeys.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[5].multiKeys.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[6].multiKeys.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[7].multiKeys.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[8].multiKeys.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[9].multiKeys.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[10].multiKeys.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[11].multiKeys.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[12].multiKeys.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[2].multiKeys.Array.data[0]
+      value: 97
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[2].multiKeys.Array.data[1]
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[3].multiKeys.Array.data[0]
+      value: 97
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[3].multiKeys.Array.data[1]
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[4].multiKeys.Array.data[0]
+      value: 97
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[4].multiKeys.Array.data[1]
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[5].multiKeys.Array.data[0]
+      value: 97
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[5].multiKeys.Array.data[1]
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[6].multiKeys.Array.data[0]
+      value: 97
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[6].multiKeys.Array.data[1]
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[7].multiKeys.Array.data[0]
+      value: 97
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[7].multiKeys.Array.data[1]
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[8].multiKeys.Array.data[0]
+      value: 97
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[8].multiKeys.Array.data[1]
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[9].multiKeys.Array.data[0]
+      value: 97
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[9].multiKeys.Array.data[1]
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[10].multiKeys.Array.data[0]
+      value: 97
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[10].multiKeys.Array.data[1]
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[11].multiKeys.Array.data[0]
+      value: 97
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[11].multiKeys.Array.data[1]
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[12].multiKeys.Array.data[0]
+      value: 97
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[12].multiKeys.Array.data[1]
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
       propertyPath: tutorialSteps.Array.data[0].dialogSettings.includeDialog
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[1].dialogSettings.includeDialog
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[2].dialogSettings.includeDialog
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[3].dialogSettings.includeDialog
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[4].dialogSettings.includeDialog
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[5].dialogSettings.includeDialog
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[7].dialogSettings.includeDialog
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[8].dialogSettings.includeDialog
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[9].dialogSettings.includeDialog
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[10].dialogSettings.includeDialog
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[11].dialogSettings.includeDialog
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[12].dialogSettings.includeDialog
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
@@ -28917,25 +29517,326 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[1].dialogSettings.dialogEntries.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[2].dialogSettings.dialogEntries.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[3].dialogSettings.dialogEntries.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[4].dialogSettings.dialogEntries.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[5].dialogSettings.dialogEntries.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[6].dialogSettings.dialogEntries.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[7].dialogSettings.dialogEntries.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[8].dialogSettings.dialogEntries.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[9].dialogSettings.dialogEntries.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[10].dialogSettings.dialogEntries.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[11].dialogSettings.dialogEntries.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[12].dialogSettings.dialogEntries.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
       propertyPath: tutorialSteps.Array.data[0].dialogSettings.dialogEntries.Array.data[0].dialogText
+      value: "\uBA38\uB9AC\uC640 \uBAB8\uC774 \uD611\uB825\uD558\uC5EC \uB2E4\uC591\uD55C
+        \uD37C\uC990\uC744 \uD480\uC5B4\uB098\uAC00\uB294 \uAC8C\uC784\uC785\uB2C8\uB2E4"
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[1].dialogSettings.dialogEntries.Array.data[0].dialogText
       value: "\uBC84\uD2BC\uACFC \uBB38\uC73C\uB85C \uC774\uB8E8\uC5B4\uC9C4 \uD37C\uC990\uC744
         \uD480\uC5B4\uB098\uAC00\uBA70 \uC2A4\uD14C\uC774\uC9C0\uB97C \uD074\uB9AC\uC5B4\uD560
         \uC218 \uC788\uC2B5\uB2C8\uB2E4"
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[2].dialogSettings.dialogEntries.Array.data[0].dialogText
+      value: "A,D\uB97C \uD1B5\uD574 \uC88C\uC6B0\uB85C \uC774\uB3D9\uD560 \uC218
+        \uC788\uC2B5\uB2C8\uB2E4. A,D\uB97C \uB20C\uB7EC\uC11C \uC774\uB3D9\uD574\uC8FC\uC138\uC694"
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[3].dialogSettings.dialogEntries.Array.data[0].dialogText
+      value: "A,D\uB97C \uD1B5\uD574 \uC88C\uC6B0\uB85C \uC774\uB3D9\uD560 \uC218
+        \uC788\uC2B5\uB2C8\uB2E4. A,D\uB97C \uB20C\uB7EC\uC11C \uC774\uB3D9\uD574\uC8FC\uC138\uC694"
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[4].dialogSettings.dialogEntries.Array.data[0].dialogText
+      value: "SPACE\uB97C \uD1B5\uD574 \uC810\uD504\uD560 \uC218 \uC788\uC2B5\uB2C8\uB2E4.
+        SPACE\uB97C \uB20C\uB7EC \uC810\uD504\uD574\uC8FC\uC138\uC694"
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[5].dialogSettings.dialogEntries.Array.data[0].dialogText
+      value: "SPACE\uB97C \uD1B5\uD574 \uC810\uD504\uD560 \uC218 \uC788\uC2B5\uB2C8\uB2E4.
+        SPACE\uB97C \uB20C\uB7EC \uC810\uD504\uD574\uC8FC\uC138\uC694"
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[6].dialogSettings.dialogEntries.Array.data[0].dialogText
+      value: "SPACE\uB97C \uD1B5\uD574 \uC810\uD504\uD560 \uC218 \uC788\uC2B5\uB2C8\uB2E4.
+        SPACE\uB97C \uB20C\uB7EC \uC810\uD504\uD574\uC8FC\uC138\uC694"
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[7].dialogSettings.dialogEntries.Array.data[0].dialogText
+      value: "\uBAB8\uACFC \uBA38\uB9AC\uB97C \uBC14\uAFB8\uC5B4 \uC870\uC791\uD558\uAE30
+        \uC704\uD574 Left Shift\uD0A4\uB97C \uC0AC\uC6A9\uD560 \uC218 \uC788\uC2B5\uB2C8\uB2E4."
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[8].dialogSettings.dialogEntries.Array.data[0].dialogText
+      value: "\uAE30\uBCF8\uC801\uC73C\uB85C \uBC84\uD2BC\uACFC \uBB38\uC740 \uACE0\uC720\uD55C
+        \uC2E0\uD638\uB97C \uAC00\uC9C0\uACE0 \uC788\uC2B5\uB2C8\uB2E4."
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[9].dialogSettings.dialogEntries.Array.data[0].dialogText
+      value: "\uAC01 \uBC84\uD2BC\uC774 \uC5B4\uB5A4 \uBB38\uACFC \uC5F0\uACB0\uB418\uC5B4\uC788\uB294\uC9C0\uB294
+        \uC9C1\uC811 \uBC1F\uC544\uBD10\uC57C \uC54C \uC218 \uC788\uC2B5\uB2C8\uB2E4."
       objectReference: {fileID: 0}
     - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
       propertyPath: tutorialSteps.Array.data[0].dialogSettings.dialogEntries.Array.data[0].speakerName
       value: ???
       objectReference: {fileID: 0}
     - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[10].dialogSettings.dialogEntries.Array.data[0].dialogText
+      value: "\uB610\uD55C \uB3D9\uC77C\uD55C \uC2E0\uD638\uB97C \uAC00\uC9C4 \uBC84\uD2BC\uC774
+        \uC788\uB2E4\uBA74 \uD55C\uAC1C\uB77C\uB3C4 \uD65C\uC131\uD654 \uB418\uBA74
+        \uD574\uB2F9 \uC2E0\uD638\uB97C \uAC00\uC9C4 \uBB38\uC774 \uC5F4\uB9BD\uB2C8\uB2E4."
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[11].dialogSettings.dialogEntries.Array.data[0].dialogText
+      value: "\uBA38\uB9AC\uAC00 \uBAB8 \uC704\uB85C \uC62C\uB77C\uAC04 \uB4A4 F\uB97C
+        \uB204\uB974\uBA74 \uD569\uCCB4\uD558\uC5EC \uC6C0\uC9C1\uC77C \uC218 \uC788\uC2B5\uB2C8\uB2E4"
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[12].dialogSettings.dialogEntries.Array.data[0].dialogText
+      value: "\uB9C8\uC9C0\uB9C9 \uAD6C\uC5ED\uC5D0 \uAC04 \uB4A4 \uD569\uCCB4\uD558\uBA74
+        \uC2A4\uD14C\uC774\uC9C0\uAC00 \uD074\uB9AC\uC5B4\uB429\uB2C8\uB2E4."
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[1].dialogSettings.dialogEntries.Array.data[0].speakerName
+      value: ???
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[2].dialogSettings.dialogEntries.Array.data[0].speakerName
+      value: ???
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[3].dialogSettings.dialogEntries.Array.data[0].speakerName
+      value: ???
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[4].dialogSettings.dialogEntries.Array.data[0].speakerName
+      value: ???
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[5].dialogSettings.dialogEntries.Array.data[0].speakerName
+      value: ???
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[6].dialogSettings.dialogEntries.Array.data[0].speakerName
+      value: ???
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[7].dialogSettings.dialogEntries.Array.data[0].speakerName
+      value: ???
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[8].dialogSettings.dialogEntries.Array.data[0].speakerName
+      value: ???
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[9].dialogSettings.dialogEntries.Array.data[0].speakerName
+      value: ???
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[10].dialogSettings.dialogEntries.Array.data[0].speakerName
+      value: ???
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[11].dialogSettings.dialogEntries.Array.data[0].speakerName
+      value: ???
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[12].dialogSettings.dialogEntries.Array.data[0].speakerName
+      value: ???
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
       propertyPath: tutorialSteps.Array.data[0].dialogSettings.dialogEntries.Array.data[0].dialogDuration
-      value: 10
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[1].dialogSettings.dialogEntries.Array.data[0].dialogDuration
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[2].dialogSettings.dialogEntries.Array.data[0].dialogDuration
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[3].dialogSettings.dialogEntries.Array.data[0].dialogDuration
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[4].dialogSettings.dialogEntries.Array.data[0].dialogDuration
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[5].dialogSettings.dialogEntries.Array.data[0].dialogDuration
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[6].dialogSettings.dialogEntries.Array.data[0].dialogDuration
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[7].dialogSettings.dialogEntries.Array.data[0].dialogDuration
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[8].dialogSettings.dialogEntries.Array.data[0].dialogDuration
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[9].dialogSettings.dialogEntries.Array.data[0].dialogDuration
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
       propertyPath: tutorialSteps.Array.data[0].dialogSettings.dialogEntries.Array.data[0].typewriterSpeed
       value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[10].dialogSettings.dialogEntries.Array.data[0].dialogDuration
+      value: 5.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[11].dialogSettings.dialogEntries.Array.data[0].dialogDuration
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[12].dialogSettings.dialogEntries.Array.data[0].dialogDuration
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[1].dialogSettings.dialogEntries.Array.data[0].typewriterSpeed
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[2].dialogSettings.dialogEntries.Array.data[0].typewriterSpeed
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[3].dialogSettings.dialogEntries.Array.data[0].typewriterSpeed
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[4].dialogSettings.dialogEntries.Array.data[0].typewriterSpeed
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[5].dialogSettings.dialogEntries.Array.data[0].typewriterSpeed
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[6].dialogSettings.dialogEntries.Array.data[0].typewriterSpeed
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[7].dialogSettings.dialogEntries.Array.data[0].typewriterSpeed
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[8].dialogSettings.dialogEntries.Array.data[0].typewriterSpeed
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[9].dialogSettings.dialogEntries.Array.data[0].typewriterSpeed
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[10].dialogSettings.dialogEntries.Array.data[0].typewriterSpeed
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[11].dialogSettings.dialogEntries.Array.data[0].typewriterSpeed
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[12].dialogSettings.dialogEntries.Array.data[0].typewriterSpeed
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
       propertyPath: tutorialSteps.Array.data[0].dialogSettings.dialogEntries.Array.data[0].useTypewriterEffect
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[1].dialogSettings.dialogEntries.Array.data[0].useTypewriterEffect
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[2].dialogSettings.dialogEntries.Array.data[0].useTypewriterEffect
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[3].dialogSettings.dialogEntries.Array.data[0].useTypewriterEffect
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[4].dialogSettings.dialogEntries.Array.data[0].useTypewriterEffect
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[5].dialogSettings.dialogEntries.Array.data[0].useTypewriterEffect
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[6].dialogSettings.dialogEntries.Array.data[0].useTypewriterEffect
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[7].dialogSettings.dialogEntries.Array.data[0].useTypewriterEffect
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[8].dialogSettings.dialogEntries.Array.data[0].useTypewriterEffect
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[9].dialogSettings.dialogEntries.Array.data[0].useTypewriterEffect
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[10].dialogSettings.dialogEntries.Array.data[0].useTypewriterEffect
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[11].dialogSettings.dialogEntries.Array.data[0].useTypewriterEffect
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[12].dialogSettings.dialogEntries.Array.data[0].useTypewriterEffect
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3780808816375977097, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}

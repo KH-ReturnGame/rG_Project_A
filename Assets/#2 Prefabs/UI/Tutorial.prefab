@@ -151,7 +151,26 @@ MonoBehaviour:
   CurrentState: 0
   CurrentCheckpoint: 0
   playerTransform: {fileID: 0}
-  tutorialSteps: []
+  tutorialSteps:
+  - description: 
+    requiredCheckpoint: 0
+    targetObject: {fileID: 0}
+    taskType: wait
+    taskParameter: 5
+    primaryKey: 0
+    multiKeys: 
+    dialogSettings:
+      includeDialog: 1
+      dialogEntries:
+      - speakerName: ???
+        dialogText: 
+        dialogVoiceClip: {fileID: 0}
+        dialogDuration: 5
+        overrideTypewriterSettings: 0
+        useTypewriterEffect: 1
+        typewriterSpeed: 0.05
+      useTypewriterEffect: 0
+      typewriterSpeed: 0
   tutorialUI: {fileID: 7964550818205429245}
   instructionText: {fileID: 7964550817413972583}
 --- !u!114 &605597962531580408
@@ -240,7 +259,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.25490198}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.8156863}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

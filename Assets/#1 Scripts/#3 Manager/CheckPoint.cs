@@ -21,7 +21,7 @@ public class CheckPoint : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player") && (!activateOnce || !hasBeenActivated))
+        if ((other.CompareTag("Body") || other.CompareTag("Head"))  && (!activateOnce || !hasBeenActivated))
         {
             // Record activation
             hasBeenActivated = true;
