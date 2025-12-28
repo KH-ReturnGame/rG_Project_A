@@ -100,6 +100,16 @@ public class ArrowController : MonoBehaviour
         {
             Destroy(_arrowControlObj);
         }
+        
+        
+        
+        
+        
+        
+        
+        
+        //---------------------------------------------------------------------------
+        
     }
     
     //화살 활성화 비활성화 조절
@@ -121,56 +131,37 @@ public class ArrowController : MonoBehaviour
             //_arrowRigidbody.velocity = Vector3.zero;
             //ChangeArrow("1");
         }
+        
+        
+        
     }
 
-    //Method 변경 함수
-    public void ChangeArrow(String mode)
+    private void Update()
     {
-        controlMethod = mode;
-        if (controlMethod == "2")
+        Debug.Log("hi");
+        if (Input.GetMouseButtonDown(0))
         {
-            _arrowRigidbody.gravityScale = 0;
-            _arrowRigidbody.velocity = Vector3.zero;
+            if (!GameManager.Instance.isPaused)
+            {
+                ChangeArrow("2");
+                _startMousePosition = currentMousePosition;
+                //GameObject canvas = GameObject.FindGameObjectWithTag("canvas");
+                //_arrowControlObj = Instantiate(arrowControlPrefab, canvas.transform);
+                //_arrowControlObj.transform.position = _startMousePosition;
+                line.positionCount = 2;
+                _arrow.GetComponent<ArrowController>().ActivateArrow(true);
+                _arrow.GetComponent<PolygonCollider2D>().isTrigger = true;
+                Time.timeScale = 0.5f;
+            }
         }
-        else if (controlMethod == "1")
+        else if (Input.GetMouseButton(0))
         {
-            _arrowRigidbody.gravityScale = 0;
-            _arrowRigidbody.velocity = Vector3.zero;
+            // 스크린 좌표를 월드 좌표로 변환 (2D 게임 기준)
+            Vector2 screenPosition = Input.mousePosition;
+            currentMousePosition = screenPosition;
+            player.AddState(PlayerStats.IsOnClick);
         }
-    }
-
-    //마우스 포인터 조작 이벤트 함수
-    public void OnDragArrowPos(InputAction.CallbackContext context)
-    {
-        // 스크린 좌표를 월드 좌표로 변환 (2D 게임 기준)
-        Vector2 screenPosition = context.ReadValue<Vector2>();
-        currentMousePosition = screenPosition;
-    }
-
-    //마우스 클릭 이벤트 함수
-    public void OnDragArrowMouse(InputAction.CallbackContext context)
-    {
-        if (/*!player.IsContainState(PlayerStats.CanControlArrow)*/ player.IsContainState(PlayerStats.IsFly) || !player.IsContainState(PlayerStats.CanShoot) || !GameManager.Instance.useArrow || !player.IsContainState(PlayerStats.HasArrow))
-        {
-            return;
-            
-        }
-
-        //눌렀을때 Method2로 변경
-        if (context.started && !GameManager.Instance.isPaused)
-        {
-            ChangeArrow("2");
-            _startMousePosition = currentMousePosition;
-            //GameObject canvas = GameObject.FindGameObjectWithTag("canvas");
-            //_arrowControlObj = Instantiate(arrowControlPrefab, canvas.transform);
-            //_arrowControlObj.transform.position = _startMousePosition;
-            line.positionCount = 2;
-            _arrow.GetComponent<ArrowController>().ActivateArrow(true);
-            _arrow.GetComponent<PolygonCollider2D>().isTrigger = true;
-            Time.timeScale = 0.5f;
-        }
-        //뗄때 화살 날리기
-        else if (context.canceled)
+        else if (Input.GetMouseButtonUp(0))
         {
             if (!player.IsContainState(PlayerStats.IsOnClick))
             {
@@ -215,12 +206,106 @@ public class ArrowController : MonoBehaviour
             currentMask &= ~arrowLayerMask;
             player.GetPlayerObj(PlayerObj.Body).GetComponent<PlatformEffector2D>().colliderMask = currentMask;
         }
-        //중간
-        else
+    }
+
+    //Method 변경 함수
+    public void ChangeArrow(String mode)
+    {
+        controlMethod = mode;
+        if (controlMethod == "2")
         {
-            player.AddState(PlayerStats.IsOnClick);
+            _arrowRigidbody.gravityScale = 0;
+            _arrowRigidbody.velocity = Vector3.zero;
+        }
+        else if (controlMethod == "1")
+        {
+            _arrowRigidbody.gravityScale = 0;
+            _arrowRigidbody.velocity = Vector3.zero;
         }
     }
+
+    //마우스 포인터 조작 이벤트 함수
+    // public void OnDragArrowPos(InputAction.CallbackContext context)
+    // {
+    //     // 스크린 좌표를 월드 좌표로 변환 (2D 게임 기준)
+    //     Vector2 screenPosition = context.ReadValue<Vector2>();
+    //     currentMousePosition = screenPosition;
+    // }
+
+    //마우스 클릭 이벤트 함수
+    // public void OnDragArrowMouse(InputAction.CallbackContext context)
+    // {
+    //     if (/*!player.IsContainState(PlayerStats.CanControlArrow)*/ player.IsContainState(PlayerStats.IsFly) || !player.IsContainState(PlayerStats.CanShoot) || !GameManager.Instance.useArrow || !player.IsContainState(PlayerStats.HasArrow))
+    //     {
+    //         return;
+    //         
+    //     }
+    //
+    //     //눌렀을때 Method2로 변경
+    //     if (context.started && !GameManager.Instance.isPaused)
+    //     {
+    //         ChangeArrow("2");
+    //         _startMousePosition = currentMousePosition;
+    //         //GameObject canvas = GameObject.FindGameObjectWithTag("canvas");
+    //         //_arrowControlObj = Instantiate(arrowControlPrefab, canvas.transform);
+    //         //_arrowControlObj.transform.position = _startMousePosition;
+    //         line.positionCount = 2;
+    //         _arrow.GetComponent<ArrowController>().ActivateArrow(true);
+    //         _arrow.GetComponent<PolygonCollider2D>().isTrigger = true;
+    //         Time.timeScale = 0.5f;
+    //     }
+    //     //뗄때 화살 날리기
+    //     else if (context.canceled)
+    //     {
+    //         if (!player.IsContainState(PlayerStats.IsOnClick))
+    //         {
+    //             return;
+    //         }
+    //         
+    //         player.RemoveState(PlayerStats.IsOnClick);
+    //         /*if (!player.IsContainState(PlayerStats.IsCollisionMethod2))
+    //         {
+    //             player.AddState(PlayerStats.IsFly);
+    //         }
+    //         else
+    //         {
+    //             Debug.Log("날리는거 아니다");
+    //         }*/
+    //         player.AddState(PlayerStats.IsFly);
+    //
+    //         if (!GameManager.Instance.isPaused)
+    //         {
+    //             //Destroy(_arrowControlObj);
+    //             transform.rotation = Quaternion.Euler(new Vector3(0, 0, _angle));
+    //         }
+    //         
+    //         
+    //         GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
+    //         //GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+    //         GetComponent<Rigidbody2D>().velocity = new Vector2((_directionMouse.normalized.x) * (_l / 5),
+    //             (_directionMouse.normalized.y) * (_l / 5));
+    //         
+    //         _arrowRigidbody.gravityScale = 1f;
+    //         line.enabled = false;
+    //         
+    //         layer1 = LayerMask.NameToLayer("Arrow"); 
+    //         layer2 = LayerMask.NameToLayer("Head");
+    //         Physics2D.IgnoreLayerCollision(layer1, layer2, true);
+    //         
+    //         int arrowLayerMask = 1 << layer1; // "Arrow" 레이어의 LayerMask 비트값
+    //
+    //         // 기존 ColliderMask 값을 가져옴
+    //         int currentMask =player.GetPlayerObj(PlayerObj.Body).GetComponent<PlatformEffector2D>().colliderMask;
+    //         
+    //         currentMask &= ~arrowLayerMask;
+    //         player.GetPlayerObj(PlayerObj.Body).GetComponent<PlatformEffector2D>().colliderMask = currentMask;
+    //     }
+    //     //중간
+    //     else
+    //     {
+    //         player.AddState(PlayerStats.IsOnClick);
+    //     }
+    // }
     private IEnumerator ArrowCooldown()
     {
         player.RemoveState(PlayerStats.CanShoot);
