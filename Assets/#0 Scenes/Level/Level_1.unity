@@ -28892,6 +28892,64 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[0].taskType
+      value: wait
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[0].description
+      value: "\uAE30\uBCF8 \uC124\uBA85"
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[0].taskParameter
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[0].dialogSettings.includeDialog
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[0].dialogSettings.dialogEntries.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[0].dialogSettings.dialogEntries.Array.data[0].dialogText
+      value: "\uBC84\uD2BC\uACFC \uBB38\uC73C\uB85C \uC774\uB8E8\uC5B4\uC9C4 \uD37C\uC990\uC744
+        \uD480\uC5B4\uB098\uAC00\uBA70 \uC2A4\uD14C\uC774\uC9C0\uB97C \uD074\uB9AC\uC5B4\uD560
+        \uC218 \uC788\uC2B5\uB2C8\uB2E4"
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[0].dialogSettings.dialogEntries.Array.data[0].speakerName
+      value: ???
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[0].dialogSettings.dialogEntries.Array.data[0].dialogDuration
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[0].dialogSettings.dialogEntries.Array.data[0].typewriterSpeed
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 605597962531580409, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: tutorialSteps.Array.data[0].dialogSettings.dialogEntries.Array.data[0].useTypewriterEffect
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3780808816375977097, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: m_Type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3780808816375977097, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
+    - target: {fileID: 3780808816375977097, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
+      propertyPath: m_Color.a
+      value: 0.8156863
+      objectReference: {fileID: 0}
     - target: {fileID: 3780808816375977102, guid: 380a42fd5cdff52499b57e11c69a4df2, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0

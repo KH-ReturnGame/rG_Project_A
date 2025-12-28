@@ -19,7 +19,7 @@ public class CheckPoint : MonoBehaviour
         }
     }
     
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player") && (!activateOnce || !hasBeenActivated))
         {
@@ -46,7 +46,7 @@ public class CheckPoint : MonoBehaviour
             // Optional - disable collider if one-time use
             if (activateOnce)
             {
-                GetComponent<Collider>().enabled = false;
+                GetComponent<Collider2D>().enabled = false;
             }
         }
     }
